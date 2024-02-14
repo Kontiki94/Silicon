@@ -1,7 +1,6 @@
 .showcase {
     margin-bottom: 80px;
 
-
     @include lg {
         display: flex;
         justify-content: flex-end;
@@ -20,7 +19,6 @@
 
     .container {
         height: 100%;
-
 
         @include lg {
             position: absolute;

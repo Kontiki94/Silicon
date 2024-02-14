@@ -1,8 +1,20 @@
-﻿.manage-work {
+﻿#manage-work {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 80px;
+
+    @include lg {
+        flex-direction: row-reverse;
+        gap: 30px;
+    }
 
     .presentation {
-
-        h2 {
+        padding-bottom: 20px;
+        
+        @include lg {
+            padding-left: 50px;
         }
 
         .info {
@@ -14,16 +26,16 @@
                 padding-right: 10px;
                 color: $theme;
             }
-
-            p {
-            }
         }
 
-        .image-container {
+        .btn-theme {
+            margin-top: 30px;
+        }
+    }
 
-            img {
-                max-width: 100%;
-            }
+    .image-container {
+        img {
+            max-width: 100%;
         }
     }
 }
