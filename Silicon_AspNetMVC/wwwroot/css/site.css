@@ -801,3 +801,57 @@ footer .container .social-media {
   border: 2px solid #D4D7E5;
   border-radius: 7px;
 }
+
+#courses {
+  margin-top: 40px;
+}
+#courses .grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem 1rem;
+}
+#courses .grid .course-card {
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.0588235294), 0 4px 5px rgba(0, 0, 0, 0.0470588235);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  border: 1 px solid #E2E5F1;
+}
+#courses .grid .course-card .content {
+  padding: 1rem;
+}
+#courses .grid .course-card .content .price {
+  color: #6366F1;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+#courses .grid .course-card .content .divider {
+  width: 100%;
+  height: 1px;
+  background-color: #E2E5F1;
+}
+#courses .grid .course-card .content footer {
+  padding: 0;
+  padding-top: 1rem;
+  gap: 2rem;
+}
+#courses .grid .course-card .content footer, #courses .grid .course-card .content footer * {
+  display: flex;
+  align-items: center;
+}
+#courses .grid .course-card .content padding {
+  margin: 0;
+}
+#courses .grid .course-card .content div {
+  gap: 0.5rem;
+}
+#courses .grid .course-card .content .author {
+  line-height: 160%;
+  font-weight: 400;
+  color: #565973;
+  font-family: "Manrope", sans-serif;
+  font-size: 14px !important;
+}
+#courses .grid .course-card .content i {
+  padding-right: 1rem;
+  margin-bottom: 1.2rem;
+}

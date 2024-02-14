@@ -1,0 +1,58 @@
+#courses {
+        margin-top: 40px;
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem 1rem;
+
+        .course-card {
+            box-shadow: 0 3px 10px #0000000f, 0 4px 5px #0000000c;
+            border-radius: .5rem;
+            overflow: hidden;
+            border: 1 px solid $gray-300;
+
+            .content {
+                padding: 1rem;
+
+                .price {
+                    color: $theme;
+                    font-size: 1.2rem;
+                    font-weight: 700;
+                }
+
+                .divider {
+                    width: 100%;
+                    height: 1px;
+                    background-color: $gray-300;
+                }
+
+                footer {
+                    padding: 0;
+                    padding-top: 1rem;
+                    gap: 2rem;
+                    &, * { 
+                        display: flex;
+                        align-items: center;
+                    }
+                }
+
+                padding {
+                    margin: 0;
+                }
+
+                div {
+                    gap: .5rem;
+                }
+
+                .author {
+                    @include text-s;
+                }
+
+                i {
+                    padding-right: 1rem;
+                    margin-bottom: 1.2rem;
+                }
+            }
+        }
+    }
+}
