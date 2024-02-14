@@ -6,9 +6,8 @@ public class HomeController : Controller
 {
     public IActionResult Index()
     {
-
         ViewData["Title"] = "Silicon";
-
         return View();
     }
+
 }
