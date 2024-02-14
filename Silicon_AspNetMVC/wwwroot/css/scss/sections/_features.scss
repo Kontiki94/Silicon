@@ -1,0 +1,59 @@
+.features {
+    text-align: center;
+    background-color: #D9D9D9;
+
+    .container {
+        padding-top: 120px;
+
+        p {
+            margin-bottom: 30px;
+            color: $gray-600;
+        }
+
+        .tool-features {
+            @include lg {
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr;
+            }
+        }
+
+        .box {
+            padding: 50px;
+            border-bottom: 1px solid black;
+
+            @include lg {
+                border: 0.1px solid $gray-100;
+                border-top: none;
+                border-radius: 5px;
+
+                &:hover {
+                    background-color: $white;
+                }
+
+                &:nth-child(1) {
+                    border-left: none;
+                }
+
+                &:nth-child(3) {
+                    border-right: none;
+                }
+
+                &:nth-child(4) {
+                    border-left: none;
+                }
+
+                &:nth-child(6) {
+                    border-right: none;
+                }
+
+                &:nth-child(n+4) {
+                    border-top: 0.1px solid $gray-100;
+                }
+            }
+
+            h5 {
+                margin-top: 15px;
+            }
+        }
+    }
+}

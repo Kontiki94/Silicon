@@ -1,0 +1,39 @@
+.newsletter {
+    background-color: $gray-100;
+    padding-top: 80px;
+    padding-bottom: 80px;
+
+    .container {
+        text-align: center;
+
+        @include lg {
+            text-align: left;
+            width: 50%;
+        }
+
+        .checkbox-content {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            align-items: center;
+            gap: 60px;
+
+
+            .checkboxes {
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr;
+            }
+        }
+
+        .subscribe {
+            margin-top: 40px;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            grid-column-gap: 20px;
+
+            input {
+                border-radius: 5px;
+                border-color: $gray-400;
+            }
+        }
+    }
+}
