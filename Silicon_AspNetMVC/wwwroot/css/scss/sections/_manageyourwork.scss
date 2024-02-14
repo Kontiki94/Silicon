@@ -1,1 +1,29 @@
-﻿
+﻿.manage-work {
+
+    .presentation {
+
+        h2 {
+        }
+
+        .info {
+            display: flex;
+            flex-direction: row;
+
+            i {
+                padding-top: 5px;
+                padding-right: 10px;
+                color: $theme;
+            }
+
+            p {
+            }
+        }
+
+        .image-container {
+
+            img {
+                max-width: 100%;
+            }
+        }
+    }
+}

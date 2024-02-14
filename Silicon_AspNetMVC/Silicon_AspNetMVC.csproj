@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Views\Shared\Partials\**" />
+    <Content Remove="Views\Shared\Partials\**" />
+    <EmbeddedResource Remove="Views\Shared\Partials\**" />
+    <None Remove="Views\Shared\Partials\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="compilerconfig.json" />
   </ItemGroup>
 
@@ -16,7 +23,6 @@
 
   <ItemGroup>
     <Folder Include="Models\" />
-    <Folder Include="Views\Shared\Partials\" />
   </ItemGroup>
 
 </Project>
