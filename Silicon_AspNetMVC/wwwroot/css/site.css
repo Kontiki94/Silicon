@@ -560,15 +560,15 @@ footer .container .social-media {
 @media (min-width: 992px) {
   #manage-work {
     flex-direction: row-reverse;
-    gap: 30px;
+    gap: 2.5rem;
   }
 }
 #manage-work .presentation {
-  padding-bottom: 20px;
+  padding-bottom: 1.5rem;
 }
 @media (min-width: 992px) {
   #manage-work .presentation {
-    padding-left: 50px;
+    padding-left: 3.5rem;
   }
 }
 #manage-work .presentation .info {
@@ -576,12 +576,12 @@ footer .container .social-media {
   flex-direction: row;
 }
 #manage-work .presentation .info i {
-  padding-top: 5px;
-  padding-right: 10px;
+  padding-top: 0.2rem;
+  padding-right: 0.8rem;
   color: #6366F1;
 }
 #manage-work .presentation .btn-theme {
-  margin-top: 30px;
+  margin-top: 2.5rem;
 }
 #manage-work .image-container img {
   max-width: 100%;
@@ -803,7 +803,39 @@ footer .container .social-media {
 }
 
 #courses {
-  margin-top: 40px;
+  margin-top: 60px;
+  margin-bottom: 120px;
+}
+#courses .section-title {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+@media (min-width: 768px) {
+  #courses .section-title {
+    flex-direction: row;
+  }
+}
+#courses .section-title .search-div {
+  display: flex;
+  flex-direction: row;
+  gap: 3rem;
+  margin-top: 1rem;
+}
+#courses .section-title .search-div select {
+  width: 130%;
+  height: 1.9rem;
+}
+#courses .section-title .search-div .search {
+  position: relative;
+}
+#courses .section-title .search-div .search input {
+  padding-left: 15px;
+}
+#courses .section-title .search-div .search i {
+  position: absolute;
+  top: 7px;
+  right: 10px;
 }
 #courses .grid {
   display: grid;
@@ -854,4 +886,54 @@ footer .container .social-media {
 #courses .grid .course-card .content i {
   padding-right: 1rem;
   margin-bottom: 1.2rem;
+}
+
+#skills .container {
+  background-color: #F3F6FF;
+  display: grid;
+  margin-bottom: 60px;
+  padding: 10px;
+}
+@media (min-width: 992px) {
+  #skills .container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+#skills .container .section-title {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 5rem;
+}
+@media (min-width: 992px) {
+  #skills .container .section-title {
+    align-items: flex-start;
+    text-align: left;
+    padding-left: 10rem;
+  }
+}
+#skills .container .section-title p {
+  margin: 0;
+}
+#skills .container .section-title h1 {
+  margin-bottom: 2rem;
+}
+#skills .container .section-title h1 .purple {
+  color: #6366F1;
+}
+#skills .container .section-title .button {
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.0588235294), 0 4px 5px rgba(0, 0, 0, 0.0470588235);
+}
+#skills .container .section-title .btn-theme {
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.0588235294), 0 4px 5px rgba(0, 0, 0, 0.0470588235);
+}
+#skills .container .image {
+  display: flex;
+  justify-content: center;
+}
+#skills .container .image img {
+  max-width: 100%;
+  align-self: center;
 }

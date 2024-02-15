@@ -1,5 +1,43 @@
 #courses {
-        margin-top: 40px;
+    margin-top: 60px;
+    margin-bottom: 120px;
+
+    .section-title {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        @include md {
+            flex-direction: row;
+        }
+
+        .search-div {
+            display: flex;
+            flex-direction: row;
+            gap: 3rem;
+            margin-top: 1rem;
+
+            select {
+                width: 130%;
+                height: 1.9rem;
+            }
+
+            .search {
+                position: relative;
+
+                input {
+                    padding-left: 15px;
+                }
+
+                i {
+                    position: absolute;
+                    top: 7px;
+                    right: 10px;
+                }
+            }
+        }
+    }
+
     .grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
@@ -30,7 +68,8 @@
                     padding: 0;
                     padding-top: 1rem;
                     gap: 2rem;
-                    &, * { 
+
+                    &, * {
                         display: flex;
                         align-items: center;
                     }
