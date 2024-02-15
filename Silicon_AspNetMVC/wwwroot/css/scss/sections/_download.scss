@@ -1,0 +1,32 @@
+.download {
+    background-color: $gray-100;
+
+    .container {
+        background-color: $gray-200;
+        padding: 5rem;
+
+        .content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .img-container {
+                margin-right: 5rem;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+
+            .right {
+                margin-left: 5rem;
+
+                h2 {
+                    border: 1px solid black;
+                }
+            }
+        }
+    }
+}
