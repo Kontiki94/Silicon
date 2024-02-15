@@ -51,8 +51,13 @@
             border-radius: 1.1rem;
             overflow: hidden;
             padding: 5px;
-            border: 1 px solid $gray-300;
+            border: 1px solid $gray-300;
             padding: 1px;
+
+            &:hover {
+                transition: transform 0.3s ease;
+                transform: scale(1.02)
+            }
 
             .content {
                 padding: 0;

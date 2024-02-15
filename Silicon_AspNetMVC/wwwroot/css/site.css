@@ -856,8 +856,12 @@ footer .container .social-media {
   border-radius: 1.1rem;
   overflow: hidden;
   padding: 5px;
-  border: 1 px solid #E2E5F1;
+  border: 1px solid #E2E5F1;
   padding: 1px;
+}
+.courses .grid .course-card:hover {
+  transition: transform 0.3s ease;
+  transform: scale(1.02);
 }
 .courses .grid .course-card .content {
   padding: 0;
