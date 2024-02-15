@@ -21,6 +21,7 @@ public class Program
         app.MapControllerRoute(
             name: "courses",
             pattern: "{controller=Courses}/{action=CoursesIndex}/{id?}");
+
         app.Run();
     }
 }
