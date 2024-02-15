@@ -2,194 +2,159 @@
 
 
 <section id="@Model.Id" class="container">
-    <div class="section-title">
-        <h1 class="h1">Courses</h1>
-        <div class="search-div">
-            <div class="dropdown">
-                <select name="All Categories">
-                    @if (Model.Categories is not null)
-                    {
-                        foreach (var category in Model.Categories)
+    <div class="courses">
+
+
+        <div class="section-title">
+            <h1 class="h1">Courses</h1>
+            <div class="search-div">
+                <div class="dropdown">
+                    <select name="All Categories">
+
+                        @if (Model.Categories is not null)
                         {
-                            <option value="">All Categories</option>
+                            foreach (var category in Model.Categories)
+                            {
+                                <option value="">All Categories</option>
+                            }
                         }
-                    }
 
-                </select>
-            </div>
-            <div class="search">
-                <input name="search" placeholder="Search courses" />
-                <i class="fa-sharp fa-solid fa-magnifying-glass"></i>
-            </div>
-        </div>
-    </div>
-    <div class="grid">
-        @* @foreach (var course in courses) *@
-        <div class="course-card">
-            <a class="content" asp-controller="@Model.Link.ControllerName" asp-action="@Model.Link.ActionName">
-                <img src="@Model.CourseImage.ImageUrl"  alt="@Model.CourseImage.AltText"/>
-                <p>@Model.CourseTitle</p>
-                <p class="author">@Model.Author</p>
-
-                <div class="divider"></div>
-                <footer>
-                    <div>
-                        <i class="fa-sharp fa-solid fa-clock"></i>
-                        <p class="price">@Model.Price</p>
-                    </div>
-                    <div>
-                        <i class="fa-sharp fa-light fa-thumbs-up"></i>
-                        <p>@Model.Views</p>
-                    </div>
-                </footer>
-            </a>
-        </div>
-
-        <div class="course-card">
-            <div class="content">
-                <img src="~/images/fullstack_dev.png" />
-                <p>Fullstack Web Developer Course from Scratch</p>
-                <p class="author">By Robert Fox</p>
-
-                <div class="divider"></div>
-                <footer>
-                    <div>
-                        <i class="fa-sharp fa-solid fa-clock"></i>
-                        <p class="price">$12.50</p>
-                    </div>
-                    <div>
-                        <i class="fa-sharp fa-light fa-thumbs-up"></i>
-                        <p>94% (4.2K)</p>
-                    </div>
-                </footer>
+                    </select>
+                </div>
+                <div class="search">
+                    <input name="search" placeholder="Search courses" />
+                    <i class="fa-sharp fa-solid fa-magnifying-glass"></i>
+                </div>
             </div>
         </div>
+        <div class="grid">
+            @* @foreach (var course in courses) *@
+            <div class="course-card">
+                <a class="content" asp-controller="@Model.Link.ControllerName" asp-action="@Model.Link.ActionName">
+                    <img src="@Model.CourseImage.ImageUrl" alt="@Model.CourseImage.AltText" />
+                    <div class="course-info">
+                        <p class="title">@Model.CourseTitle</p>
+                        <p class="author">@Model.Author</p>
+                        <p class="price">$@Model.Price</p>
+                    </div>
 
-        <div class="course-card">
-            <div class="content">
-                <img src="~/images/fullstack_dev.png" />
-                <p>Fullstack Web Developer Course from Scratch</p>
-                <p class="author">By Robert Fox</p>
+                    <div class="divider"></div>
+                    <footer>
+                        <div>
+                            <i class="fa-sharp fa-solid fa-clock"></i>
+                            <p> 500 hours</p>
+                        </div>
+                        <div>
+                            <i class="fa-sharp fa-light fa-thumbs-up"></i>
+                            <p>@Model.Views</p>
+                        </div>
+                    </footer>
+                </a>
+            </div> <div class="course-card">
+                <a class="content" asp-controller="@Model.Link.ControllerName" asp-action="@Model.Link.ActionName">
+                    <img src="@Model.CourseImage.ImageUrl" alt="@Model.CourseImage.AltText" />
+                    <div class="course-info">
+                        <p class="title">@Model.CourseTitle</p>
+                        <p class="author">@Model.Author</p>
+                        <p class="price">$@Model.Price</p>
+                    </div>
 
-                <div class="divider"></div>
-                <footer>
-                    <div>
-                        <i class="fa-sharp fa-solid fa-clock"></i>
-                        <p class="price">$12.50</p>
+                    <div class="divider"></div>
+                    <footer>
+                        <div>
+                            <i class="fa-sharp fa-solid fa-clock"></i>
+                            <p> hours</p>
+                        </div>
+                        <div>
+                            <i class="fa-sharp fa-light fa-thumbs-up"></i>
+                            <p>@Model.Views</p>
+                        </div>
+                    </footer>
+                </a>
+            </div> <div class="course-card">
+                <a class="content" asp-controller="@Model.Link.ControllerName" asp-action="@Model.Link.ActionName">
+                    <img src="@Model.CourseImage.ImageUrl" alt="@Model.CourseImage.AltText" />
+                    <div class="course-info">
+                        <p class="title">@Model.CourseTitle</p>
+                        <p class="author">@Model.Author</p>
+                        <p class="price">$@Model.Price</p>
                     </div>
-                    <div>
-                        <i class="fa-sharp fa-light fa-thumbs-up"></i>
-                        <p>94% (4.2K)</p>
-                    </div>
-                </footer>
-            </div>
-        </div>  <div class="course-card">
-            <div class="content">
-                <img src="~/images/fullstack_dev.png" />
-                <p>Fullstack Web Developer Course from Scratch</p>
-                <p class="author">By Robert Fox</p>
 
-                <div class="divider"></div>
-                <footer>
-                    <div>
-                        <i class="fa-sharp fa-solid fa-clock"></i>
-                        <p class="price">$12.50</p>
+                    <div class="divider"></div>
+                    <footer>
+                        <div>
+                            <i class="fa-sharp fa-solid fa-clock"></i>
+                            <p> hours</p>
+                        </div>
+                        <div>
+                            <i class="fa-sharp fa-light fa-thumbs-up"></i>
+                            <p>@Model.Views</p>
+                        </div>
+                    </footer>
+                </a>
+            </div> <div class="course-card">
+                <a class="content" asp-controller="@Model.Link.ControllerName" asp-action="@Model.Link.ActionName">
+                    <img src="@Model.CourseImage.ImageUrl" alt="@Model.CourseImage.AltText" />
+                    <div class="course-info">
+                        <p class="title">@Model.CourseTitle</p>
+                        <p class="author">@Model.Author</p>
+                        <p class="price">$@Model.Price</p>
                     </div>
-                    <div>
-                        <i class="fa-sharp fa-light fa-thumbs-up"></i>
-                        <p>94% (4.2K)</p>
-                    </div>
-                </footer>
-            </div>
-        </div>  <div class="course-card">
-            <div class="content">
-                <img src="~/images/fullstack_dev.png" />
-                <p>Fullstack Web Developer Course from Scratch</p>
-                <p class="author">By Robert Fox</p>
 
-                <div class="divider"></div>
-                <footer>
-                    <div>
-                        <i class="fa-sharp fa-solid fa-clock"></i>
-                        <p class="price">$12.50</p>
+                    <div class="divider"></div>
+                    <footer>
+                        <div>
+                            <i class="fa-sharp fa-solid fa-clock"></i>
+                            <p> hours</p>
+                        </div>
+                        <div>
+                            <i class="fa-sharp fa-light fa-thumbs-up"></i>
+                            <p>@Model.Views</p>
+                        </div>
+                    </footer>
+                </a>
+            </div> <div class="course-card">
+                <a class="content" asp-controller="@Model.Link.ControllerName" asp-action="@Model.Link.ActionName">
+                    <img src="@Model.CourseImage.ImageUrl" alt="@Model.CourseImage.AltText" />
+                    <div class="course-info">
+                        <p class="title">@Model.CourseTitle</p>
+                        <p class="author">@Model.Author</p>
+                        <p class="price">$@Model.Price</p>
                     </div>
-                    <div>
-                        <i class="fa-sharp fa-light fa-thumbs-up"></i>
-                        <p>94% (4.2K)</p>
-                    </div>
-                </footer>
-            </div>
-        </div>  <div class="course-card">
-            <div class="content">
-                <img src="~/images/fullstack_dev.png" />
-                <p>Fullstack Web Developer Course from Scratch</p>
-                <p class="author">By Robert Fox</p>
 
-                <div class="divider"></div>
-                <footer>
-                    <div>
-                        <i class="fa-sharp fa-solid fa-clock"></i>
-                        <p class="price">$12.50</p>
+                    <div class="divider"></div>
+                    <footer>
+                        <div>
+                            <i class="fa-sharp fa-solid fa-clock"></i>
+                            <p> hours</p>
+                        </div>
+                        <div>
+                            <i class="fa-sharp fa-light fa-thumbs-up"></i>
+                            <p>@Model.Views</p>
+                        </div>
+                    </footer>
+                </a>
+            </div> <div class="course-card">
+                <a class="content" asp-controller="@Model.Link.ControllerName" asp-action="@Model.Link.ActionName">
+                    <img src="@Model.CourseImage.ImageUrl" alt="@Model.CourseImage.AltText" />
+                    <div class="course-info">
+                        <p class="title">@Model.CourseTitle</p>
+                        <p class="author">@Model.Author</p>
+                        <p class="price">$@Model.Price</p>
                     </div>
-                    <div>
-                        <i class="fa-sharp fa-light fa-thumbs-up"></i>
-                        <p>94% (4.2K)</p>
-                    </div>
-                </footer>
-            </div>
-        </div>  <div class="course-card">
-            <div class="content">
-                <img src="~/images/fullstack_dev.png" />
-                <p>Fullstack Web Developer Course from Scratch</p>
-                <p class="author">By Robert Fox</p>
 
-                <div class="divider"></div>
-                <footer>
-                    <div>
-                        <i class="fa-sharp fa-solid fa-clock"></i>
-                        <p class="price">$12.50</p>
-                    </div>
-                    <div>
-                        <i class="fa-sharp fa-light fa-thumbs-up"></i>
-                        <p>94% (4.2K)</p>
-                    </div>
-                </footer>
-            </div>
-        </div>  <div class="course-card">
-            <div class="content">
-                <img src="~/images/fullstack_dev.png" />
-                <p>Fullstack Web Developer Course from Scratch</p>
-                <p class="author">By Robert Fox</p>
-
-                <div class="divider"></div>
-                <footer>
-                    <div>
-                        <i class="fa-sharp fa-solid fa-clock"></i>
-                        <p class="price">$12.50</p>
-                    </div>
-                    <div>
-                        <i class="fa-sharp fa-light fa-thumbs-up"></i>
-                        <p>94% (4.2K)</p>
-                    </div>
-                </footer>
-            </div>
-        </div>  <div class="course-card">
-            <div class="content">
-                <img src="~/images/fullstack_dev.png" />
-                <p>Fullstack Web Developer Course from Scratch</p>
-                <p class="author">By Robert Fox</p>
-
-                <div class="divider"></div>
-                <footer>
-                    <div>
-                        <i class="fa-sharp fa-solid fa-clock"></i>
-                        <p class="price">$12.50</p>
-                    </div>
-                    <div>
-                        <i class="fa-sharp fa-light fa-thumbs-up"></i>
-                        <p>94% (4.2K)</p>
-                    </div>
-                </footer>
+                    <div class="divider"></div>
+                    <footer>
+                        <div>
+                            <i class="fa-sharp fa-solid fa-clock"></i>
+                            <p> hours</p>
+                        </div>
+                        <div>
+                            <i class="fa-sharp fa-light fa-thumbs-up"></i>
+                            <p>@Model.Views</p>
+                        </div>
+                    </footer>
+                </a>
             </div>
         </div>
     </div>
