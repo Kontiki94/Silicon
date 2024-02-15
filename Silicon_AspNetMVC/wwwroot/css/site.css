@@ -553,15 +553,15 @@ footer .container .social-media {
 
 #manage-work {
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   justify-content: center;
   align-items: center;
   margin-top: 80px;
 }
 @media (min-width: 992px) {
   #manage-work {
-    flex-direction: row-reverse;
-    gap: 2.5rem;
+    flex-direction: row;
+    gap: 6rem;
   }
 }
 #manage-work .presentation {
@@ -570,6 +570,8 @@ footer .container .social-media {
 @media (min-width: 992px) {
   #manage-work .presentation {
     padding-left: 3.5rem;
+    margin-left: 1.5rem;
+    padding-right: 7rem;
   }
 }
 #manage-work .presentation .info {
@@ -888,9 +890,10 @@ footer .container .social-media {
   max-width: 100%;
 }
 .courses .grid .course-card .content .divider {
-  width: 100%;
+  width: 90%;
   height: 1px;
   background-color: #E2E5F1;
+  margin-left: 25px;
 }
 .courses .grid .course-card .content footer {
   padding: 0;

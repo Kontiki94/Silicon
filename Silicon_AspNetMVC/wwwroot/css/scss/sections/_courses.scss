@@ -30,7 +30,6 @@
                 input {
                     padding-left: 15px;
                     border: 1px solid $gray-400;
-
                 }
 
                 i {
@@ -88,9 +87,10 @@
                 }
 
                 .divider {
-                    width: 100%;
+                    width: 90%;
                     height: 1px;
                     background-color: $gray-300;
+                    margin-left: 25px;
                 }
 
                 footer {
