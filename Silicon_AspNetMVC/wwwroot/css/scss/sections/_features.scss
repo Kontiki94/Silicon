@@ -1,12 +1,13 @@
 .features {
     text-align: center;
     background-color: #D9D9D9;
+    padding-bottom: 160px;
 
     .container {
         padding-top: 120px;
 
         p {
-            margin-bottom: 30px;
+            margin-bottom: 60px;
             color: $gray-600;
         }
 
@@ -28,6 +29,7 @@
 
                 &:hover {
                     background-color: $white;
+                    transition: background-color 0.3s ease-in-out;
                 }
 
                 &:nth-child(1) {
@@ -48,6 +50,7 @@
 
                 &:nth-child(n+4) {
                     border-top: 0.1px solid $gray-100;
+                    border-bottom: none;
                 }
             }
 
