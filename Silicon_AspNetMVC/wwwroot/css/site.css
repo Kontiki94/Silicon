@@ -808,6 +808,102 @@ footer .container .social-media {
   border-radius: 7px;
 }
 
+.download {
+  background-color: #F3F6FF;
+}
+.download .container {
+  background-color: #EFF2FC;
+  padding: 5rem;
+}
+@media (min-width: 1200px) {
+  .download .container {
+    padding-left: 140px;
+  }
+}
+.download .container .content {
+  display: block;
+}
+@media (min-width: 992px) {
+  .download .container .content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+.download .container .content .img-container {
+  padding-bottom: 4rem;
+}
+@media (min-width: 992px) {
+  .download .container .content .img-container {
+    margin-right: 5rem;
+  }
+}
+.download .container .content .img-container img {
+  width: 100%;
+  max-height: 100%;
+  object-fit: cover;
+}
+@media (min-width: 1200px) {
+  .download .container .content .img-container img {
+    width: auto;
+  }
+}
+.download .container .content .right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.download .container .content .right h1 {
+  text-align: center;
+}
+@media (min-width: 992px) {
+  .download .container .content .right h1 {
+    text-align: left;
+  }
+}
+@media (min-width: 1200px) {
+  .download .container .content .right h1 {
+    margin-bottom: 1.5rem;
+  }
+}
+@media (min-width: 1400px) {
+  .download .container .content .right h1 {
+    margin-right: 10rem;
+  }
+}
+.download .container .content .right .boxes {
+  padding-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+@media (min-width: 992px) {
+  .download .container .content .right .boxes {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: end;
+  }
+}
+.download .container .content .right .boxes .box {
+  margin-bottom: 2rem;
+}
+.download .container .content .right .boxes .box p {
+  margin: 0px;
+}
+.download .container .content .right .boxes .box h4 {
+  margin: 0px;
+}
+.download .container .content .right .boxes .box .five-stars {
+  color: #FFBA08;
+  font-size: 12px;
+}
+.download .container .content .right .boxes .box img {
+  margin-bottom: 1rem;
+  width: auto;
+  height: 100%;
+  max-width: 60%;
+}
+
 .courses {
   margin-top: 60px;
   margin-bottom: 120px;
@@ -962,6 +1058,26 @@ footer .container .social-media {
 #skills .container .image img {
   max-width: 100%;
   align-self: center;
+}
+
+.tools .container h1 {
+  padding-top: 2rem;
+  text-align: center;
+}
+.tools .container p {
+  text-align: center;
+}
+.tools .container .tool-boxes {
+  padding-top: 1rem;
+}
+.tools .container .tool-boxes .box {
+  padding: 2rem 8rem 4rem 8rem;
+}
+.tools .container .tool-boxes .box img {
+  margin-bottom: 1rem;
+}
+.tools .container .tool-boxes .box p {
+  text-align: left;
 }
 
 #signin {
