@@ -680,12 +680,12 @@ footer .container .social-media {
   .showcase .container .content {
     margin-left: 0;
     margin-right: 0;
-    width: 35%;
+    width: 40%;
     text-align: left;
     margin-top: 75px;
   }
 }
-.showcase .container .content h1 {
+.showcase .container .content .d4 {
   margin-top: 150px;
   margin-bottom: 35px;
 }
