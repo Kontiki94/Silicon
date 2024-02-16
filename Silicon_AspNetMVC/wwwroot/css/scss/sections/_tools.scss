@@ -1,0 +1,27 @@
+.tools {
+    .container {
+        h1 {
+            padding-top: 2rem;
+            text-align: center;
+        }
+
+        p {
+            text-align: center;
+        }
+
+        .tool-boxes {
+            padding-top:1rem;
+
+            .box {
+                padding: 2rem 8rem 4rem 8rem;
+
+                img{
+                    margin-bottom:1rem;
+                }
+                p{
+                    text-align: left;
+                }
+            }
+        }
+    }
+}
