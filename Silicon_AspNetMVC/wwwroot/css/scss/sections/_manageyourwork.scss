@@ -1,20 +1,23 @@
 ﻿#manage-work {
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     justify-content: center;
     align-items: center;
     margin-top: 80px;
 
     @include lg {
-        flex-direction: row-reverse;
-        gap: 2.5rem;
+        flex-direction: row;
+        gap: 6rem;
     }
 
     .presentation {
         padding-bottom: 1.5rem;
-        
+
+
         @include lg {
             padding-left: 3.5rem;
+            margin-left: 1.5rem;
+            padding-right: 7rem;
         }
 
         .info {
