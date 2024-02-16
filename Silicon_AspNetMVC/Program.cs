@@ -21,10 +21,6 @@ public class Program
         app.MapControllerRoute(
             name: "courses",
             pattern: "{controller=Courses}/{action=CoursesIndex}/{id?}");
-        
-        app.MapControllerRoute(
-            name: "signin",
-            pattern: "{controller=Account}/{action=SignInIndex}/{id?}");
 
         app.Run();
     }
