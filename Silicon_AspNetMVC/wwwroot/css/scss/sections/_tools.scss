@@ -7,18 +7,34 @@
 
         p {
             text-align: center;
+            padding: 0 2rem 0 2rem;
         }
 
         .tool-boxes {
-            padding-top:1rem;
+            padding-top: 1rem;
+
+            @include lg {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+            }
+
+            @include xl {
+                grid-template-columns: 1fr 1fr 1fr 1fr;
+            }
 
             .box {
-                padding: 2rem 8rem 4rem 8rem;
+                padding: 2rem 9rem 2rem 9rem;
 
-                img{
-                    margin-bottom:1rem;
+                @include lg {
+                padding: 2rem 2rem 2rem 2rem;
                 }
-                p{
+
+                img {
+                    margin-bottom: 1rem;
+                    margin-left: 1.5rem;
+                }
+
+                p {
                     text-align: left;
                 }
             }

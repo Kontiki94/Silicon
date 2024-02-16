@@ -1066,15 +1066,33 @@ footer .container .social-media {
 }
 .tools .container p {
   text-align: center;
+  padding: 0 2rem 0 2rem;
 }
 .tools .container .tool-boxes {
   padding-top: 1rem;
 }
+@media (min-width: 992px) {
+  .tools .container .tool-boxes {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (min-width: 1200px) {
+  .tools .container .tool-boxes {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+}
 .tools .container .tool-boxes .box {
-  padding: 2rem 8rem 4rem 8rem;
+  padding: 2rem 9rem 2rem 9rem;
+}
+@media (min-width: 992px) {
+  .tools .container .tool-boxes .box {
+    padding: 2rem 2rem 2rem 2rem;
+  }
 }
 .tools .container .tool-boxes .box img {
   margin-bottom: 1rem;
+  margin-left: 1.5rem;
 }
 .tools .container .tool-boxes .box p {
   text-align: left;
