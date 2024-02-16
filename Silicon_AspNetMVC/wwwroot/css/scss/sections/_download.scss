@@ -1,0 +1,98 @@
+.download {
+    background-color: $gray-100;
+
+    .container {
+        background-color: $gray-200;
+        padding: 5rem;
+
+        @include xl {
+            padding-left: 140px;
+        }
+
+        .content {
+            display: block;
+
+            @include lg {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+            }
+
+            .img-container {
+                padding-bottom:4rem;
+                @include lg {
+                    margin-right: 5rem;
+                }
+
+                img {
+                    width: 100%;
+                    max-height: 100%;
+                    object-fit: cover;
+
+                    @include xl {
+                        width: auto;
+                    }
+                }
+            }
+
+            .right {     
+                display: flex;
+                flex-direction: column;
+                justify-content:center;               
+
+                h1 {
+                    text-align: center;
+
+                    @include lg {
+                        text-align: left;
+                    }
+
+                    @include xl {
+                        margin-bottom: 1.5rem;
+                    }
+
+                    @include xxl {
+                        margin-right: 10rem;
+                    }
+                }
+
+                .boxes {
+                    padding-bottom: 20px;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+
+                    @include lg {
+                        display: grid;
+                        grid-template-columns: 1fr 1fr;
+                        align-items: end;
+                    }
+
+                    .box {
+                        margin-bottom: 2rem;
+
+                        p {
+                            margin: 0px;
+                        }
+
+                        h4 {
+                            margin: 0px;
+                        }
+
+                        .five-stars {
+                            color: $warning;
+                            font-size: 12px;
+                        }
+
+                        img {
+                            margin-bottom: 1rem;
+                            width: auto;
+                            height: 100%;
+                            max-width: 60%;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

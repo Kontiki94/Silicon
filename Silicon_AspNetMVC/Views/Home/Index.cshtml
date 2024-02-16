@@ -1,6 +1,5 @@
-﻿<section id="showcase">
-    @await Html.PartialAsync("~/Views/Shared/Sections/_ShowcasePartial.cshtml")
-</section>
+﻿@model HomeIndexViewModel
+@await Html.PartialAsync("~/Views/Shared/Sections/_ShowcasePartial.cshtml", Model.Showcase)
 
 <section id="features">
     @await Html.PartialAsync("~/Views/Shared/Sections/_FeaturesPartial.cshtml")
@@ -12,6 +11,14 @@
 
 <section id="manage">
     @await Html.PartialAsync("~/Views/Shared/Sections/_ManageYourWorkPartial.cshtml");
+</section>
+
+<section id="download">
+    @await Html.PartialAsync("~/Views/Shared/Sections/_DownloadPartial.cshtml")
+</section>
+
+<section id="tools">
+    @await Html.PartialAsync("~/Views/Shared/Sections/_ToolsPartial.cshtml")
 </section>
 
 <section id="newsletter">
