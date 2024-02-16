@@ -24,7 +24,7 @@ public class Program
         
         app.MapControllerRoute(
             name: "signin",
-            pattern: "{controller=SignIn}/{action=SignInIndex}/{id?}");
+            pattern: "{controller=Account}/{action=SignInIndex}/{id?}");
 
         app.Run();
     }

@@ -2,9 +2,9 @@
 
 namespace Silicon_AspNetMVC.Controllers
 {
-    public class SignInController : Controller
+    public class AccountController : Controller
     {
-        public IActionResult SignInIndex()
+        public IActionResult SignIn()
         {
             return View();
         }
