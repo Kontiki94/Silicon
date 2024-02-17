@@ -1,0 +1,77 @@
+﻿<section id="details">
+    <div class="container">
+
+        <div class="menu-bar">
+            <div class="profile">
+                <div class="image">
+                    <img src="~/images/john-doe.png" alt="image of John Doe" />
+                </div>
+                <h5 class="user-name">John Doe</h5>
+                <p>john.doe@domain.com</p>
+            </div>
+            <div class="options">
+                <a class="active" asp-controller="Account" asp-action="Details"><i class="fa-regular fa-gear"></i>Account Details</a>
+                <a asp-controller="Account" asp-action="Security"><i class="fa-regular fa-lock"></i>Security</a>
+                <a asp-controller="Account" asp-action="SavedCourses"><i class="fa-sharp fa-regular fa-bookmark"></i>Saved Courses</a>
+                <a asp-controller="Account" asp-action="Sign Out"><i class="fa-solid fa-right-from-bracket"></i>Sign Out</a>
+            </div>
+        </div>
+
+        <div class="account-details">
+            <div class="user-details">
+                <h1>Account Details</h1>
+                <h5>Basic Info</h5>
+                <div class="name">
+                    <div class="firstname">
+                        <label>First name</label>
+                        <input placeholder="John" />
+                    </div>
+                    <div class="lastname">
+                        <label>Last name</label>
+                        <input placeholder="Doe" />
+                    </div>
+                </div>
+                <div class="contact-info">
+                    <div class="email">
+                        <label>Email Address</label>
+                        <input placeholder="john.doe@domain.com" />
+                    </div>
+                    <div class="phone">
+                        <label>Phone</label>
+                        <input placeholder="Enter your phone" />
+                    </div>
+                </div>
+            </div>
+            <div class="bio">
+                <label>Bio <span>(optional)</span></label>
+                <textarea placeholder="Add a short bio"></textarea>
+                <div class="user-buttons">
+                    <button href="#" class="btn-gray">Cancel</button>
+                    <button href="#" class="btn-theme">Save Changes</button>
+                </div>
+                <div class="divider"></div>
+                <div class="address">
+                    <h5>Address</h5>
+                    <label>Address line 1</label>
+                    <input placeholder="Enter your address line" />
+                    <label>Address line 2<span>(optional)</span></label>
+                    <input placeholder="Enter your second address line" />
+                    <div class="city-info">
+                        <div class="postal">
+                            <label>Postal Code</label>
+                            <input placeholder="Enter your postal code" />
+                        </div>
+                        <div class="city">
+                            <label>City</label>
+                            <input placeholder="Enter your city" />
+                        </div>
+                    </div>
+                    <div class="address-button">
+                        <button href="#" class="btn-gray">Cancel</button>
+                        <button href="#" class="btn-theme">Save Changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
