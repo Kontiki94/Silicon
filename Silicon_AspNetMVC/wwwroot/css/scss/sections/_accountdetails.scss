@@ -16,6 +16,7 @@
             flex-direction: column;
             margin-bottom: 30px;
             align-self: flex-start;
+            align-items: center;
 
             @include md {
                 display: grid;
@@ -29,7 +30,10 @@
 
             .profile {
                 text-align: center;
-                padding-right: 3rem;
+
+                @include md {
+                    padding-right: 3rem;
+                }
 
                 h5 {
                     color: black;
@@ -81,8 +85,11 @@
         }
 
         .account-details {
-            border-left: 1px solid $gray-300;
-            padding-left: 7rem;
+
+            @include lg {
+                border-left: 1px solid $gray-300;
+                padding-left: 7rem;
+            }
 
             h1 {
                 margin-bottom: 1.2rem;

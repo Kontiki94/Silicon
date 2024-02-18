@@ -18,10 +18,6 @@ public class Program
             name: "default",
             pattern: "{controller=Home}/{action=Index}/{id?}");
 
-        //app.MapControllerRoute(
-        //    name: "courses",
-        //    pattern: "{controller=Courses}/{action=Courses}/{id?}");
-
         app.MapControllerRoute(
             name: "Error",
             pattern: "{*url}",
