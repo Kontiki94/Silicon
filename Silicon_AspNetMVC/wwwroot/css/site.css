@@ -1192,6 +1192,7 @@ footer .container .social-media {
   flex-direction: column;
   margin-bottom: 30px;
   align-self: flex-start;
+  align-items: center;
 }
 @media (min-width: 768px) {
   #details .container .menu-bar {
@@ -1206,7 +1207,11 @@ footer .container .social-media {
 }
 #details .container .menu-bar .profile {
   text-align: center;
-  padding-right: 3rem;
+}
+@media (min-width: 768px) {
+  #details .container .menu-bar .profile {
+    padding-right: 3rem;
+  }
 }
 #details .container .menu-bar .profile h5 {
   color: black;
@@ -1248,9 +1253,11 @@ footer .container .social-media {
   background-color: #6366F1;
   color: #fff;
 }
-#details .container .account-details {
-  border-left: 1px solid #E2E5F1;
-  padding-left: 7rem;
+@media (min-width: 992px) {
+  #details .container .account-details {
+    border-left: 1px solid #E2E5F1;
+    padding-left: 7rem;
+  }
 }
 #details .container .account-details h1 {
   margin-bottom: 1.2rem;
