@@ -1335,3 +1335,22 @@ footer .container .social-media {
   color: #6366F1;
   margin-bottom: 1rem;
 }
+
+#not-found .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-top: 10rem;
+}
+#not-found .container .image {
+  margin-bottom: 1rem;
+}
+#not-found .container .text {
+  display: flex;
+  flex-direction: column;
+}
+#not-found .container .text a {
+  align-self: center;
+  margin-top: 1.5rem;
+}
