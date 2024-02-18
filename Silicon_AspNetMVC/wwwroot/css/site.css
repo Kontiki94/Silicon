@@ -1172,3 +1172,171 @@ footer .container .social-media {
   margin-top: 5rem;
   text-align: center;
 }
+
+#course-showcase {
+  position: relative;
+}
+#course-showcase .header-image {
+  width: 100%;
+  max-height: auto;
+}
+@media (min-width: 1600px) {
+  #course-showcase .header-image {
+    position: absolute;
+    z-index: -1;
+  }
+}
+#course-showcase .container .path {
+  margin-bottom: 10px;
+  position: absolute;
+  top: 0;
+  color: #FFFFFF;
+  padding-top: 15px;
+}
+@media (min-width: 768px) {
+  #course-showcase .container .path {
+    padding-top: 40px;
+  }
+}
+@media (min-width: 1600px) {
+  #course-showcase .container .path {
+    position: static;
+    padding-top: 40px;
+    margin-bottom: 80px;
+  }
+}
+#course-showcase .container .header-container .tags {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+#course-showcase .container .header-container .tags .tag-1 {
+  background-color: forestgreen;
+  padding-right: 10px;
+  padding-left: 10px;
+  border-radius: 5px;
+}
+#course-showcase .container .header-container .tags .tag-1 span {
+  color: #FFFFFF;
+}
+#course-showcase .container .header-container .tags .tag-2 {
+  background-color: #EFF2FC;
+  padding-right: 10px;
+  padding-left: 10px;
+  border-radius: 5px;
+}
+#course-showcase .container .header-container .tags .tag-2 span {
+  font-weight: 600;
+}
+#course-showcase .container .header-container .course-title {
+  margin-bottom: 40px;
+}
+@media (min-width: 992px) {
+  #course-showcase .container .header-container .course-title {
+    box-shadow: none;
+    position: absolute;
+    top: 10%;
+  }
+}
+@media (min-width: 1600px) {
+  #course-showcase .container .header-container .course-title {
+    position: static;
+  }
+}
+@media (min-width: 992px) {
+  #course-showcase .container .header-container .course-title h1 {
+    margin-top: 40px;
+    color: #FFFFFF;
+  }
+}
+@media (min-width: 992px) {
+  #course-showcase .container .header-container .course-title span {
+    color: #FFFFFF;
+    opacity: 0.7;
+  }
+}
+#course-showcase .container .header-container .author-rating-box {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 15px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+@media (min-width: 1600px) {
+  #course-showcase .container .header-container .author-rating-box {
+    display: flex;
+    flex-direction: column;
+    box-shadow: none;
+  }
+}
+#course-showcase .container .header-container .author-rating-box .interactions {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+@media (min-width: 992px) {
+  #course-showcase .container .header-container .author-rating-box .interactions {
+    flex-direction: row;
+  }
+}
+@media (min-width: 1600px) {
+  #course-showcase .container .header-container .author-rating-box .interactions {
+    flex-direction: row;
+  }
+}
+#course-showcase .container .header-container .author-rating-box .interactions .rating {
+  display: flex;
+  color: orange;
+}
+@media (min-width: 1600px) {
+  #course-showcase .container .header-container .author-rating-box .interactions span:nth-child(n+3) {
+    padding-left: 15px;
+  }
+}
+@media (min-width: 1600px) {
+  #course-showcase .container .header-container .author-rating-box .interactions span {
+    border-right: 1px solid;
+    padding-right: 15px;
+    color: #FFFFFF;
+    opacity: 0.5;
+  }
+  #course-showcase .container .header-container .author-rating-box .interactions span:last-child {
+    border: none;
+  }
+}
+#course-showcase .container .header-container .author {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+@media (min-width: 1600px) {
+  #course-showcase .container .header-container .author {
+    justify-content: flex-start;
+    margin-left: 0px;
+    margin-top: 120px;
+  }
+}
+#course-showcase .container .header-container .author .created-by {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+#course-showcase .container .header-container .author .created-by span:nth-of-type(1) {
+  font-weight: 700;
+}
+@media (min-width: 1600px) {
+  #course-showcase .container .header-container .author .created-by span {
+    color: #FFFFFF;
+  }
+}
+#course-showcase .container .header-container .author img {
+  border-radius: 50%;
+  width: 20%;
+  height: auto;
+}
+@media (min-width: 1600px) {
+  #course-showcase .container .header-container .author img {
+    width: 4%;
+  }
+}
