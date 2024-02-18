@@ -6,7 +6,13 @@ namespace Silicon_AspNetMVC.Controllers;
 
 public class CoursesController : Controller
 {
-    public IActionResult CoursesIndex()
+    public IActionResult Index()
+    {
+        return View();
+    }
+
+
+    public IActionResult Courses()
     {
         var viewModel = new CourseIndexViewModel
         {
@@ -15,7 +21,7 @@ public class CoursesController : Controller
             {
                 Id = "Courses",
                 CourseTitle = "Fullstack Web Developer Course from Scratch",
-                CourseImage = new() { ImageUrl = "images/fullstack_dev.png", AltText = "Macbook image" },
+                CourseImage = new() { ImageUrl = "/images/fullstack_dev.png", AltText = "Macbook image" },
                 Author = "Robert Fox",
                 Price = 23,
                 Views = 5000,

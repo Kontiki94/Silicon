@@ -19,8 +19,9 @@ public class Program
             pattern: "{controller=Home}/{action=Index}/{id?}");
 
         app.MapControllerRoute(
-            name: "courses",
-            pattern: "{controller=Courses}/{action=CoursesIndex}/{id?}");
+            name: "Error",
+            pattern: "{*url}",
+            defaults: new { controller = "Error", action = "PageNotFound" });
 
         app.Run();
     }
