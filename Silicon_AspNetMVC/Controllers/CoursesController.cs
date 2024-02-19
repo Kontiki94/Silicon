@@ -11,7 +11,6 @@ public class CoursesController : Controller
         return View();
     }
 
-
     public IActionResult Courses()
     {
         var viewModel = new CoursesViewModel();
