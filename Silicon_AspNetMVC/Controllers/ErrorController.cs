@@ -2,9 +2,9 @@
 
 namespace Silicon_AspNetMVC.Controllers
 {
-    public class ContactController : Controller
+    public class ErrorController : Controller
     {
-        public IActionResult Index()
+        public IActionResult PageNotFound()
         {
             return View();
         }

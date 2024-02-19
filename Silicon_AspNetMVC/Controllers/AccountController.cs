@@ -21,6 +21,12 @@ namespace Silicon_AspNetMVC.Controllers
             ViewData["Title"] = "Sign Up";
             return View();
         }
+
+        public IActionResult Details()
+        {
+            ViewData["Title"] = "Details";
+            return View();
+        }
        
     }
 }

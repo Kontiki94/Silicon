@@ -1219,3 +1219,360 @@ footer .container .social-media {
   margin-top: 5rem;
   text-align: center;
 }
+
+#course-showcase {
+  position: relative;
+}
+#course-showcase .header-image {
+  width: 100%;
+  max-height: auto;
+}
+@media (min-width: 1600px) {
+  #course-showcase .header-image {
+    position: absolute;
+    z-index: -1;
+  }
+}
+#course-showcase .container .path {
+  margin-bottom: 10px;
+  position: absolute;
+  top: 0;
+  color: #FFFFFF;
+  padding-top: 15px;
+}
+@media (min-width: 768px) {
+  #course-showcase .container .path {
+    padding-top: 40px;
+  }
+}
+@media (min-width: 1600px) {
+  #course-showcase .container .path {
+    position: static;
+    padding-top: 40px;
+    margin-bottom: 80px;
+  }
+}
+#course-showcase .container .header-container .tags {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+#course-showcase .container .header-container .tags .tag-1 {
+  background-color: forestgreen;
+  padding-right: 10px;
+  padding-left: 10px;
+  border-radius: 5px;
+}
+#course-showcase .container .header-container .tags .tag-1 span {
+  color: #FFFFFF;
+}
+#course-showcase .container .header-container .tags .tag-2 {
+  background-color: #EFF2FC;
+  padding-right: 10px;
+  padding-left: 10px;
+  border-radius: 5px;
+}
+#course-showcase .container .header-container .tags .tag-2 span {
+  font-weight: 600;
+}
+#course-showcase .container .header-container .course-title {
+  margin-bottom: 40px;
+}
+@media (min-width: 992px) {
+  #course-showcase .container .header-container .course-title {
+    box-shadow: none;
+    position: absolute;
+    top: 10%;
+  }
+}
+@media (min-width: 1600px) {
+  #course-showcase .container .header-container .course-title {
+    position: static;
+  }
+}
+@media (min-width: 992px) {
+  #course-showcase .container .header-container .course-title h1 {
+    margin-top: 40px;
+    color: #FFFFFF;
+  }
+}
+@media (min-width: 992px) {
+  #course-showcase .container .header-container .course-title span {
+    color: #FFFFFF;
+    opacity: 0.7;
+  }
+}
+#course-showcase .container .header-container .author-rating-box {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 15px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+@media (min-width: 1600px) {
+  #course-showcase .container .header-container .author-rating-box {
+    display: flex;
+    flex-direction: column;
+    box-shadow: none;
+  }
+}
+#course-showcase .container .header-container .author-rating-box .interactions {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+@media (min-width: 992px) {
+  #course-showcase .container .header-container .author-rating-box .interactions {
+    flex-direction: row;
+  }
+}
+@media (min-width: 1600px) {
+  #course-showcase .container .header-container .author-rating-box .interactions {
+    flex-direction: row;
+  }
+}
+#course-showcase .container .header-container .author-rating-box .interactions .rating {
+  display: flex;
+  color: orange;
+}
+@media (min-width: 1600px) {
+  #course-showcase .container .header-container .author-rating-box .interactions span:nth-child(n+3) {
+    padding-left: 15px;
+  }
+}
+@media (min-width: 1600px) {
+  #course-showcase .container .header-container .author-rating-box .interactions span {
+    border-right: 1px solid;
+    padding-right: 15px;
+    color: #FFFFFF;
+    opacity: 0.5;
+  }
+  #course-showcase .container .header-container .author-rating-box .interactions span:last-child {
+    border: none;
+  }
+}
+#course-showcase .container .header-container .author {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+@media (min-width: 1600px) {
+  #course-showcase .container .header-container .author {
+    justify-content: flex-start;
+    margin-left: 0px;
+    margin-top: 120px;
+  }
+}
+#course-showcase .container .header-container .author .created-by {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+#course-showcase .container .header-container .author .created-by span:nth-of-type(1) {
+  font-weight: 700;
+}
+@media (min-width: 1600px) {
+  #course-showcase .container .header-container .author .created-by span {
+    color: #FFFFFF;
+  }
+}
+#course-showcase .container .header-container .author img {
+  border-radius: 50%;
+  width: 20%;
+  height: auto;
+}
+@media (min-width: 1600px) {
+  #course-showcase .container .header-container .author img {
+    width: 4%;
+  }
+}
+
+#details {
+  margin-top: 40px;
+  margin-bottom: 60px;
+}
+#details .container {
+  display: grid;
+  justify-content: center;
+}
+@media (min-width: 992px) {
+  #details .container {
+    grid-template-columns: 1fr 3fr;
+    padding-right: 5rem;
+  }
+}
+#details .container .menu-bar {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+  align-self: flex-start;
+  align-items: center;
+}
+@media (min-width: 768px) {
+  #details .container .menu-bar {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (min-width: 992px) {
+  #details .container .menu-bar {
+    grid-template-columns: 1fr;
+  }
+}
+#details .container .menu-bar .profile {
+  text-align: center;
+}
+@media (min-width: 768px) {
+  #details .container .menu-bar .profile {
+    padding-right: 3rem;
+  }
+}
+#details .container .menu-bar .profile h5 {
+  color: black;
+  margin-bottom: 0;
+}
+#details .container .menu-bar .profile p {
+  margin-bottom: 2rem;
+}
+#details .container .menu-bar .options {
+  display: flex;
+  flex-direction: column;
+}
+@media (min-width: 768px) {
+  #details .container .menu-bar .options {
+    padding-right: 1rem;
+  }
+}
+#details .container .menu-bar .options a {
+  background-color: #fff;
+  color: #000;
+  font-weight: 700;
+  padding: 10px;
+  max-width: 300px;
+  width: auto;
+  margin-bottom: 0.2rem;
+  text-decoration: none;
+  border-radius: 0.4rem;
+  border: 1px solid white;
+}
+#details .container .menu-bar .options a i {
+  padding-right: 1rem;
+  padding-left: 1.2rem;
+}
+#details .container .menu-bar .options a:hover {
+  background-color: #6366F1;
+  color: #fff;
+}
+#details .container .menu-bar .options a:active {
+  background-color: #6366F1;
+  color: #fff;
+}
+@media (min-width: 992px) {
+  #details .container .account-details {
+    border-left: 1px solid #E2E5F1;
+    padding-left: 7rem;
+  }
+}
+#details .container .account-details h1 {
+  margin-bottom: 1.2rem;
+}
+#details .container .account-details .user-details .name, #details .container .account-details .user-details .contact-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+#details .container .account-details .user-details div {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 0.5rem;
+}
+#details .container .account-details .user-details div .firstname, #details .container .account-details .user-details div .email {
+  margin-right: 1rem;
+}
+#details .container .account-details .bio textarea {
+  max-width: 100%;
+  width: 100%;
+  height: 7rem;
+  border: 0.5px solid #D4D7E5;
+  border-radius: 0.4rem;
+  padding: 0.5rem;
+}
+#details .container .account-details .bio span {
+  font-weight: 300;
+}
+#details .container .account-details .bio .user-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+#details .container .account-details .bio .divider {
+  width: 100%;
+  height: 1px;
+  background-color: #E2E5F1;
+  margin-top: 2.5rem;
+  margin-bottom: 3.5rem;
+}
+#details .container .account-details .bio .address {
+  display: flex;
+  flex-direction: column;
+}
+#details .container .account-details .bio .address label {
+  margin-top: 1rem;
+}
+#details .container .account-details .bio .address span {
+  padding-left: 0.4rem;
+  font-weight: 400;
+}
+#details .container .account-details .bio .address .city-info {
+  display: flex;
+  flex-direction: row;
+}
+#details .container .account-details .bio .address .city-info .city, #details .container .account-details .bio .address .city-info .postal {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 0.5rem;
+}
+#details .container .account-details .bio .address .city-info .postal {
+  margin-right: 0.5rem;
+}
+#details .container .account-details .bio .address .address-button {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+#details .container input {
+  margin-bottom: 0.5rem;
+  padding: 0.6rem;
+  border: 0.5px solid #D4D7E5;
+  border-radius: 0.4rem;
+}
+#details .container label {
+  font-weight: 700;
+  margin-bottom: 0.2rem;
+}
+#details .container h5 {
+  color: #6366F1;
+  margin-bottom: 1rem;
+}
+
+#not-found .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-top: 10rem;
+}
+#not-found .container .image {
+  margin-bottom: 1rem;
+}
+#not-found .container .text {
+  display: flex;
+  flex-direction: column;
+}
+#not-found .container .text a {
+  align-self: center;
+  margin-top: 1.5rem;
+}
