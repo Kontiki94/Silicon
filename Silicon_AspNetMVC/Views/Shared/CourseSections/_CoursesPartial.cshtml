@@ -1,4 +1,4 @@
-﻿@model CoursesViewModel
+﻿@model CourseDetailsViewModel
 
 <section id="@Model.Id" class="container">
     <div class="courses">
@@ -33,11 +33,10 @@
                         <img src="/images/fullstack_dev.png" alt="@Model.CourseImage.AltText" />
                     </div>
                     <div class="course-info">
-                        <p class="title">@Model.CourseTitle</p>
-                        <p class="author">@Model.Author</p>
+                        <p class="title">@Model.Title</p>
+                        <p class="author">@Model.Author.AuthorName</p>
                         <p class="price">$@Model.Price</p>
                     </div>
-
                     <div class="divider"></div>
                     <footer>
                         <div>
@@ -54,8 +53,8 @@
                 <a class="content" asp-controller="@Model.Link.ControllerName" asp-action="@Model.Link.ActionName">
                     <img src="@Model.CourseImage.ImageUrl" alt="@Model.CourseImage.AltText" />
                     <div class="course-info">
-                        <p class="title">@Model.CourseTitle</p>
-                        <p class="author">@Model.Author</p>
+                        <p class="title">@Model.Title</p>
+                        <p class="author">@Model.Author.AuthorName</p>
                         <p class="price">$@Model.Price</p>
                     </div>
 
@@ -75,8 +74,8 @@
                 <a class="content" asp-controller="@Model.Link.ControllerName" asp-action="@Model.Link.ActionName">
                     <img src="@Model.CourseImage.ImageUrl" alt="@Model.CourseImage.AltText" />
                     <div class="course-info">
-                        <p class="title">@Model.CourseTitle</p>
-                        <p class="author">@Model.Author</p>
+                        <p class="title">@Model.Title</p>
+                        <p class="author">@Model.Author.AuthorName</p>
                         <p class="price">$@Model.Price</p>
                     </div>
 
@@ -96,8 +95,8 @@
                 <a class="content" asp-controller="@Model.Link.ControllerName" asp-action="@Model.Link.ActionName">
                     <img src="@Model.CourseImage.ImageUrl" alt="@Model.CourseImage.AltText" />
                     <div class="course-info">
-                        <p class="title">@Model.CourseTitle</p>
-                        <p class="author">@Model.Author</p>
+                        <p class="title">@Model.Title</p>
+                        <p class="author">@Model.Author.AuthorName</p>
                         <p class="price">$@Model.Price</p>
                     </div>
 
@@ -117,8 +116,8 @@
                 <a class="content" asp-controller="@Model.Link.ControllerName" asp-action="@Model.Link.ActionName">
                     <img src="@Model.CourseImage.ImageUrl" alt="@Model.CourseImage.AltText" />
                     <div class="course-info">
-                        <p class="title">@Model.CourseTitle</p>
-                        <p class="author">@Model.Author</p>
+                        <p class="title">@Model.Title</p>
+                        <p class="author">@Model.Author.AuthorName</p>
                         <p class="price">$@Model.Price</p>
                     </div>
 
@@ -138,8 +137,8 @@
                 <a class="content" asp-controller="@Model.Link.ControllerName" asp-action="@Model.Link.ActionName">
                     <img src="@Model.CourseImage.ImageUrl" alt="@Model.CourseImage.AltText" />
                     <div class="course-info">
-                        <p class="title">@Model.CourseTitle</p>
-                        <p class="author">@Model.Author</p>
+                        <p class="title">@Model.Title</p>
+                        <p class="author">@Model.Author.AuthorName</p>
                         <p class="price">$@Model.Price</p>
                     </div>
 
