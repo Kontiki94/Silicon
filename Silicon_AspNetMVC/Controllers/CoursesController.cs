@@ -11,31 +11,9 @@ public class CoursesController : Controller
         return View();
     }
 
-
     public IActionResult Courses()
     {
-        var viewModel = new CourseIndexViewModel
-        {
-            Title = "courses",
-            Course = new CoursesViewModel
-            {
-                Id = "Courses",
-                CourseTitle = "Fullstack Web Developer Course from Scratch",
-                CourseImage = new() { ImageUrl = "/images/fullstack_dev.png", AltText = "Macbook image" },
-                Author = "Robert Fox",
-                Price = 23,
-                Views = 5000,
-                Link = new() { ControllerName = "Courses", ActionName = "CourseDetails" },
-                Categories =
-                [
-                    "IT",
-                    "Tech",
-                    "DevOps",
-                    "Data Analyst"
-                    ],
-            }
-        };
-
+        var viewModel = new CoursesViewModel();
         ViewData["Title"] = viewModel.Title;
         return View(viewModel);
     }
