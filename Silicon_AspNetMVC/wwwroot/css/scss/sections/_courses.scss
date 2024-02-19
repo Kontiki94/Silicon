@@ -43,8 +43,16 @@
 
     .grid {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(1, 1fr);
         gap: 2rem 1rem;
+
+        @include md {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        @include lg {
+            grid-template-columns: repeat(3, 1fr);
+        }
 
         .course-card {
             box-shadow: 0 3px 10px #0000000f, 0 4px 5px #0000000c;
@@ -53,6 +61,7 @@
             padding: 5px;
             border: 1px solid $gray-300;
             padding: 1px;
+            
 
             &:hover {
                 transition: transform 0.3s ease;
@@ -86,8 +95,9 @@
                     color: $gray-800;
                     padding-left: 5px;
                 }
-
-                .img {
+                
+                img {
+                    width: 100%;
                     max-width: 100%;
                 }
 

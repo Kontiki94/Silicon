@@ -4,11 +4,11 @@ namespace Silicon_AspNetMVC.Controllers
 {
     public class AccountController : Controller
     {
-        public IActionResult Index()
-        {
-            ViewData["Title"] = "Profile";
-            return View();
-        }
+        //public IActionResult Index()
+        //{
+        //    ViewData["Title"] = "Profile";
+        //    return View();
+        //}
 
         public IActionResult SignIn()
         {

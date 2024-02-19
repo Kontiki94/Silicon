@@ -55,7 +55,6 @@
                 }
 
                 a {
-                    background-color: #fff;
                     color: #000;
                     font-weight: 700;
                     padding: 10px;
@@ -71,15 +70,19 @@
                         padding-left: 1.2rem;
                     }
 
-                    &:hover {
+                    &:hover,
+                    &:active,
+                    &:focus,
+                    .active {
                         background-color: $theme;
+                        text-decoration: none;
                         color: #fff;
                     }
+                }
 
-                    &:active {
-                        background-color: $theme;
-                        color: #fff;
-                    }
+                .active {
+                    background-color: $theme;
+                    color: #fff;
                 }
             }
         }
@@ -127,6 +130,8 @@
                 span {
                     font-weight: 300;
                 }
+
+                
 
                 .user-buttons {
                     display: flex;
