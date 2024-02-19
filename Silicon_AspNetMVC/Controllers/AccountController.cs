@@ -1,14 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Silicon_AspNetMVC.Models.Sections;
 
 namespace Silicon_AspNetMVC.Controllers
 {
     public class AccountController : Controller
     {
-        //public IActionResult Index()
-        //{
-        //    ViewData["Title"] = "Profile";
-        //    return View();
-        //}
+        public IActionResult Index()
+        {
+            ViewData["Title"] = "Profile";
+            return View();
+        }
 
         public IActionResult SignIn()
         {
@@ -27,6 +28,16 @@ namespace Silicon_AspNetMVC.Controllers
             ViewData["Title"] = "Details";
             return View();
         }
-       
+
+        [HttpPost]
+        public IActionResult SaveDetails(AccountViewModel model)
+        {
+            return RedirectToAction("Details", "Account");
+        }
+
+        public IActionResult Cancel()
+        {
+            return RedirectToAction("Details", "Account");
+        }
     }
 }
