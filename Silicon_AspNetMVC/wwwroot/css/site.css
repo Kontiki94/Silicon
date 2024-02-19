@@ -574,11 +574,11 @@ footer .container .social-media {
     padding-right: 7rem;
   }
 }
-#manage-work .presentation .info {
+#manage-work .presentation div:nth-child(n) {
   display: flex;
   flex-direction: row;
 }
-#manage-work .presentation .info i {
+#manage-work .presentation div:nth-child(n) i {
   padding-top: 0.2rem;
   padding-right: 0.8rem;
   color: #6366F1;
