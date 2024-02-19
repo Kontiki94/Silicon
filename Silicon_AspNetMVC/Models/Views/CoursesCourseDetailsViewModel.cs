@@ -20,9 +20,9 @@ public class CoursesCourseDetailsViewModel
         {
             AuthorName = "Albert Flores",
             Description = "Dolor ipsum amet cursus quisque porta adipiscing. Lorem convallis malesuada sed maecenas. Ac dui at vitae mauris cursus in nullam porta sem. Quis pellentesque elementum ac bibendum. Nunc aliquam in tortor facilisis. Vulputate eget risus, metus phasellus. Pellentesque faucibus amet, eleifend diam quam condimentum convallis ultricies placerat. Duis habitasse placerat amet, odio pellentesque rhoncus, feugiat at. Eget pellentesque tristique felis magna fringilla.",
-            Youtube="240K",
+            Youtube = "240K",
             Facebook = "180K",
-            AuthorImage = new() { ImageUrl = "/images/albert-flores.svg", AltText = "Picture of author"}
+            AuthorImage = new() { ImageUrl = "/images/albert-flores.svg", AltText = "Picture of author" }
         },
         CourseDescription = "Suspendisse natoque sagittis, consequat turpis. Sed tristique tellus morbi magna. At vel senectus accumsan, arcu mattis id tempor. Tellus sagittis, euismod porttitor sed tortor est id. Feugiat velit velit, tortor ut. Ut libero cursus nibh lorem urna amet tristique leo. Viverra lorem arcu nam nunc at ipsum quam. A proin id sagittis dignissim mauris condimentum ornare. Tempus mauris sed dictum ultrices.",
         LearnPoints =
@@ -32,7 +32,9 @@ public class CoursesCourseDetailsViewModel
             "Phasellus id vitae dui aliquet mi.",
             "Integer cursus vitae, odio feugiat iaculis aliquet diam, et purus.",
             "In aenean dolor diam tortor orci eu."
-        ]
+        ],
+        DiscountPrice = (decimal?)28.99,
+        Price = (decimal?)49.00
     };
 
     public AuthorViewModel Author = new()

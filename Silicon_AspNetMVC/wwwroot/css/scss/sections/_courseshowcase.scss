@@ -1,6 +1,10 @@
 #course-showcase {
     position: relative;
-    margin-bottom: 140px;
+    margin-bottom: 60px;
+
+    @include xxxl{
+        margin-bottom: 120px;
+    }
 
     .header-image {
         width: 100%;
