@@ -19,8 +19,8 @@ public class CourseDetailsViewModel
     public int? Resources { get; set; }
     public string? AccessTime { get; set; }
     public string? CourseDescription { get; set; }
-    public string? LearnPoints { get; set; }
-    public string? ProgramDetails { get; set; }
+    public List<string>? LearnPoints { get; set; }
+    public List<string>? ProgramDetails { get; set; }
     public List<string>? Categories { get; set; }
     public AuthorViewModel Author { get; set; } = new AuthorViewModel();
     public LinkViewModel Link { get; set; } = new LinkViewModel();

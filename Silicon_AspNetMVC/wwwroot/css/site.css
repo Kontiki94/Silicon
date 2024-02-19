@@ -1175,13 +1175,14 @@ footer .container .social-media {
 
 #course-showcase {
   position: relative;
+  margin-bottom: 140px;
 }
 #course-showcase .header-image {
   width: 100%;
-  max-height: auto;
 }
 @media (min-width: 1600px) {
   #course-showcase .header-image {
+    height: 123%;
     position: absolute;
     z-index: -1;
   }
@@ -1267,6 +1268,7 @@ footer .container .social-media {
     display: flex;
     flex-direction: column;
     box-shadow: none;
+    padding: 0px;
   }
 }
 #course-showcase .container .header-container .author-rating-box .interactions {
@@ -1528,4 +1530,63 @@ footer .container .social-media {
 #not-found .container .text a {
   align-self: center;
   margin-top: 1.5rem;
+}
+
+.author-content {
+  display: flex;
+  background-color: #0B0F19;
+}
+.author-content .squiggly {
+  position: absolute;
+  z-index: 1;
+}
+.author-content .author-image {
+  z-index: 10;
+}
+.author-content .author-image img {
+  width: auto;
+}
+.author-content .author-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-left: 125px;
+  padding-right: 125px;
+}
+.author-content .author-box .author-info {
+  display: flex;
+  flex-direction: column;
+  row-gap: 40px;
+}
+.author-content .author-box .author-info .learn-from {
+  color: #FFFFFF;
+  opacity: 0.6;
+  font-size: 20px;
+}
+.author-content .author-box .author-info .author-name {
+  color: #FFFFFF;
+  font-size: 40px;
+  font-weight: 800;
+}
+.author-content .author-box .author-info .author-description {
+  color: #FFFFFF;
+  opacity: 0.6;
+}
+.author-content .author-box .social {
+  display: flex;
+  gap: 20px;
+  z-index: 2;
+}
+.author-content .author-box .social .youtube-btn a {
+  background-color: #FF0000;
+}
+.author-content .author-box .social .youtube-btn a:hover {
+  background-color: black;
+}
+.author-content .author-box .social .fb-btn a {
+  background-color: #1877F2;
+}
+.author-content .author-box .social .fb-btn a:hover {
+  background-color: black;
 }

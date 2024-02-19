@@ -1,5 +1,43 @@
-﻿<section id="course-details" class="container">
-    <div class="content">
+﻿@model CourseDetailsViewModel
+<section id="course-details" class="container">
+    <div class="course-content">
+        <div class="top-section">
+            <div class="left">
+                <div class="description">
+                    <span></span>
+                    <p></p>
+                </div>
+                <div class="learn">
+                    <span></span>
+                    <ul style="list-style-type: none;">
+                        @if (Model.LearnPoints is not null)
+                        {
+                            @foreach (var point in Model.LearnPoints)
+                            {
+                                <li><i class="fa-sharp fa-regular fa-circle-check"></i>@point</li>
+                            }
+                        }
+                    </ul>
+                </div>
+            </div>
+            <div class="right">
+                <div class="course-box">
+                    <span class="title"></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
 
+                    <div class="course-price">
+                        <span class="discount-price"></span>
+                        <span class="ord-price"></span>
+                    </div>
+                    <a class="btn-theme">Join Course</a>
+                </div>
+            </div>
+        </div>
+        <div class="bottom-section">
+        </div>
     </div>
 </section>
