@@ -25,7 +25,7 @@ public class CoursesController : Controller
                 Author = "Robert Fox",
                 Price = 23,
                 Views = 5000,
-                Link = new() { ControllerName = "Course", ActionName = "Index" },
+                Link = new() { ControllerName = "Courses", ActionName = "CourseDetails" },
                 Categories =
                 [
                     "IT",
@@ -36,6 +36,13 @@ public class CoursesController : Controller
             }
         };
 
+        ViewData["Title"] = viewModel.Title;
+        return View(viewModel);
+    }
+
+    public IActionResult CourseDetails()
+    {
+        var viewModel = new CoursesCourseDetailsViewModel();
         ViewData["Title"] = viewModel.Title;
         return View(viewModel);
     }
