@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Silicon_AspNetMVC.Models.Sections;
+using Silicon_AspNetMVC.ViewModels;
 
 namespace Silicon_AspNetMVC.Controllers
 {
@@ -9,7 +9,7 @@ namespace Silicon_AspNetMVC.Controllers
         [Route("/signin")]
         public IActionResult SignIn()
         {
-            var viewModel = new SignInModel();
+            var viewModel = new SignInViewModel();
             ViewData["Title"] = "Sign In";
             return View(viewModel);
         }

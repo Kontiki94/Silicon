@@ -1,8 +1,8 @@
-﻿@model SignInModel
+﻿@model SignInViewModel
 
-@* @{
-    ViewData["Title"] = Model.;
-} *@
+@{
+    ViewData["Title"] = Model.Title;
+}
 
 <section id="signin" class="container">
     <div class="main-holder">
@@ -14,18 +14,18 @@
             <form asp-controller="Auth" asp-action="SignIn" method="post">
 
                 <div class="email">
-                    <label asp-for="Email">Email</label>
-                    <input asp-for="Email" />
+                    <label asp-for="Form.Email">Email</label>
+                    <input asp-for="Form.Email" />
                     <span></span>
                 </div>
                 <div class="password">
-                    <label asp-for="Password">Password</label>
-                    <input asp-for="Password" type="password" id="password"/>
+                    <label asp-for="Form.Password">Password</label>
+                    <input asp-for="Form.Password" type="password" id="password" />
 
                 </div>
                 <div class="checkbox">
                     <input type="checkbox" />
-                    <label asp-for="RememberMe">Remember me</label>
+                    <label asp-for="Form.RememberMe">Remember me</label>
                 </div>
                 <button type="submit" class="btn-theme">Sign In</button>
                 <div class="social-box">
