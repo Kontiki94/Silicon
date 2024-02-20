@@ -12,12 +12,13 @@ public class CoursesController : Controller
         return View(viewModel);
     }
 
+    
     public IActionResult Courses()
     {
-        
         return View();
     }
 
+    [Route("/coursedetails")]
     public IActionResult CourseDetails()
     {
         var viewModel = new CoursesCourseDetailsViewModel();

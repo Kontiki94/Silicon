@@ -11,6 +11,7 @@ namespace Silicon_AspNetMVC.Controllers
             return View();
         }
 
+        [Route("/details")]
         public IActionResult Details()
         {
             ViewData["Title"] = "Details";
