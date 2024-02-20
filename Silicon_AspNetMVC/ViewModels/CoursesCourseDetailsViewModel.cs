@@ -1,7 +1,7 @@
 ﻿using Silicon_AspNetMVC.Models.Components;
 using Silicon_AspNetMVC.Models.Sections;
 
-namespace Silicon_AspNetMVC.Models.Views;
+namespace Silicon_AspNetMVC.ViewModels;
 
 public class CoursesCourseDetailsViewModel
 {
@@ -35,7 +35,7 @@ public class CoursesCourseDetailsViewModel
         ],
         DiscountPrice = (decimal)28.99,
         Price = (decimal)49.00,
-        ProgramDetails = 
+        ProgramDetails =
         [
             new SectionTitleModel { Title = "Introduction. Getting started", Subtitle = "Nulla faucibus mauris pellentesque blandit faucibus non. Sit ut et at suspendisse gravida hendrerit tempus placerat." },
             new SectionTitleModel { Title = "The ultimate HTML developer: advanced HTML", Subtitle = "Lobortis diam elit id nibh ultrices sed penatibus donec. Nibh iaculis eu sit cras ultricies. Nam eu eget etiam egestas donec scelerisque ut ac enim. Vitae ac nisl, enim nec accumsan vitae est." },
@@ -51,7 +51,7 @@ public class CoursesCourseDetailsViewModel
     {
         Id = 1,
         AuthorName = "Albert Flores",
-        AuthorImage = { ImageUrl = "/images/albert-flores.svg", AltText = "Portrait of Albert"},
+        AuthorImage = { ImageUrl = "/images/albert-flores.svg", AltText = "Portrait of Albert" },
         Description = "Dolor ipsum amet cursus quisque porta adipiscing. Lorem convallis malesuada sed maecenas. Ac dui at vitae mauris cursus in nullam porta sem. Quis pellentesque elementum ac bibendum. Nunc aliquam in tortor facilisis. Vulputate eget risus, metus phasellus. Pellentesque faucibus amet, eleifend diam quam condimentum convallis ultricies placerat. Duis habitasse placerat amet, odio pellentesque rhoncus, feugiat at. Eget pellentesque tristique felis magna fringilla.",
         Youtube = "240K",
         Facebook = "180k"

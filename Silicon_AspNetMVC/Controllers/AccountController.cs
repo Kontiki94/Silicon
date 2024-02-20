@@ -11,6 +11,7 @@ namespace Silicon_AspNetMVC.Controllers
             return View();
         }
 
+        [Route("/details")]
         public IActionResult Details()
         {
             ViewData["Title"] = "Details";
@@ -23,7 +24,7 @@ namespace Silicon_AspNetMVC.Controllers
         }
 
         [HttpPost]
-        public IActionResult SaveDetails(AccountViewModel model)
+        public IActionResult SaveDetails(AccountModel model)
         {
             return RedirectToAction("Details", "Account");
         }

@@ -1,4 +1,4 @@
-﻿using Silicon_AspNetMVC.Models.Views;
+﻿using Silicon_AspNetMVC.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Silicon_AspNetMVC.Controllers;
@@ -11,13 +11,13 @@ public class CoursesController : Controller
         ViewData["Title"] = viewModel.Title;
         return View(viewModel);
     }
-
+    
     public IActionResult Courses()
     {
-        
         return View();
     }
 
+    [Route("/coursedetails")]
     public IActionResult CourseDetails()
     {
         var viewModel = new CoursesCourseDetailsViewModel();
