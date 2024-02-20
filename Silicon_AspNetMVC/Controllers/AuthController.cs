@@ -7,6 +7,7 @@ namespace Silicon_AspNetMVC.Controllers
     {
 
         [Route("/signin")]
+        [HttpGet]
         public IActionResult SignIn()
         {
             var viewModel = new SignInViewModel();
@@ -15,6 +16,8 @@ namespace Silicon_AspNetMVC.Controllers
         }
 
         [Route("/signup")]
+        //Ta bort kommentaren när det finns en view för signup med en form som har method=post.
+        //[HttpPost]
         public IActionResult SignUp()
         {
             ViewData["Title"] = "Sign Up";
