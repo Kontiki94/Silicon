@@ -1,4 +1,4 @@
-﻿const toogleMenu = () => {
+﻿const toggleMenu = () => {
     document.getElementById("menu").classList.toogle('hide');
     document.getElementById("account-buttons").classList.toogle('hide');
 }
