@@ -1,0 +1,20 @@
+﻿@model AccountViewModel
+<section id="security">
+    <div class="container">
+        <div class="menu-bar">
+            <div class="profile">
+                <div class="image">
+                    <img src="~/images/john-doe.png" alt="image of John Doe" />
+                </div>
+                <h5 class="user-name">John Doe</h5>
+                <p>john.doe@domain.com</p>
+            </div>
+            <div class="options">
+                <a class="menu-link" asp-controller="Account" asp-action="Details"><i class="fa-regular fa-gear"></i>Account Details</a>
+                <a class="active" asp-controller="Account" asp-action="Security"><i class="fa-regular fa-lock"></i>Security</a>
+                <a class="menu-link" asp-controller="Account" asp-action="SavedCourses"><i class="fa-sharp fa-regular fa-bookmark"></i>Saved Courses</a>
+                <a class="menu-link" asp-controller="Account" asp-action="Sign Out"><i class="fa-solid fa-right-from-bracket"></i>Sign Out</a>
+            </div>
+        </div>
+    </div>
+</section>

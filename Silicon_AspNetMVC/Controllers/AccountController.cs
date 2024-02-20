@@ -17,6 +17,11 @@ namespace Silicon_AspNetMVC.Controllers
             return View();
         }
 
+        public IActionResult Security()
+        {
+            return View();
+        }
+
         [HttpPost]
         public IActionResult SaveDetails(AccountViewModel model)
         {
