@@ -12,6 +12,7 @@ public class CoursesController : Controller
         return View(viewModel);
     }
 
+    //Behövs inte, men får ligga kvar ett tag för säkerhets skull. 
     //public IActionResult Courses()
     //{
     //    var viewModel = new CoursesViewModel();
