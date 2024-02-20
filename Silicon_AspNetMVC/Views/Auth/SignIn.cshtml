@@ -1,5 +1,9 @@
 ﻿@model SignInViewModel
 
+@{
+    ViewData["Title"] = Model.Title;
+}
+
 <section id="signin" class="container">
     <div class="main-holder">
         <div class="section-title">
@@ -12,17 +16,17 @@
             </form>
             <div class="email">
                 <label>Email</label>
-                <input asp-for="Email" placeholder="Enter your email address" />
-                <span asp-validation-for="Email"></span>
+                <input placeholder="Enter your email address" />
+                <span></span>
             </div>
             <div class="password">
                 <label>Password</label>
-                <input asp-for="Password" type="password" id="password" placeholder="******"/>
-                <span asp-validation-for="Password"></span>
+                <input type="password" id="password" placeholder="******"/>
+
             </div>
             <div class="checkbox">
-                <input asp-for="RememberMe" type="checkbox" />
-                <label asp-for="RememberMe" >Remember me</label>
+                <input type="checkbox" />
+                <label>Remember me</label>
             </div>
             <button type="submit" class="btn-theme">Sign In</button>
             <div class="social-box">

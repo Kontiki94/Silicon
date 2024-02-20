@@ -18,7 +18,7 @@ namespace Silicon_AspNetMVC.Controllers
         }
 
         [HttpPost]
-        public IActionResult SaveDetails(AccountViewModel model)
+        public IActionResult SaveDetails(AccountModel model)
         {
             return RedirectToAction("Details", "Account");
         }

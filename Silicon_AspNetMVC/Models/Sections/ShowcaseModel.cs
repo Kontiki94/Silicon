@@ -2,7 +2,7 @@
 
 namespace Silicon_AspNetMVC.Models.Sections;
 
-public class ShowcaseViewModel
+public class ShowcaseModel
 {
     public string? Id { get; set; }
     public ImageViewModel ShowcaseImage { get; set; } = null!;

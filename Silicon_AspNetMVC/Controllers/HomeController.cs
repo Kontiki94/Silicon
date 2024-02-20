@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Silicon_AspNetMVC.Models.Views;
+using Silicon_AspNetMVC.ViewModels;
 
 namespace Silicon_AspNetMVC.Controllers;
 

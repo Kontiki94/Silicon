@@ -1,4 +1,4 @@
-﻿using Silicon_AspNetMVC.Models.Views;
+﻿using Silicon_AspNetMVC.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Silicon_AspNetMVC.Controllers;
