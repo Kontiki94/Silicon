@@ -1,5 +1,43 @@
-﻿<section id="course-details" class="container">
-    <div class="content">
+﻿@model CourseDetailsViewModel
+<section id="course-description" class="container">
+    <div class="course-content">
+        <div class="top-section">
+            <div class="left">
+                <div class="description">
+                    <p class="test">Course Description</p>
+                    <p>@Model.CourseDescription</p>
+                </div>
+                <div class="learn">
+                    <p>What you'll learn</p>
+                    <ul class="list" style="list-style-type: none;">
+                        @if (Model.LearnPoints is not null)
+                        {
+                            @foreach (var point in Model.LearnPoints)
+                            {
+                                <li><i class="fa-sharp fa-regular fa-circle-check"></i> @point</li>
+                            }
+                        }
+                    </ul>
+                </div>
+            </div>
+            <div class="right">
+                <div class="course-box">
+                    <p class="title">This course includes:</p>
+                    <p><i class="fa-sharp fa-light fa-display"></i> @Model.ViewHours on-demand video</p>
+                    <p><i class="fa-thin fa-file"></i> @Model.Articles articles</p>
+                    <p><i class="fa-sharp fa-thin fa-download"></i> @Model.Resources downloadable resources</p>
+                    <p><i class="fa-regular fa-infinity"></i> @Model.AccessTime access</p>
+                    <p><i class="fa-sharp fa-thin fa-trophy"></i> Certificate of completion</p>
 
+                    <div class="course-price">
+                        <p class="discount-price">$@Model.DiscountPrice</p>
+                        <p class="ord-price">$@Model.Price</p>
+                    </div>
+                    <a class="btn-theme">Join Course</a>
+                </div>
+            </div>
+        </div>
+        <div class="bottom-section">
+        </div>
     </div>
 </section>

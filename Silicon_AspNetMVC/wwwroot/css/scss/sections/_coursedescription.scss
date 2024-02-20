@@ -1,0 +1,106 @@
+.course-content {
+
+    @include xxxl{
+        padding-top:100px;
+    }
+    .top-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 20px;
+
+
+        @include lg {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+        }
+
+        .left {
+            width: 85%;
+
+            .description {
+                p:nth-child(1) {
+                    color: $gray-900;
+                    font-size: 40px;
+                    font-weight: 800;
+                }
+
+                p:nth-child(2) {
+                    margin-top: 40px;
+                }
+            }
+
+            .learn {
+                p:nth-child(1) {
+                    color: $gray-900;
+                    font-size: 28px;
+                    font-weight: 800;
+                    margin-top: 50px;
+                    margin-bottom: 30px;
+                }
+
+                .list {
+                    padding: 0px;
+
+                    li:not(:last-child) {
+                        margin-bottom: 10px;
+                    }
+
+                    i {
+                        color: $theme;
+                    }
+                }
+            }
+        }
+
+        .right {
+            .course-box {
+                box-shadow: 0 3px 10px #0000000f, 0 4px 5px #0000000c;
+                border-radius: 1.1rem;
+                overflow: hidden;
+                border: 1px solid $gray-300;
+                width: 430px;
+                padding: 50px 50px 35px 50px;
+
+                @include xxxl {
+                }
+
+                .title {
+                    font-size: 24px;
+                    color: $gray-900;
+                    font-weight: 800;
+                    margin-bottom: 30px;
+                }
+
+                .course-price {
+                    display: flex;
+                    gap: 15px;
+                    padding-top: 30px;
+                    margin-bottom: 5px;
+
+                    .discount-price {
+                        font-size: 32px;
+                        color: $gray-900;
+                        font-weight: 800;
+                    }
+
+                    .ord-price {
+                        text-decoration: line-through;
+                        color: $gray-600;
+                        font-size: 20px;
+                    }
+                }
+
+                a {
+                    width: fit-content;
+                    padding-left: 30px;
+                    padding-right: 30px;
+                }
+
+                i {
+                    margin-right: 10px;
+                }
+            }
+        }
+    }
+}

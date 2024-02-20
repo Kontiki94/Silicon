@@ -1,11 +1,16 @@
 #course-showcase {
     position: relative;
+    margin-bottom: 60px;
+
+    @include xxxl{
+        margin-bottom: 120px;
+    }
 
     .header-image {
         width: 100%;
-        max-height: auto;
 
         @include xxxl {
+            height: 123%;
             position: absolute;
             z-index: -1;
         }
@@ -106,6 +111,7 @@
                     display: flex;
                     flex-direction: column;
                     box-shadow: none;
+                    padding: 0px;
                 }
 
                 .interactions {
