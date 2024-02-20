@@ -1,4 +1,6 @@
-﻿<section id="details">
+﻿@model AccountViewModel
+
+<section id="details">
     <div class="container">
 
         <div class="menu-bar">
@@ -18,60 +20,62 @@
         </div>
 
         <div class="account-details">
-            <div class="user-details">
-                <h1>Account Details</h1>
-                <h5>Basic Info</h5>
-                <div class="name">
-                    <div class="firstname">
-                        <label>First name</label>
-                        <input placeholder="John" />
-                    </div>
-                    <div class="lastname">
-                        <label>Last name</label>
-                        <input placeholder="Doe" />
-                    </div>
-                </div>
-                <div class="contact-info">
-                    <div class="email">
-                        <label>Email Address</label>
-                        <input placeholder="john.doe@domain.com" />
-                    </div>
-                    <div class="phone">
-                        <label>Phone</label>
-                        <input placeholder="Enter your phone" />
-                    </div>
-                </div>
-            </div>
-            <div class="bio">
-                <label>Bio <span>(optional)</span></label>
-                <textarea placeholder="Add a short bio"></textarea>
-                <div class="user-buttons">
-                    <button href="#" class="btn-gray">Cancel</button>
-                    <button href="#" class="btn-theme">Save Changes</button>
-                </div>
-                <div class="divider"></div>
-                <div class="address">
-                    <h5>Address</h5>
-                    <label>Address line 1</label>
-                    <input placeholder="Enter your address line" />
-                    <label>Address line 2<span>(optional)</span></label>
-                    <input placeholder="Enter your second address line" />
-                    <div class="city-info">
-                        <div class="postal">
-                            <label>Postal Code</label>
-                            <input placeholder="Enter your postal code" />
+            <form asp-controller="Account" asp-action="SaveDetails" method="post">
+                <div class="user-details">
+                    <h1>Account Details</h1>
+                    <h5>Basic Info</h5>
+                    <div class="name">
+                        <div class="firstname">
+                            <label asp-for="FirstName">First name</label>
+                            <input asp-for="FirstName" placeholder="John" />
                         </div>
-                        <div class="city">
-                            <label>City</label>
-                            <input placeholder="Enter your city" />
+                        <div class="lastname">
+                            <label asp-for="LastName">Last name</label>
+                            <input asp-for="LastName" placeholder="Doe" />
                         </div>
                     </div>
-                    <div class="address-button">
+                    <div class="contact-info">
+                        <div class="email">
+                            <label asp-for="Email">Email Address</label>
+                            <input asp-for="Email" placeholder="john.doe@domain.com" />
+                        </div>
+                        <div class="phone">
+                            <label asp-for="Phone">Phone</label>
+                            <input asp-for="Phone" placeholder="Enter your phone" />
+                        </div>
+                    </div>
+                </div>
+                <div class="bio">
+                    <label asp-for="Bio">Bio <span>(optional)</span></label>
+                    <textarea asp-for="Bio" placeholder="Add a short bio"></textarea>
+                    <div class="user-buttons">
                         <button href="#" class="btn-gray">Cancel</button>
                         <button href="#" class="btn-theme">Save Changes</button>
                     </div>
+                    <div class="divider"></div>
+                    <div class="address">
+                        <h5>Address</h5>
+                        <label asp-for="AddressLine1">Address line 1</label>
+                        <input asp-for="AddressLine1" placeholder="Enter your address line" />
+                        <label asp-for="AddressLine2">Address line 2<span>(optional)</span></label>
+                        <input asp-for="AddressLine2" placeholder="Enter your second address line" />
+                        <div class="city-info">
+                            <div class="postal">
+                                <label asp-for="PostalCode">Postal Code</label>
+                                <input asp-for="PostalCode" placeholder="Enter your postal code" />
+                            </div>
+                            <div class="city">
+                                <label asp-for="City">City</label>
+                                <input asp-for="City" placeholder="Enter your city" />
+                            </div>
+                        </div>
+                        <div class="address-button">
+                            <button type="button" href="#" class="btn-gray">Cancel</button>
+                            <button type="submit" href="#" class="btn-theme">Save Changes</button>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 </section>

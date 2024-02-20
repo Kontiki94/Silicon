@@ -1143,6 +1143,7 @@ footer .container .social-media {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 4rem;
 }
 #signin .main-holder {
   width: 480px;
@@ -1212,10 +1213,6 @@ footer .container .social-media {
   padding: 8px;
   border-radius: 0.3rem;
 }
-#signin .main-holder .login-box .btn-theme {
-  width: 30rem;
-  box-shadow: 0 3px 10px rgba(99, 102, 241, 0.5019607843), 0 4px 5px rgba(99, 102, 241, 0.3764705882);
-}
 #signin .main-holder .login-box .divider {
   width: 100%;
   height: 1px;
@@ -1223,12 +1220,12 @@ footer .container .social-media {
   margin-top: 35px;
   margin-bottom: 15px;
 }
+#signin .main-holder .login-box .btn-theme {
+  width: 30rem;
+  box-shadow: 0 3px 10px rgba(99, 102, 241, 0.5019607843), 0 4px 5px rgba(99, 102, 241, 0.3764705882);
+}
 #signin .main-holder .login-box p {
   font-weight: 800;
-}
-#signin footer {
-  margin-top: 5rem;
-  text-align: center;
 }
 
 #course-showcase {
