@@ -16,5 +16,10 @@ namespace Silicon_AspNetMVC.Controllers
             ViewData["Title"] = "Sign Up";
             return View();
         }
+
+        public new IActionResult SignOut()
+        {
+            return View();
+        }
     }
 }
