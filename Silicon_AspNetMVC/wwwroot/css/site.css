@@ -1174,6 +1174,7 @@ footer .container .social-media {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
+  margin-bottom: 1.2rem;
 }
 #signin .main-holder .login-box .checkbox input[type=checkbox] {
   margin-right: 0.8rem;
@@ -1212,6 +1213,7 @@ footer .container .social-media {
   border: 1px solid #D4D7E5;
   padding: 8px;
   border-radius: 0.3rem;
+  margin-bottom: 1rem;
 }
 #signin .main-holder .login-box .divider {
   width: 100%;
@@ -1223,6 +1225,7 @@ footer .container .social-media {
 #signin .main-holder .login-box .btn-theme {
   width: 30rem;
   box-shadow: 0 3px 10px rgba(99, 102, 241, 0.5019607843), 0 4px 5px rgba(99, 102, 241, 0.3764705882);
+  margin-bottom: 2rem;
 }
 #signin .main-holder .login-box p {
   font-weight: 800;
