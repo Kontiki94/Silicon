@@ -1,6 +1,6 @@
 ﻿using Silicon_AspNetMVC.Models.Sections;
 
-namespace Silicon_AspNetMVC.Models.Views
+namespace Silicon_AspNetMVC.ViewModels
 {
     public class CoursesViewModel
     {

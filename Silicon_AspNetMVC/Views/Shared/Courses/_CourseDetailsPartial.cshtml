@@ -1,10 +1,10 @@
 ﻿@model CourseDetailsViewModel
 <section id="course-description" class="container">
     <div class="course-content">
-        <div class="top-section">
-            <div class="left">
+        <div class="description-section">
+            <div class="learn-points">
                 <div class="description">
-                    <p class="test">Course Description</p>
+                    <p>Course Description</p>
                     <p>@Model.CourseDescription</p>
                 </div>
                 <div class="learn">
@@ -20,7 +20,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="right">
+            <div class="course-info">
                 <div class="course-box">
                     <p class="title">This course includes:</p>
                     <p><i class="fa-sharp fa-light fa-display"></i> @Model.ViewHours on-demand video</p>
@@ -37,7 +37,20 @@
                 </div>
             </div>
         </div>
-        <div class="bottom-section">
+        <div class="details-section">
+            <p class="details-title">Program Details</p>
+            <ol class="detail-list">
+                @if (Model.ProgramDetails is not null)
+                {
+                    @foreach (var detail in Model.ProgramDetails)
+                    {
+                        <li class="item">
+                            <p class="title">@detail.Title</p>
+                            <p class="subtitle">@detail.Subtitle</p>
+                        </li>
+                    }
+                }
+            </ol>
         </div>
     </div>
 </section>
