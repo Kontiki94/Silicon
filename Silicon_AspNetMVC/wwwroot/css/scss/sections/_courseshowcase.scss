@@ -2,7 +2,7 @@
     position: relative;
     margin-bottom: 60px;
 
-    @include xxxl{
+    @include xxxl {
         margin-bottom: 120px;
     }
 
@@ -129,6 +129,7 @@
 
                     .rating {
                         display: flex;
+                        align-items: center;
                         color: orange;
                     }
 

@@ -33,8 +33,18 @@ public class CoursesCourseDetailsViewModel
             "Integer cursus vitae, odio feugiat iaculis aliquet diam, et purus.",
             "In aenean dolor diam tortor orci eu."
         ],
-        DiscountPrice = (decimal?)28.99,
-        Price = (decimal?)49.00
+        DiscountPrice = (decimal)28.99,
+        Price = (decimal)49.00,
+        ProgramDetails = 
+        [
+            new SectionTitleModel { Title = "Introduction. Getting started", Subtitle = "Nulla faucibus mauris pellentesque blandit faucibus non. Sit ut et at suspendisse gravida hendrerit tempus placerat." },
+            new SectionTitleModel { Title = "The ultimate HTML developer: advanced HTML", Subtitle = "Lobortis diam elit id nibh ultrices sed penatibus donec. Nibh iaculis eu sit cras ultricies. Nam eu eget etiam egestas donec scelerisque ut ac enim. Vitae ac nisl, enim nec accumsan vitae est." },
+            new SectionTitleModel { Title = "CSS & CSS3: basic", Subtitle = "Duis euismod enim, facilisis risus tellus pharetra lectus diam neque. Nec ultrices mi faucibus est. Magna ullamcorper potenti elementum ultricies auctor nec volutpat augue." },
+            new SectionTitleModel { Title = "JavaScript basics for beginners", Subtitle = "Morbi porttitor risus imperdiet a, nisl mattis. Amet, faucibus eget in platea vitae, velit, erat eget velit. At lacus ut proin erat." },
+            new SectionTitleModel { Title = "Understanding APIs", Subtitle = "Risus morbi euismod in congue scelerisque fusce pellentesque diam consequat. Nisi mauris nibh sed est morbi amet arcu urna. Malesuada feugiat quisque consectetur elementum diam vitae. Dictumst facilisis odio eu quis maecenas risus odio fames bibendum." },
+            new SectionTitleModel { Title = "C# and .NET from beginner to advanced", Subtitle = "Quis risus quisque diam diam. Volutpat neque eget eu faucibus sed urna fermentum risus. Est, mauris morbi nibh massa." }
+
+        ]
     };
 
     public AuthorViewModel Author = new()
