@@ -11,7 +11,6 @@ public class CoursesController : Controller
         ViewData["Title"] = viewModel.Title;
         return View(viewModel);
     }
-
     
     public IActionResult Courses()
     {
