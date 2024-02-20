@@ -2,7 +2,7 @@
 
 namespace Silicon_AspNetMVC.Models.Sections;
 
-public class CourseDetailsViewModel
+public class CourseDetailsModel
 {
     public string? Id { get; set; }
     public string? Title { get; set; }
