@@ -6,6 +6,7 @@ namespace Silicon_AspNetMVC.Controllers
     {
         public IActionResult Index()
         {
+            ViewData["Title"] = "Contact Us";
             return View();
         }
     }
