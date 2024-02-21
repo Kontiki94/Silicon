@@ -31,13 +31,24 @@ namespace Silicon_AspNetMVC.Controllers
         }
 
         [Route("/signup")]
-        // ! Ta bort kommentaren när det finns en view för signup med en form som har method=post.
-        // ! Behövs en get och en post for signup
-        //[HttpPost]
+        [HttpGet]
         public IActionResult SignUp()
         {
+            var viewModel = new SignUpViewModel();
             ViewData["Title"] = "Sign Up";
-            return View();
+            return View(viewModel);
+        }
+
+        [Route("/signup")]
+        [HttpPost]
+        public IActionResult SignUp(SignUpViewModel viewModel)
+        {
+            ViewData["Title"] = "Sign Up";
+            if (!ModelState.IsValid)
+            {
+                return View(viewModel);
+            }
+            return RedirectToAction("Details", "Account");
         }
 
 

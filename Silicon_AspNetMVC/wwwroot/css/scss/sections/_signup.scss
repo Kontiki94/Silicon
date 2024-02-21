@@ -1,0 +1,66 @@
+#signup {
+    margin-top: 50px;
+
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .form-content {
+            width: 480px;
+
+            .form-name {
+                display: flex;
+                justify-content: space-between;
+            }
+
+            .input-field {
+                display: flex;
+                flex-direction: column;
+
+                span {
+                    color: $danger;
+                }
+
+                input {
+                    border: 1px solid $gray-400;
+                    padding: 8px;
+                    border-radius: .3rem;
+                    margin-bottom: .4rem;
+                    width: 100%;
+
+                    &.input-validation-error {
+                        border: 0.050rem solid $danger !important;
+                        color: $danger;
+                    }
+                }
+
+                label {
+                    font-weight: 800;
+                    margin-top: 15px;
+                    margin-bottom: 5px;
+                }
+            }
+
+            .checkbox {
+                margin-top: 20px;
+                display: flex;
+                flex-flow: row wrap;
+                accent-color: $theme;
+
+                label {
+                    margin-left: 10px;
+                }
+
+                span {
+                    color: $danger;
+                }
+            }
+        }
+
+        .btn-theme {
+            width: 100%;
+            margin-top: 20px;
+        }
+    }
+}

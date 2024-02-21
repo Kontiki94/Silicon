@@ -14,7 +14,12 @@ namespace Silicon_AspNetMVC.Controllers
             return View(viewModel);
         }
 
-        // Ändra route till / sen för att bli standard vid inloggat läge.
+
+        public IActionResult Security()
+        {
+            return View();
+        }
+
         [Route("/details")]
         [HttpPost]
         public IActionResult Details(AccountDetailsViewModel viewmodel)

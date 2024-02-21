@@ -11,7 +11,5 @@ public class AccountDetailsViewModel
         LastName = "Pieplow",
         Email = "ted@domain.se",
         ProfileImage = "/images/john-doe.png"
-
-
     };
 }
