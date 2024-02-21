@@ -1,5 +1,6 @@
 #signup {
     margin-top: 50px;
+
     .container {
         display: flex;
         justify-content: center;
@@ -18,7 +19,7 @@
                 flex-direction: column;
 
                 span {
-                    color: red;
+                    color: $danger;
                 }
 
                 input {
@@ -27,6 +28,11 @@
                     border-radius: .3rem;
                     margin-bottom: .4rem;
                     width: 100%;
+
+                    &.input-validation-error {
+                        border: 0.050rem solid $danger !important;
+                        color: $danger;
+                    }
                 }
 
                 label {
@@ -35,16 +41,19 @@
                     margin-bottom: 5px;
                 }
             }
-            .checkbox{
+
+            .checkbox {
                 margin-top: 20px;
                 display: flex;
                 flex-flow: row wrap;
+                accent-color: $theme;
 
-                label{
+                label {
                     margin-left: 10px;
                 }
-                span{
-                    color: red;
+
+                span {
+                    color: $danger;
                 }
             }
         }

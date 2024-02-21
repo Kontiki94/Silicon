@@ -1258,7 +1258,7 @@ footer .container .social-media {
   flex-direction: column;
 }
 #signup .container .form-content .input-field span {
-  color: red;
+  color: #EF4444;
 }
 #signup .container .form-content .input-field input {
   border: 1px solid #D4D7E5;
@@ -1266,6 +1266,10 @@ footer .container .social-media {
   border-radius: 0.3rem;
   margin-bottom: 0.4rem;
   width: 100%;
+}
+#signup .container .form-content .input-field input.input-validation-error {
+  border: 0.05rem solid #EF4444 !important;
+  color: #EF4444;
 }
 #signup .container .form-content .input-field label {
   font-weight: 800;
@@ -1276,12 +1280,13 @@ footer .container .social-media {
   margin-top: 20px;
   display: flex;
   flex-flow: row wrap;
+  accent-color: #6366F1;
 }
 #signup .container .form-content .checkbox label {
   margin-left: 10px;
 }
 #signup .container .form-content .checkbox span {
-  color: red;
+  color: #EF4444;
 }
 #signup .container .btn-theme {
   width: 100%;
