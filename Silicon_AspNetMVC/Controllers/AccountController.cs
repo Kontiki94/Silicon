@@ -5,12 +5,6 @@ namespace Silicon_AspNetMVC.Controllers
 {
     public class AccountController : Controller
     {
-        //public IActionResult Index()
-        //{
-        //    ViewData["Title"] = "Profile";
-        //    return View();
-        //}
-
         [Route("/details")]
         [HttpGet]
         public IActionResult Details()
@@ -20,6 +14,7 @@ namespace Silicon_AspNetMVC.Controllers
             return View(viewModel);
         }
 
+        // Ändra route till / sen för att bli standard vid inloggat läge.
         [Route("/details")]
         [HttpPost]
         public IActionResult Details(AccountDetailsViewModel viewmodel)

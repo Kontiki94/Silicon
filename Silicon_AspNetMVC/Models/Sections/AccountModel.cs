@@ -4,6 +4,9 @@ namespace Silicon_AspNetMVC.Models.Sections;
 
 public class AccountModel
 {
+    [DataType(DataType.ImageUrl)]
+    public string? ProfileImage { get; set; }
+
     [Display(Name = "First name", Prompt = "John", Order = 0)]
     [Required(ErrorMessage = "First name is required")]
     public string FirstName { get; set; } = null!;
