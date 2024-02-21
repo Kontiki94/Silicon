@@ -7,7 +7,7 @@ public class CoursesCourseDetailsViewModel
 {
     public string Title { get; set; } = null!;
 
-    public CourseDetailsViewModel CourseDetails = new()
+    public CourseDetailsModel CourseDetails = new()
     {
         Id = "course-details",
         CourseImage = new() { ImageUrl = "/images/laptop-image.svg", AltText = "Image of laptop" },

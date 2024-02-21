@@ -6,25 +6,16 @@ namespace Silicon_AspNetMVC.ViewModels
     {
         public string Title { get; set; } = null!;
 
-        public CourseDetailsViewModel Courses = new CourseDetailsViewModel
+        public CourseDetailsModel Courses { get; set; } = new CourseDetailsModel
         {
-            Id = "courses",
-            Title = "Fullstack Web Developer Course from Scratch",
-            CourseImage = new() { ImageUrl = "/images/fullstack_dev.png", AltText = "Macbook image" },
-            Author =
-            {
-                AuthorName = "Robert Fox"
-            },
+            Title = "Courses",
+            Id = "Courses",
+            CourseImage = new () { ImageUrl = "/images/fullstack_dev.png", AltText = "Macbook image" },
+            Author = new () { AuthorName = "Robert Fox" },
             Price = 23,
             Views = 5000,
-            Link = new() { ControllerName = "Courses", ActionName = "CourseDetails" },
-            Categories =
-                [
-                    "IT",
-                    "Tech",
-                    "DevOps",
-                    "Data Analyst"
-                    ],
+            Link = new () { ControllerName = "Courses", ActionName = "CourseDetails" },
+            Categories = new List<string> { "IT", "Tech", "DevOps", "Data Analyst" }
         };
     }
 }

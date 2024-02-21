@@ -9,10 +9,12 @@ public class SignInModel
     [EmailAddress(ErrorMessage = "Invalid email address")]
     public string Email { get; set; } = null!;
 
+    [Display(Name = "Password", Prompt = "******", Order = 1)]
     [Required(ErrorMessage = "Password is required")]
     [Compare(nameof(Password), ErrorMessage = "Password does not match")]
     public string Password { get; set; } = null!;
 
-    [Display(Name = "RememberMe")]
+
+    [Display(Name = "RememberMe", Order = 2)]
     public bool RememberMe { get; set; }
 }

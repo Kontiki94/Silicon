@@ -15,10 +15,24 @@ namespace Silicon_AspNetMVC.Controllers
         }
 
         [Route("/signup")]
+        [HttpGet]
         public IActionResult SignUp()
         {
+            var viewModel = new SignUpViewModel();
             ViewData["Title"] = "Sign Up";
-            return View();
+            return View(viewModel);
+        }
+
+        [Route("/signup")]
+        [HttpPost]
+        public IActionResult SignUp(SignUpViewModel viewModel)
+        {
+            ViewData["Title"] = "Sign Up";
+            if (!ModelState.IsValid)
+            {
+                return View(viewModel);
+            }
+            return RedirectToAction("Details", "Account");
         }
 
         public new IActionResult SignOut()

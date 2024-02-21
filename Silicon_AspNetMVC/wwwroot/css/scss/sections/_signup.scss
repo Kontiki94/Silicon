@@ -1,0 +1,57 @@
+#signup {
+    margin-top: 50px;
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .form-content {
+            width: 480px;
+
+            .form-name {
+                display: flex;
+                justify-content: space-between;
+            }
+
+            .input-field {
+                display: flex;
+                flex-direction: column;
+
+                span {
+                    color: red;
+                }
+
+                input {
+                    border: 1px solid $gray-400;
+                    padding: 8px;
+                    border-radius: .3rem;
+                    margin-bottom: .4rem;
+                    width: 100%;
+                }
+
+                label {
+                    font-weight: 800;
+                    margin-top: 15px;
+                    margin-bottom: 5px;
+                }
+            }
+            .checkbox{
+                margin-top: 20px;
+                display: flex;
+                flex-flow: row wrap;
+
+                label{
+                    margin-left: 10px;
+                }
+                span{
+                    color: red;
+                }
+            }
+        }
+
+        .btn-theme {
+            width: 100%;
+            margin-top: 20px;
+        }
+    }
+}

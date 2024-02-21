@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Silicon_AspNetMVC.Models.Sections;
+using Silicon_AspNetMVC.ViewModels;
 
 namespace Silicon_AspNetMVC.Controllers
 {
@@ -14,8 +14,9 @@ namespace Silicon_AspNetMVC.Controllers
         [Route("/details")]
         public IActionResult Details()
         {
+            var viewModel = new AccountDetailsViewModel();
             ViewData["Title"] = "Details";
-            return View();
+            return View(viewModel);
         }
 
         public IActionResult Security()
@@ -24,7 +25,7 @@ namespace Silicon_AspNetMVC.Controllers
         }
 
         [HttpPost]
-        public IActionResult SaveDetails(AccountModel model)
+        public IActionResult SaveDetails()
         {
             return RedirectToAction("Details", "Account");
         }

@@ -1,1 +1,53 @@
-﻿
+﻿@model SignUpViewModel
+
+<section id="signup">
+    <div class="container">
+        <form method="post" asp-controller="auth" asp-action="SignUp" novalidate>
+            <h1>Create Account</h1>
+            <p>Already have an accout? <a asp-controller="auth" asp-action="SignIn">Sign in here</a></p>
+
+            <div class="form-content">
+                <div class="form-name">
+                    <div id="form-firstname" class="input-field">
+                        <label asp-for="Form.FirstName"></label>
+                        <input asp-for="Form.FirstName" />
+                        <span asp-validation-for="Form.FirstName"></span>
+                    </div>
+                    <div id="form-lastname" class="input-field">
+                        <label asp-for="Form.LastName"></label>
+                        <input asp-for="Form.LastName" />
+                        <span asp-validation-for="Form.LastName"></span>
+                    </div>
+                </div>
+                <div id="form-email" class="input-field">
+                    <label asp-for="Form.Email"></label>
+                    <input asp-for="Form.Email" />
+                    <span asp-validation-for="Form.Email"></span>
+                </div>
+                <div id="form-password" class="input-field">
+                    <label asp-for="Form.Password"></label>
+                    <input asp-for="Form.Password" />
+                    <span asp-validation-for="Form.Password"></span>
+                </div>
+                <div id="form-confirm" class="input-field">
+                    <label asp-for="Form.ConfirmPassword"></label>
+                    <input asp-for="Form.ConfirmPassword" />
+                    <span asp-validation-for="Form.ConfirmPassword"></span>
+                </div>
+                <div id="form-terms" class="checkbox">
+                    <input type="checkbox" asp-for="Form.TermsAndConditions" />
+                    <label asp-for="Form.TermsAndConditions">I agree to the terms and conditions</label>
+                    <span asp-validation-for="Form.TermsAndConditions"></span>
+
+                    <label for="test">test</label>
+                    <select name="hejsans" id="test">
+                        <option value="hej">hej</option>
+                        <option value="på">på</option>
+                        <option value="dig">dig</option>
+                    </select>
+                </div>
+            </div>
+            <button class="btn-theme" type="submit">Sign Up</button>
+        </form>
+    </div>
+</section>
