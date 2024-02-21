@@ -5,10 +5,19 @@ namespace Silicon_AspNetMVC.Controllers
 {
     public class ContactController : Controller
     {
-        public IActionResult Index()
+
+        [Route("/contact")]
+        [HttpGet]    
+        public IActionResult ContactUs()
         {
-            ViewData["Title"] = "Contact Us";
-            return View();
+            var viewModel = new ContactViewModel();
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public IActionResult ContactUs(ContactViewModel viewModel)
+        {
+            return View(viewModel);
         }
     }
 }

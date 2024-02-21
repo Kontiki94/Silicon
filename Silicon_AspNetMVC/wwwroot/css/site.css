@@ -1594,6 +1594,43 @@ footer .container .social-media {
   margin-top: 1.5rem;
 }
 
+.contact {
+  background-color: #F3F6FF;
+}
+.contact .container .nav {
+  gap: 0.5rem;
+  align-items: baseline;
+}
+.contact .container .upper {
+  padding-bottom: 5rem;
+}
+.contact .container .upper .box {
+  display: flex;
+}
+.contact .container .upper .box .img-holder {
+  vertical-align: top;
+  padding-top: 1.3rem;
+  padding-right: 1rem;
+}
+.contact .container .upper .box .img-holder img {
+  width: 100%;
+  height: auto;
+}
+.contact .container .upper .box .box-content {
+  padding: 1rem 2rem 0 0;
+}
+.contact .container .map {
+  padding-bottom: 50%;
+  position: relative;
+}
+.contact .container .map iframe {
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  position: absolute;
+}
+
 .author-content {
   background-color: #0B0F19;
 }
