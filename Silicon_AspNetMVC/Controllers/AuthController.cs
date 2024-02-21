@@ -22,7 +22,10 @@ namespace Silicon_AspNetMVC.Controllers
             ViewData["Title"] = "Sign In";
 
             if (!ModelState.IsValid)
+            {
+                viewModel.ErrorMessage = "Invalid e-mail or password";
                 return View(viewModel);
+            }
 
             return RedirectToAction("SignIn", "Auth");
         }
