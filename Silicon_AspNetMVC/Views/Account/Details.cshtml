@@ -6,17 +6,17 @@
         <div class="menu-bar">
             <div class="profile">
                 <div class="image">
-                    <img src="~/images/john-doe.png" alt="image of John Doe" />
+                    <img src="@Model.Account.ProfileImage" alt="@($"{Model.Account.FirstName} {@Model.Account.LastName}")" />
                 </div>
-                <h5 class="user-name">John Doe</h5>
-                <p>john.doe@domain.com</p>
+                <h5 class="user-name">@Model.Account.FirstName @Model.Account.LastName</h5>
+                <p>@Model.Account.Email</p>
             </div>
-            <div class="options">
+            <nav class="options">
                 <a class="active" asp-controller="Account" asp-action="Details"><i class="fa-regular fa-gear"></i>Account Details</a>
                 <a class="menu-link" asp-controller="Account" asp-action="Security"><i class="fa-regular fa-lock"></i>Security</a>
                 <a class="menu-link" asp-controller="Account" asp-action="SavedCourses"><i class="fa-sharp fa-regular fa-bookmark"></i>Saved Courses</a>
-                <a class="menu-link" asp-controller="Account" asp-action="Sign Out"><i class="fa-solid fa-right-from-bracket"></i>Sign Out</a>
-            </div>
+                <a class="menu-link" asp-controller="Auth" asp-action="Sign Out"><i class="fa-solid fa-right-from-bracket"></i>Sign Out</a>
+            </nav>
         </div>
 
         <div class="account-details">

@@ -5,12 +5,6 @@ namespace Silicon_AspNetMVC.Controllers
 {
     public class AccountController : Controller
     {
-        //public IActionResult Index()
-        //{
-        //    ViewData["Title"] = "Profile";
-        //    return View();
-        //}
-
         [Route("/details")]
         [HttpGet]
         public IActionResult Details()
@@ -19,6 +13,7 @@ namespace Silicon_AspNetMVC.Controllers
             ViewData["Title"] = "Details";
             return View(viewModel);
         }
+
 
         public IActionResult Security()
         {
