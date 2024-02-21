@@ -15,14 +15,29 @@ namespace Silicon_AspNetMVC.Controllers
             return View(viewModel);
         }
 
+        [Route("/signin")]
+        [HttpPost]
+        public IActionResult SignIn(SignInViewModel viewModel)
+        {
+            ViewData["Title"] = "Sign In";
+
+            if (!ModelState.IsValid)
+                return View(viewModel);
+
+            return RedirectToAction("SignIn", "Auth");
+        }
+
         [Route("/signup")]
-        //Ta bort kommentaren när det finns en view för signup med en form som har method=post.
+        // ! Ta bort kommentaren när det finns en view för signup med en form som har method=post.
+        // ! Behövs en get och en post for signup
         //[HttpPost]
         public IActionResult SignUp()
         {
             ViewData["Title"] = "Sign Up";
             return View();
         }
+
+
 
         public new IActionResult SignOut()
         {
