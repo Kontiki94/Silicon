@@ -14,12 +14,6 @@ namespace Silicon_AspNetMVC.Controllers
             return View(viewModel);
         }
 
-
-        public IActionResult Security()
-        {
-            return View();
-        }
-
         [Route("/details")]
         [HttpPost]
         public IActionResult Details(AccountDetailsViewModel viewmodel)
@@ -29,12 +23,18 @@ namespace Silicon_AspNetMVC.Controllers
                 return View(viewmodel);
             }
 
-            return RedirectToAction("Details", "Account");
+            return RedirectToAction(nameof(Details), viewmodel);
         }
 
         public IActionResult Cancel()
         {
             return RedirectToAction("Details", "Account");
+        }
+
+        [Route("/security")]
+        public IActionResult Security()
+        {
+            return View();
         }
     }
 }
