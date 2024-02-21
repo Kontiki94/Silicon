@@ -4,7 +4,6 @@
     .container {
         display: flex;
         justify-content: center;
-        align-items: center;
 
         .form-content {
             width: 480px;
@@ -12,6 +11,10 @@
             .form-name {
                 display: flex;
                 justify-content: space-between;
+
+                input{
+                    width: 230px;
+                }
             }
 
             .input-field {
@@ -27,7 +30,6 @@
                     padding: 8px;
                     border-radius: .3rem;
                     margin-bottom: .4rem;
-                    width: 100%;
 
                     &.input-validation-error {
                         border: 0.050rem solid $danger !important;
