@@ -85,6 +85,15 @@
                 padding: 8px;
                 border-radius: .3rem;
                 margin-bottom: 1rem;
+
+                &.input-validation-error {
+                    border: 0.050rem solid $danger !important;
+                    color: $danger;
+                }
+            }
+
+            span.field-validation-error {
+                color: $danger !important;
             }
 
             .divider {
