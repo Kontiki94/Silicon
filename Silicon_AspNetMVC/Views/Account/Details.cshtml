@@ -20,27 +20,31 @@
         </div>
 
         <div class="account-details">
-            <form asp-controller="Account" asp-action="SaveDetails" method="post">
+            <form asp-controller="Account" asp-action="Details" method="post" novalidate>
                 <div class="user-details">
                     <h1>Account Details</h1>
                     <h5>Basic Info</h5>
                     <div class="name">
                         <div class="firstname">
                             <label asp-for="Account.FirstName">First name</label>
+                            <span asp-validation-for="Account.FirstName"></span>
                             <input asp-for="Account.FirstName" />
                         </div>
                         <div class="lastname">
                             <label asp-for="Account.LastName">Last name</label>
+                            <span asp-validation-for="Account.LastName"></span>
                             <input asp-for="Account.LastName" />
                         </div>
                     </div>
                     <div class="contact-info">
                         <div class="email">
                             <label asp-for="Account.Email">Email Address</label>
+                            <span asp-validation-for="Account.Email"></span>
                             <input asp-for="Account.Email" />
                         </div>
                         <div class="phone">
                             <label asp-for="Account.Phone">Phone</label>
+                            <span asp-validation-for="Account.Phone"></span>
                             <input asp-for="Account.Phone" />
                         </div>
                     </div>
@@ -49,29 +53,32 @@
                     <label asp-for="Account.Bio">Bio <span>(optional)</span></label>
                     <textarea asp-for="Account.Bio"></textarea>
                     <div class="user-buttons">
-                        <button href="#" class="btn-gray">Cancel</button>
-                        <button href="#" class="btn-theme">Save Changes</button>
+                        <a asp-controller="Account" asp-action="Cancel" class="btn-gray">Cancel</a>
+                        <button type="submit" class="btn-theme">Save Changes</button>
                     </div>
                     <div class="divider"></div>
                     <div class="address">
                         <h5>Address</h5>
                         <label asp-for="Account.AddressLine1">Address line 1</label>
+                        <span asp-validation-for="Account.AddressLine1"></span>
                         <input asp-for="Account.AddressLine1" />
                         <label asp-for="Account.AddressLine2">Address line 2<span>(optional)</span></label>
                         <input asp-for="Account.AddressLine2" />
                         <div class="city-info">
                             <div class="postal">
                                 <label asp-for="Account.PostalCode">Postal Code</label>
+                                <span asp-validation-for="Account.PostalCode"></span>
                                 <input asp-for="Account.PostalCode" />
                             </div>
                             <div class="city">
                                 <label asp-for="Account.City">City</label>
+                                <span asp-validation-for="Account.City"></span>
                                 <input asp-for="Account.City" />
                             </div>
                         </div>
                         <div class="address-button">
-                            <button type="button" href="#" class="btn-gray">Cancel</button>
-                            <button type="submit" href="#" class="btn-theme">Save Changes</button>
+                            <a asp-controller="Account" asp-action="Cancel" class="btn-gray">Cancel</a>
+                            <button type="submit" class="btn-theme">Save Changes</button>
                         </div>
                     </div>
                 </div>
