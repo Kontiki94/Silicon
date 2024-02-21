@@ -14,7 +14,6 @@ public class SignInModel
     [Compare(nameof(Password), ErrorMessage = "Password does not match")]
     public string Password { get; set; } = null!;
 
-
     [Display(Name = "RememberMe", Order = 2)]
     public bool RememberMe { get; set; }
 }
