@@ -5,13 +5,14 @@ namespace Silicon_AspNetMVC.Controllers
 {
     public class AccountController : Controller
     {
-        public IActionResult Index()
-        {
-            ViewData["Title"] = "Profile";
-            return View();
-        }
+        //public IActionResult Index()
+        //{
+        //    ViewData["Title"] = "Profile";
+        //    return View();
+        //}
 
         [Route("/details")]
+        [HttpGet]
         public IActionResult Details()
         {
             var viewModel = new AccountDetailsViewModel();
@@ -19,9 +20,15 @@ namespace Silicon_AspNetMVC.Controllers
             return View(viewModel);
         }
 
+        [Route("/details")]
         [HttpPost]
-        public IActionResult SaveDetails()
+        public IActionResult Details(AccountDetailsViewModel viewmodel)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(viewmodel);
+            }
+
             return RedirectToAction("Details", "Account");
         }
 
