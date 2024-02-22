@@ -1300,7 +1300,6 @@ footer .container .social-media {
 #signup .container {
   display: flex;
   justify-content: center;
-  align-items: center;
 }
 #signup .container .form-content {
   width: 480px;
@@ -1308,6 +1307,9 @@ footer .container .social-media {
 #signup .container .form-content .form-name {
   display: flex;
   justify-content: space-between;
+}
+#signup .container .form-content .form-name input {
+  width: 230px;
 }
 #signup .container .form-content .input-field {
   display: flex;
@@ -1321,7 +1323,6 @@ footer .container .social-media {
   padding: 8px;
   border-radius: 0.3rem;
   margin-bottom: 0.4rem;
-  width: 100%;
 }
 #signup .container .form-content .input-field input.input-validation-error {
   border: 0.05rem solid #EF4444 !important;
