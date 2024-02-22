@@ -15,6 +15,9 @@ const checkScreenSize = () => {
     if (window.innerWidth >= 1200) {
         document.getElementById('menu').classList.remove('hide');
         document.getElementById('account-buttons').classList.remove('hide');
+        menu.classList.add('hide');
+        accountButtons.classList.add('hide');
+        barsIcon.classList.remove('hide');
         barsIcon.classList.toggle('hide');
         crossIcon.classList.toggle('hide');
     } else {
@@ -31,6 +34,12 @@ const checkScreenSize = () => {
 };
 
 window.addEventListener('resize', checkScreenSize);
+
+const menuLinks = document.querySelectorAll('#menu .menu-link');
+menuLinks.forEach(link => {
+    link.addEventListener('click', () => toggleMenu());
+});
+
 checkScreenSize();
 
 

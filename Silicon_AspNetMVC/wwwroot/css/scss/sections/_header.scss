@@ -5,7 +5,7 @@ header {
         display: grid;
         align-items: center;
         grid-template-columns: 1fr auto;
-        grid-template-areas: "logo mobile";
+        grid-template-areas: "logo buttons mobile";
         gap: 40px;
 
         @include lg {
@@ -33,12 +33,11 @@ header {
         }
 
         .btn-mobile:not(.hide) + #menu,
-        #menu:not(.hide),
-        #menu:not(.hide) + #account-buttons {
+        #menu:not(.hide) {
             display: block;
             background-color: $gray-900;
             padding: 10px;
-            border-radius: 5px;
+            border-radius: 15px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             position: fixed;
             top: 0;
@@ -49,7 +48,7 @@ header {
 
             nav {
                 display: block;
-                margin-top: 200px;
+                margin-top: 160px;
 
                 a {
                     display: block;
@@ -57,21 +56,16 @@ header {
                     justify-content: center;
                     padding: 8px 15px;
                     color: #fff;
+                    font-size: 2.5rem;
                     text-decoration: none;
-                    font-size: 2rem;
 
-                    &:hover {
-                        background-color: #e9ecef;
-                    }
+                    .active {
+                        color: $gray-500;
+                    } 
                 }
             }
-
-
-
-            @include lg {
-                display: none;
-            }
         }
+
 
         .hide {
             display: none;
@@ -88,13 +82,23 @@ header {
 
         .account-buttons {
             grid-area: buttons;
-            display: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             gap: 15px;
+            z-index: 3;
 
             @include lg {
                 display: flex;
             }
+
+            button {
+                max-width: 100%;
+            }
         }
+
+
+
 
         .btn-mobile {
             font-size: 1.8rem;
@@ -109,11 +113,11 @@ header {
                 display: none;
             }
         }
-
-        #crossIcon {
-            color: white;
-        }
     }
+}
+
+#crossIcon {
+    color: white;
 }
 
 .no-scroll {
