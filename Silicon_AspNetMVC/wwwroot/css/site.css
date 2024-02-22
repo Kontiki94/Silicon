@@ -407,7 +407,7 @@ header .container .btn-mobile:not(.hide) + #menu nav,
 header .container #menu:not(.hide) nav,
 header .container #menu:not(.hide) + #account-buttons nav {
   display: block;
-  margin-top: 80px;
+  margin-top: 150px;
 }
 header .container .btn-mobile:not(.hide) + #menu nav a,
 header .container #menu:not(.hide) nav a,
@@ -418,11 +418,19 @@ header .container #menu:not(.hide) + #account-buttons nav a {
   padding: 8px 15px;
   color: #6366F1;
   text-decoration: none;
+  font-size: 2rem;
 }
 header .container .btn-mobile:not(.hide) + #menu nav a:hover,
 header .container #menu:not(.hide) nav a:hover,
 header .container #menu:not(.hide) + #account-buttons nav a:hover {
   background-color: #e9ecef;
+}
+@media (min-width: 992px) {
+  header .container .btn-mobile:not(.hide) + #menu,
+  header .container #menu:not(.hide),
+  header .container #menu:not(.hide) + #account-buttons {
+    display: none;
+  }
 }
 header .container .hide {
   display: none;

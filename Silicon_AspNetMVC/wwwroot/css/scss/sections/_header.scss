@@ -49,7 +49,7 @@ header {
 
             nav {
                 display: block;
-                margin-top: 80px;
+                margin-top: 150px;
 
                 a {
                     display: block;
@@ -58,11 +58,16 @@ header {
                     padding: 8px 15px;
                     color: $theme;
                     text-decoration: none;
+                    font-size: 2rem;
 
                     &:hover {
                         background-color: #e9ecef;
                     }
                 }
+            }
+
+            @include lg {
+                display: none;
             }
         }
 
