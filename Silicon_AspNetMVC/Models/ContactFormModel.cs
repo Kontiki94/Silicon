@@ -13,9 +13,10 @@ public class ContactFormModel
     [RegularExpression(@"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$", ErrorMessage = "Invalid email address.")]
     public string Email { get; set; } = null!;
 
-    //[DataType(DataType.)]  //dropmeny
-    [Display(Name = "Service (Optional)", Prompt = "Choose the service you are interested in", Order = 2)]    
-    public string? Service { get; set; }
+    //[DataType(DataType.Custom)]  //chat gpt förslag, men fick det inte att fungera. Annat alt eller hårdkodat i HTML?
+    //[UIHint("DropDownList")]
+    [Display(Name = "Service (Optional)", Order = 2)]    
+    public string? SelectedService { get; set; }
 
     [DataType(DataType.MultilineText)]
     [Display(Name = "Message", Prompt = "Enter your message here", Order = 3)]
