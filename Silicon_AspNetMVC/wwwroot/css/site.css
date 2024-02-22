@@ -392,7 +392,7 @@ header .container .btn-mobile:not(.hide) + #menu,
 header .container #menu:not(.hide),
 header .container #menu:not(.hide) + #account-buttons {
   display: block;
-  background-color: #f8f9fa;
+  background-color: #0B0F19;
   padding: 10px;
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -407,7 +407,7 @@ header .container .btn-mobile:not(.hide) + #menu nav,
 header .container #menu:not(.hide) nav,
 header .container #menu:not(.hide) + #account-buttons nav {
   display: block;
-  margin-top: 150px;
+  margin-top: 200px;
 }
 header .container .btn-mobile:not(.hide) + #menu nav a,
 header .container #menu:not(.hide) nav a,
@@ -416,7 +416,7 @@ header .container #menu:not(.hide) + #account-buttons nav a {
   display: flex;
   justify-content: center;
   padding: 8px 15px;
-  color: #6366F1;
+  color: #fff;
   text-decoration: none;
   font-size: 2rem;
 }
@@ -467,6 +467,13 @@ header .container .btn-mobile {
   header .container .btn-mobile {
     display: none;
   }
+}
+header .container #crossIcon {
+  color: white;
+}
+
+.no-scroll {
+  overflow: hidden;
 }
 
 footer {

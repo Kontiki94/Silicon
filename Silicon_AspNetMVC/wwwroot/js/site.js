@@ -7,6 +7,8 @@
     const crossIcon = document.getElementById('crossIcon');
     barsIcon.classList.toggle('hide');
     crossIcon.classList.toggle('hide');
+
+    document.body.classList.toggle('no-scroll');
 }
 
 const checkScreenSize = () => {
@@ -20,6 +22,7 @@ const checkScreenSize = () => {
             document.getElementById('menu').classList.add('hide');
             barsIcon.classList.toggle('hide');
             crossIcon.classList.toggle('hide');
+
         }
         if (!document.getElementById('account-buttons').classList.contains('hide')) {
             document.getElementById('account-buttons').classList.add('hide');
@@ -29,3 +32,5 @@ const checkScreenSize = () => {
 
 window.addEventListener('resize', checkScreenSize);
 checkScreenSize();
+
+

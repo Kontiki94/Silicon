@@ -36,7 +36,7 @@ header {
         #menu:not(.hide),
         #menu:not(.hide) + #account-buttons {
             display: block;
-            background-color: #f8f9fa;
+            background-color: $gray-900;
             padding: 10px;
             border-radius: 5px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -49,14 +49,14 @@ header {
 
             nav {
                 display: block;
-                margin-top: 150px;
+                margin-top: 200px;
 
                 a {
                     display: block;
                     display: flex;
                     justify-content: center;
                     padding: 8px 15px;
-                    color: $theme;
+                    color: #fff;
                     text-decoration: none;
                     font-size: 2rem;
 
@@ -65,6 +65,8 @@ header {
                     }
                 }
             }
+
+
 
             @include lg {
                 display: none;
@@ -107,5 +109,13 @@ header {
                 display: none;
             }
         }
+
+        #crossIcon {
+            color: white;
+        }
     }
+}
+
+.no-scroll {
+    overflow: hidden;
 }
