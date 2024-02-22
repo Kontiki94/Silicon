@@ -27,7 +27,7 @@ namespace Silicon_AspNetMVC.Controllers
                 return View(viewModel);
             }
 
-            return RedirectToAction("SignIn", "Auth");
+            return RedirectToAction("Details", "Account");
         }
 
         [Route("/signup")]
