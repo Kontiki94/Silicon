@@ -373,6 +373,7 @@ header .container {
 }
 header .container #logo {
   grid-area: logo;
+  z-index: 2;
 }
 header .container #menu {
   grid-area: menu;
@@ -386,6 +387,45 @@ header .container #menu {
 header .container #menu nav {
   display: flex;
   gap: 15px;
+}
+header .container .btn-mobile:not(.hide) + #menu,
+header .container #menu:not(.hide),
+header .container #menu:not(.hide) + #account-buttons {
+  display: block;
+  background-color: #f8f9fa;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+header .container .btn-mobile:not(.hide) + #menu nav,
+header .container #menu:not(.hide) nav,
+header .container #menu:not(.hide) + #account-buttons nav {
+  display: block;
+  margin-top: 80px;
+}
+header .container .btn-mobile:not(.hide) + #menu nav a,
+header .container #menu:not(.hide) nav a,
+header .container #menu:not(.hide) + #account-buttons nav a {
+  display: block;
+  display: flex;
+  justify-content: center;
+  padding: 8px 15px;
+  color: #6366F1;
+  text-decoration: none;
+}
+header .container .btn-mobile:not(.hide) + #menu nav a:hover,
+header .container #menu:not(.hide) nav a:hover,
+header .container #menu:not(.hide) + #account-buttons nav a:hover {
+  background-color: #e9ecef;
+}
+header .container .hide {
+  display: none;
 }
 header .container .btn-switch {
   grid-area: switch;
@@ -407,8 +447,13 @@ header .container .account-buttons {
   }
 }
 header .container .btn-mobile {
+  font-size: 1.8rem;
+  background: transparent;
+  color: #33354D;
+  border: none;
   grid-area: mobile;
   display: block;
+  z-index: 2;
 }
 @media (min-width: 992px) {
   header .container .btn-mobile {

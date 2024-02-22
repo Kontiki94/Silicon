@@ -5,32 +5,73 @@ header {
         display: grid;
         align-items: center;
         grid-template-columns: 1fr auto;
-        grid-template-areas:  "logo mobile";
+        grid-template-areas: "logo mobile";
         gap: 40px;
-        
+
         @include lg {
             grid-template-columns: auto 1fr auto auto;
-            grid-template-areas:  "logo menu switch buttons";
+            grid-template-areas: "logo menu switch buttons";
         }
 
-        #logo { grid-area: logo; }
+        #logo {
+            grid-area: logo;
+            z-index: 2;
+        }
 
-        #menu { 
-            grid-area: menu; 
+        #menu {
+            grid-area: menu;
             display: none;
 
             @include lg {
                 display: block;
             }
-            
+
             nav {
                 display: flex;
                 gap: 15px;
             }
         }
-        
-        .btn-switch { 
-            grid-area: switch; 
+
+        .btn-mobile:not(.hide) + #menu,
+        #menu:not(.hide),
+        #menu:not(.hide) + #account-buttons {
+            display: block;
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+
+            nav {
+                display: block;
+                margin-top: 80px;
+
+                a {
+                    display: block;
+                    display: flex;
+                    justify-content: center;
+                    padding: 8px 15px;
+                    color: $theme;
+                    text-decoration: none;
+
+                    &:hover {
+                        background-color: #e9ecef;
+                    }
+                }
+            }
+        }
+
+        .hide {
+            display: none;
+        }
+
+        .btn-switch {
+            grid-area: switch;
             display: none;
 
             @include lg {
@@ -38,8 +79,8 @@ header {
             }
         }
 
-        .account-buttons { 
-            grid-area: buttons; 
+        .account-buttons {
+            grid-area: buttons;
             display: none;
             gap: 15px;
 
@@ -49,8 +90,13 @@ header {
         }
 
         .btn-mobile {
-            grid-area: mobile; 
+            font-size: 1.8rem;
+            background: $transparent;
+            color: $gray-800;
+            border: none;
+            grid-area: mobile;
             display: block;
+            z-index: 2;
 
             @include lg {
                 display: none;
