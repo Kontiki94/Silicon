@@ -35,10 +35,6 @@ const checkScreenSize = () => {
 
 window.addEventListener('resize', checkScreenSize);
 
-const menuLinks = document.querySelectorAll('#menu .menu-link');
-menuLinks.forEach(link => {
-    link.addEventListener('click', () => toggleMenu());
-});
 
 checkScreenSize();
 
