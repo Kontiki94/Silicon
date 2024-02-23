@@ -986,6 +986,10 @@ footer .container .social-media {
   width: 130%;
   height: 1.9rem;
   border-color: #D4D7E5;
+  color: #EFF2FC;
+}
+.courses .section-title .search-div select option {
+  color: #0B0F19;
 }
 .courses .section-title .search-div .search {
   position: relative;
