@@ -14,10 +14,16 @@ namespace Silicon_AspNetMVC.Controllers
             return View(viewModel);
         }
 
+        [Route("/contact")]
         [HttpPost]
         public IActionResult ContactUs(ContactViewModel viewModel)
         {
-            return View(viewModel);
+            if (!ModelState.IsValid)                //om formuläret inte är rätt ifyllt, retunera vy med felmeddelande
+            {
+                return View(viewModel);
+            }
+            
+            return View(viewModel);             //Om rätt ifyllt, tillbaks till vyn (eller RedirectToAction("Vy", "controller") om vi vill gå någon annanstans)
         }
     }
 }

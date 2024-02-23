@@ -2,6 +2,9 @@
     background-color: $gray-100;
 
     .container {
+        padding: 2rem 2rem 2rem 2rem;
+        position: relative;
+
         .nav {
             gap: 0.5rem;
             align-items: baseline;
@@ -11,18 +14,23 @@
             .box {
                 display: flex;
 
+                @include xl {
+                    max-width: 40%;
+                }
+
                 .img-holder {
                     vertical-align: top;
                     padding-top: 1.3rem;
                     padding-right: 1rem;
-                    img{
-                        width:100%;
-                        height:auto;
+
+                    img {
+                        width: 100%;
+                        height: auto;
                     }
                 }
 
                 .box-content {
-                    padding: 1rem 2rem 0 0;                   
+                    padding: 1rem 2rem 0 0;
                 }
             }
 
@@ -32,14 +40,142 @@
         .map {
             padding-bottom: 50%;
             position: relative;
+            margin-bottom: 5rem;
         }
 
         .map iframe {
             height: 100%;
-            width: 100%;
+            width:100%;
             left: 0;
             top: 0;
             position: absolute;
+        }
+
+        .contact-form {
+            @include shadow-l;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            background-color: $white;
+            border-radius: 0.5rem;
+
+
+            @include xl {
+                position: absolute;
+                top: 8%;
+                left: 60%;
+                height: fit-content;
+            }
+
+            form {
+                padding: 3rem;
+                width: 100%;
+                display: grid;
+
+                @include xl {
+                    padding: 2rem;
+                }
+
+                .form-content {
+                    display: grid;
+                    gap: 1rem 2rem;
+                    grid-template-columns: 1fr;
+                    grid-template-areas: "fullname" "email" "service" "message";
+
+                    #form-fullname {
+                        grid-area: fullname;
+                    }
+
+                    #form-email {
+                        grid-area: email;
+                    }
+
+                    #form-service {
+                        grid-area: service;
+                    }
+
+                    #form-message {
+                        grid-area: message;
+                    }
+
+                    .input-group {
+                        display: grid;
+                    }
+
+                    label {
+                        margin: 0;
+                        font-weight: 700;
+                    }
+
+                    input {
+                        padding: 1rem;
+                        border-radius: 0.5rem !important;
+                        border: 0.06rem solid $gray-400;
+
+                        &::placeholder {
+                            opacity: 0.4;
+                        }
+
+                        &.input-validation-error {
+                            border: 0.06rem solid $danger !important;
+                        }
+                    }
+
+                    textarea {
+                        padding: 1rem;
+                        border-radius: 0.5rem !important;
+                        border: 0.06rem solid $gray-400;
+
+                        &::placeholder {
+                            opacity: 0.4;
+                        }
+
+                        &.input-validation-error {
+                            border: 0.06rem solid $danger !important;
+                        }
+                    }
+
+                    select {
+                        padding: 1rem;
+                        border-radius: 0.5rem !important;
+                        border: 0.06rem solid $gray-400;
+                        color: $gray-400;
+
+                        option {
+                            color: $gray-700;
+                        }
+
+                        &::placeholder {
+                            opacity: 0.4;
+                        }
+
+                        &.input-validation-error {
+                            border: 0.06rem solid $danger !important;
+                        }
+                    }
+
+                    span {
+                        &.field-validation-error {
+                            position: absolute;
+                            top: 0;
+                            right: 0;
+                            @include text-s;
+                            color: $danger;
+                        }
+                    }
+
+                    button {
+                        display: inline-block;
+                        max-width: 50%;
+                        padding: 1rem;
+
+                        @include xl{
+                            padding: 0.5rem;
+                        }
+                    }
+                }
+            }
         }
     }
 }
