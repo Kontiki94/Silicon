@@ -374,7 +374,7 @@ header .container {
 }
 header .container #logo {
   grid-area: logo;
-  z-index: 2;
+  z-index: 3;
 }
 header .container #menu {
   grid-area: menu;
@@ -401,7 +401,7 @@ header .container #menu:not(.hide) {
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 1;
+  z-index: 2;
 }
 header .container .btn-mobile:not(.hide) + #menu nav,
 header .container #menu:not(.hide) nav {
@@ -1314,7 +1314,7 @@ footer .container .social-media {
   position: absolute;
   right: 10px;
   top: 40px;
-  z-index: 10;
+  z-index: 1;
   font-size: 2em;
   display: block;
   content: "⮿";
