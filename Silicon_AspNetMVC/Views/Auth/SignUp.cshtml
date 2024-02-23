@@ -9,29 +9,39 @@
             <div class="form-content">
                 <div class="form-name">
                     <div id="form-firstname" class="input-field">
-                        <label asp-for="Form.FirstName"></label>
-                        <span asp-validation-for="Form.FirstName"></span>
+                        <div class="test">
+                            <label asp-for="Form.FirstName"></label>
+                            <span asp-validation-for="Form.FirstName"></span>
+                        </div>
                         <input asp-for="Form.FirstName" />
                     </div>
                     <div id="form-lastname" class="input-field">
-                        <label asp-for="Form.LastName"></label>
-                        <span asp-validation-for="Form.LastName"></span>
+                        <div class="test">
+                            <label asp-for="Form.LastName"></label>
+                            <span asp-validation-for="Form.LastName"></span>
+                        </div>
                         <input asp-for="Form.LastName" />
                     </div>
                 </div>
                 <div id="form-email" class="input-field">
-                    <label asp-for="Form.Email"></label>
-                    <span asp-validation-for="Form.Email"></span>
+                    <div class="test">
+                        <label asp-for="Form.Email"></label>
+                        <span asp-validation-for="Form.Email"></span>
+                    </div>
                     <input asp-for="Form.Email" />
                 </div>
                 <div id="form-password" class="input-field">
-                    <label asp-for="Form.Password"></label>
-                    <span asp-validation-for="Form.Password"></span>
+                    <div class="test">
+                        <label asp-for="Form.Password"></label>
+                        <span asp-validation-for="Form.Password"></span>
+                    </div>
                     <input asp-for="Form.Password" />
                 </div>
                 <div id="form-confirm" class="input-field">
-                    <label asp-for="Form.ConfirmPassword"></label>
-                    <span asp-validation-for="Form.ConfirmPassword"></span>
+                    <div class="test">
+                        <label asp-for="Form.ConfirmPassword"></label>
+                        <span asp-validation-for="Form.ConfirmPassword"></span>
+                    </div>
                     <input asp-for="Form.ConfirmPassword" />
                 </div>
                 <div id="form-terms" class="checkbox">
@@ -44,3 +54,5 @@
         </form>
     </div>
 </section>
+
+@await Html.PartialAsync("_ValidationScriptPartial")

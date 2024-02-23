@@ -48,7 +48,7 @@ namespace Silicon_AspNetMVC.Controllers
             {
                 return View(viewModel);
             }
-            return RedirectToAction("Details", "Account");
+            return RedirectToAction("SignIn", "Auth");
         }
 
 

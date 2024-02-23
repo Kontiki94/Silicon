@@ -22,6 +22,11 @@
                 width: 130%;
                 height: 1.9rem;
                 border-color: $gray-400;
+                color: $gray-200;
+
+                option{
+                    color: $gray-900;
+                }
             }
 
             .search {
