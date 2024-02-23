@@ -1,6 +1,13 @@
-﻿@model CourseDetailsViewModel
+﻿@model CoursesViewModel
+@{
+    var courses = Model.Courses;
+}
 
-<section id="@Model.Id" class="container">
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<section id="@Model.Title" class="container">
     <div class="courses">
 
         <div class="section-title">
@@ -9,9 +16,9 @@
                 <div class="dropdown">
                     <select name="All Categories">
 
-                        @if (Model.Categories is not null)
+                        @if (courses.Categories is not null)
                         {
-                            foreach (var category in Model.Categories)
+                            foreach (var category in courses.Categories)
                             {
                                 <option value="">All Categories</option>
                             }
@@ -20,7 +27,7 @@
                     </select>
                 </div>
                 <div class="search">
-                    <input name="search" placeholder="Search courses" />
+                    <input type="search" name="search" placeholder="Search courses" />
                     <i class="fa-sharp fa-solid fa-magnifying-glass"></i>
                 </div>
             </div>
@@ -28,14 +35,14 @@
         <div class="grid">
             @* @foreach (var course in courses) *@
             <div class="course-card">
-                <a class="content" asp-controller="@Model.Link.ControllerName" asp-action="@Model.Link.ActionName">
+                <a class="content" asp-controller="@courses.Link.ControllerName" asp-action="@courses.Link.ActionName">
                     <div class="image">
-                        <img src="/images/fullstack_dev.png" alt="@Model.CourseImage.AltText" />
+                        <img src="/images/fullstack_dev.png" alt="@courses.CourseImage.AltText" />
                     </div>
                     <div class="course-info">
-                        <p class="title">@Model.Title</p>
-                        <p class="author">@Model.Author.AuthorName</p>
-                        <p class="price">$@Model.Price</p>
+                        <p class="title">@courses.Title</p>
+                        <p class="author">@courses.Author.AuthorName</p>
+                        <p class="price">$ @courses.Price</p>
                     </div>
                     <div class="divider"></div>
                     <footer>
@@ -45,20 +52,19 @@
                         </div>
                         <div>
                             <i class="fa-sharp fa-light fa-thumbs-up"></i>
-                            <p>@Model.Views</p>
+                            <p>@courses.Views</p>
                         </div>
                     </footer>
                 </a>
-            </div> 
+            </div>
             <div class="course-card">
-                <a class="content" asp-controller="@Model.Link.ControllerName" asp-action="@Model.Link.ActionName">
-                    <img src="@Model.CourseImage.ImageUrl" alt="@Model.CourseImage.AltText" />
+                <a class="content" asp-controller="@courses.Link.ControllerName" asp-action="@courses.Link.ActionName">
+                    <img src="@courses.CourseImage.ImageUrl" alt="@courses.CourseImage.AltText" />
                     <div class="course-info">
-                        <p class="title">@Model.Title</p>
-                        <p class="author">@Model.Author.AuthorName</p>
-                        <p class="price">$@Model.Price</p>
+                        <p class="title">@courses.Title</p>
+                        <p class="author">@courses.Author.AuthorName</p>
+                        <p class="price">$ @courses.Price</p>
                     </div>
-
                     <div class="divider"></div>
                     <footer>
                         <div>
@@ -67,19 +73,18 @@
                         </div>
                         <div>
                             <i class="fa-sharp fa-light fa-thumbs-up"></i>
-                            <p>@Model.Views</p>
+                            <p>@courses.Views</p>
                         </div>
                     </footer>
                 </a>
             </div> <div class="course-card">
-                <a class="content" asp-controller="@Model.Link.ControllerName" asp-action="@Model.Link.ActionName">
-                    <img src="@Model.CourseImage.ImageUrl" alt="@Model.CourseImage.AltText" />
+                <a class="content" asp-controller="@courses.Link.ControllerName" asp-action="@courses.Link.ActionName">
+                    <img src="@courses.CourseImage.ImageUrl" alt="@courses.CourseImage.AltText" />
                     <div class="course-info">
-                        <p class="title">@Model.Title</p>
-                        <p class="author">@Model.Author.AuthorName</p>
-                        <p class="price">$@Model.Price</p>
+                        <p class="title">@courses.Title</p>
+                        <p class="author">@courses.Author.AuthorName</p>
+                        <p class="price">$ @courses.Price</p>
                     </div>
-
                     <div class="divider"></div>
                     <footer>
                         <div>
@@ -88,70 +93,7 @@
                         </div>
                         <div>
                             <i class="fa-sharp fa-light fa-thumbs-up"></i>
-                            <p>@Model.Views</p>
-                        </div>
-                    </footer>
-                </a>
-            </div> <div class="course-card">
-                <a class="content" asp-controller="@Model.Link.ControllerName" asp-action="@Model.Link.ActionName">
-                    <img src="@Model.CourseImage.ImageUrl" alt="@Model.CourseImage.AltText" />
-                    <div class="course-info">
-                        <p class="title">@Model.Title</p>
-                        <p class="author">@Model.Author.AuthorName</p>
-                        <p class="price">$@Model.Price</p>
-                    </div>
-
-                    <div class="divider"></div>
-                    <footer>
-                        <div>
-                            <i class="fa-sharp fa-solid fa-clock"></i>
-                            <p> hours</p>
-                        </div>
-                        <div>
-                            <i class="fa-sharp fa-light fa-thumbs-up"></i>
-                            <p>@Model.Views</p>
-                        </div>
-                    </footer>
-                </a>
-            </div> <div class="course-card">
-                <a class="content" asp-controller="@Model.Link.ControllerName" asp-action="@Model.Link.ActionName">
-                    <img src="@Model.CourseImage.ImageUrl" alt="@Model.CourseImage.AltText" />
-                    <div class="course-info">
-                        <p class="title">@Model.Title</p>
-                        <p class="author">@Model.Author.AuthorName</p>
-                        <p class="price">$@Model.Price</p>
-                    </div>
-
-                    <div class="divider"></div>
-                    <footer>
-                        <div>
-                            <i class="fa-sharp fa-solid fa-clock"></i>
-                            <p> hours</p>
-                        </div>
-                        <div>
-                            <i class="fa-sharp fa-light fa-thumbs-up"></i>
-                            <p>@Model.Views</p>
-                        </div>
-                    </footer>
-                </a>
-            </div> <div class="course-card">
-                <a class="content" asp-controller="@Model.Link.ControllerName" asp-action="@Model.Link.ActionName">
-                    <img src="@Model.CourseImage.ImageUrl" alt="@Model.CourseImage.AltText" />
-                    <div class="course-info">
-                        <p class="title">@Model.Title</p>
-                        <p class="author">@Model.Author.AuthorName</p>
-                        <p class="price">$@Model.Price</p>
-                    </div>
-
-                    <div class="divider"></div>
-                    <footer>
-                        <div>
-                            <i class="fa-sharp fa-solid fa-clock"></i>
-                            <p> hours</p>
-                        </div>
-                        <div>
-                            <i class="fa-sharp fa-light fa-thumbs-up"></i>
-                            <p>@Model.Views</p>
+                            <p>@courses.Views</p>
                         </div>
                     </footer>
                 </a>

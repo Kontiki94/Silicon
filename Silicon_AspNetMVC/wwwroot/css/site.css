@@ -1,4 +1,5 @@
-﻿@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap");
+﻿@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap");
 html, body {
   line-height: 160%;
   font-weight: 400;
@@ -362,7 +363,7 @@ header .container {
   display: grid;
   align-items: center;
   grid-template-columns: 1fr auto;
-  grid-template-areas: "logo mobile";
+  grid-template-areas: "logo buttons mobile";
   gap: 40px;
 }
 @media (min-width: 992px) {
@@ -373,6 +374,7 @@ header .container {
 }
 header .container #logo {
   grid-area: logo;
+  z-index: 3;
 }
 header .container #menu {
   grid-area: menu;
@@ -387,6 +389,42 @@ header .container #menu nav {
   display: flex;
   gap: 15px;
 }
+header .container .btn-mobile:not(.hide) + #menu,
+header .container #menu:not(.hide) {
+  display: block;
+  background-color: #0B0F19;
+  padding: 10px;
+  border-radius: 15px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+}
+header .container .btn-mobile:not(.hide) + #menu nav,
+header .container #menu:not(.hide) nav {
+  display: block;
+  margin-top: 160px;
+}
+header .container .btn-mobile:not(.hide) + #menu nav a,
+header .container #menu:not(.hide) nav a {
+  display: block;
+  display: flex;
+  justify-content: center;
+  padding: 8px 15px;
+  color: #fff;
+  font-size: 2.5rem;
+  text-decoration: none;
+}
+header .container .btn-mobile:not(.hide) + #menu nav a .active,
+header .container #menu:not(.hide) nav a .active {
+  color: #B4B7C9;
+}
+header .container .hide {
+  display: none;
+}
 header .container .btn-switch {
   grid-area: switch;
   display: none;
@@ -398,22 +436,41 @@ header .container .btn-switch {
 }
 header .container .account-buttons {
   grid-area: buttons;
-  display: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   gap: 15px;
+  z-index: 3;
 }
 @media (min-width: 992px) {
   header .container .account-buttons {
     display: flex;
   }
 }
+header .container .account-buttons button {
+  max-width: 100%;
+}
 header .container .btn-mobile {
+  font-size: 1.8rem;
+  background: transparent;
+  color: #33354D;
+  border: none;
   grid-area: mobile;
   display: block;
+  z-index: 2;
 }
 @media (min-width: 992px) {
   header .container .btn-mobile {
     display: none;
   }
+}
+
+#crossIcon {
+  color: white;
+}
+
+.no-scroll {
+  overflow: hidden;
 }
 
 footer {
@@ -1161,6 +1218,10 @@ footer .container .social-media {
   flex-direction: column;
   gap: 1.5rem;
 }
+#signin .main-holder .login-box .text-danger {
+  color: #EF4444;
+  margin-bottom: 0.3rem;
+}
 #signin .main-holder .login-box .email, #signin .main-holder .login-box .password {
   display: flex;
   flex-direction: column;
@@ -1170,10 +1231,15 @@ footer .container .social-media {
   font-weight: 800;
   margin-bottom: 0.2rem;
 }
+#signin .main-holder .login-box .validation {
+  display: flex;
+  justify-content: space-between;
+}
 #signin .main-holder .login-box .checkbox {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
+  margin-bottom: 1.2rem;
 }
 #signin .main-holder .login-box .checkbox input[type=checkbox] {
   margin-right: 0.8rem;
@@ -1210,8 +1276,16 @@ footer .container .social-media {
 }
 #signin .main-holder .login-box input {
   border: 1px solid #D4D7E5;
-  padding: 8px;
+  padding: 0.7rem;
   border-radius: 0.3rem;
+  margin-bottom: 1rem;
+}
+#signin .main-holder .login-box input.input-validation-error {
+  border: 0.05rem solid #EF4444 !important;
+  color: #EF4444;
+}
+#signin .main-holder .login-box span.field-validation-error {
+  color: #EF4444 !important;
 }
 #signin .main-holder .login-box .divider {
   width: 100%;
@@ -1223,9 +1297,86 @@ footer .container .social-media {
 #signin .main-holder .login-box .btn-theme {
   width: 30rem;
   box-shadow: 0 3px 10px rgba(99, 102, 241, 0.5019607843), 0 4px 5px rgba(99, 102, 241, 0.3764705882);
+  margin-bottom: 2rem;
+}
+#signin .main-holder .login-box span {
+  position: relative;
+}
+#signin .main-holder .login-box span.field-validation-error {
+  line-height: 160%;
+  font-weight: 400;
+  color: #565973;
+  font-family: "Manrope", sans-serif;
+  font-size: 14px !important;
+  color: #EF4444;
+}
+#signin .main-holder .login-box span.field-validation-error::after {
+  position: absolute;
+  right: 10px;
+  top: 40px;
+  z-index: 1;
+  font-size: 2em;
+  display: block;
+  content: "⮿";
 }
 #signin .main-holder .login-box p {
   font-weight: 800;
+}
+
+#signup {
+  margin-top: 50px;
+}
+#signup .container {
+  display: flex;
+  justify-content: center;
+}
+#signup .container .form-content {
+  width: 480px;
+}
+#signup .container .form-content .form-name {
+  display: flex;
+  justify-content: space-between;
+}
+#signup .container .form-content .form-name input {
+  width: 230px;
+}
+#signup .container .form-content .input-field {
+  display: flex;
+  flex-direction: column;
+}
+#signup .container .form-content .input-field span {
+  color: #EF4444;
+}
+#signup .container .form-content .input-field input {
+  border: 1px solid #D4D7E5;
+  padding: 8px;
+  border-radius: 0.3rem;
+  margin-bottom: 0.4rem;
+}
+#signup .container .form-content .input-field input.input-validation-error {
+  border: 0.05rem solid #EF4444 !important;
+  color: #EF4444;
+}
+#signup .container .form-content .input-field label {
+  font-weight: 800;
+  margin-top: 15px;
+  margin-bottom: 5px;
+}
+#signup .container .form-content .checkbox {
+  margin-top: 20px;
+  display: flex;
+  flex-flow: row wrap;
+  accent-color: #6366F1;
+}
+#signup .container .form-content .checkbox label {
+  margin-left: 10px;
+}
+#signup .container .form-content .checkbox span {
+  color: #EF4444;
+}
+#signup .container .btn-theme {
+  width: 100%;
+  margin-top: 20px;
 }
 
 #course-showcase {
@@ -1566,13 +1717,102 @@ footer .container .social-media {
   border: 0.5px solid #D4D7E5;
   border-radius: 0.4rem;
 }
+#details .container input.input-validation-error {
+  border: 0.05rem solid #EF4444 !important;
+  color: #EF4444;
+}
 #details .container label {
   font-weight: 700;
   margin-bottom: 0.2rem;
 }
+#details .container span.field-validation-error {
+  color: #EF4444 !important;
+}
 #details .container h5 {
   color: #6366F1;
   margin-bottom: 1rem;
+}
+
+#security {
+  margin-top: 40px;
+  margin-bottom: 60px;
+}
+#security .container {
+  display: grid;
+  justify-content: center;
+}
+@media (min-width: 992px) {
+  #security .container {
+    grid-template-columns: 1fr 3fr;
+    padding-right: 5rem;
+  }
+}
+#security .container .menu-bar {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+  align-self: flex-start;
+  align-items: center;
+}
+@media (min-width: 768px) {
+  #security .container .menu-bar {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (min-width: 992px) {
+  #security .container .menu-bar {
+    grid-template-columns: 1fr;
+  }
+}
+#security .container .menu-bar .profile {
+  text-align: center;
+}
+@media (min-width: 768px) {
+  #security .container .menu-bar .profile {
+    padding-right: 3rem;
+  }
+}
+#security .container .menu-bar .profile h5 {
+  color: black;
+  margin-bottom: 0;
+}
+#security .container .menu-bar .profile p {
+  margin-bottom: 2rem;
+}
+#security .container .menu-bar .options {
+  display: flex;
+  flex-direction: column;
+}
+@media (min-width: 768px) {
+  #security .container .menu-bar .options {
+    padding-right: 1rem;
+  }
+}
+#security .container .menu-bar .options a {
+  color: #000;
+  font-weight: 700;
+  padding: 10px;
+  max-width: 300px;
+  width: auto;
+  margin-bottom: 0.2rem;
+  text-decoration: none;
+  border-radius: 0.4rem;
+  border: 1px solid white;
+}
+#security .container .menu-bar .options a i {
+  padding-right: 1rem;
+  padding-left: 1.2rem;
+}
+#security .container .menu-bar .options a:hover, #security .container .menu-bar .options a:active, #security .container .menu-bar .options a:focus,
+#security .container .menu-bar .options a .active {
+  background-color: #6366F1;
+  text-decoration: none;
+  color: #fff;
+}
+#security .container .menu-bar .options .active {
+  background-color: #6366F1;
+  color: #fff;
 }
 
 #not-found .container {

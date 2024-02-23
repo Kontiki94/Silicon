@@ -1,32 +1,40 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Silicon_AspNetMVC.Models.Sections;
+using Silicon_AspNetMVC.ViewModels;
 
 namespace Silicon_AspNetMVC.Controllers
 {
     public class AccountController : Controller
     {
-        public IActionResult Index()
+        [Route("/details")]
+        [HttpGet]
+        public IActionResult Details()
         {
-            ViewData["Title"] = "Profile";
-            return View();
+            var viewModel = new AccountDetailsViewModel();
+            ViewData["Title"] = "Details";
+            return View(viewModel);
         }
 
         [Route("/details")]
-        public IActionResult Details()
-        {
-            ViewData["Title"] = "Details";
-            return View();
-        }
-
         [HttpPost]
-        public IActionResult SaveDetails(AccountModel model)
+        public IActionResult Details(AccountDetailsViewModel viewmodel)
         {
-            return RedirectToAction("Details", "Account");
+            if (!ModelState.IsValid)
+            {
+                return View(viewmodel);
+            }
+
+            return RedirectToAction(nameof(Details), viewmodel);
         }
 
         public IActionResult Cancel()
         {
             return RedirectToAction("Details", "Account");
+        }
+
+        [Route("/security")]
+        public IActionResult Security()
+        {
+            return View();
         }
     }
 }

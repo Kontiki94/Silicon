@@ -23,6 +23,11 @@
             flex-direction: column;
             gap: 1.5rem;
 
+            .text-danger {
+                color: $danger;
+                margin-bottom: .3rem;
+            }
+
             .email, .password {
                 display: flex;
                 flex-direction: column;
@@ -34,10 +39,16 @@
                 }
             }
 
+            .validation {
+                display: flex;
+                justify-content: space-between;
+            }
+
             .checkbox {
                 display: flex;
                 flex-direction: row;
                 align-items: flex-start;
+                margin-bottom: 1.2rem;
 
                 input[type="checkbox"] {
                     margin-right: .8rem;
@@ -81,8 +92,18 @@
 
             input {
                 border: 1px solid $gray-400;
-                padding: 8px;
+                padding: .7rem;
                 border-radius: .3rem;
+                margin-bottom: 1rem;
+
+                &.input-validation-error {
+                    border: 0.050rem solid $danger !important;
+                    color: $danger;
+                }
+            }
+
+            span.field-validation-error {
+                color: $danger !important;
             }
 
             .divider {
@@ -96,8 +117,27 @@
             .btn-theme {
                 width: 30rem;
                 box-shadow: 0 3px 10px #6366F180, 0 4px 5px #6366F160;
+                margin-bottom: 2rem;
             }
 
+            span {
+                position: relative;
+
+                &.field-validation-error {
+                     @include text-s;
+                     color: $danger;
+
+                     &::after {
+                         position: absolute;
+                         right: 10px;
+                         top: 40px;
+                         z-index: 1;
+                         font-size: 2em;
+                         display: block;
+                         content: '\2BBF';
+                     }
+                 }
+            }
 
             p {
                 font-weight: 800;

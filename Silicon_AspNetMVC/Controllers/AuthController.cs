@@ -7,6 +7,7 @@ namespace Silicon_AspNetMVC.Controllers
     {
 
         [Route("/signin")]
+        [HttpGet]
         public IActionResult SignIn()
         {
             var viewModel = new SignInViewModel();
@@ -14,12 +15,43 @@ namespace Silicon_AspNetMVC.Controllers
             return View(viewModel);
         }
 
+        [Route("/signin")]
+        [HttpPost]
+        public IActionResult SignIn(SignInViewModel viewModel)
+        {
+            ViewData["Title"] = "Sign In";
+
+            if (!ModelState.IsValid)
+            {
+                viewModel.ErrorMessage = "Invalid e-mail or password";
+                return View(viewModel);
+            }
+
+            return RedirectToAction("Details", "Account");
+        }
+
         [Route("/signup")]
+        [HttpGet]
         public IActionResult SignUp()
         {
+            var viewModel = new SignUpViewModel();
             ViewData["Title"] = "Sign Up";
-            return View();
+            return View(viewModel);
         }
+
+        [Route("/signup")]
+        [HttpPost]
+        public IActionResult SignUp(SignUpViewModel viewModel)
+        {
+            ViewData["Title"] = "Sign Up";
+            if (!ModelState.IsValid)
+            {
+                return View(viewModel);
+            }
+            return RedirectToAction("Details", "Account");
+        }
+
+
 
         public new IActionResult SignOut()
         {

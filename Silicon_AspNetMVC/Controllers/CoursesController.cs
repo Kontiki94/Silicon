@@ -8,20 +8,23 @@ public class CoursesController : Controller
     public IActionResult Index()
     {
         var viewModel = new CoursesViewModel();
-        ViewData["Title"] = viewModel.Title;
+        ViewData["Title"] = "Courses";
         return View(viewModel);
     }
-    
-    public IActionResult Courses()
-    {
-        return View();
-    }
+
+    //Behövs inte, men får ligga kvar ett tag för säkerhets skull. 
+    //public IActionResult Courses()
+    //{
+    //    var viewModel = new CoursesViewModel();
+    //    ViewData["Title"] = "Courses";
+    //    return View(viewModel);
+    //}
 
     [Route("/coursedetails")]
     public IActionResult CourseDetails()
     {
         var viewModel = new CoursesCourseDetailsViewModel();
-        ViewData["Title"] = viewModel.Title;
+        ViewData["Title"] = "Course Details";
         return View(viewModel);
     }
 }
