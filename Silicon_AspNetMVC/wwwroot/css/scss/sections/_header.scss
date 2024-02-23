@@ -61,10 +61,12 @@ header {
 
                     .active {
                         color: $gray-500;
-                    } 
+                    }
                 }
             }
         }
+
+
 
         .hide {
             display: none;
@@ -95,9 +97,6 @@ header {
                 max-width: 100%;
             }
         }
-
-
-
 
         .btn-mobile {
             font-size: 1.8rem;

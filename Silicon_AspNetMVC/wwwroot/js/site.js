@@ -15,17 +15,20 @@ const checkScreenSize = () => {
     if (window.innerWidth >= 1200) {
         document.getElementById('menu').classList.remove('hide');
         document.getElementById('account-buttons').classList.remove('hide');
+
         menu.classList.add('hide');
         accountButtons.classList.add('hide');
+
         barsIcon.classList.remove('hide');
+
         barsIcon.classList.toggle('hide');
         crossIcon.classList.toggle('hide');
     } else {
         if (!document.getElementById('menu').classList.contains('hide')) {
             document.getElementById('menu').classList.add('hide');
+
             barsIcon.classList.toggle('hide');
             crossIcon.classList.toggle('hide');
-
         }
         if (!document.getElementById('account-buttons').classList.contains('hide')) {
             document.getElementById('account-buttons').classList.add('hide');
@@ -35,9 +38,11 @@ const checkScreenSize = () => {
 
 window.addEventListener('resize', checkScreenSize);
 
-const menuLinks = document.querySelectorAll('#menu .menu-link');
+const menuLinks = document.querySelectorAll('#menu.btn-mobile .menu-link');
 menuLinks.forEach(link => {
-    link.addEventListener('click', () => toggleMenu());
+    link.addEventListener('click', () => {
+        toggleMenu();
+    });
 });
 
 checkScreenSize();
