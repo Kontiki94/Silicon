@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Silicon_AspNetMVC.Models;
+namespace Silicon_AspNetMVC.Models.Sections;
 
 public class ContactFormModel
 {
@@ -8,7 +8,7 @@ public class ContactFormModel
     [Required(ErrorMessage = "Name is required")]
     public string FullName { get; set; } = null!;
 
-    [DataType(DataType.EmailAddress)]                                                            
+    [DataType(DataType.EmailAddress)]
     [Display(Name = "Email address", Prompt = "Enter your email address", Order = 1)]
     [Required(ErrorMessage = "Email address is required")]
     [RegularExpression(@"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$", ErrorMessage = "Invalid email address.")]
@@ -16,7 +16,7 @@ public class ContactFormModel
 
     //[DataType(DataType.Custom)]  //chat gpt förslag, men fick det inte att fungera. Annat alt eller hårdkodat i HTML?
     //[UIHint("DropDownList")]
-    [Display(Name = "Service (Optional)", Prompt = "Choose the service you are interested in...", Order = 2)]    
+    [Display(Name = "Service (Optional)", Prompt = "Choose the service you are interested in...", Order = 2)]
     public string? SelectedService { get; set; }
 
     [DataType(DataType.MultilineText)]

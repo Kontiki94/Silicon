@@ -23,7 +23,7 @@ namespace Silicon_AspNetMVC.Controllers
                 return View(viewModel);
             }
             
-            return View(viewModel);             //Om rätt ifyllt, tillbaks till vyn (eller RedirectToAction("Vy", "controller") om vi vill gå någon annanstans)
+            return RedirectToAction("ContactUs", "Contact");     //Om rätt ifyllt, tillbaks till vyn (eller RedirectToAction("Vy", "controller") om vi vill gå någon annanstans)
         }
     }
 }

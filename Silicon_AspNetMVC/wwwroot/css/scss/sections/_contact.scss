@@ -1,9 +1,11 @@
 .contact {
     background-color: $gray-100;
+    z-index: 0;
 
     .container {
         padding: 2rem 2rem 2rem 2rem;
         position: relative;
+
 
         .nav {
             gap: 0.5rem;
@@ -37,20 +39,6 @@
             padding-bottom: 5rem;
         }
 
-        .map {
-            padding-bottom: 50%;
-            position: relative;
-            margin-bottom: 5rem;
-        }
-
-        .map iframe {
-            height: 100%;
-            width:100%;
-            left: 0;
-            top: 0;
-            position: absolute;
-        }
-
         .contact-form {
             @include shadow-l;
             display: flex;
@@ -66,6 +54,7 @@
                 top: 8%;
                 left: 60%;
                 height: fit-content;
+                z-index: 2;
             }
 
             form {
@@ -170,12 +159,27 @@
                         max-width: 50%;
                         padding: 1rem;
 
-                        @include xl{
+                        @include xl {
                             padding: 0.5rem;
                         }
                     }
                 }
             }
         }
+    }
+
+    .map {
+        padding-bottom: 50%;
+        position: relative;
+        margin-bottom: 5rem;
+        z-index: 1;
+    }
+
+    .map iframe {
+        height: 100%;
+        width: 100%;
+        left: 0;
+        top: 0;
+        position: absolute;
     }
 }
