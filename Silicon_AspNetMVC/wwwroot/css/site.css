@@ -1659,6 +1659,32 @@ footer .container .social-media {
 #details .container .account-details .user-details div .firstname, #details .container .account-details .user-details div .email {
   margin-right: 1rem;
 }
+#details .container .account-details .user-details span {
+  margin-top: 5px;
+  position: relative;
+}
+#details .container .account-details .user-details span.field-validation-error {
+  line-height: 160%;
+  font-weight: 400;
+  color: #565973;
+  font-family: "Manrope", sans-serif;
+  font-size: 14px !important;
+  color: #EF4444;
+}
+#details .container .account-details .user-details span.field-validation-error::after {
+  position: absolute;
+  right: 10px;
+  top: 45px;
+  z-index: 1;
+  font-size: 2em;
+  display: block;
+  content: "⮿";
+}
+#details .container .account-details .user-details .validation {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
 #details .container .account-details .bio textarea {
   max-width: 100%;
   width: 100%;
@@ -1710,6 +1736,32 @@ footer .container .social-media {
   display: flex;
   gap: 1rem;
   margin-top: 1rem;
+}
+#details .container .account-details .bio span {
+  margin-top: 15px;
+  position: relative;
+}
+#details .container .account-details .bio span.field-validation-error {
+  line-height: 160%;
+  font-weight: 400;
+  color: #565973;
+  font-family: "Manrope", sans-serif;
+  font-size: 14px !important;
+  color: #EF4444;
+}
+#details .container .account-details .bio span.field-validation-error::after {
+  position: absolute;
+  right: 10px;
+  top: 42px;
+  z-index: 1;
+  font-size: 2em;
+  display: block;
+  content: "⮿";
+}
+#details .container .validation {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 #details .container input {
   margin-bottom: 0.5rem;
