@@ -23,6 +23,11 @@
             flex-direction: column;
             gap: 1.5rem;
 
+            .text-danger {
+                color: $danger;
+                margin-bottom: .3rem;
+            }
+
             .email, .password {
                 display: flex;
                 flex-direction: column;

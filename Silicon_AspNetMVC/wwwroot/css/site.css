@@ -1218,6 +1218,10 @@ footer .container .social-media {
   flex-direction: column;
   gap: 1.5rem;
 }
+#signin .main-holder .login-box .text-danger {
+  color: #EF4444;
+  margin-bottom: 0.3rem;
+}
 #signin .main-holder .login-box .email, #signin .main-holder .login-box .password {
   display: flex;
   flex-direction: column;
