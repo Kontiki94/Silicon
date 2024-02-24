@@ -23,9 +23,7 @@ const checkScreenSize = () => {
         accountButtons.classList.add('hide');
 
         barsIcon.classList.remove('hide');
-
-        barsIcon.classList.toggle('hide');
-        crossIcon.classList.toggle('hide');
+        
     } else {
         if (!menu.classList.contains('hide')) {
             menu.classList.add('hide');
