@@ -1316,7 +1316,7 @@ footer .container .social-media {
 }
 #signin .main-holder .login-box span.field-validation-error::after {
   position: absolute;
-  right: 10px;
+  right: -35px;
   top: 40px;
   z-index: 1;
   font-size: 2em;
