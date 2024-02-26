@@ -1,3 +1,6 @@
+using Infrastructure.Contexts;
+using Microsoft.EntityFrameworkCore;
+
 namespace Silicon_AspNetMVC;
 
 public class Program
@@ -6,6 +9,8 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder(args);
         builder.Services.AddControllersWithViews();
+
+        builder.Services.AddDbContext<DataContext>(x => x.UseSqlServer(builder.Configuration.GetConnectionString("SqlServer")));
 
         var app = builder.Build();
         app.UseHsts();
