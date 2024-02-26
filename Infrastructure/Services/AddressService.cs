@@ -8,17 +8,23 @@ public class AddressService(AddressRepository addressRepository)
 {
     private readonly AddressRepository _addressRepository = addressRepository;
 
-    public async Task <ResponseResult> CreateAddressAsync(string streetName, string postalCode, string city)
+    public async Task<ResponseResult> CreateAddressAsync(string streetName, string postalCode, string city)
     {
-		try
-		{
+        try
+        {
             var exists = await _addressRepository.AlreadyExistsAsync(x => x.StreetName == streetName && x.PostalCode == postalCode && x.City == city);
             if (exists is null)
             {
                 var result = await _addressRepository.CreateOneAsync(AddressFactory.Create(streetName, postalCode, city));
+                if (result.StatusCode == StatusCode.OK)
+                {
+                    var response = ResponseFactory.Ok(AddressFactory.Create(result.ContentResult));
+                    return response;
+                }
+
             }
-		}
-		catch (Exception ex) { return ResponseFactory.Error(ex.Message); }
+        }
+        catch (Exception ex) { return ResponseFactory.Error(ex.Message); }
     }
 
     public async Task<ResponseResult> GetAddressAsync(string streetName, string postalCode, string city)
