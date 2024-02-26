@@ -1894,6 +1894,96 @@ footer .container .social-media {
   background-color: #6366F1;
   color: #fff;
 }
+@media (min-width: 992px) {
+  #security .security-details {
+    border-left: 1px solid #E2E5F1;
+    padding-left: 7rem;
+  }
+}
+#security .security-details h2 {
+  margin-top: 20px;
+  margin-bottom: 25px;
+}
+#security .security-details h5 {
+  color: #6366F1;
+}
+@media (min-width: 992px) {
+  #security .security-details .confirm-password {
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+  }
+}
+#security .security-details .input-group {
+  display: flex;
+  flex-direction: column;
+}
+@media (min-width: 992px) {
+  #security .security-details .input-group {
+    width: 48%;
+  }
+}
+#security .security-details .input-group span {
+  position: relative;
+}
+#security .security-details .input-group span.field-validation-error {
+  line-height: 160%;
+  font-weight: 400;
+  color: #565973;
+  font-family: "Manrope", sans-serif;
+  font-size: 14px !important;
+  color: #EF4444;
+}
+#security .security-details .input-group span.field-validation-error::after {
+  position: absolute;
+  right: 10px;
+  top: 38px;
+  z-index: 1;
+  font-size: 2em;
+  display: block;
+  content: "⮿";
+}
+#security .security-details .input-group label {
+  font-weight: 800;
+  margin-top: 20px;
+  margin-bottom: 5px;
+  color: #0B0F19;
+}
+#security .security-details .input-group input {
+  border: 1px solid #D4D7E5;
+  padding: 8px;
+  border-radius: 0.3rem;
+  margin-bottom: 0.4rem;
+}
+#security .security-details .input-group input.input-validation-error {
+  border: 0.05rem solid #EF4444 !important;
+  color: #EF4444;
+}
+#security .security-details .input-group .validation {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+#security .security-details .buttons {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+#security .security-details .delete-section {
+  border-top: 1px solid #E2E5F1;
+  padding-top: 30px;
+}
+#security .security-details .delete-section .checkbox label {
+  margin-left: 10px;
+}
+#security .security-details .delete-section h5 {
+  color: #6366F1;
+}
+#security .security-details .delete-section button {
+  background-color: red;
+  margin-top: 20px;
+}
 
 #not-found .container {
   display: flex;

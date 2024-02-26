@@ -27,8 +27,19 @@ public abstract class Repo<TEntity>(DataContext context) where TEntity : class
 
     public virtual async Task<ResponseResult> GetOneAsync(Expression<Func<TEntity, bool>> predicate)
     {
-        // TODO Hassan
-        return ResponseFactory.Ok();
+        try
+        {
+            var result = await _context.Set<TEntity>().FirstOrDefaultAsync(predicate);
+            if(result is null)
+            {
+                return ResponseFactory.NotFound();
+            }
+            return ResponseFactory.Ok(result);
+        }
+        catch (Exception ex) 
+        { 
+            return ResponseFactory.Error(ex.Message);
+        }
     }
 
     public virtual async Task<ResponseResult> GetAllAsync(TEntity entity)

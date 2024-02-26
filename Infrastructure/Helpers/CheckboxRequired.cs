@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Silicon_AspNetMVC.Helpers;
+namespace Infrastructure.Helpers;
 
 public class CheckboxRequired : ValidationAttribute
 {
