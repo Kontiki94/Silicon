@@ -55,7 +55,9 @@ namespace Silicon_AspNetMVC.Controllers
 
         public new IActionResult SignOut()
         {
-            return View();
+            var viewModel = new HomeIndexViewModel();
+            ViewData["Title"] = "Silicon";
+            return View(viewModel);
         }
     }
 }

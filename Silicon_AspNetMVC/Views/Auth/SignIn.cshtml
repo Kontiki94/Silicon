@@ -12,9 +12,9 @@
         </div>
         <div class="login-box">
             <form asp-controller="Auth" asp-action="SignIn" method="post" novalidate>
-                <div class="text-danger">
+                <span class="text-danger">
                     @Model.ErrorMessage
-                </div>
+                </span>
                 <div class="email">
                     <div class="validation">
                         <label asp-for="Form.Email">Email</label>
@@ -35,7 +35,6 @@
                 </div>
                 <button type="submit" class="btn-theme">@Model.Title</button>
                 <div class="social-box">
-                    @* Måste ändra här sen *@
                     <a asp-controller="Home" asp-action="Index">Forgot your password?</a>
                     <div class="divider"></div>
                     <p>Or sign in with your social network</p>
@@ -48,3 +47,5 @@
         </div>
     </div>
 </section>
+
+@await Html.PartialAsync("_ValidationScriptPartial")

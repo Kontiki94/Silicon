@@ -15,7 +15,7 @@
                 <a class="active" asp-controller="Account" asp-action="Details"><i class="fa-regular fa-gear"></i>Account Details</a>
                 <a class="menu-link" asp-controller="Account" asp-action="Security"><i class="fa-regular fa-lock"></i>Security</a>
                 <a class="menu-link" asp-controller="Account" asp-action="SavedCourses"><i class="fa-sharp fa-regular fa-bookmark"></i>Saved Courses</a>
-                <a class="menu-link" asp-controller="Auth" asp-action="Sign Out"><i class="fa-solid fa-right-from-bracket"></i>Sign Out</a>
+                <a class="menu-link" asp-controller="Home" asp-action="Index"><i class="fa-solid fa-right-from-bracket"></i>Sign Out</a>
             </nav>
         </div>
 
@@ -26,25 +26,33 @@
                     <h5>Basic Info</h5>
                     <div class="name">
                         <div class="firstname">
-                            <label asp-for="Account.FirstName">First name</label>
-                            <span asp-validation-for="Account.FirstName"></span>
+                            <div class="validation">
+                                <label asp-for="Account.FirstName">First name</label>
+                                <span asp-validation-for="Account.FirstName"></span>
+                            </div>
                             <input asp-for="Account.FirstName" />
                         </div>
                         <div class="lastname">
-                            <label asp-for="Account.LastName">Last name</label>
-                            <span asp-validation-for="Account.LastName"></span>
+                            <div class="validation">
+                                <label asp-for="Account.LastName">Last name</label>
+                                <span asp-validation-for="Account.LastName"></span>
+                            </div>
                             <input asp-for="Account.LastName" />
                         </div>
                     </div>
                     <div class="contact-info">
                         <div class="email">
-                            <label asp-for="Account.Email">Email Address</label>
-                            <span asp-validation-for="Account.Email"></span>
+                            <div class="validation">
+                                <label asp-for="Account.Email">Email Address</label>
+                                <span asp-validation-for="Account.Email"></span>
+                            </div>
                             <input asp-for="Account.Email" />
                         </div>
                         <div class="phone">
-                            <label asp-for="Account.Phone">Phone</label>
-                            <span asp-validation-for="Account.Phone"></span>
+                            <div class="validation">
+                                <label asp-for="Account.Phone">Phone</label>
+                                <span asp-validation-for="Account.Phone"></span>
+                            </div>
                             <input asp-for="Account.Phone" />
                         </div>
                     </div>
@@ -59,20 +67,26 @@
                     <div class="divider"></div>
                     <div class="address">
                         <h5>Address</h5>
-                        <label asp-for="Account.AddressLine1">Address line 1</label>
-                        <span asp-validation-for="Account.AddressLine1"></span>
+                        <div class="validation">
+                            <label asp-for="Account.AddressLine1">Address line 1</label>
+                            <span asp-validation-for="Account.AddressLine1"></span>
+                        </div>
                         <input asp-for="Account.AddressLine1" />
                         <label asp-for="Account.AddressLine2">Address line 2<span>(optional)</span></label>
                         <input asp-for="Account.AddressLine2" />
                         <div class="city-info">
                             <div class="postal">
-                                <label asp-for="Account.PostalCode">Postal Code</label>
-                                <span asp-validation-for="Account.PostalCode"></span>
+                                <div class="validation">
+                                    <label asp-for="Account.PostalCode">Postal Code</label>
+                                    <span asp-validation-for="Account.PostalCode"></span>
+                                </div>
                                 <input asp-for="Account.PostalCode" />
                             </div>
                             <div class="city">
-                                <label asp-for="Account.City">City</label>
-                                <span asp-validation-for="Account.City"></span>
+                                <div class="validation">
+                                    <label asp-for="Account.City">City</label>
+                                    <span asp-validation-for="Account.City"></span>
+                                </div>
                                 <input asp-for="Account.City" />
                             </div>
                         </div>

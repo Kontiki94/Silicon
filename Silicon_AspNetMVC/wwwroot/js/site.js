@@ -1,5 +1,4 @@
 ﻿const toggleMenu = () => {
-    console.log("Toggle menu function executed");
     document.getElementById('menu').classList.toggle('hide');
     document.getElementById('account-buttons').classList.toggle('hide');
 
@@ -12,22 +11,27 @@
 }
 
 const checkScreenSize = () => {
+    const menu = document.getElementById('menu');
+    const accountButtons = document.getElementById('account-buttons');
+    const barsIcon = document.getElementById('barsIcon');
+
     if (window.innerWidth >= 1200) {
-        document.getElementById('menu').classList.remove('hide');
-        document.getElementById('account-buttons').classList.remove('hide');
+        menu.classList.remove('hide');
+        accountButtons.classList.remove('hide');
+
         menu.classList.add('hide');
         accountButtons.classList.add('hide');
+
         barsIcon.classList.remove('hide');
-        barsIcon.classList.toggle('hide');
-        crossIcon.classList.toggle('hide');
+        
     } else {
-        if (!document.getElementById('menu').classList.contains('hide')) {
-            document.getElementById('menu').classList.add('hide');
+        if (!menu.classList.contains('hide')) {
+            menu.classList.add('hide');
+
             barsIcon.classList.toggle('hide');
             crossIcon.classList.toggle('hide');
-
         }
-        if (!document.getElementById('account-buttons').classList.contains('hide')) {
+        if (accountButtons.classList.contains('hide')) {
             document.getElementById('account-buttons').classList.add('hide');
         }
     }
@@ -35,6 +39,16 @@ const checkScreenSize = () => {
 
 window.addEventListener('resize', checkScreenSize);
 
+const menuLinks = document.querySelectorAll('.menu-link');
+menuLinks.forEach(link => {
+    if (link.classList.contains('asp-fragment')) {
+        link.addEventListener('click', () => {
+            if (window.innerWidth < 992) {
+                toggleMenu();
+            }
+        });
+    }
+});
 
 checkScreenSize();
 
