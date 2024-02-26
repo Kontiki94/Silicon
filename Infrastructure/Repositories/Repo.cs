@@ -1,12 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Infrastructure.Contexts;
+using Infrastructure.Models;
 
-namespace Infrastructure.Repositories
+namespace Infrastructure.Repositories;
+
+public abstract class Repo<TEntity>(DataContext context) where TEntity : class
 {
-    internal class Repo
+    private readonly DataContext _context = context;
+
+    public virtual async Task<ResponseResult> CreateAsync(TEntity entity)
     {
+        try
+        {
+            _context.Set<TEntity>().Add(entity);
+            await _context.SaveChangesAsync();
+            return new ResponseResult
+            {
+                ContentResult = entity,
+                Message = "Created successfully",
+                Status = StatusCode.OK
+            };
+        }
+        catch { }
+        return null!;
     }
 }
