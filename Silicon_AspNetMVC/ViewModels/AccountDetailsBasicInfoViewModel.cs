@@ -2,10 +2,9 @@
 
 namespace Silicon_AspNetMVC.ViewModels;
 
-public class AccountDetailsViewModel
+public class AccountDetailsBasicInfoViewModel
 {
-    public string Title { get; set; } = "Account details";
-    public AccountModel Account { get; set; } = new AccountModel()
+    public AccountDetailsBasicInfoModel Account { get; set; } = new AccountDetailsBasicInfoModel()
     {
         FirstName = "Ted",
         LastName = "Pieplow",

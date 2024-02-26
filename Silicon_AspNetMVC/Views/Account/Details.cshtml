@@ -1,4 +1,6 @@
-﻿@model AccountDetailsViewModel
+﻿@model AccountViewModel
+
+
 
 <section id="details">
     <div class="container">
@@ -6,10 +8,10 @@
         <div class="menu-bar">
             <div class="profile">
                 <div class="image">
-                    <img src="@Model.Account.ProfileImage" alt="@($"{Model.Account.FirstName} {@Model.Account.LastName}")" />
+                    <img src="@Model.Details.ProfileImage" alt="@($"{@Model.Details.FirstName} {@Model.Details.LastName}")" />
                 </div>
-                <h5 class="user-name">@Model.Account.FirstName @Model.Account.LastName</h5>
-                <p>@Model.Account.Email</p>
+                <h5 class="user-name"> @Model.Details.FirstName @Model.Details.LastName</h5>
+                <p>@Model.Details.Email</p>
             </div>
             <nav class="options">
                 <a class="active" asp-controller="Account" asp-action="Details"><i class="fa-regular fa-gear"></i>Account Details</a>
@@ -27,39 +29,39 @@
                     <div class="name">
                         <div class="firstname">
                             <div class="validation">
-                                <label asp-for="Account.FirstName">First name</label>
-                                <span asp-validation-for="Account.FirstName"></span>
+                                <label asp-for="Details.FirstName">First name</label>
+                                <span asp-validation-for="Details.FirstName"></span>
                             </div>
-                            <input asp-for="Account.FirstName" />
+                            <input asp-for="Details.FirstName" />
                         </div>
                         <div class="lastname">
                             <div class="validation">
-                                <label asp-for="Account.LastName">Last name</label>
-                                <span asp-validation-for="Account.LastName"></span>
+                                <label asp-for="Details.LastName">Last name</label>
+                                <span asp-validation-for="Details.LastName"></span>
                             </div>
-                            <input asp-for="Account.LastName" />
+                            <input asp-for="Details.LastName" />
                         </div>
                     </div>
                     <div class="contact-info">
                         <div class="email">
                             <div class="validation">
-                                <label asp-for="Account.Email">Email Address</label>
-                                <span asp-validation-for="Account.Email"></span>
+                                <label asp-for="Details.Email">Email Address</label>
+                                <span asp-validation-for="Details.Email"></span>
                             </div>
-                            <input asp-for="Account.Email" />
+                            <input asp-for="Details.Email" />
                         </div>
                         <div class="phone">
                             <div class="validation">
-                                <label asp-for="Account.Phone">Phone</label>
-                                <span asp-validation-for="Account.Phone"></span>
+                                <label asp-for="Details.Phone">Phone</label>
+                                <span asp-validation-for="Details.Phone"></span>
                             </div>
-                            <input asp-for="Account.Phone" />
+                            <input asp-for="Details.Phone" />
                         </div>
                     </div>
                 </div>
                 <div class="bio">
-                    <label asp-for="Account.Bio">Bio <span>(optional)</span></label>
-                    <textarea asp-for="Account.Bio"></textarea>
+                    <label asp-for="Details.Bio">Bio <span>(optional)</span></label>
+                    <textarea asp-for="Details.Bio"></textarea>
                     <div class="user-buttons">
                         <a asp-controller="Account" asp-action="Cancel" class="btn-gray">Cancel</a>
                         <button type="submit" class="btn-theme">Save Changes</button>
@@ -68,26 +70,26 @@
                     <div class="address">
                         <h5>Address</h5>
                         <div class="validation">
-                            <label asp-for="Account.AddressLine1">Address line 1</label>
-                            <span asp-validation-for="Account.AddressLine1"></span>
+                            <label asp-for="AddressInfo.AddressLine1">Address line 1</label>
+                            <span asp-validation-for="AddressInfo.AddressLine1"></span>
                         </div>
-                        <input asp-for="Account.AddressLine1" />
-                        <label asp-for="Account.AddressLine2">Address line 2<span>(optional)</span></label>
-                        <input asp-for="Account.AddressLine2" />
+                        <input asp-for="AddressInfo.AddressLine1" />
+                        <label asp-for="AddressInfo.AddressLine2">Address line 2<span>(optional)</span></label>
+                        <input asp-for="AddressInfo.AddressLine2" />
                         <div class="city-info">
                             <div class="postal">
                                 <div class="validation">
-                                    <label asp-for="Account.PostalCode">Postal Code</label>
-                                    <span asp-validation-for="Account.PostalCode"></span>
+                                    <label asp-for="AddressInfo.PostalCode">Postal Code</label>
+                                    <span asp-validation-for="AddressInfo.PostalCode"></span>
                                 </div>
-                                <input asp-for="Account.PostalCode" />
+                                <input asp-for="AddressInfo.PostalCode" />
                             </div>
                             <div class="city">
                                 <div class="validation">
-                                    <label asp-for="Account.City">City</label>
-                                    <span asp-validation-for="Account.City"></span>
+                                    <label asp-for="AddressInfo.City">City</label>
+                                    <span asp-validation-for="AddressInfo.City"></span>
                                 </div>
-                                <input asp-for="Account.City" />
+                                <input asp-for="AddressInfo.City" />
                             </div>
                         </div>
                         <div class="address-button">
