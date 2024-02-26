@@ -15,4 +15,6 @@ public class UserEntity
     public string? Biography { get; set; }
     public DateTime? Created { get; set; }
     public DateTime? Updated { get; set;}
+    // Skapar en en till många relation
+    public ICollection<AddressEntity> Address { get; set; } = new List<AddressEntity>();
 }
