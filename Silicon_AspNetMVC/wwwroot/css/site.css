@@ -1225,6 +1225,8 @@ footer .container .social-media {
 #signin .main-holder .login-box .text-danger {
   color: #EF4444;
   margin-bottom: 0.3rem;
+  display: inline-block;
+  height: 0;
 }
 #signin .main-holder .login-box .email, #signin .main-holder .login-box .password {
   display: flex;
