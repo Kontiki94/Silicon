@@ -12,6 +12,16 @@ namespace Infrastructure.Factories
                 StatusCode = StatusCode.OK
             };
         }
+
+        public static ResponseResult Ok(string? message = null)
+        {
+            return new ResponseResult
+            {
+                Message = message ?? "Succeeded",
+                StatusCode = StatusCode.OK
+            };
+        }
+
         public static ResponseResult Ok(object obj, string? message = null)
         {
             return new ResponseResult
