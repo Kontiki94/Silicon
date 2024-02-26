@@ -1,4 +1,5 @@
 ﻿using Infrastructure.Contexts;
+using Infrastructure.Factories;
 using Infrastructure.Models;
 
 namespace Infrastructure.Repositories;
@@ -13,14 +14,12 @@ public abstract class Repo<TEntity>(DataContext context) where TEntity : class
         {
             _context.Set<TEntity>().Add(entity);
             await _context.SaveChangesAsync();
-            return new ResponseResult
-            {
-                ContentResult = entity,
-                Message = "Created successfully",
-                StatusCode = StatusCode.OK
-            };
+            return ResponseFactory.Ok(entity);
         }
-        catch { }
-        return null!;
+        catch (Exception ex)
+        {
+            return ResponseFactory.Error(ex.Message);
+
+        }
     }
 }
