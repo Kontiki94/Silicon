@@ -1,6 +1,8 @@
-﻿using Infrastructure.Contexts;
+﻿using Azure.Identity;
+using Infrastructure.Contexts;
 using Infrastructure.Factories;
 using Infrastructure.Models;
+using System.Linq.Expressions;
 
 namespace Infrastructure.Repositories;
 
@@ -21,4 +23,16 @@ public abstract class Repo<TEntity>(DataContext context) where TEntity : class
             return ResponseFactory.Error(ex.Message);
         }
     }
+
+    public virtual async Task<ResponseResult> GetOneAsync(Expression<Func<TEntity, bool>> predicate)
+    {
+        // TODO Hassan
+    }
+
+    public virtual async Task<ResponseResult> GetAllAsync(TEntity entity)
+    {
+        // TODO Ann-Sofie
+    }
+
+    
 }
