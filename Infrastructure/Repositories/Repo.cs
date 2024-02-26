@@ -41,14 +41,50 @@ public abstract class Repo<TEntity>(DataContext context) where TEntity : class
         try
         {
             var result = await _context.Set<TEntity>().FirstOrDefaultAsync(predicate);
-            if (result != null)
+            if (result is not null)
             {
                 _context.Entry(result).CurrentValues.SetValues(updatedEntity);
                 await _context.SaveChangesAsync();
                 return ResponseFactory.Ok(result);
             }
 
-            return ResponseFactory.NotFound(); 
+            return ResponseFactory.NotFound();
+        }
+        catch (Exception ex)
+        {
+            return ResponseFactory.Error(ex.Message);
+        }
+    }
+
+    public virtual async Task<ResponseResult> DeleteOneAsync(Expression<Func<TEntity, bool>> predicate)
+    {
+        try
+        {
+            var result = await _context.Set<TEntity>().FirstOrDefaultAsync(predicate);
+            if (result is not null)
+            {
+                _context.Set<TEntity>().Remove(result);
+                await _context.SaveChangesAsync();
+                return ResponseFactory.Ok("Successfully removed");
+            }
+
+            return ResponseFactory.NotFound();
+        }
+        catch (Exception ex)
+        {
+            return ResponseFactory.Error(ex.Message);
+        }
+    }
+
+    public virtual async Task<ResponseResult> AlreadyExistsAsync(Expression<Func<TEntity, bool>> predicate)
+    {
+        try
+        {
+            var result = await _context.Set<TEntity>().AnyAsync(predicate);
+            if (result)
+                return ResponseFactory.Exists();
+
+            return ResponseFactory.NotFound();
         }
         catch (Exception ex)
         {
@@ -56,3 +92,4 @@ public abstract class Repo<TEntity>(DataContext context) where TEntity : class
         }
     }
 }
+
