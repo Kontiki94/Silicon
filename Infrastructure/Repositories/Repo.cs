@@ -17,10 +17,16 @@ public abstract class Repo<TEntity>(DataContext context) where TEntity : class
             {
                 ContentResult = entity,
                 Message = "Created successfully",
-                Status = StatusCode.OK
+                StatusCode = StatusCode.OK
             };
         }
-        catch { }
-        return null!;
+        catch (Exception ex)
+        {
+            return new ResponseResult
+            {
+                Message = ex.Message,
+                StatusCode = StatusCode.ERROR
+            };
+        }
     }
 }
