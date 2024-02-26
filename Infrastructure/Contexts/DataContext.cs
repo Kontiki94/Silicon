@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
-namespace Infrastructure.Contexts
+using Microsoft.EntityFrameworkCore;
+
+namespace Infrastructure.Contexts;
+
+public class DataContext : DbContext
 {
-    internal class DbContext
+    public DataContext(DbContextOptions<DataContext> options) : base(options)
     {
     }
 }
