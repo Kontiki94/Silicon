@@ -5,9 +5,9 @@
     @await Html.PartialAsync("~/Views/Shared/Sections/_FeaturesPartial.cshtml")
 </section>
 
-<section id="lightanddark">
-    ﻿@await Html.PartialAsync("~/Views/Shared/Sections/_LightAndDarkPartial.cshtml")
-</section>
+
+    ﻿@await Html.PartialAsync("~/Views/Shared/Sections/_LightAndDarkPartial.cshtml", new HomeLightAndDarkViewModel())
+
 
 
 @await Html.PartialAsync("~/Views/Shared/Sections/_ManageYourWorkPartial.cshtml", new HomeManageWorkViewModel());
