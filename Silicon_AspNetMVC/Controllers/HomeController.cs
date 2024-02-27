@@ -11,4 +11,11 @@ public class HomeController : Controller
         ViewData["Title"] = "Silicon";
         return View(viewModel);
     }
+
+    public IActionResult ManageWork()
+    {
+        var viewModel = new HomeManageWorkViewModel();
+
+        return View(viewModel);
+    }
 }
