@@ -1,12 +1,14 @@
-﻿<section id="not-found">
+﻿@model PageNotFoundViewModel
+
+<section id="not-found">
     <div class="container">
         <div class="image">
-            <img src="~/images/404.svg" />
+            <img src="@Model.ImageUrl" alt="@Model.AltText"/>
         </div>
         <div class="text">
-            <h2>Ooops!</h2>
-            <p>The page you are looking for is not available</p>
-            <a class="btn-theme" asp-controller="Home" asp-action="Index"><i class="fa-regular fa-house"></i>Go to homepage</a>
+            <h2>@Model.Title</h2>
+            <p>@Model.Description</p>
+            <a class="btn-theme" asp-controller="Home" asp-action="Index"><i class="@Model.ButtonIcon"></i>@Model.ButtonText</a>
         </div>
     </div>
 

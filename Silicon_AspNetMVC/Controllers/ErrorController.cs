@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Silicon_AspNetMVC.ViewModels;
 
 namespace Silicon_AspNetMVC.Controllers
 {
@@ -6,7 +7,8 @@ namespace Silicon_AspNetMVC.Controllers
     {
         public IActionResult PageNotFound()
         {
-            return View();
+            var viewModel = new PageNotFoundViewModel();
+            return View(viewModel);
         }
     }
 }
