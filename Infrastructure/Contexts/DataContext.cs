@@ -11,6 +11,7 @@ public class DataContext : DbContext
 
     public DbSet<UserEntity> Users { get; set; }
     public DbSet<AddressEntity> Address { get; set; }
+    public DbSet<UserCredentialsEntity> UserCredentials { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

@@ -1,4 +1,5 @@
-﻿using System.Security.Cryptography;
+﻿using Infrastructure.Entitys;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace Infrastructure.Helpers
@@ -15,7 +16,7 @@ namespace Infrastructure.Helpers
         /// </summary>
         /// <param name="password">The input password from the user</param>
         /// <returns>Returns salt and hash as 64base-coded strings</returns>
-        public static (string, string, string) GenerateSecurePassword(string password)
+        public static UserCredentialsEntity GenerateSecurePassword(string password)
         {
             byte[] salt = GenerateSalt();
             byte[] securityKey = Generate128BitKey();
@@ -24,7 +25,12 @@ namespace Infrastructure.Helpers
             hmac.Key = salt;
             var hashedPassword = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
 
-            return (Convert.ToBase64String(salt), Convert.ToBase64String(hashedPassword), Convert.ToBase64String(securityKey));
+            return new UserCredentialsEntity
+            {
+                Salt = Convert.ToBase64String(salt),
+                HashedPassword = Convert.ToBase64String(hashedPassword),
+                SecurityKey = Convert.ToBase64String(securityKey)
+            };
         }
 
         /// <summary>
@@ -65,6 +71,11 @@ namespace Infrastructure.Helpers
             return salt;
         }
 
+        /// <summary>
+        /// Using a 128Bit (16Bytes) Key here to generate a random key value.
+        /// https://learn.microsoft.com/en-us/dotnet/api/system.security.cryptography.hmacsha512.-ctor?view=net-8.0
+        /// </summary>
+        /// <returns>Returns the random generated 128bit value, aka the key. </returns>
         private static byte[] Generate128BitKey()
         {
             byte[] key = new byte[16];
