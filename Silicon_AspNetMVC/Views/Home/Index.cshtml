@@ -5,13 +5,13 @@
     @await Html.PartialAsync("~/Views/Shared/Sections/_FeaturesPartial.cshtml")
 </section>
 
-<section id="lightanddark">
-    ﻿@await Html.PartialAsync("~/Views/Shared/Sections/_LightAndDarkPartial.cshtml")
-</section>
 
-<section id="manage">
-    @await Html.PartialAsync("~/Views/Shared/Sections/_ManageYourWorkPartial.cshtml");
-</section>
+    ﻿@await Html.PartialAsync("~/Views/Shared/Sections/_LightAndDarkPartial.cshtml", new HomeLightAndDarkViewModel())
+
+
+
+@await Html.PartialAsync("~/Views/Shared/Sections/_ManageYourWorkPartial.cshtml", new HomeManageWorkViewModel());
+
 
 <section id="download">
     @await Html.PartialAsync("~/Views/Shared/Sections/_DownloadPartial.cshtml")

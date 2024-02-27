@@ -6,7 +6,7 @@ namespace Silicon_AspNetMVC.ViewModels
     {
         public string Title { get; set; } = "Saved Items";
 
-        public AccountModel AccountSaved { get; set; } = new()
+        public AccountDetailsBasicInfoModel Account { get; set; } = new AccountDetailsBasicInfoModel()
         {
             FirstName = "John",
             LastName = "Doe",
@@ -14,6 +14,15 @@ namespace Silicon_AspNetMVC.ViewModels
             ProfileImage = "/images/john-doe.png"
         };
 
-        public CourseDetailsModel? CourseDetails { get; set; } 
+        public CourseDetailsModel CourseDetails { get; set; } = new CourseDetailsModel()
+        {
+            CourseImage = new () {ImageUrl="/images/video-game-design.svg", AltText ="" },
+            Title = "Blender Character Creator v2.0 for Video Games Design",
+            Author = new () { AuthorName= "Ralph Edwards" },
+            Price = (decimal?)18.99,
+            ViewHours = 160,
+            Likes = "92% (3.1K)"
+
+        };
     }
 }

@@ -1,7 +1,7 @@
-﻿using Silicon_AspNetMVC.Helpers;
+﻿using Infrastructure.Helpers;
 using System.ComponentModel.DataAnnotations;
 
-namespace Silicon_AspNetMVC.Models.Sections;
+namespace Infrastructure.Models;
 
 public class SignUpModel
 {

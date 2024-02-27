@@ -1,0 +1,90 @@
+#saved-courses {
+    margin-top: 40px;
+    margin-bottom: 60px;
+
+    .container {
+        display: grid;
+        justify-content: center;
+
+        @include lg {
+            grid-template-columns: 1fr 3fr;
+            padding-right: 5rem;
+        }
+
+        .menu-bar {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 30px;
+            align-self: flex-start;
+            align-items: center;
+
+            @include md {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+            }
+
+            @include lg {
+                grid-template-columns: 1fr;
+            }
+
+
+            .profile {
+                text-align: center;
+
+                @include md {
+                    padding-right: 3rem;
+                }
+
+                h5 {
+                    color: black;
+                    margin-bottom: 0;
+                }
+
+                p {
+                    margin-bottom: 2rem;
+                }
+            }
+
+            .options {
+                display: flex;
+                flex-direction: column;
+
+
+                @include md {
+                    padding-right: 1rem;
+                }
+
+                a {
+                    color: #000;
+                    font-weight: 700;
+                    padding: 10px;
+                    max-width: 300px;
+                    width: auto;
+                    margin-bottom: 0.2rem;
+                    text-decoration: none;
+                    border-radius: .4rem;
+                    border: 1px solid white;
+
+                    i {
+                        padding-right: 1rem;
+                        padding-left: 1.2rem;
+                    }
+
+                    &:hover,
+                    &:active,
+                    &:focus,
+                    .active {
+                        background-color: $theme;
+                        text-decoration: none;
+                        color: #fff;
+                    }
+                }
+
+                .active {
+                    background-color: $theme;
+                    color: #fff;
+                }
+            }
+        }
+    }
+}

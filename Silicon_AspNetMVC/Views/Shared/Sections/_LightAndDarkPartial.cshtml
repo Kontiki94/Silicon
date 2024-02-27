@@ -1,13 +1,15 @@
-﻿<section id="lightanddark">
+﻿@model HomeLightAndDarkViewModel
+
+<section id="lightanddark">
     <div class="container">
         <h1>
-            <span class="white">Switch Between</span>
-            <span class="black">Light and Dark</span>
+            <span class="white">@Model.TitleWhite</span>
+            <span class="black">@Model.TitleBlack</span>
         </h1>
         <div class="img-container">
-            <img src="~/images/macbook_test.png" alt="Macbook" />
+            <img src="@Model.ImageUrl" alt="@Model.ImageUrl" />
             <div class="arrows">
-                <img src="~/images/arrows_laptop.png" alt="Macbook" />
+                <img src="@Model.IconUrl" alt="@Model.IconAlt" />
             </div>
         </div>
     </div>

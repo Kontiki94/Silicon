@@ -1,4 +1,5 @@
-﻿using Silicon_AspNetMVC.Models.Sections;
+﻿
+using Infrastructure.Models;
 
 namespace Silicon_AspNetMVC.ViewModels;
 
