@@ -12,7 +12,7 @@ public class SignInModel
     [Display(Name = "Password", Prompt = "******", Order = 1)]
     [Required(ErrorMessage = "Password is required.")]
     [MinLength(2, ErrorMessage = "Not valid.")]
-    //[Compare(nameof(Password), ErrorMessage = "Password does not match")]
+
     public string Password { get; set; } = null!;
 
     [Display(Name = "RememberMe", Order = 2)]
