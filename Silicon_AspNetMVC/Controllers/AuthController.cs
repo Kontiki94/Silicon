@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Infrastructure.Services;
+using Microsoft.AspNetCore.Mvc;
 using Silicon_AspNetMVC.ViewModels;
 
 namespace Silicon_AspNetMVC.Controllers
 {
-    public class AuthController : Controller
+    public class AuthController(UserService userService) : Controller
     {
+
+        private readonly UserService _userService = userService;
 
         [Route("/signin")]
         [HttpGet]
@@ -41,14 +44,18 @@ namespace Silicon_AspNetMVC.Controllers
 
         [Route("/signup")]
         [HttpPost]
-        public IActionResult SignUp(SignUpViewModel viewModel)
+        public async Task<IActionResult> SignUp(SignUpViewModel viewModel)
         {
             ViewData["Title"] = "Sign Up";
-            if (!ModelState.IsValid)
+
+            if (ModelState.IsValid)
             {
-                return View(viewModel);
+                var result = await _userService.CreateUserAsync(viewModel.Form);
+                if (result.StatusCode == Infrastructure.Models.StatusCode.OK)
+                    return RedirectToAction("SignIn", "Auth");
             }
-            return RedirectToAction("SignIn", "Auth");
+
+            return View(viewModel);
         }
 
 
