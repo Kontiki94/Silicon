@@ -36,5 +36,13 @@ namespace Silicon_AspNetMVC.Controllers
         {
             return View();
         }
+
+
+        [Route("/account/saved")]
+        public IActionResult SavedCourses()
+        {
+            var viewModel = new SavedCoursesViewModel();
+            return View(viewModel);
+        }
     }
 }

@@ -1,0 +1,22 @@
+﻿@model SavedCoursesViewModel
+
+<section id="saved-courses">
+    <div class="container">
+        <div class="menu-bar">
+            <div class="profile">
+                <div class="image">
+                    <img src="@Model.AccountSaved.ProfileImage" alt="" />
+                </div>
+                <h5 class="user-name">@Model.AccountSaved.FirstName</h5>
+                <p>john.doe@domain.com</p>
+            </div>
+            <nav class="options">
+                <a class="menu-link" asp-controller="Account" asp-action="Details"><i class="fa-regular fa-gear"></i>Account Details</a>
+                <a class="menu-link" asp-controller="Account" asp-action="Security"><i class="fa-regular fa-lock"></i>Security</a>
+                <a class="active" asp-controller="Account" asp-action="SavedCourses"><i class="fa-sharp fa-regular fa-bookmark"></i>Saved Courses</a>
+                <a class="menu-link" asp-controller="Home" asp-action="Index"><i class="fa-solid fa-right-from-bracket"></i>Sign Out</a>
+            </nav>
+        </div>
+    </div>
+
+</section>
