@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using System.Reflection.Metadata.Ecma335;
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
 using System.Text;
 
 namespace Infrastructure.Helpers
@@ -9,25 +7,24 @@ namespace Infrastructure.Helpers
     {
         // The size of the salt.
         private const int SaltSize = 32;
-        // Private key used in the HMAC-algorithm to create a hashed password otogether with the salt.
-        private const string SecurityKey = "16";
+        // Private key used in the HMAC-algorithm to create a hashed password together with the salt.
 
         /// <summary>
-        /// Creates a instance of HMACSHA3_512 with the securitykey, then the salt is introduced to the HMAC-object.
+        /// Creates a instance of HMACSHA3_512 with the SecurityKey, then the salt is introduced to the HMAC-object.
         /// Converts the password to bytes and the HMACSHA3_512 algo is used to calculate the hashvalue.
         /// </summary>
         /// <param name="password">The input password from the user</param>
         /// <returns>Returns salt and hash as 64base-coded strings</returns>
-        public static (string, string) GenerateSecurePassword(string password)
+        public static (string, string, string) GenerateSecurePassword(string password)
         {
             byte[] salt = GenerateSalt();
+            byte[] securityKey = Generate128BitKey();
 
-
-            using var hmac = new HMACSHA3_512(Encoding.UTF8.GetBytes(SecurityKey));
+            using var hmac = new HMACSHA3_512(securityKey);
             hmac.Key = salt;
             var hashedPassword = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
 
-            return (Convert.ToBase64String(salt), Convert.ToBase64String(hashedPassword));
+            return (Convert.ToBase64String(salt), Convert.ToBase64String(hashedPassword), Convert.ToBase64String(securityKey));
         }
 
         /// <summary>
@@ -41,12 +38,13 @@ namespace Infrastructure.Helpers
         /// <param name="hash">The calulated hash</param>
         /// <param name="salt">Salting</param>
         /// <returns>True if valid, else false</returns>
-        public static bool ValidateSecurePassword(string password, string hash, string salt)
+        public static bool ValidateSecurePassword(string password, string hash, string salt, string securityKey)
         {
             byte[] saltBytes = Convert.FromBase64String(salt);
             byte[] hashBytes = Convert.FromBase64String(hash);
+            byte[] keyBytes = Convert.FromBase64String(securityKey);
 
-            using var hmac = new HMACSHA3_512(Encoding.UTF8.GetBytes(SecurityKey));
+            using var hmac = new HMACSHA3_512(keyBytes);
             hmac.Key = saltBytes;
             var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
 
@@ -65,6 +63,16 @@ namespace Infrastructure.Helpers
                 rng.GetBytes(salt);
             }
             return salt;
+        }
+
+        private static byte[] Generate128BitKey()
+        {
+            byte[] key = new byte[16];
+            using (var rng = RandomNumberGenerator.Create())
+            {
+                rng.GetBytes(key);
+            }
+            return key;
         }
 
         /// <summary>
@@ -86,6 +94,5 @@ namespace Infrastructure.Helpers
             }
             return true;
         }
-       
     }
 }
