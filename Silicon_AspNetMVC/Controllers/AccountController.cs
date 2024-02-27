@@ -51,8 +51,6 @@ namespace Silicon_AspNetMVC.Controllers
         {
             return RedirectToAction("Details", "Account");
         }
-                   
-
 
         [Route("/account/saved")]
         public IActionResult SavedCourses()
