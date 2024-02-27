@@ -15,7 +15,7 @@ namespace Infrastructure.Helpers
         /// Converts the password to bytes and the HMACSHA3_512 algo is used to calculate the hashvalue.
         /// </summary>
         /// <param name="password">The input password from the user</param>
-        /// <returns>Returns salt and hash as 64base-coded strings</returns>
+        /// <returns>Returns salt, hash as 64base-coded and SecurityKey as strings</returns>
         public static UserCredentialsEntity GenerateSecurePassword(string password)
         {
             byte[] salt = GenerateSalt();
