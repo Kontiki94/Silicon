@@ -1,5 +1,5 @@
-﻿using Silicon_AspNetMVC.ViewModels;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using Silicon_AspNetMVC.ViewModels.Courses;
 
 namespace Silicon_AspNetMVC.Controllers;
 

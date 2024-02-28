@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Silicon_AspNetMVC.Models.Sections;
+using Silicon_AspNetMVC.ViewModels.Contact;
 
 namespace Silicon_AspNetMVC.Controllers
 {

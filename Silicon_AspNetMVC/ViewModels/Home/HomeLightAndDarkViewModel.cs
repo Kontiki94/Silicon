@@ -1,4 +1,4 @@
-﻿namespace Silicon_AspNetMVC.ViewModels
+﻿namespace Silicon_AspNetMVC.ViewModels.Home
 {
     public class HomeLightAndDarkViewModel
     {
@@ -9,7 +9,7 @@
         public string IconUrl { get; set; } = null!;
         public string IconAlt { get; set; } = null!;
 
-        public HomeLightAndDarkViewModel() 
+        public HomeLightAndDarkViewModel()
         {
             TitleWhite = "Switch Between";
             TitleBlack = "Lignt and Dark";

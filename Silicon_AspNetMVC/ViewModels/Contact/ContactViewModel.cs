@@ -1,4 +1,6 @@
-﻿namespace Silicon_AspNetMVC.Models.Sections;
+﻿using Silicon_AspNetMVC.Models.Sections;
+
+namespace Silicon_AspNetMVC.ViewModels.Contact;
 
 public class ContactViewModel
 {

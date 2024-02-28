@@ -1,6 +1,7 @@
 ﻿using Infrastructure.Services;
 using Microsoft.AspNetCore.Mvc;
 using Silicon_AspNetMVC.ViewModels;
+using Silicon_AspNetMVC.ViewModels.Auth;
 
 namespace Silicon_AspNetMVC.Controllers
 {

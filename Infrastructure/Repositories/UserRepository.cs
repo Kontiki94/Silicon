@@ -26,10 +26,10 @@ public class UserRepository(DataContext context) : Repo<UserEntity>(context)
         }
     }
 
-    public override Task<ResponseResult> GetAllAsync(UserEntity entity)
+    public override Task<ResponseResult> GetAllAsync()
     {
         // TODO ANSO
-        return base.GetAllAsync(entity);
+        return base.GetAllAsync();
     }
 
     public async Task<UserEntity?> GetUserAndIncludeCredentialsAsync(Expression<Func<UserEntity, bool>> predicate)
