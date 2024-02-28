@@ -67,7 +67,7 @@ namespace Infrastructure.Helpers
         /// <summary>
         /// Generates a random salt based on the SaltSize.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>A byte array of salt</returns>
         private static byte[] GenerateSalt()
         {
             byte[] salt = new byte[SaltSize];
@@ -111,7 +111,7 @@ namespace Infrastructure.Helpers
         /// </summary>
         /// <param name="hash1">Represents the saved hash-value</param>
         /// <param name="hash2">Represents the new (input) hash-value</param>
-        /// <returns></returns>
+        /// <returns>True if hashed are equal, else false</returns>
         private static bool AreHashesEqual(byte[] hash1, byte[] hash2)
         {
             if (hash1.Length != hash2.Length)
