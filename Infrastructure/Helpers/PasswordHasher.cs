@@ -51,17 +51,28 @@ namespace Infrastructure.Helpers
         /// <param name="hash">The calulated hash</param>
         /// <param name="salt">Salting</param>
         /// <returns>True if valid, else false</returns>
-        public static bool ValidateSecurePassword(string password, string hash, string salt, string securityKey)
+        public static bool ValidateSecurePassword(string password, string savedPasswordHash, string savedSalt, string savedSecurityKey)
         {
-            byte[] saltBytes = Convert.FromBase64String(salt);
-            byte[] hashBytes = Convert.FromBase64String(hash);
-            byte[] keyBytes = Convert.FromBase64String(securityKey);
+            try
+            {
 
-            using var hmac = new HMACSHA256(keyBytes);
-            hmac.Key = saltBytes;
-            var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
+                byte[] hashBytes = Convert.FromBase64String(savedPasswordHash);
+                byte[] saltBytes = Convert.FromBase64String(savedSalt);
+                byte[] keyBytes = Convert.FromBase64String(savedSecurityKey);
 
-            return AreHashesEqual(hashBytes, computedHash);
+                byte[] keyDerivation = CombineToKeyDerivation(saltBytes, keyBytes);
+
+                var hmac = new HMACSHA256(keyDerivation);
+                byte[] recreatePasswordByte = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
+
+                return AreHashesEqual(hashBytes, recreatePasswordByte);
+            }
+            catch (Exception ex)
+            {
+                // Hantera eventuella fel här
+                Debug.Write(ex.Message);
+                return false;
+            }
         }
 
         /// <summary>
@@ -86,7 +97,7 @@ namespace Infrastructure.Helpers
         /// <returns>The combinated arrays as key derivation</returns>
         private static byte[] CombineToKeyDerivation(byte[] salt, byte[] securityKey)
         {
-            byte[] keyDerivation = [..salt, ..securityKey];
+            byte[] keyDerivation = [.. salt, .. securityKey];
             return keyDerivation;
         }
 

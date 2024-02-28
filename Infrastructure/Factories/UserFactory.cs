@@ -34,7 +34,6 @@ public class UserFactory
                 FirstName = model.FirstName,
                 LastName = model.LastName,
                 Email = model.Email,
-                Password = model.Password,
                 Created = date,
                 Updated = date
             };
@@ -44,6 +43,7 @@ public class UserFactory
             credentials.Id = Guid.NewGuid().ToString();
             credentials.UserId = user.Id;
             user.Credentials = new List<UserCredentialsEntity> { credentials };
+            user.Password = credentials.HashedPassword;
 
             return (user, credentials);
         }

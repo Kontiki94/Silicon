@@ -2,6 +2,7 @@
 using Infrastructure.Entitys;
 using Infrastructure.Factories;
 using Infrastructure.Models;
+using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
 namespace Infrastructure.Repositories;
@@ -31,10 +32,11 @@ public class UserRepository(DataContext context) : Repo<UserEntity>(context)
         return base.GetAllAsync(entity);
     }
 
-    public override Task<ResponseResult> GetOneAsync(Expression<Func<UserEntity, bool>> predicate)
+    public async Task<UserEntity?> GetUserAndIncludeCredentialsAsync(Expression<Func<UserEntity, bool>> predicate)
     {
-        // TODO Hassan
-        return base.GetOneAsync(predicate);
+        return await _context.Users
+            .Include(u => u.Credentials)
+            .FirstOrDefaultAsync(predicate);
     }
 }
 
