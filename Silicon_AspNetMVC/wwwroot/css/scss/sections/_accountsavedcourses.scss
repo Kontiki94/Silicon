@@ -27,7 +27,6 @@
                 grid-template-columns: 1fr;
             }
 
-
             .profile {
                 text-align: center;
 
@@ -83,6 +82,104 @@
                 .active {
                     background-color: $theme;
                     color: #fff;
+                }
+            }
+        }
+
+        .content {
+            @include lg {
+                border-left: 1px solid $gray-300;
+            }
+
+            h2 {
+                padding: 0 0 .5rem 1rem;
+
+                @include md {
+                    padding: 0 0 2rem 5rem;
+                }
+            }
+
+            .saved-items {
+                padding: 0 1rem 1rem 1rem;
+                display: grid;
+                grid-template-columns: repeat(1, 1fr);
+                gap: 2.5rem 2rem;
+
+                @include md {
+                    padding: 0 1rem 1rem 5rem;
+                }
+
+                @include xl {
+                    grid-template-columns: repeat(2, 1fr);
+                }
+
+
+
+                .course-card {
+                    border-radius: 2%;
+                    overflow: hidden;
+                    @include shadow-m;
+                    position: relative;
+
+                    .image {
+                        img {
+                            width: 100%;
+                            max-width: 100%;
+                        }
+                    }
+
+                    .bookmark {
+                        position: absolute;
+                        width: 2.1rem;
+                        aspect-ratio: 1;
+                        top: 2%;
+                        left: 90%;
+                        background-color: $white;
+                        border-radius: 50%;
+
+                        i {
+                            position: absolute;
+                            top: 50%;
+                            left: 50%;
+                            transform: translate(-50%, -50%);
+
+                            &:hover {
+                                color: $theme;
+                            }
+                        }
+                    }
+
+                    .course-info {
+                        padding: 2rem 2rem 0 2rem;
+
+                        .price {
+                            color: $theme;
+                            font-size: 1.2rem;
+                            font-weight: 700;
+                        }
+
+                        .divider {
+                            width: 100%;
+                            height: 1px;
+                            background-color: $gray-300;
+                        }
+                    }
+
+                    .bottom {
+                        padding-top: 1rem;
+                        padding-left: 2rem;
+                        gap: 2rem;
+
+                        &, * {
+                            display: flex;
+                            align-items: center;
+                        }
+
+                        i {
+                            margin-bottom: .8rem;
+                            padding-right: .5rem;
+                        }
+                    }
                 }
             }
         }
