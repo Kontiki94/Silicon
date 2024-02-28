@@ -125,6 +125,7 @@
                         img {
                             width: 100%;
                             max-width: 100%;
+                            /*overflow: hidden;*/
                         }
                     }
 
@@ -142,11 +143,31 @@
                             top: 50%;
                             left: 50%;
                             transform: translate(-50%, -50%);
-
-                            &:hover {
-                                color: $theme;
-                            }
                         }
+
+                        &:hover {
+                            color: $theme;
+                        }
+                    }
+
+
+                    .hide {
+                        display: none;
+                        color: $white;
+                        background-color: $black;
+                        padding: 5px;
+                        border-radius: 10%;
+                        position: absolute;
+                        top: -15px;
+                        left: 71%;
+
+                        p {
+                            margin: 0;
+                        }
+                    }
+
+                    .bookmark:hover + .hide {
+                        display: inline-block;
                     }
 
                     .course-info {

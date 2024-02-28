@@ -2525,6 +2525,7 @@ footer .container .social-media {
 #saved-courses .container .content .saved-items .course-card .image img {
   width: 100%;
   max-width: 100%;
+  /*overflow: hidden;*/
 }
 #saved-courses .container .content .saved-items .course-card .bookmark {
   position: absolute;
@@ -2541,8 +2542,24 @@ footer .container .social-media {
   left: 50%;
   transform: translate(-50%, -50%);
 }
-#saved-courses .container .content .saved-items .course-card .bookmark i:hover {
+#saved-courses .container .content .saved-items .course-card .bookmark:hover {
   color: #6366F1;
+}
+#saved-courses .container .content .saved-items .course-card .hide {
+  display: none;
+  color: #FFFFFF;
+  background-color: #000000;
+  padding: 5px;
+  border-radius: 10%;
+  position: absolute;
+  top: -15px;
+  left: 71%;
+}
+#saved-courses .container .content .saved-items .course-card .hide p {
+  margin: 0;
+}
+#saved-courses .container .content .saved-items .course-card .bookmark:hover + .hide {
+  display: inline-block;
 }
 #saved-courses .container .content .saved-items .course-card .course-info {
   padding: 2rem 2rem 0 2rem;
