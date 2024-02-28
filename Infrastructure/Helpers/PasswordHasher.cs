@@ -78,6 +78,12 @@ namespace Infrastructure.Helpers
             return salt;
         }
 
+        /// <summary>
+        /// Combines salt and securityKey arrays to create a key derivation using the range operator.
+        /// </summary>
+        /// <param name="salt">Byte array of the salt</param>
+        /// <param name="securityKey">Byte array of the securitykey</param>
+        /// <returns>The combinated arrays as key derivation</returns>
         private static byte[] CombineToKeyDerivation(byte[] salt, byte[] securityKey)
         {
             byte[] keyDerivation = [..salt, ..securityKey];
