@@ -56,9 +56,8 @@ namespace Infrastructure.Migrations
                 name: "UserCredentials",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Salt = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     HashedPassword = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Security_Key = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: false),

@@ -1,4 +1,5 @@
 ﻿using Infrastructure.Entitys;
+using Infrastructure.Helpers;
 using Infrastructure.Models;
 
 namespace Infrastructure.Factories;
@@ -22,13 +23,12 @@ public class UserFactory
         return null!;
     }
 
-    public static UserEntity Create(SignUpModel model)
+    public static (UserEntity, UserCredentialsEntity) Create(SignUpModel model)
     {
         try
         {
             var date = DateTime.Now;
-
-            return new UserEntity()
+            var user = new UserEntity()
             {
                 Id = Guid.NewGuid().ToString(),
                 FirstName = model.FirstName,
@@ -38,8 +38,16 @@ public class UserFactory
                 Created = date,
                 Updated = date
             };
+
+
+            UserCredentialsEntity credentials = PasswordHasher.GenerateSecurePassword(model.Password);
+            credentials.Id = Guid.NewGuid().ToString();
+            credentials.UserId = user.Id;
+            user.Credentials = new List<UserCredentialsEntity> { credentials };
+
+            return (user, credentials);
         }
         catch { }
-        return null!;
+        return (null!, null!);
     }
 }

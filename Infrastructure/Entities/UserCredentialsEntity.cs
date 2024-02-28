@@ -6,10 +6,10 @@ namespace Infrastructure.Entitys;
 public class UserCredentialsEntity
 {
     [Key]
-    public int Id { get; set; }
+    public string Id { get; set; } = null!;
 
     [ForeignKey("User")]
-    public int UserId { get; set; }
+    public string? UserId { get; set; }
 
     [Required]
     public string Salt { get; set; } = null!;
@@ -20,4 +20,10 @@ public class UserCredentialsEntity
     [Column("Security_Key")]
     [MaxLength(64)]
     public string SecurityKey { get; set; } = null!;
+
+    public void Deconstruct(out string salt, out string hashedPassword)
+    {
+        salt = Salt;
+        hashedPassword = HashedPassword;
+    }
 }

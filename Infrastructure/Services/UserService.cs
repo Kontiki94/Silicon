@@ -1,4 +1,5 @@
-﻿using Infrastructure.Factories;
+﻿using Infrastructure.Entitys;
+using Infrastructure.Factories;
 using Infrastructure.Models;
 using Infrastructure.Repositories;
 
@@ -17,7 +18,9 @@ namespace Infrastructure.Services
                 if (exists.StatusCode == StatusCode.EXISTS)
                     return exists;
 
-                var result = await _repository.CreateOneAsync(UserFactory.Create(model));
+                var (user, credentials) = UserFactory.Create(model);
+
+                var result = await _repository.CreateUserWithCredentialsAsync(user, credentials);
                 if (result.StatusCode != StatusCode.OK)
                     return result;
 

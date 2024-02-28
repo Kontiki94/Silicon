@@ -15,8 +15,7 @@ public class UserEntity
     public string Email { get; set; } = null!;
     [Required]
     public string Password { get; set; } = null!;
-    [Required]
-    public string? Phone {  get; set; } = null!;
+    public string? Phone {  get; set; }
     public string? Biography { get; set; }
     public DateTime? Created { get; set; }
     public DateTime? Updated { get; set;}

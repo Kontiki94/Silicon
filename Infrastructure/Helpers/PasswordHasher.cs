@@ -1,4 +1,5 @@
 ﻿using Infrastructure.Entitys;
+using System.Diagnostics;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -11,26 +12,32 @@ namespace Infrastructure.Helpers
         // Private key used in the HMAC-algorithm to create a hashed password together with the salt.
 
         /// <summary>
-        /// Creates a instance of HMACSHA3_512 with the SecurityKey, then the salt is introduced to the HMAC-object.
-        /// Converts the password to bytes and the HMACSHA3_512 algo is used to calculate the hashvalue.
+        /// Creates a instance of HMACSHA256 with the SecurityKey, then the salt is introduced to the HMAC-object.
+        /// Converts the password to bytes and the HMACSHA256 algo is used to calculate the hashvalue.
         /// </summary>
         /// <param name="password">The input password from the user</param>
         /// <returns>Returns salt, hash as 64base-coded and SecurityKey as strings</returns>
         public static UserCredentialsEntity GenerateSecurePassword(string password)
         {
-            byte[] salt = GenerateSalt();
-            byte[] securityKey = Generate128BitKey();
-
-            using var hmac = new HMACSHA3_512(securityKey);
-            hmac.Key = salt;
-            var hashedPassword = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
-
-            return new UserCredentialsEntity
+            try
             {
-                Salt = Convert.ToBase64String(salt),
-                HashedPassword = Convert.ToBase64String(hashedPassword),
-                SecurityKey = Convert.ToBase64String(securityKey)
-            };
+                byte[] salt = GenerateSalt();
+                byte[] securityKey = Generate128BitKey();
+                byte[] keyDerivation = CombineToKeyDerivation(salt, securityKey);
+
+                var hmac = new HMACSHA256(keyDerivation);
+
+                var hashedPassword = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
+
+                return new UserCredentialsEntity
+                {
+                    Salt = Convert.ToBase64String(salt),
+                    HashedPassword = Convert.ToBase64String(hashedPassword),
+                    SecurityKey = Convert.ToBase64String(securityKey)
+                };
+            }
+            catch (Exception ex) { Debug.Write(ex.Message); }
+            return null!;
         }
 
         /// <summary>
@@ -50,7 +57,7 @@ namespace Infrastructure.Helpers
             byte[] hashBytes = Convert.FromBase64String(hash);
             byte[] keyBytes = Convert.FromBase64String(securityKey);
 
-            using var hmac = new HMACSHA3_512(keyBytes);
+            using var hmac = new HMACSHA256(keyBytes);
             hmac.Key = saltBytes;
             var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
 
@@ -71,8 +78,14 @@ namespace Infrastructure.Helpers
             return salt;
         }
 
+        private static byte[] CombineToKeyDerivation(byte[] salt, byte[] securityKey)
+        {
+            byte[] keyDerivation = [..salt, ..securityKey];
+            return keyDerivation;
+        }
+
         /// <summary>
-        /// Using a 128Bit (16Bytes) Key here to generate a random key value.
+        /// Using a 128Bit (16Bytes) key here to generate a random key value.
         /// https://learn.microsoft.com/en-us/dotnet/api/system.security.cryptography.hmacsha512.-ctor?view=net-8.0
         /// </summary>
         /// <returns>Returns the random generated 128bit value, aka the key. </returns>
