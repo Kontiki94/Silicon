@@ -42,24 +42,23 @@ namespace Infrastructure.Helpers
 
         /// <summary>
         /// Validates a password against a already generated hashvalue
-        /// Hash and salt converts to byte-arrays
-        /// Creates a instance of the HMAC-algo with the SecurityKey as a key and the salt is assigned the HMAC-object.
+        /// Basicaly recreating the old password with the saved passwordhash, salt and securitykey.
+        /// Creates a instance of the HMAC-algo with the SecurityKey as a key and the salt is assigned the HMAC-object, combined to key derivation.
         /// The password is converted to bytes and HMAC calculate the hash value.
         /// Lastely, the two hashvalues are compared against each other
         /// </summary>
         /// <param name="password">The input password from the user</param>
-        /// <param name="hash">The calulated hash</param>
-        /// <param name="salt">Salting</param>
+        /// <param name="savedPasswordHash">Stored hash</param>
+        /// <param name="savedSalt">Stored Salting</param>
+        /// <param name="savedSecurityKey">Stored security key</param>
         /// <returns>True if valid, else false</returns>
         public static bool ValidateSecurePassword(string password, string savedPasswordHash, string savedSalt, string savedSecurityKey)
         {
             try
             {
-
                 byte[] hashBytes = Convert.FromBase64String(savedPasswordHash);
                 byte[] saltBytes = Convert.FromBase64String(savedSalt);
                 byte[] keyBytes = Convert.FromBase64String(savedSecurityKey);
-
                 byte[] keyDerivation = CombineToKeyDerivation(saltBytes, keyBytes);
 
                 var hmac = new HMACSHA256(keyDerivation);
@@ -69,7 +68,6 @@ namespace Infrastructure.Helpers
             }
             catch (Exception ex)
             {
-                // Hantera eventuella fel här
                 Debug.Write(ex.Message);
                 return false;
             }
