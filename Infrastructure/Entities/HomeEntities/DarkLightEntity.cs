@@ -1,6 +1,6 @@
 ﻿namespace Infrastructure.Entities.HomeEntities;
 
-public class Dark_LightEntity
+public class DarkLightEntity
 {
     public int Id { get; set; }
     public string TitleWhite { get; set; } = null!;
