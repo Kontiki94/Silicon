@@ -17,22 +17,81 @@
                 <a class="menu-link" asp-controller="Home" asp-action="Index"><i class="fa-solid fa-right-from-bracket"></i>Sign Out</a>
             </nav>
         </div>
-
-        <div class="saved-items">
+        <div class="content">
             <h2>@Model.Title</h2>
-            <div class="course-card">
-                <div>
-                    <img src=""/>
+            <div class="saved-items">
+                <div class="course-card">
+                    <div class="image">
+                        <img src="~/images/video-game-design.svg" />
+                    </div>                    
+                    <a class="bookmark" asp-controller="" asp-action=""><i class="fa-solid fa-bookmark"></i></a>
+                    <div class="hide"><p>Remove</p></div>
+                    <div class="course-info">
+                        <h5 class="title">@Model.CourseDetails.Title</h5>
+                        <p class="author">By @Model.CourseDetails.Author.AuthorName</p>
+                        <p class="price">$@Model.CourseDetails.Price</p>
+                        <div class="divider"></div>                        
+                    </div>
+                    <div class="bottom">
+                        <div>
+                            <i class="fa-sharp fa-solid fa-clock"></i>
+                            <p>@Model.CourseDetails.ViewHours hours</p>
+                        </div>
+                        <div>
+                            <i class="fa-sharp fa-light fa-thumbs-up"></i>
+                            <p>@Model.CourseDetails.Likes</p>
+                        </div>
+                    </div>
+                    
                 </div>
-                <div class="course-info">
-                    <p class="title">@Model.CourseDetails.Title</p>
-                    <p class="author">@Model.CourseDetails.Author</p>
-                    <p class="price"></p>
+                <div class="course-card">
+                    <div class="image">
+                        <img src="~/images/video-game-design.svg" />
+                    </div>
+                    <a class="bookmark" asp-controller="" asp-action=""><i class="fa-solid fa-bookmark"></i></a>
+                    <div class="hide"><p>Remove</p></div>
+                    <div class="course-info">
+                        <h5 class="title">@Model.CourseDetails.Title</h5>
+                        <p class="author">By @Model.CourseDetails.Author.AuthorName</p>
+                        <p class="price">$@Model.CourseDetails.Price</p>
+                        <div class="divider"></div>
+                    </div>
+                    <div class="bottom">
+                        <div>
+                            <i class="fa-sharp fa-solid fa-clock"></i>
+                            <p>@Model.CourseDetails.ViewHours hours</p>
+                        </div>
+                        <div>
+                            <i class="fa-sharp fa-light fa-thumbs-up"></i>
+                            <p>@Model.CourseDetails.Likes</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="divider"></div>
+                <div class="course-card">
+                    <div class="image">
+                        <img src="~/images/video-game-design.svg" />
+                    </div>
+                    <a class="bookmark" asp-controller="" asp-action=""><i class="fa-solid fa-bookmark"></i></a>
+                    <div class="hide"><p>Remove</p></div>
+                    <div class="course-info">
+                        <h5 class="title">@Model.CourseDetails.Title</h5>
+                        <p class="author">By @Model.CourseDetails.Author.AuthorName</p>
+                        <p class="price">$@Model.CourseDetails.Price</p>
+                        <div class="divider"></div>
+                    </div>
+                    <div class="bottom">
+                        <div>
+                            <i class="fa-sharp fa-solid fa-clock"></i>
+                            <p>@Model.CourseDetails.ViewHours hours</p>
+                        </div>
+                        <div>
+                            <i class="fa-sharp fa-light fa-thumbs-up"></i>
+                            <p>@Model.CourseDetails.Likes</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-
-        </div>
+        </div>       
     </div>
 
 </section>
