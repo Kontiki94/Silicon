@@ -10,7 +10,7 @@ namespace Silicon_AspNetMVC.ViewModels.Courses
         {
             Title = "Courses",
             Id = "Courses",
-            CourseImage = new() { ImageUrl = "/images/fullstack_dev.png", AltText = "Macbook image" },
+            CourseImage = new() { ImageUrl = "images/fullstack_dev.png", AltText = "Macbook image" },
             Author = new() { AuthorName = "Robert Fox" },
             Price = 23,
             Views = 5000,

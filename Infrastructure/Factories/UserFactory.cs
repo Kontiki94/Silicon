@@ -38,7 +38,6 @@ public class UserFactory
                 Updated = date
             };
 
-
             UserCredentialsEntity credentials = PasswordHasher.GenerateSecurePassword(model.Password);
             credentials.Id = Guid.NewGuid().ToString();
             credentials.UserId = user.Id;
