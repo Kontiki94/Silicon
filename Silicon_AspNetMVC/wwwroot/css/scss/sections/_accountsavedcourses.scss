@@ -117,7 +117,6 @@
 
                 .course-card {
                     border-radius: 2%;
-                    overflow: hidden;
                     @include shadow-m;
                     position: relative;
 
@@ -125,7 +124,8 @@
                         img {
                             width: 100%;
                             max-width: 100%;
-                            /*overflow: hidden;*/
+                            border-top-left-radius: 2%;
+                            border-top-right-radius: 2%;                           
                         }
                     }
 
@@ -158,8 +158,8 @@
                         padding: 5px;
                         border-radius: 10%;
                         position: absolute;
-                        top: -15px;
-                        left: 71%;
+                        top: -2.2rem;
+                        left: 85%;
 
                         p {
                             margin: 0;
