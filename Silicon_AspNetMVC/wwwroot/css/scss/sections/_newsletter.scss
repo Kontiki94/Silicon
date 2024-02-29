@@ -30,6 +30,14 @@
                 grid-template-columns: 1fr auto;
                 margin-bottom: 20px;
             }
+            .news-title{
+                width: 50%;
+                text-align: center;
+
+                @include lg {
+                    text-align: left;
+                }
+            }
 
             @include xl {
                 display: grid;

@@ -1,17 +1,11 @@
-﻿
-@model HomeIndexViewModel
-@await Html.PartialAsync("~/Views/Shared/Sections/_ShowcasePartial.cshtml", Model.Showcase)
+﻿@model HomeIndexViewModel
+@await Html.PartialAsync("~/Views/Shared/Sections/_ShowcasePartial.cshtml", new ShowcaseViewModel())
 
-<section id="features">
-    @await Html.PartialAsync("~/Views/Shared/Sections/_FeaturesPartial.cshtml")
-</section>
+@await Html.PartialAsync("~/Views/Shared/Sections/_FeaturesPartial.cshtml", new FeaturesViewModel())
 
+﻿@await Html.PartialAsync("~/Views/Shared/Sections/_LightAndDarkPartial.cshtml", new HomeLightAndDarkViewModel())
 
-    ﻿@await Html.PartialAsync("~/Views/Shared/Sections/_LightAndDarkPartial.cshtml", new HomeLightAndDarkViewModel())
-
-
-
-@await Html.PartialAsync("~/Views/Shared/Sections/_ManageYourWorkPartial.cshtml", new HomeManageWorkViewModel());
+@await Html.PartialAsync("~/Views/Shared/Sections/_ManageYourWorkPartial.cshtml", new HomeManageWorkViewModel())
 
 
 <section id="download">
@@ -22,8 +16,6 @@
     @await Html.PartialAsync("~/Views/Shared/Sections/_ToolsPartial.cshtml")
 </section>
 
-<section id="newsletter">
-    @await Html.PartialAsync("~/Views/Shared/Sections/_NewsletterPartial.cshtml")
-</section>
+@await Html.PartialAsync("~/Views/Shared/Sections/_NewsletterPartial.cshtml", new NewsLetterViewModel())
 
 
