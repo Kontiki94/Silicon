@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240227133226_init")]
-    partial class init
+    [Migration("20240228083211_PhoneNullable")]
+    partial class PhoneNullable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -56,6 +56,39 @@ namespace Infrastructure.Migrations
                     b.ToTable("Address");
                 });
 
+            modelBuilder.Entity("Infrastructure.Entitys.UserCredentialsEntity", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("HashedPassword")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Salt")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SecurityKey")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("nvarchar(64)")
+                        .HasColumnName("Security_Key");
+
+                    b.Property<string>("UserEntityId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserEntityId");
+
+                    b.ToTable("UserCredentials");
+                });
+
             modelBuilder.Entity("Infrastructure.Entitys.UserEntity", b =>
                 {
                     b.Property<string>("Id")
@@ -86,10 +119,6 @@ namespace Infrastructure.Migrations
                     b.Property<string>("Phone")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("SecurityKey")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("Updated")
                         .HasColumnType("datetime2");
 
@@ -109,9 +138,18 @@ namespace Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Infrastructure.Entitys.UserCredentialsEntity", b =>
+                {
+                    b.HasOne("Infrastructure.Entitys.UserEntity", null)
+                        .WithMany("Credentials")
+                        .HasForeignKey("UserEntityId");
+                });
+
             modelBuilder.Entity("Infrastructure.Entitys.UserEntity", b =>
                 {
                     b.Navigation("Address");
+
+                    b.Navigation("Credentials");
                 });
 #pragma warning restore 612, 618
         }

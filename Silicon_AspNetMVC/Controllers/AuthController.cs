@@ -1,6 +1,7 @@
 ﻿using Infrastructure.Services;
 using Microsoft.AspNetCore.Mvc;
-using Silicon_AspNetMVC.ViewModels;
+using Silicon_AspNetMVC.ViewModels.Auth;
+using Silicon_AspNetMVC.ViewModels.Home;
 
 namespace Silicon_AspNetMVC.Controllers
 {
@@ -20,17 +21,21 @@ namespace Silicon_AspNetMVC.Controllers
 
         [Route("/signin")]
         [HttpPost]
-        public IActionResult SignIn(SignInViewModel viewModel)
+        public async Task<IActionResult> SignIn(SignInViewModel viewModel)
         {
             ViewData["Title"] = "Sign In";
 
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                viewModel.ErrorMessage = "Invalid e-mail or password";
-                return View(viewModel);
+                var result = await _userService.SignInUserAsync(viewModel.Form);
+                if (result.StatusCode == Infrastructure.Models.StatusCode.OK)
+                {
+                    return RedirectToAction("Details", "Account");
+                }
             }
 
-            return RedirectToAction("Details", "Account");
+            viewModel.ErrorMessage = "Invalid e-mail or password";
+            return View(viewModel);
         }
 
         [Route("/signup")]

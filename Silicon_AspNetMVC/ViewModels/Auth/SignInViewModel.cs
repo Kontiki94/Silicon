@@ -1,6 +1,6 @@
 ﻿using Infrastructure.Models;
 
-namespace Silicon_AspNetMVC.ViewModels;
+namespace Silicon_AspNetMVC.ViewModels.Auth;
 
 public class SignInViewModel
 {

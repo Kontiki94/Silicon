@@ -1,4 +1,4 @@
-﻿namespace Silicon_AspNetMVC.ViewModels
+﻿namespace Silicon_AspNetMVC.ViewModels.Home
 {
     public class PageNotFoundViewModel
     {

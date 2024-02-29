@@ -2,6 +2,7 @@
 using Infrastructure.Factories;
 using Infrastructure.Models;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Linq.Expressions;
 
 namespace Infrastructure.Repositories;
@@ -30,22 +31,29 @@ public abstract class Repo<TEntity>(DataContext context) where TEntity : class
         try
         {
             var result = await _context.Set<TEntity>().FirstOrDefaultAsync(predicate);
-            if(result is null)
+            if (result is null)
             {
                 return ResponseFactory.NotFound();
             }
             return ResponseFactory.Ok(result);
         }
-        catch (Exception ex) 
-        { 
+        catch (Exception ex)
+        {
             return ResponseFactory.Error(ex.Message);
         }
     }
 
-    public virtual async Task<ResponseResult> GetAllAsync(TEntity entity)
+    public virtual async Task<ResponseResult> GetAllAsync()
     {
-        // TODO Ann-Sofie
-        return ResponseFactory.Ok();
+        try
+        {
+            var result = await _context.Set<TEntity>().ToListAsync();
+            return ResponseFactory.Ok();
+        }
+        catch (Exception ex)
+        {
+            return ResponseFactory.Error(ex.Message);
+        }
     }
 
     public virtual async Task<ResponseResult> UpdateOneAsync(Expression<Func<TEntity, bool>> predicate, TEntity updatedEntity)
@@ -79,7 +87,7 @@ public abstract class Repo<TEntity>(DataContext context) where TEntity : class
                 await _context.SaveChangesAsync();
                 return ResponseFactory.Ok("Successfully removed.");
             }
-            return ResponseFactory.NotFound(); 
+            return ResponseFactory.NotFound();
         }
         catch (Exception ex)
         {

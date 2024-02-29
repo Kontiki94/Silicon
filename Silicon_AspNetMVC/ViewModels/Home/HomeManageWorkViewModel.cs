@@ -1,4 +1,6 @@
-﻿namespace Silicon_AspNetMVC.ViewModels
+﻿using Infrastructure.Entities.HomeEntities;
+
+namespace Silicon_AspNetMVC.ViewModels.Home
 {
     public class HomeManageWorkViewModel
     {
@@ -8,7 +10,16 @@
         public string ButtonText { get; set; }
         public string ButtonIcon { get; set; }
 
-        public HomeManageWorkViewModel() 
+        //public HomeManageWorkViewModel(ManageWorkEntity entity)
+        //{
+        //    Title = entity.Title;
+        //    ImageUrl = entity.ImageUrl;
+        //    Features = entity.Features;
+        //    ButtonText = entity.ButtonText;
+        //    ButtonIcon = entity.ButtonIcon;
+        //}
+
+        public HomeManageWorkViewModel()
         {
             Title = "Manage your work";
             ImageUrl = "images/manage_work.svg";
