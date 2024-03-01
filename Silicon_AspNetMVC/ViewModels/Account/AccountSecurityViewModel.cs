@@ -1,5 +1,4 @@
-﻿
-using Infrastructure.Models.Sections;
+﻿using Infrastructure.Models.Sections;
 
 namespace Silicon_AspNetMVC.ViewModels.Account;
 

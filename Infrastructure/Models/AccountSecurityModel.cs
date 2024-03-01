@@ -26,5 +26,4 @@ public class AccountSecurityModel
     [Display(Name = "Delete", Order = 3)]
     [CheckboxRequired(ErrorMessage = "You must confirm if you want to delete")]
     public bool DeleteAccount { get; set; } = false;
-
 }

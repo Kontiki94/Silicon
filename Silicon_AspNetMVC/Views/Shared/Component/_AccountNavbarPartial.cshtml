@@ -1,4 +1,6 @@
-﻿<div class="profile">
+﻿
+
+<div class="profile">
     <div class="image">
         <img src="@Model.Details.ProfileImage" alt="@($"{@Model.Details.FirstName} {@Model.Details.LastName}")" />
     </div>
@@ -6,9 +8,9 @@
     <p>@Model.Details.Email</p>
 </div>
 <nav class="options">
-    <a class="active" asp-controller="Account" asp-action="Details"><i class="fa-regular fa-gear"></i>Account Details</a>
-    <a class="menu-link" asp-controller="Account" asp-action="Security"><i class="fa-regular fa-lock"></i>Security</a>
-    <a class="menu-link" asp-controller="Account" asp-action="SavedCourses"><i class="fa-sharp fa-regular fa-bookmark"></i>Saved Courses</a>
+    <a class="@((Model.Navigation.ActiveAction == "Details") ? "active" : "") menu-link" asp-controller="Account" asp-action="Details"><i class="fa-regular fa-gear"></i>Account Details</a>
+    <a class="@((Model.Navigation.ActiveAction == "Security") ? "active" : "") menu-link" asp-controller="Account" asp-action="Security"><i class="fa-regular fa-lock"></i>Security</a>
+    <a class="@((Model.Navigation.ActiveAction == "SavedCourses") ? "active" : "") menu-link" asp-controller="Account" asp-action="SavedCourses"><i class="fa-sharp fa-regular fa-bookmark"></i>Saved Courses</a>
     <a class="menu-link" asp-controller="Home" asp-action="Index"><i class="fa-solid fa-right-from-bracket"></i>Sign Out</a>
 </nav>
 

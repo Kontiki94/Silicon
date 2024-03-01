@@ -3,12 +3,14 @@
 namespace Silicon_AspNetMVC.ViewModels.Home;
 public class FeaturesViewModel
 {
+    public string? Id { get; set; }
     public string Title { get; set; } = null!;
     public string Subtitle { get; set; } = null!;
     public List<FeaturesBoxViewModel> Boxes { get; set; } = null!;
 
     public FeaturesViewModel()
     {
+        Id = "features";
         Title = "What do you get with our tool?";
         Subtitle = "Make sure all your tasks are organized so you can set the priorities and focus on important.";
 

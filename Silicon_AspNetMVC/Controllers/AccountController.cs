@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Silicon_AspNetMVC.ViewModels;
 using Silicon_AspNetMVC.ViewModels.Account;
 using Silicon_AspNetMVC.ViewModels.CompositeViewModels;
 
@@ -18,28 +17,29 @@ namespace Silicon_AspNetMVC.Controllers
 
         [Route("/details")]
         [HttpPost]
-        public IActionResult Details(AccountViewModel viewmodel)
+        public IActionResult Details(AccountViewModel viewModel)
         {
             if (!ModelState.IsValid)
             {
-                return View(viewmodel);
+                viewModel.Navigation = new NavigationViewModel("Details");
+                return View(viewModel);
             }
 
-            return RedirectToAction(nameof(Details), viewmodel);
+            return RedirectToAction(nameof(Details), viewModel);
         }
 
         [Route("/security")]
         [HttpGet]
         public IActionResult Security()
         {
-            var viewModel = new AccountSecurityViewModel();
+            var viewModel = new AccountViewModel();
             ViewData["Title"] = "Security";
             return View(viewModel);
         }
 
         [Route("/security")]
         [HttpPost]
-        public IActionResult Security(AccountSecurityViewModel viewModel)
+        public IActionResult Security(AccountViewModel viewModel)
         {
             if (!ModelState.IsValid)
             {
@@ -59,6 +59,5 @@ namespace Silicon_AspNetMVC.Controllers
             var viewModel = new SavedCoursesViewModel();
             return View(viewModel);
         }
-
     }
 }
