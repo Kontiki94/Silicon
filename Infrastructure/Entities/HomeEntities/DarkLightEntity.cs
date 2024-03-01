@@ -10,3 +10,4 @@ public class DarkLightEntity
     public string IconUrl { get; set; } = null!;
     public string IconAlt { get; set; } = null!;
 }
+

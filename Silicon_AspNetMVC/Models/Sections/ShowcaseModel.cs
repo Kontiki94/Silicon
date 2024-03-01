@@ -11,5 +11,4 @@ public class ShowcaseModel
     public LinkViewModel Link { get; set; } = new();
     public string? BrandsText { get; set; }
     public List<ImageViewModel>? Brands { get; set; }
-    
 }
