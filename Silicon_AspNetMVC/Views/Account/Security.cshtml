@@ -9,6 +9,7 @@
         <div class="security-details">
             <h2>Security</h2>
             <h5>Password</h5>
+            @await Html.PartialAsync("/Views/Shared/Security/_ChangePasswordPartial.cshtml", new AccountSecurityViewModel())
             <div class="delete-section">
                 @await Html.PartialAsync("/Views/Shared/Security/_DeleteAccountPartial.cshtml", new AccountSecurityViewModel())
             </div>
