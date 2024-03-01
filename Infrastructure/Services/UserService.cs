@@ -2,6 +2,7 @@
 using Infrastructure.Factories;
 using Infrastructure.Helpers;
 using Infrastructure.Models;
+using Infrastructure.Models.Sections;
 using Infrastructure.Repositories;
 
 
@@ -39,7 +40,6 @@ namespace Infrastructure.Services
                 if (userEntity != null)
                 {
                     var credentialEntity = userEntity.Credentials.FirstOrDefault();
-
                     if (credentialEntity != null && PasswordHasher.ValidateSecurePassword(model.Password, credentialEntity.HashedPassword, credentialEntity.Salt, credentialEntity.SecurityKey))
                     {
                         return ResponseFactory.Ok();
@@ -47,6 +47,42 @@ namespace Infrastructure.Services
                 }
 
                 return ResponseFactory.Error("Incorrect email or password");
+            }
+            catch (Exception ex)
+            {
+                return ResponseFactory.Error(ex.Message);
+            }
+        }
+
+        public async Task<ResponseResult> UpdateCredentials(AccountSecurityModel securityModel)
+        {
+            try
+            {
+                var email = "tast@tast.se";//Plockar från användarsession när vi löst det
+                var userEntity = await _repository.GetUserAndIncludeCredentialsAsync(x => x.Email == email);
+                if (userEntity is null)
+                {
+                    return ResponseFactory.NotFound();
+                }
+                else if (userEntity is not null)
+                {
+                    var credentialEntity = userEntity.Credentials.FirstOrDefault();
+                    if (credentialEntity != null && PasswordHasher.ValidateSecurePassword(securityModel.Password, credentialEntity.HashedPassword, credentialEntity.Salt, credentialEntity.SecurityKey))
+                    {
+                        var generateNewPassword = PasswordHasher.GenerateSecurePassword(securityModel.NewPassword);
+                        credentialEntity.HashedPassword = generateNewPassword.HashedPassword;
+                        credentialEntity.Salt = generateNewPassword.Salt;
+                        credentialEntity.SecurityKey = generateNewPassword.SecurityKey;
+                        userEntity.Password = generateNewPassword.HashedPassword;
+                        var updated = await _repository.UpdateAsync(userEntity);
+                        if (updated.StatusCode == StatusCode.OK)
+                        {
+                            return updated;
+                        }
+                    }
+                }
+                return ResponseFactory.Error("Something went wrong");
+
             }
             catch (Exception ex)
             {
@@ -70,5 +106,30 @@ namespace Infrastructure.Services
                 return ResponseFactory.Error(ex.Message);
             }
         }
+
+        public async Task<ResponseResult> DeleteUser()
+        {
+
+            try
+            {
+                var email = "ted@domain.com"; //inloggade sessionen
+                var result = await _repository.DeleteOneAsync(x => x.Email == email);
+
+                if (result.StatusCode == StatusCode.OK)
+                {
+                    return ResponseFactory.Ok();
+                }
+                else
+                {
+                    return ResponseFactory.Error("Something went wrong");
+                }
+            }
+            catch (Exception ex)
+            {
+                return ResponseFactory.Error(ex.Message);
+            }
+        }
     }
 }
+
+

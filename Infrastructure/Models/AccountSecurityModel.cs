@@ -1,6 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Infrastructure.Helpers;
+using System.ComponentModel.DataAnnotations;
 
-namespace Silicon_AspNetMVC.Models.Sections;
+namespace Infrastructure.Models.Sections;
 
 public class AccountSecurityModel
 {
@@ -23,6 +24,7 @@ public class AccountSecurityModel
     public string ConfirmPassword { get; set; } = null!;
 
     [Display(Name = "Delete", Order = 3)]
+    [CheckboxRequired(ErrorMessage = "You must confirm if you want to delete")]
     public bool DeleteAccount { get; set; } = false;
 
 }

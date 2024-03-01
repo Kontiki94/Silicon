@@ -808,6 +808,15 @@ footer .container .social-media {
     margin-bottom: 20px;
   }
 }
+.newsletter .container .checkbox-content .news-title {
+  width: 50%;
+  text-align: center;
+}
+@media (min-width: 992px) {
+  .newsletter .container .checkbox-content .news-title {
+    text-align: left;
+  }
+}
 @media (min-width: 1200px) {
   .newsletter .container .checkbox-content {
     display: grid;

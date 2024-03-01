@@ -1,49 +1,29 @@
-﻿<section class="newsletter">
+﻿@model NewsLetterViewModel
+<section class="newsletter">
     <div class="container">
         <div class="top">
-            <h1>Don't Want To Miss Anything?</h1>
-            <img src="~/images/arrows.svg" alt="" />
+            <h1>@Model.NewsletterTitle.Title</h1>
+            <img src="@Model.NewsletterImage.ImageUrl" alt="@Model.NewsletterImage.AltText" />
         </div>
-        <div class="checkbox-content">
-            <div class="news-title">
-                <h5>Sign up for <br /> Newsletters</h5>
-            </div>
-            <div class="checkboxes">
-                <div class="box">
-                    <input type="checkbox" id="daily-newsletter" />
-                    <label for="daily-newsletter">Daily Newsletter</label>
+        <form asp-controller="Home" asp-action="" asp-fragment="newsletter" novalidate>
+            <div class="checkbox-content">
+                <div class="news-title">
+                    <h5>@Model.NewsletterTitle.Subtitle</h5>
                 </div>
-
-                <div class="box">
-                    <input type="checkbox" id="advertising" />
-                    <label for="advertising">Advertising Updates</label>
-                </div>
-
-                <div class="box">
-                    <input type="checkbox" id="review" />
-                    <label for="review">Week in Review</label>
-                </div>
-
-                <div class="box">
-                    <input type="checkbox" id="events" />
-                    <label for="events">Event Updates</label>
-                </div>
-
-                <div class="box">
-                    <input type="checkbox" id="startup" />
-                    <label for="startup">Startups Weekly</label>
-                </div>
-
-                <div class="box">
-                    <input type="checkbox" id="podcasts" />
-                    <label for="podcasts">Podcasts</label>
+                <div class="checkboxes">
+                    @foreach (var item in Model.Checkbox)
+                    {
+                        <div class="box">
+                            <input type="checkbox" id="@item.Id" />
+                            <label asp-for="@item.Id">@item.Text</label>
+                        </div>
+                    }
                 </div>
             </div>
-        </div>
-
-        <div class="subscribe">
-            <input type="text" name="email" placeholder="Your Email" class="input-email" />
-            <a class="btn-theme" href="#"><span>* Subscribe</span></a>
-        </div>
+            <div class="subscribe">
+                <input type="text" name="email" placeholder="Your Email" class="input-email" />
+                <button class="btn-theme" href="#"><span>* Subscribe</span></button>
+            </div>
+        </form>
     </div>
 </section>
