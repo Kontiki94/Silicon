@@ -143,6 +143,14 @@
                 }
             }
 
+            .divider {
+                width: 100%;
+                height: 1px;
+                background-color: $gray-300;
+                margin-top: 2.5rem;
+                margin-bottom: 3.5rem;
+            }
+
             .bio {
                 textarea {
                     max-width: 100%;
@@ -167,50 +175,6 @@
                     }
                 }
 
-                .divider {
-                    width: 100%;
-                    height: 1px;
-                    background-color: $gray-300;
-                    margin-top: 2.5rem;
-                    margin-bottom: 3.5rem;
-                }
-
-                .address {
-                    display: flex;
-                    flex-direction: column;
-
-                    label {
-                        margin-top: 1rem;
-                    }
-
-                    span {
-                        padding-left: .4rem;
-                        font-weight: 400;
-                    }
-
-                    .city-info {
-                        display: flex;
-                        flex-direction: row;
-
-                        .city, .postal {
-                            display: flex;
-                            flex-direction: column;
-                            width: 100%;
-                            margin-bottom: .5rem;
-                        }
-
-                        .postal {
-                            margin-right: .5rem;
-                        }
-                    }
-
-                    .address-button {
-                        display: flex;
-                        gap: 1rem;
-                        margin-top: 1rem;
-                    }
-                }
-
                 span {
                     margin-top: 15px;
                     position: relative;
@@ -231,13 +195,60 @@
                     }
                 }
             }
+
+            .address {
+                display: flex;
+                flex-direction: column;
+
+                label {
+                    margin-top: 1rem;
+                }
+
+                span {
+                    padding-left: .4rem;
+                    font-weight: 400;
+                }
+
+                .city-info {
+                    display: flex;
+                    flex-direction: row;
+
+                    .city, .postal {
+                        display: flex;
+                        flex-direction: column;
+                        width: 100%;
+                        margin-bottom: .5rem;
+                    }
+
+                    .postal {
+                        margin-right: .5rem;
+                    }
+                }
+
+                .address-button {
+                    display: flex;
+                    gap: 1rem;
+                    margin-top: 1rem;
+                }
+            }
         }
 
-        .validation {
+        .address-fields {
             display: flex;
             flex-direction: row;
-            justify-content: space-between;
+
+
+            .validation {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+            }
+
+            #first-address {
+                margin-right: .5rem;
+            }
         }
+                
 
         input {
             margin-bottom: .5rem;

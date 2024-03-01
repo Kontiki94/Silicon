@@ -10,7 +10,8 @@
         </div>
 
         <div class="account-details">
-            <form asp-controller="Account" asp-action="Details" method="post" novalidate>
+
+            <form asp-controller="Account" asp-action="UpdateBasicInfo" method="post" novalidate>
                 <div class="user-details">
                     <h1>Account Details</h1>
                     <h5>Basic Info</h5>
@@ -54,36 +55,44 @@
                         <a asp-controller="Account" asp-action="Cancel" class="btn-gray">Cancel</a>
                         <button type="submit" class="btn-theme">Save Changes</button>
                     </div>
-                    <div class="divider"></div>
-                    <div class="address">
-                        <h5>Address</h5>
-                        <div class="validation">
+                </div>
+            </form>
+
+            <div class="divider"></div>
+
+            <form asp-controller="Account" asp-action="UpdateAddressInfo" method="post" novalidate>
+                <div class="address">
+                    <h5>Address</h5>
+                    <div class="address-fields">
+                        <div class="validation" id="first-address">
                             <label asp-for="AddressInfo.AddressLine1">Address line 1</label>
                             <span asp-validation-for="AddressInfo.AddressLine1"></span>
+                            <input asp-for="AddressInfo.AddressLine1" />
                         </div>
-                        <input asp-for="AddressInfo.AddressLine1" />
-                        <label asp-for="AddressInfo.AddressLine2">Address line 2<span>(optional)</span></label>
-                        <input asp-for="AddressInfo.AddressLine2" />
-                        <div class="city-info">
-                            <div class="postal">
-                                <div class="validation">
-                                    <label asp-for="AddressInfo.PostalCode">Postal Code</label>
-                                    <span asp-validation-for="AddressInfo.PostalCode"></span>
-                                </div>
-                                <input asp-for="AddressInfo.PostalCode" />
+                        <div class="validation">
+                            <label asp-for="AddressInfo.AddressLine2">Address line 2<span>(optional)</span></label>
+                            <input asp-for="AddressInfo.AddressLine2" />
+                        </div>
+                    </div>
+                    <div class="city-info">
+                        <div class="postal">
+                            <div class="validation">
+                                <label asp-for="AddressInfo.PostalCode">Postal Code</label>
+                                <span asp-validation-for="AddressInfo.PostalCode"></span>
                             </div>
-                            <div class="city">
-                                <div class="validation">
-                                    <label asp-for="AddressInfo.City">City</label>
-                                    <span asp-validation-for="AddressInfo.City"></span>
-                                </div>
-                                <input asp-for="AddressInfo.City" />
+                            <input asp-for="AddressInfo.PostalCode" />
+                        </div>
+                        <div class="city">
+                            <div class="validation">
+                                <label asp-for="AddressInfo.City">City</label>
+                                <span asp-validation-for="AddressInfo.City"></span>
                             </div>
+                            <input asp-for="AddressInfo.City" />
                         </div>
-                        <div class="address-button">
-                            <a asp-controller="Account" asp-action="Cancel" class="btn-gray">Cancel</a>
-                            <button type="submit" class="btn-theme">Save Changes</button>
-                        </div>
+                    </div>
+                    <div class="address-button">
+                        <a asp-controller="Account" asp-action="Cancel" class="btn-gray">Cancel</a>
+                        <button type="submit" class="btn-theme">Save Changes</button>
                     </div>
                 </div>
             </form>
