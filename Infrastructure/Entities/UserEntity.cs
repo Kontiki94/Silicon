@@ -2,6 +2,7 @@
 
 namespace Infrastructure.Entitys;
 
+// This is the PARENT_TABLE FYI. 
 public class UserEntity
 {
     [Key]
