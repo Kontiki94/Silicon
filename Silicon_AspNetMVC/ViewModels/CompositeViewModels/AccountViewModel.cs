@@ -7,10 +7,10 @@ public class AccountViewModel
 {
     public AccountDetailsBasicInfoModel Details { get; set; }
     public AccountDetailsAddressInfoModel AddressInfo { get; set; }
-    public AccountSecurityModel Security { get; set; }
-    // Lägg till en model för saved courses.
     public SavedCoursesViewModel SavedCourses { get; set; }
     public NavigationViewModel Navigation { get; set; }
+    public AccountDeleteViewModel Delete { get; set; } = null!;
+    public AccountChangePasswordViewModel ChangePass { get; set; } = null!;
 
 
     public AccountViewModel()
@@ -21,8 +21,11 @@ public class AccountViewModel
         var addressInfoViewModel = new AccountDetailsAddressInfoViewModel();
         AddressInfo = addressInfoViewModel.Address;
 
-        var accountSecurityViewModel = new AccountSecurityViewModel();
-        Security = accountSecurityViewModel.Security;
+        new AccountSecurityViewModel()
+        {
+            ChangePass = ChangePass,
+            Delete = Delete
+        };
 
         SavedCourses = new SavedCoursesViewModel();
 

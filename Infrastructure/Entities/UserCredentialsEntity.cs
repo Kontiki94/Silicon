@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Infrastructure.Entitys;
@@ -26,4 +27,5 @@ public class UserCredentialsEntity
         salt = Salt;
         hashedPassword = HashedPassword;
     }
+    public UserEntity User { get; set; } = null!;
 }

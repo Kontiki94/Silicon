@@ -1,9 +1,8 @@
-﻿using Infrastructure.Helpers;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace Infrastructure.Models.Sections;
+namespace Silicon_AspNetMVC.ViewModels.Account;
 
-public class AccountSecurityModel
+public class AccountChangePasswordViewModel
 {
     [Display(Name = "Current Password", Prompt = "******", Order = 0)]
     [DataType(DataType.Password)]
@@ -22,8 +21,4 @@ public class AccountSecurityModel
     [Compare(nameof(NewPassword), ErrorMessage = "Password does not match")]
     public string ConfirmPassword { get; set; } = null!;
 
-
-    [Display(Name = "Delete", Order = 3)]
-    [CheckboxRequired(ErrorMessage = "You must confirm if you want to delete")]
-    public bool DeleteAccount { get; set; } = false;
 }

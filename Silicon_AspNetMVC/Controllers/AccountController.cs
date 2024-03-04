@@ -1,15 +1,18 @@
-﻿using Microsoft.AspNetCore.Authorization;
+using Infrastructure.Models.Sections;
+using Infrastructure.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using Silicon_AspNetMVC.ViewModels.Account;
 using Silicon_AspNetMVC.ViewModels.CompositeViewModels;
 
 namespace Silicon_AspNetMVC.Controllers
 {
-    public class AccountController : Controller
+    [Authorize]
+    public class AccountController(UserService userService) : Controller
     {
+        private readonly UserService _userService = userService;
 
         [HttpGet]
-        [Authorize]
         [Route("/details")]
         public IActionResult Details()
         {
@@ -21,7 +24,6 @@ namespace Silicon_AspNetMVC.Controllers
         }
 
         [HttpPost]
-        [Authorize]
         [Route("/details")]
         public IActionResult Details(AccountViewModel viewModel)
         {
@@ -30,12 +32,11 @@ namespace Silicon_AspNetMVC.Controllers
             {
                 return View(viewModel);
             }
-
             return RedirectToAction(nameof(Details), viewModel);
         }
 
+
         [HttpGet]
-        [Authorize]
         [Route("/security")]
         public IActionResult Security()
         {
@@ -46,16 +47,49 @@ namespace Silicon_AspNetMVC.Controllers
         }
 
         [HttpPost]
-        [Authorize]
         [Route("/security")]
         public IActionResult Security(AccountViewModel viewModel)
         {
             viewModel.Navigation = new NavigationViewModel("Security");
-            if (!ModelState.IsValid)
+
+            if (viewModel.ChangePass is not null)
+
             {
-                return View(viewModel);
+                if (viewModel.ChangePass.ConfirmPassword != null && viewModel.ChangePass.Password != null && viewModel.ChangePass.NewPassword != null && viewModel.ChangePass.NewPassword == viewModel.ChangePass.ConfirmPassword)
+                {
+                    var result = _userService.UpdateCredentials(
+                        new AccountSecurityModel()
+                        {
+                            Password = viewModel.ChangePass.Password,
+                            NewPassword = viewModel.ChangePass.NewPassword,
+                            ConfirmPassword = viewModel.ChangePass.ConfirmPassword
+                        });
+
+                    if (result.Result.StatusCode == Infrastructure.Models.StatusCode.OK)
+                    {
+                        return RedirectToAction("Details", "Account");
+                    }
+                }
             }
-            return RedirectToAction("Details", "Account");
+            return View("Security", viewModel);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(AccountViewModel viewModel)
+        {
+            viewModel.Navigation = new NavigationViewModel("Security");
+            if (viewModel.Delete is not null)
+            {
+                if (viewModel.Delete.DeleteAccount == true)
+                {
+                    var result = _userService.DeleteUser();
+                    if (result.Result.StatusCode == Infrastructure.Models.StatusCode.OK)
+                    {
+                        return RedirectToAction("SignUp", "Auth");
+                    }
+                }
+            }
+            return View("Security", viewModel);
         }
 
         public IActionResult Cancel()
@@ -63,7 +97,6 @@ namespace Silicon_AspNetMVC.Controllers
             return RedirectToAction("Details", "Account");
         }
 
-        [Authorize]
         [Route("/saved")]
         public IActionResult SavedCourses()
         {
@@ -72,3 +105,4 @@ namespace Silicon_AspNetMVC.Controllers
         }
     }
 }
+

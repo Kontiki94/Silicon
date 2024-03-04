@@ -1993,6 +1993,10 @@ footer .container .social-media {
 #security .security-details .delete-section .checkbox label {
   margin-left: 10px;
 }
+#security .security-details .delete-section .checkbox span {
+  margin-left: 10px;
+  color: #EF4444;
+}
 #security .security-details .delete-section h5 {
   color: #6366F1;
 }

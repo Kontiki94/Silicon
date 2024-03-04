@@ -12,6 +12,7 @@ namespace Infrastructure.Repositories;
 public class UserRepository(DataContext context) : Repo<UserEntity>(context)
 {
     private readonly DataContext _context = context;
+    
 
     public async Task<ResponseResult> CreateUserWithCredentialsAsync(UserEntity user, UserCredentialsEntity credentials)
     {
@@ -50,6 +51,27 @@ public class UserRepository(DataContext context) : Repo<UserEntity>(context)
             return ResponseFactory.Ok();
         }
         catch (Exception ex) { return ResponseFactory.Error(ex.Message); }
+    }
+
+    public virtual async Task<ResponseResult> DeleteAsync(Expression<Func<UserEntity, bool>> predicate)
+    {
+        try
+        {
+            var result = await _context.Set<UserEntity>()
+                .Include(x => x.Credentials)
+                .FirstOrDefaultAsync(predicate);
+            if (result is not null)
+            {
+                _context.Set<UserEntity>().Remove(result);
+                await _context.SaveChangesAsync();
+                return ResponseFactory.Ok("Successfully removed.");
+            }
+            return ResponseFactory.NotFound();
+        }
+        catch (Exception ex)
+        {
+            return ResponseFactory.Error(ex.Message);
+        }
     }
 }
 
