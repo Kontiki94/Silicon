@@ -13,7 +13,9 @@ namespace Silicon_AspNetMVC.Controllers
         [Route("/details")]
         public IActionResult Details()
         {
+
             var viewModel = new AccountViewModel();
+            viewModel.Navigation = new NavigationViewModel("Details");
             ViewData["Title"] = "Details";
             return View(viewModel);
         }
@@ -23,9 +25,9 @@ namespace Silicon_AspNetMVC.Controllers
         [Route("/details")]
         public IActionResult Details(AccountViewModel viewModel)
         {
+            viewModel.Navigation = new NavigationViewModel("Details");
             if (!ModelState.IsValid)
             {
-                viewModel.Navigation = new NavigationViewModel("Details");
                 return View(viewModel);
             }
 
@@ -38,6 +40,7 @@ namespace Silicon_AspNetMVC.Controllers
         public IActionResult Security()
         {
             var viewModel = new AccountViewModel();
+            viewModel.Navigation = new NavigationViewModel("Security");
             ViewData["Title"] = "Security";
             return View(viewModel);
         }
@@ -47,6 +50,7 @@ namespace Silicon_AspNetMVC.Controllers
         [Route("/security")]
         public IActionResult Security(AccountViewModel viewModel)
         {
+            viewModel.Navigation = new NavigationViewModel("Security");
             if (!ModelState.IsValid)
             {
                 return View(viewModel);

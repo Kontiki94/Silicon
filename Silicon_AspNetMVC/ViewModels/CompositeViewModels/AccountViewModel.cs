@@ -5,7 +5,7 @@ namespace Silicon_AspNetMVC.ViewModels.CompositeViewModels;
 
 public class AccountViewModel
 {
-    public AccountDetailsBasicInfoModel Details {  get; set; }
+    public AccountDetailsBasicInfoModel Details { get; set; }
     public AccountDetailsAddressInfoModel AddressInfo { get; set; }
     public AccountSecurityModel Security { get; set; }
     // Lägg till en model för saved courses.
@@ -21,7 +21,7 @@ public class AccountViewModel
         var addressInfoViewModel = new AccountDetailsAddressInfoViewModel();
         AddressInfo = addressInfoViewModel.Address;
 
-       var accountSecurityViewModel = new AccountSecurityViewModel();
+        var accountSecurityViewModel = new AccountSecurityViewModel();
         Security = accountSecurityViewModel.Security;
 
         SavedCourses = new SavedCoursesViewModel();
