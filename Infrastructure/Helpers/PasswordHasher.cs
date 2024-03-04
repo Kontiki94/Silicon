@@ -84,6 +84,7 @@ namespace Infrastructure.Helpers
             {
                 rng.GetBytes(salt);
             }
+
             return salt;
         }
 
@@ -111,6 +112,7 @@ namespace Infrastructure.Helpers
             {
                 rng.GetBytes(key);
             }
+
             return key;
         }
 
@@ -131,6 +133,7 @@ namespace Infrastructure.Helpers
                 if (hash1[i] != hash2[i])
                     return false;
             }
+
             return true;
         }
     }

@@ -27,4 +27,5 @@ public class UserCredentialsEntity
         salt = Salt;
         hashedPassword = HashedPassword;
     }
+    public UserEntity User { get; set; } = null!;
 }

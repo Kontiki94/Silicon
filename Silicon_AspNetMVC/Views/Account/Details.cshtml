@@ -1,103 +1,22 @@
 ﻿@model AccountViewModel
 
-
-
 <section id="details">
     <div class="container">
 
         <div class="menu-bar">
-            <div class="profile">
-                <div class="image">
-                    <img src="@Model.Details.ProfileImage" alt="@($"{@Model.Details.FirstName} {@Model.Details.LastName}")" />
-                </div>
-                <h5 class="user-name"> @Model.Details.FirstName @Model.Details.LastName</h5>
-                <p>@Model.Details.Email</p>
-            </div>
-            <nav class="options">
-                <a class="active" asp-controller="Account" asp-action="Details"><i class="fa-regular fa-gear"></i>Account Details</a>
-                <a class="menu-link" asp-controller="Account" asp-action="Security"><i class="fa-regular fa-lock"></i>Security</a>
-                <a class="menu-link" asp-controller="Account" asp-action="SavedCourses"><i class="fa-sharp fa-regular fa-bookmark"></i>Saved Courses</a>
-                <a class="menu-link" asp-controller="Home" asp-action="Index"><i class="fa-solid fa-right-from-bracket"></i>Sign Out</a>
-            </nav>
+            @await Html.PartialAsync("~/Views/Shared/Component/_AccountNavbarPartial.cshtml")
         </div>
 
         <div class="account-details">
-            <form asp-controller="Account" asp-action="Details" method="post" novalidate>
-                <div class="user-details">
-                    <h1>Account Details</h1>
-                    <h5>Basic Info</h5>
-                    <div class="name">
-                        <div class="firstname">
-                            <div class="validation">
-                                <label asp-for="Details.FirstName">First name</label>
-                                <span asp-validation-for="Details.FirstName"></span>
-                            </div>
-                            <input asp-for="Details.FirstName" />
-                        </div>
-                        <div class="lastname">
-                            <div class="validation">
-                                <label asp-for="Details.LastName">Last name</label>
-                                <span asp-validation-for="Details.LastName"></span>
-                            </div>
-                            <input asp-for="Details.LastName" />
-                        </div>
-                    </div>
-                    <div class="contact-info">
-                        <div class="email">
-                            <div class="validation">
-                                <label asp-for="Details.Email">Email Address</label>
-                                <span asp-validation-for="Details.Email"></span>
-                            </div>
-                            <input asp-for="Details.Email" />
-                        </div>
-                        <div class="phone">
-                            <div class="validation">
-                                <label asp-for="Details.Phone">Phone</label>
-                                <span asp-validation-for="Details.Phone"></span>
-                            </div>
-                            <input asp-for="Details.Phone" />
-                        </div>
-                    </div>
-                </div>
-                <div class="bio">
-                    <label asp-for="Details.Bio">Bio <span>(optional)</span></label>
-                    <textarea asp-for="Details.Bio"></textarea>
-                    <div class="user-buttons">
-                        <a asp-controller="Account" asp-action="Cancel" class="btn-gray">Cancel</a>
-                        <button type="submit" class="btn-theme">Save Changes</button>
-                    </div>
-                    <div class="divider"></div>
-                    <div class="address">
-                        <h5>Address</h5>
-                        <div class="validation">
-                            <label asp-for="AddressInfo.AddressLine1">Address line 1</label>
-                            <span asp-validation-for="AddressInfo.AddressLine1"></span>
-                        </div>
-                        <input asp-for="AddressInfo.AddressLine1" />
-                        <label asp-for="AddressInfo.AddressLine2">Address line 2<span>(optional)</span></label>
-                        <input asp-for="AddressInfo.AddressLine2" />
-                        <div class="city-info">
-                            <div class="postal">
-                                <div class="validation">
-                                    <label asp-for="AddressInfo.PostalCode">Postal Code</label>
-                                    <span asp-validation-for="AddressInfo.PostalCode"></span>
-                                </div>
-                                <input asp-for="AddressInfo.PostalCode" />
-                            </div>
-                            <div class="city">
-                                <div class="validation">
-                                    <label asp-for="AddressInfo.City">City</label>
-                                    <span asp-validation-for="AddressInfo.City"></span>
-                                </div>
-                                <input asp-for="AddressInfo.City" />
-                            </div>
-                        </div>
-                        <div class="address-button">
-                            <a asp-controller="Account" asp-action="Cancel" class="btn-gray">Cancel</a>
-                            <button type="submit" class="btn-theme">Save Changes</button>
-                        </div>
-                    </div>
-                </div>
+
+            <form asp-controller="Account" asp-action="UpdateBasicInfo" method="post" novalidate>
+                @await Html.PartialAsync("~/Views/Shared/AccountDetails/_AccountBasicInfoPartial.cshtml")
+            </form>
+
+            <div class="divider"></div>
+
+            <form asp-controller="Account" asp-action="UpdateAddressInfo" method="post" novalidate>
+                @await Html.PartialAsync("~/Views/Shared/AccountDetails/_AccountAddressInfoPartial.cshtml")
             </form>
         </div>
     </div>

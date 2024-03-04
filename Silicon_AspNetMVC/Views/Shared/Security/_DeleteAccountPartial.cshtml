@@ -1,4 +1,5 @@
-﻿@model AccountSecurityViewModel
+﻿@model AccountViewModel
+
 <form asp-controller="Account" asp-action="Delete" method="post" novalidate>
     <h5>Delete account</h5>
     <p>When you delete your account, your public profile will be deactivated immediately. If you change your mind before the 14 days are up, sign in with your email and password, and we’ll send you a link to reactivate your account.</p>
@@ -10,3 +11,5 @@
     <button class="btn-theme" type="submit">Delete</button>
 </form>
 
+
+@await Html.PartialAsync("_ValidationScriptPartial")

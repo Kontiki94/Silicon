@@ -4,8 +4,7 @@ using Infrastructure.Helpers;
 using Infrastructure.Models;
 using Infrastructure.Models.Sections;
 using Infrastructure.Repositories;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Diagnostics;
+
 
 namespace Infrastructure.Services
 {
@@ -59,7 +58,7 @@ namespace Infrastructure.Services
         {
             try
             {
-                var email = "hassan@hassan.se";//Plockar från användarsession när vi löst det
+                var email = "ted@ted.se";//Plockar från användarsession när vi löst det
                 var userEntity = await _repository.GetUserAndIncludeCredentialsAsync(x => x.Email == email);
                 if (userEntity is null)
                 {
@@ -83,6 +82,24 @@ namespace Infrastructure.Services
                     }
                 }
                 return ResponseFactory.Error("Something went wrong");
+
+            }
+            catch (Exception ex)
+            {
+                return ResponseFactory.Error(ex.Message);
+            }
+        }
+
+        public async Task<ResponseResult> UpdateUserAsync(UserEntity entity)
+        {
+            try
+            {
+                var entityToUpdate = await _repository.UpdateOneAsync(x => x.Email == entity.Email, entity);
+                if (entityToUpdate != null)
+                {
+                    return ResponseFactory.Ok(entityToUpdate);
+                }
+                return ResponseFactory.Error("Incorrect email or password");
             }
             catch (Exception ex)
             {
@@ -92,17 +109,27 @@ namespace Infrastructure.Services
 
         public async Task<ResponseResult> DeleteUser()
         {
-            var email = "hassan@hassan.se"; //inloggade sessionen
-            var result = await _repository.DeleteAsync(x => x.Email == email);
 
-            if (result.StatusCode == StatusCode.OK)
+            try
             {
-                return ResponseFactory.Ok();
+                var email = "ted@ted.se"; //inloggade sessionen
+                var result = await _repository.DeleteAsync(x => x.Email == email);
+
+                if (result.StatusCode == StatusCode.OK)
+                {
+                    return ResponseFactory.Ok();
+                }
+                else
+                {
+                    return ResponseFactory.Error("Something went wrong");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                return ResponseFactory.Error("Something went wrong");
+                return ResponseFactory.Error(ex.Message);
             }
         }
     }
 }
+
+
