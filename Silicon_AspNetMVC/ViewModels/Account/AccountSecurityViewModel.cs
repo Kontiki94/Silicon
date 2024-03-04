@@ -1,9 +1,12 @@
 ﻿
+using Infrastructure.Models;
 using Infrastructure.Models.Sections;
 
 namespace Silicon_AspNetMVC.ViewModels.Account;
 
 public class AccountSecurityViewModel
 {
-    public AccountSecurityModel Security { get; set; } = new();
+    public AccountDeleteViewModel Delete { get; set; } = null!;
+    public AccountChangePasswordViewModel ChangePass { get; set; } = null!;
+
 }

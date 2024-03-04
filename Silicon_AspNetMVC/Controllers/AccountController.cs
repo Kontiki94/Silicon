@@ -1,6 +1,10 @@
 ﻿using Infrastructure.Factories;
+using Infrastructure.Helpers;
+using Infrastructure.Models.Sections;
 using Infrastructure.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Silicon_AspNetMVC.ViewModels;
 using Silicon_AspNetMVC.ViewModels.Account;
 using Silicon_AspNetMVC.ViewModels.CompositeViewModels;
@@ -45,30 +49,43 @@ public class AccountController(UserService userService) : Controller
     [HttpPost]
     public IActionResult Security(AccountSecurityViewModel viewModel)
     {
-        if (ModelState.IsValid)
+        if (viewModel.ChangePass is not null)
         {
-            var result = _userService.UpdateCredentials(viewModel.Security);
-            if (result.Result.StatusCode == Infrastructure.Models.StatusCode.OK)
+            if (viewModel.ChangePass.ConfirmPassword != null && viewModel.ChangePass.Password != null && viewModel.ChangePass.NewPassword != null)
             {
-                return RedirectToAction("Details", "Account");
+
+                var result = _userService.UpdateCredentials(
+                    new AccountSecurityModel()
+                    {
+                        Password = viewModel.ChangePass.Password,
+                        NewPassword = viewModel.ChangePass.NewPassword,
+                        ConfirmPassword = viewModel.ChangePass.ConfirmPassword
+                    });
+
+                if (result.Result.StatusCode == Infrastructure.Models.StatusCode.OK)
+                {
+                    return RedirectToAction("Details", "Account");
+                }
             }
         }
         return View(viewModel);
     }
 
-    [Route("/security")]
-    [HttpDelete]
-    public IActionResult Delete()
+    [HttpPost]
+    public IActionResult Delete(AccountSecurityViewModel viewModel)
     {
-        if (ModelState.IsValid)
+        if (viewModel.Delete is not null)
         {
-            var result = _userService.DeleteUser();
-            if(result.Result.StatusCode == Infrastructure.Models.StatusCode.OK)
+            if (viewModel.Delete.DeleteAccount == true)
             {
-                return RedirectToAction("SignIn", "Auth");
+                var result = _userService.DeleteUser();
+                if (result.Result.StatusCode == Infrastructure.Models.StatusCode.OK)
+                {
+                    return RedirectToAction("SignUp", "Auth");
+                }
             }
         }
-        return View();
+        return View("Security", viewModel);
     }
 
     public IActionResult Cancel()

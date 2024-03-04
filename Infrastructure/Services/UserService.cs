@@ -59,7 +59,7 @@ namespace Infrastructure.Services
         {
             try
             {
-                var email = "tast@tast.se";//Plockar från användarsession när vi löst det
+                var email = "hassan@hassan.se";//Plockar från användarsession när vi löst det
                 var userEntity = await _repository.GetUserAndIncludeCredentialsAsync(x => x.Email == email);
                 if (userEntity is null)
                 {
@@ -92,8 +92,8 @@ namespace Infrastructure.Services
 
         public async Task<ResponseResult> DeleteUser()
         {
-            var email = "ted@domain.com"; //inloggade sessionen
-            var result = await _repository.DeleteOneAsync(x => x.Email == email);
+            var email = "hassan@hassan.se"; //inloggade sessionen
+            var result = await _repository.DeleteAsync(x => x.Email == email);
 
             if (result.StatusCode == StatusCode.OK)
             {
