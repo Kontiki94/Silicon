@@ -74,12 +74,11 @@ namespace Silicon_AspNetMVC.Controllers
         }
 
 
-
-        public new IActionResult SignOut()
+        [HttpGet]
+        public new async Task<IActionResult> SignOut()
         {
-            var viewModel = new HomeIndexViewModel();
-            ViewData["Title"] = "Silicon";
-            return View(viewModel);
+            await HttpContext.SignOutAsync();
+            return RedirectToAction("Index", "Home");
         }
     }
 }

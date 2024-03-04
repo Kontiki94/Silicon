@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Silicon_AspNetMVC.ViewModels.Account;
 using Silicon_AspNetMVC.ViewModels.CompositeViewModels;
 
@@ -6,8 +7,10 @@ namespace Silicon_AspNetMVC.Controllers
 {
     public class AccountController : Controller
     {
-        [Route("/details")]
+
         [HttpGet]
+        [Authorize]
+        [Route("/details")]
         public IActionResult Details()
         {
             var viewModel = new AccountViewModel();
@@ -15,8 +18,9 @@ namespace Silicon_AspNetMVC.Controllers
             return View(viewModel);
         }
 
-        [Route("/details")]
         [HttpPost]
+        [Authorize]
+        [Route("/details")]
         public IActionResult Details(AccountViewModel viewModel)
         {
             if (!ModelState.IsValid)
@@ -28,8 +32,9 @@ namespace Silicon_AspNetMVC.Controllers
             return RedirectToAction(nameof(Details), viewModel);
         }
 
-        [Route("/security")]
         [HttpGet]
+        [Authorize]
+        [Route("/security")]
         public IActionResult Security()
         {
             var viewModel = new AccountViewModel();
@@ -37,8 +42,9 @@ namespace Silicon_AspNetMVC.Controllers
             return View(viewModel);
         }
 
-        [Route("/security")]
         [HttpPost]
+        [Authorize]
+        [Route("/security")]
         public IActionResult Security(AccountViewModel viewModel)
         {
             if (!ModelState.IsValid)
@@ -53,7 +59,8 @@ namespace Silicon_AspNetMVC.Controllers
             return RedirectToAction("Details", "Account");
         }
 
-        [Route("/account/saved")]
+        [Authorize]
+        [Route("/saved")]
         public IActionResult SavedCourses()
         {
             var viewModel = new SavedCoursesViewModel();
