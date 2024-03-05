@@ -25,6 +25,7 @@ public class Program
 
         var app = builder.Build();
         app.UseHsts();
+        app.UseStatusCodePagesWithReExecute("/Error/PageNotFound", "?statusCode={0}");
         app.UseHttpsRedirection();
         app.UseStaticFiles();
         app.UseRouting();
@@ -36,10 +37,10 @@ public class Program
             name: "default",
             pattern: "{controller=Home}/{action=Index}/{id?}");
 
-        app.MapControllerRoute(
-            name: "Error",
-            pattern: "{*url}",
-            defaults: new { controller = "Error", action = "PageNotFound" });
+        //app.MapControllerRoute(
+        //    name: "Error",
+        //    pattern: "{*url}",
+        //    defaults: new { controller = "Error", action = "PageNotFound" });
 
         app.Run();
     }
