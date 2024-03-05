@@ -14,7 +14,7 @@ public class UserRepository(DataContext context) : Repo<UserEntity>(context)
     private readonly DataContext _context = context;
     
 
-    public async Task<ResponseResult> CreateUserWithCredentialsAsync(UserEntity user, UserCredentialsEntity credentials)
+    public async Task<ResponseResult> CreateUserWithCredentialsAsync(UserEntity user)
     {
         try
         {
@@ -37,9 +37,10 @@ public class UserRepository(DataContext context) : Repo<UserEntity>(context)
 
     public async Task<UserEntity?> GetUserAndIncludeCredentialsAsync(Expression<Func<UserEntity, bool>> predicate)
     {
-        return await _context.Users
-            .Include(u => u.Credentials)
-            .FirstOrDefaultAsync(predicate);
+        //return await _context.Users
+        //    .Include(u => u.Credentials)
+        //    .FirstOrDefaultAsync(predicate);
+        return null;
     }
 
     public virtual async Task<ResponseResult> UpdateAsync(UserEntity entity)
@@ -58,7 +59,6 @@ public class UserRepository(DataContext context) : Repo<UserEntity>(context)
         try
         {
             var result = await _context.Set<UserEntity>()
-                .Include(x => x.Credentials)
                 .FirstOrDefaultAsync(predicate);
             if (result is not null)
             {

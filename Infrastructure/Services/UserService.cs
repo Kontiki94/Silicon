@@ -1,51 +1,58 @@
 ﻿using Infrastructure.Entitys;
 using Infrastructure.Factories;
-using Infrastructure.Helpers;
 using Infrastructure.Models;
 using Infrastructure.Models.Sections;
 using Infrastructure.Repositories;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace Infrastructure.Services
 {
-    public class UserService(UserRepository repository, AddressService addressService)
+    public class UserService(UserRepository repository, AddressService addressService, UserManager<UserEntity> userManager, SignInManager<UserEntity> signInManager)
     {
         private readonly UserRepository _repository = repository;
         private readonly AddressService _addressService = addressService;
+        private readonly UserManager<UserEntity> _userManager = userManager;
+        private readonly SignInManager<UserEntity> _signInManager = signInManager;
+
 
         public async Task<ResponseResult> CreateUserAsync(SignUpModel model)
         {
             try
             {
-                var exists = await _repository.AlreadyExistsAsync(x => x.Email == model.Email);
-                if (exists.StatusCode == StatusCode.EXISTS)
-                    return exists;
-
-                var (user, credentials) = UserFactory.Create(model);
-
-                var result = await _repository.CreateUserWithCredentialsAsync(user, credentials);
-                if (result.StatusCode != StatusCode.OK)
-                    return result;
-
-                return ResponseFactory.Ok("User created successfully.");
+                var exists = await _userManager.Users.AnyAsync(x => x.Email == model.Email);
+                if (exists)
+                {
+                    return ResponseFactory.Exists();
+                }
+                else
+                {
+                    var newUser = UserFactory.Create(model);
+                    var result = await _userManager.CreateAsync(newUser, model.Password);
+                    
+                    if (result.Succeeded)
+                    {
+                        return ResponseFactory.Ok();
+                    }
+                    return ResponseFactory.Error("Something went wrong");
+                }
             }
-            catch (Exception ex) { return ResponseFactory.Error(ex.Message); }
+            catch (Exception ex)
+            {
+                return ResponseFactory.Error(ex.Message);
+            }
         }
 
         public async Task<ResponseResult> SignInUserAsync(SignInModel model)
         {
             try
             {
-                var userEntity = await _repository.GetUserAndIncludeCredentialsAsync(x => x.Email == model.Email);
-                if (userEntity != null)
+                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
+                if (result.Succeeded)
                 {
-                    var credentialEntity = userEntity.Credentials.FirstOrDefault();
-                    if (credentialEntity != null && PasswordHasher.ValidateSecurePassword(model.Password, credentialEntity.HashedPassword, credentialEntity.Salt, credentialEntity.SecurityKey))
-                    {
-                        return ResponseFactory.Ok();
-                    }
+                    return ResponseFactory.Ok();
                 }
-
                 return ResponseFactory.Error("Incorrect email or password");
             }
             catch (Exception ex)
@@ -54,35 +61,24 @@ namespace Infrastructure.Services
             }
         }
 
-        public async Task<ResponseResult> UpdateCredentials(AccountSecurityModel securityModel)
+        public async Task<ResponseResult> UpdateCredentials(AccountSecurityModel securityModel, string userEmail)
         {
             try
             {
-                var email = "ted@ted.se";//Plockar från användarsession när vi löst det
-                var userEntity = await _repository.GetUserAndIncludeCredentialsAsync(x => x.Email == email);
+                var userEntity = await _userManager.FindByEmailAsync(userEmail);
                 if (userEntity is null)
                 {
                     return ResponseFactory.NotFound();
                 }
                 else if (userEntity is not null)
                 {
-                    var credentialEntity = userEntity.Credentials.FirstOrDefault();
-                    if (credentialEntity != null && PasswordHasher.ValidateSecurePassword(securityModel.Password, credentialEntity.HashedPassword, credentialEntity.Salt, credentialEntity.SecurityKey))
+                    var result = await _userManager.ChangePasswordAsync(userEntity, securityModel.Password, securityModel.NewPassword);
+                    if (result.Succeeded)
                     {
-                        var generateNewPassword = PasswordHasher.GenerateSecurePassword(securityModel.NewPassword);
-                        credentialEntity.HashedPassword = generateNewPassword.HashedPassword;
-                        credentialEntity.Salt = generateNewPassword.Salt;
-                        credentialEntity.SecurityKey = generateNewPassword.SecurityKey;
-                        userEntity.Password = generateNewPassword.HashedPassword;
-                        var updated = await _repository.UpdateAsync(userEntity);
-                        if (updated.StatusCode == StatusCode.OK)
-                        {
-                            return updated;
-                        }
+                        return ResponseFactory.Ok();
                     }
                 }
                 return ResponseFactory.Error("Something went wrong");
-
             }
             catch (Exception ex)
             {
@@ -107,14 +103,11 @@ namespace Infrastructure.Services
             }
         }
 
-        public async Task<ResponseResult> DeleteUser()
+        public async Task<ResponseResult> DeleteUser(string userEmail)
         {
-
             try
             {
-                var email = "ted@ted.se"; //inloggade sessionen
-                var result = await _repository.DeleteAsync(x => x.Email == email);
-
+                var result = await _repository.DeleteOneAsync(x => x.Email == userEmail);
                 if (result.StatusCode == StatusCode.OK)
                 {
                     return ResponseFactory.Ok();
