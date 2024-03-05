@@ -356,6 +356,10 @@ a:hover {
   color: #FFFFFF;
 }
 
+.background-contact {
+  background-color: #F3F6FF;
+}
+
 header {
   padding: 15px 0;
 }

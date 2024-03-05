@@ -11,6 +11,7 @@ namespace Silicon_AspNetMVC.Controllers
         public IActionResult ContactUs()
         {
             var viewModel = new ContactViewModel();
+            ViewData["Title"] = "Contact Us";
             return View(viewModel);
         }
 
@@ -20,6 +21,7 @@ namespace Silicon_AspNetMVC.Controllers
         {
             if (!ModelState.IsValid)                //om formuläret inte är rätt ifyllt, retunera vy med felmeddelande
             {
+                ViewData["Title"] = "Contact Us";
                 return View(viewModel);
             }
             

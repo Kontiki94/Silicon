@@ -53,10 +53,11 @@ namespace Silicon_AspNetMVC.Controllers
             return RedirectToAction("Details", "Account");
         }
 
-        [Route("/account/saved")]
+        [Route("/saved")]
         public IActionResult SavedCourses()
         {
             var viewModel = new AccountViewModel();
+            ViewData["Title"] = "Saved Courses";
             return View(viewModel);
         }
     }
