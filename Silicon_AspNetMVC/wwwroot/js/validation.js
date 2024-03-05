@@ -69,7 +69,8 @@ inputs.forEach(input => {
             input.addEventListener('change', (e) => {
                 checkboxValidator(e.target)
             });
-        } else {
+        }        
+        else {
             input.addEventListener('keyup', (e) => {
                 switch (e.target.type) {
                     case 'text':
@@ -86,3 +87,15 @@ inputs.forEach(input => {
         }
     }
 });
+
+let textareas = document.querySelectorAll('textarea')
+
+textareas.forEach(textarea => {
+    if (textarea.dataset.val === 'true') {
+        textarea.addEventListener('keyup', (e) => {
+            textValidator(e.target)
+        });
+    }
+});
+
+            
