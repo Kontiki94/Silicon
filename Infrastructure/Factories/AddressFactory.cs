@@ -22,7 +22,7 @@ public class AddressFactory
             return new AddressEntity
             {
 
-                StreetName = streetName,
+                AddressLine1 = streetName,
                 PostalCode = postalCode,
                 City = city
             };
@@ -38,7 +38,7 @@ public class AddressFactory
             return new AddressModel
             {
                 Id = entity.Id,
-                StreetName = entity.StreetName,
+                StreetName = entity.AddressLine1,
                 PostalCode = entity.PostalCode,
                 City = entity.City
             };

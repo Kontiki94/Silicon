@@ -1,6 +1,4 @@
-﻿using Infrastructure.Entitys;
-
-
+﻿
 namespace Infrastructure.Entities
 {
     public class UserAdressEntity

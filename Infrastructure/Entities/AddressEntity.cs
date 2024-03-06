@@ -1,6 +1,4 @@
-﻿using Infrastructure.Entities;
-
-namespace Infrastructure.Entitys;
+﻿namespace Infrastructure.Entities;
 
 public class AddressEntity
 {

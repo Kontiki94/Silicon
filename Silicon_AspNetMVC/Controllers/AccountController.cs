@@ -4,13 +4,18 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Silicon_AspNetMVC.ViewModels.Account;
 using Silicon_AspNetMVC.ViewModels.CompositeViewModels;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Identity;
+using Infrastructure.Entitys;
 
 namespace Silicon_AspNetMVC.Controllers
 {
     [Authorize]
-    public class AccountController(UserService userService) : Controller
+    public class AccountController(UserService userService, SignInManager<UserEntity> signInManager, UserManager<UserEntity> userManager) : Controller
     {
         private readonly UserService _userService = userService;
+        private readonly SignInManager<UserEntity> _signInManager = signInManager;
+        private readonly UserManager<UserEntity> _manager = userManager;
 
         [HttpGet]
         [Route("/details")]
@@ -50,6 +55,7 @@ namespace Silicon_AspNetMVC.Controllers
         [Route("/security")]
         public IActionResult Security(AccountViewModel viewModel)
         {
+            var userEmail =  _manager.GetUserName(User)!;
             viewModel.Navigation = new NavigationViewModel("Security");
 
             if (viewModel.ChangePass is not null)
@@ -57,13 +63,12 @@ namespace Silicon_AspNetMVC.Controllers
             {
                 if (viewModel.ChangePass.ConfirmPassword != null && viewModel.ChangePass.Password != null && viewModel.ChangePass.NewPassword != null && viewModel.ChangePass.NewPassword == viewModel.ChangePass.ConfirmPassword)
                 {
-                    var result = _userService.UpdateCredentials(
-                        new AccountSecurityModel()
-                        {
-                            Password = viewModel.ChangePass.Password,
-                            NewPassword = viewModel.ChangePass.NewPassword,
-                            ConfirmPassword = viewModel.ChangePass.ConfirmPassword
-                        });
+                    var result = _userService.UpdateCredentials(new AccountSecurityModel()
+                    {
+                        Password = viewModel.ChangePass.Password,
+                        NewPassword = viewModel.ChangePass.NewPassword,
+                        ConfirmPassword = viewModel.ChangePass.ConfirmPassword
+                    }, userEmail);
 
                     if (result.Result.StatusCode == Infrastructure.Models.StatusCode.OK)
                     {
@@ -77,14 +82,16 @@ namespace Silicon_AspNetMVC.Controllers
         [HttpPost]
         public IActionResult Delete(AccountViewModel viewModel)
         {
+            var userEmail = _manager.GetUserName(User)!;
             viewModel.Navigation = new NavigationViewModel("Security");
             if (viewModel.Delete is not null)
             {
                 if (viewModel.Delete.DeleteAccount == true)
                 {
-                    var result = _userService.DeleteUser();
+                    var result = _userService.DeleteUser(userEmail);
                     if (result.Result.StatusCode == Infrastructure.Models.StatusCode.OK)
                     {
+                        _signInManager.SignOutAsync();
                         return RedirectToAction("SignUp", "Auth");
                     }
                 }

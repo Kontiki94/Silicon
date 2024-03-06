@@ -26,7 +26,7 @@ public class AddressService(AddressRepository addressRepository)
     {
         try
         {
-            var exists = await _addressRepository.AlreadyExistsAsync(x => x.StreetName == streetName && x.PostalCode == postalCode && x.City == city);
+            var exists = await _addressRepository.AlreadyExistsAsync(x => x.AddressLine1 == streetName && x.PostalCode == postalCode && x.City == city);
             if (exists is null)
             {
                 var result = await _addressRepository.CreateOneAsync(AddressFactory.Create(streetName, postalCode, city));
@@ -44,7 +44,7 @@ public class AddressService(AddressRepository addressRepository)
     {
         try
         {
-            var result = await _addressRepository.GetOneAsync(x => x.StreetName == streetName && x.PostalCode == postalCode && x.City == city);
+            var result = await _addressRepository.GetOneAsync(x => x.AddressLine1 == streetName && x.PostalCode == postalCode && x.City == city);
             return result;
         }
         catch (Exception ex) { return ResponseFactory.Error(ex.Message); }
