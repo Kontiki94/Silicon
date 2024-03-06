@@ -1,9 +1,13 @@
 ﻿@model PageNotFoundViewModel
 
+@{
+    ViewData["Title"] = "Ooops!, Page was not found";
+}
+
 <section id="not-found">
     <div class="container">
         <div class="image">
-            <img src="@Model.ImageUrl" alt="@Model.AltText"/>
+            <img src="@Model.ImageUrl" alt="@Model.AltText" />
         </div>
         <div class="text">
             <h2>@Model.Title</h2>

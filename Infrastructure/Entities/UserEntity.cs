@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Conventions;
+﻿using Infrastructure.Entities;
 using System.ComponentModel.DataAnnotations;
 
 namespace Infrastructure.Entitys;
@@ -22,7 +21,9 @@ public class UserEntity
     public DateTime? Created { get; set; }
     public DateTime? Updated { get; set; }
 
-    // Creating one to many relations with Credentials and Address
-    public ICollection<UserCredentialsEntity> Credentials { get; set; } = new List<UserCredentialsEntity>();
-    public ICollection<AddressEntity> Address { get; set; } = new List<AddressEntity>();
+    // Creating many to many relations with User and Address
+    public ICollection<UserAdressEntity> UserAddress { get; set; } = new List<UserAdressEntity>();
 }
+
+
+
