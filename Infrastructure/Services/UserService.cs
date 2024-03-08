@@ -1,4 +1,4 @@
-﻿using Infrastructure.Entitys;
+﻿using Infrastructure.Entities;
 using Infrastructure.Factories;
 using Infrastructure.Models;
 using Infrastructure.Models.Sections;

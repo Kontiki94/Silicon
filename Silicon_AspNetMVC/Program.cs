@@ -1,5 +1,5 @@
 using Infrastructure.Contexts;
-using Infrastructure.Entitys;
+using Infrastructure.Entities;
 using Infrastructure.Repositories;
 using Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;

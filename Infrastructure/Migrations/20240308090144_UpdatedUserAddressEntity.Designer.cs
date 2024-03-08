@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240305122256_Identity")]
-    partial class Identity
+    [Migration("20240308090144_UpdatedUserAddressEntity")]
+    partial class UpdatedUserAddressEntity
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,13 +25,17 @@ namespace Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Infrastructure.Entitys.AddressEntity", b =>
+            modelBuilder.Entity("Infrastructure.Entities.AddressEntity", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    b.Property<string>("AddressLine1")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AddressLine2")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("City")
                         .IsRequired()
@@ -41,22 +45,33 @@ namespace Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("StreetName")
+                    b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Addresses");
                 });
 
-            modelBuilder.Entity("Infrastructure.Entitys.UserEntity", b =>
+            modelBuilder.Entity("Infrastructure.Entities.UserAddressEntity", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)")
+                        .HasColumnOrder(1);
+
+                    b.Property<string>("AddressId")
+                        .HasColumnType("nvarchar(450)")
+                        .HasColumnOrder(2);
+
+                    b.HasKey("UserId", "AddressId");
+
+                    b.HasIndex("AddressId");
+
+                    b.ToTable("UserAddress");
+                });
+
+            modelBuilder.Entity("Infrastructure.Entities.UserEntity", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -275,13 +290,21 @@ namespace Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Infrastructure.Entitys.AddressEntity", b =>
+            modelBuilder.Entity("Infrastructure.Entities.UserAddressEntity", b =>
                 {
-                    b.HasOne("Infrastructure.Entitys.UserEntity", "User")
-                        .WithMany("Address")
+                    b.HasOne("Infrastructure.Entities.AddressEntity", "Address")
+                        .WithMany("UserAddresses")
+                        .HasForeignKey("AddressId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Infrastructure.Entities.UserEntity", "User")
+                        .WithMany("UserAddresses")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Address");
 
                     b.Navigation("User");
                 });
@@ -297,7 +320,7 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Infrastructure.Entitys.UserEntity", null)
+                    b.HasOne("Infrastructure.Entities.UserEntity", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -306,7 +329,7 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Infrastructure.Entitys.UserEntity", null)
+                    b.HasOne("Infrastructure.Entities.UserEntity", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -321,7 +344,7 @@ namespace Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Infrastructure.Entitys.UserEntity", null)
+                    b.HasOne("Infrastructure.Entities.UserEntity", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -330,16 +353,21 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Infrastructure.Entitys.UserEntity", null)
+                    b.HasOne("Infrastructure.Entities.UserEntity", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Infrastructure.Entitys.UserEntity", b =>
+            modelBuilder.Entity("Infrastructure.Entities.AddressEntity", b =>
                 {
-                    b.Navigation("Address");
+                    b.Navigation("UserAddresses");
+                });
+
+            modelBuilder.Entity("Infrastructure.Entities.UserEntity", b =>
+                {
+                    b.Navigation("UserAddresses");
                 });
 #pragma warning restore 612, 618
         }

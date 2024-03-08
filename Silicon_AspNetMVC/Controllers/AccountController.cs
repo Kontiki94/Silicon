@@ -4,40 +4,77 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Silicon_AspNetMVC.ViewModels.Account;
 using Silicon_AspNetMVC.ViewModels.CompositeViewModels;
-using System.Security.Claims;
 using Microsoft.AspNetCore.Identity;
-using Infrastructure.Entitys;
+using Infrastructure.Entities;
+using Infrastructure.Models;
+using Infrastructure.Factories;
+using Silicon_AspNetMVC.Models.Sections;
 
 namespace Silicon_AspNetMVC.Controllers
 {
     [Authorize]
-    public class AccountController(UserService userService, SignInManager<UserEntity> signInManager, UserManager<UserEntity> userManager) : Controller
+    public class AccountController(UserService userService, SignInManager<UserEntity> signInManager, UserManager<UserEntity> userManager, AddressService addressService) : Controller
     {
         private readonly UserService _userService = userService;
         private readonly SignInManager<UserEntity> _signInManager = signInManager;
         private readonly UserManager<UserEntity> _manager = userManager;
+        private readonly AddressService _addressService = addressService;
+
 
         [HttpGet]
         [Route("/details")]
-        public IActionResult Details()
+        public async Task<IActionResult> Details()
         {
-
-            var viewModel = new AccountViewModel();
-            viewModel.Navigation = new NavigationViewModel("Details");
             ViewData["Title"] = "Details";
+            if (!_signInManager.IsSignedIn(User))
+                return RedirectToAction(nameof(Details));
+
+            var viewModel = new AccountViewModel()
+            {
+                Navigation = new NavigationViewModel("Details"),
+                AddressInfo = new AccountDetailsAddressInfoModel()
+            };
+
+            var user = await _signInManager.UserManager.GetUserAsync(User);
+            if (user is not null)
+            {
+                viewModel.AddressInfo.Id = user.Id;
+                var result = await _addressService.GetAddressByIdAsync(user.Id);
+                if (result.StatusCode == Infrastructure.Models.StatusCode.OK)
+                {
+                    var addressModel = (AddressModel)result.ContentResult!;
+                    viewModel.AddressInfo.AddressLine1 = addressModel.AddressLine1;
+                    viewModel.AddressInfo.AddressLine2 = addressModel.AddressLine2;
+                    viewModel.AddressInfo.PostalCode = addressModel.PostalCode;
+                    viewModel.AddressInfo.City = addressModel.City;
+                }
+            }
             return View(viewModel);
         }
 
+
         [HttpPost]
-        [Route("/details")]
-        public IActionResult Details(AccountViewModel viewModel)
+        public async Task<IActionResult> AccountAddressInfo(AccountViewModel viewModel)
         {
             viewModel.Navigation = new NavigationViewModel("Details");
-            if (!ModelState.IsValid)
+
+            var user = await _signInManager.UserManager.GetUserAsync(User);
+
+            if (user is not null)
             {
-                return View(viewModel);
+                var addressModel = AddressFactory.Create(
+                    viewModel.AddressInfo.Id!,
+                    viewModel.AddressInfo.AddressLine1,
+                    viewModel.AddressInfo.AddressLine2,
+                    viewModel.AddressInfo.PostalCode,
+                    viewModel.AddressInfo.City,
+                    user.Id
+                    );
+
+                var result = await _addressService.CreateOrUpdateAddressAsync(addressModel);
+                return RedirectToAction(nameof(Details));
             }
-            return RedirectToAction(nameof(Details), viewModel);
+            return View("Details", viewModel);
         }
 
 
@@ -55,7 +92,7 @@ namespace Silicon_AspNetMVC.Controllers
         [Route("/security")]
         public IActionResult Security(AccountViewModel viewModel)
         {
-            var userEmail =  _manager.GetUserName(User)!;
+            var userEmail = _manager.GetUserName(User)!;
             viewModel.Navigation = new NavigationViewModel("Security");
 
             if (viewModel.ChangePass is not null)

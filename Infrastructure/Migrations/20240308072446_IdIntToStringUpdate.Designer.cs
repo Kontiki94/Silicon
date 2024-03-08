@@ -4,6 +4,7 @@ using Infrastructure.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20240308072446_IdIntToStringUpdate")]
+    partial class IdIntToStringUpdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -54,12 +57,13 @@ namespace Infrastructure.Migrations
             modelBuilder.Entity("Infrastructure.Entities.UserAddressEntity", b =>
                 {
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)")
-                        .HasColumnOrder(1);
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("AddressId")
-                        .HasColumnType("nvarchar(450)")
-                        .HasColumnOrder(2);
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("UserId", "AddressId");
 
