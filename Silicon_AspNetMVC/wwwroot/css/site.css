@@ -1167,7 +1167,8 @@ footer .container .social-media {
   }
 }
 .tools .container .tool-boxes {
-  padding-top: 1rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
 }
 @media (min-width: 992px) {
   .tools .container .tool-boxes {
