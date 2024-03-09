@@ -19,6 +19,7 @@ namespace Silicon_AspNetMVC.Controllers
         private readonly UserManager<UserEntity> _manager = userManager;
         private readonly AddressService _addressService = addressService;
 
+        // Fixa en GET för att förpopulera användaruppgifter och bild. 
 
         [HttpGet]
         [Route("/details")]
@@ -32,7 +33,6 @@ namespace Silicon_AspNetMVC.Controllers
             {
                 Navigation = new NavigationViewModel("Details"),
                 AddressInfo = new AccountDetailsAddressInfoViewModel(),
-                Details = new AccountDetailsBasicInfoViewModel()
             };
 
             var user = await _signInManager.UserManager.GetUserAsync(User);
@@ -46,6 +46,7 @@ namespace Silicon_AspNetMVC.Controllers
                     viewModel.AddressInfo = new AccountDetailsAddressInfoViewModel(addressModel);
                 }
             }
+
             return View(viewModel);
         }
 
@@ -73,6 +74,7 @@ namespace Silicon_AspNetMVC.Controllers
                 if (result.StatusCode == Infrastructure.Models.StatusCode.OK)
                     return RedirectToAction(nameof(Details));
             }
+
             return View(viewModel);
         }
 
@@ -95,9 +97,9 @@ namespace Silicon_AspNetMVC.Controllers
                     );
 
                 var result = await _addressService.CreateOrUpdateAddressAsync(addressModel);
-                if (result.StatusCode == Infrastructure.Models.StatusCode.OK)
-                    return RedirectToAction(nameof(Details));
+                return RedirectToAction(nameof(Details));
             }
+
             return View("Details", viewModel);
         }
 
