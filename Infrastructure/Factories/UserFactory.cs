@@ -43,7 +43,7 @@ public class UserFactory
         return null!;
     }
 
-    public static UserEntity Create(string firstName, string lastName, string email, string phone, string bio, string userId)
+    public static UserEntity Create(string firstName, string lastName, string email, string userName, string phone, string bio, string userId, string passwordHash, string normalizedEmail, string normalizedUserName)
     {
         try
         {
@@ -59,7 +59,10 @@ public class UserFactory
                 Biography = bio,
                 Created = date,
                 Updated = date,
-                Id = userId
+                Id = userId,
+                PasswordHash = passwordHash,
+                NormalizedEmail = normalizedEmail,
+                NormalizedUserName = normalizedUserName,
             };
         }
         catch { }

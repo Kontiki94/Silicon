@@ -32,7 +32,7 @@ namespace Silicon_AspNetMVC.Controllers
             {
                 Navigation = new NavigationViewModel("Details"),
                 AddressInfo = new AccountDetailsAddressInfoViewModel(),
-                Details = new AccountDetailsBasicInfoViewModel() 
+                Details = new AccountDetailsBasicInfoViewModel()
             };
 
             var user = await _signInManager.UserManager.GetUserAsync(User);
@@ -62,11 +62,16 @@ namespace Silicon_AspNetMVC.Controllers
                     viewModel.Details.Email,
                     viewModel.Details.Phone!,
                     viewModel.Details.Bio!,
-                    user.Id
+                    user.Id,
+                    user.PasswordHash!,
+                    user.NormalizedEmail!,
+                    user.NormalizedUserName!,
+                    user.UserName!
                     );
 
                 var result = await _userService.UpdateUserAsync(userModel);
-                return RedirectToAction(nameof(Details));
+                if (result.StatusCode == Infrastructure.Models.StatusCode.OK)
+                    return RedirectToAction(nameof(Details));
             }
             return View(viewModel);
         }
@@ -90,7 +95,8 @@ namespace Silicon_AspNetMVC.Controllers
                     );
 
                 var result = await _addressService.CreateOrUpdateAddressAsync(addressModel);
-                return RedirectToAction(nameof(Details));
+                if (result.StatusCode == Infrastructure.Models.StatusCode.OK)
+                    return RedirectToAction(nameof(Details));
             }
             return View("Details", viewModel);
         }
