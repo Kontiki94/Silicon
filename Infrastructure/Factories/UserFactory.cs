@@ -1,6 +1,6 @@
 ﻿using Infrastructure.Entities;
 using Infrastructure.Models;
-using Infrastructure.Models.Sections;
+using Silicon_AspNetMVC.Models.Sections;
 
 namespace Infrastructure.Factories;
 
@@ -37,6 +37,29 @@ public class UserFactory
                 UserName = model.Email,
                 Created = date,
                 Updated = date
+            };
+        }
+        catch { }
+        return null!;
+    }
+
+    public static UserEntity Create(string firstName, string lastName, string email, string phone, string bio, string userId)
+    {
+        try
+        {
+            var date = DateTime.Now;
+
+            return new UserEntity()
+            {
+                FirstName = firstName,
+                LastName = lastName,
+                Email = email,
+                UserName = email,
+                PhoneNumber = phone,
+                Biography = bio,
+                Created = date,
+                Updated = date,
+                Id = userId
             };
         }
         catch { }

@@ -90,7 +90,7 @@ namespace Infrastructure.Services
         {
             try
             {
-                var entityToUpdate = await _repository.UpdateOneAsync(x => x.Email == entity.Email, entity);
+                var entityToUpdate = await _repository.UpdateOneAsync(x => x.Id == entity.Id, entity);
                 if (entityToUpdate != null)
                 {
                     return ResponseFactory.Ok(entityToUpdate);

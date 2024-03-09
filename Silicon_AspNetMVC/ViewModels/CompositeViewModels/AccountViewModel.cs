@@ -7,8 +7,8 @@ namespace Silicon_AspNetMVC.ViewModels.CompositeViewModels;
 public class AccountViewModel
 {
     public UserEntity User { get; set; }
-    public AccountDetailsBasicInfoModel Details { get; set; }
-    public AccountDetailsAddressInfoModel AddressInfo { get; set; }
+    public AccountDetailsBasicInfoViewModel Details { get; set; }
+    public AccountDetailsAddressInfoViewModel AddressInfo { get; set; }
     public SavedCoursesViewModel SavedCourses { get; set; }
     public NavigationViewModel Navigation { get; set; }
     public AccountDeleteViewModel Delete { get; set; } = null!;
@@ -18,11 +18,8 @@ public class AccountViewModel
     public AccountViewModel()
     {
         User ??= new UserEntity();
-        var basicInfoViewModel = new AccountDetailsBasicInfoViewModel();
-        Details = basicInfoViewModel.Account;
-
-        var addressInfoViewModel = new AccountDetailsAddressInfoViewModel();
-        AddressInfo = addressInfoViewModel.Address;
+        Details = new AccountDetailsBasicInfoViewModel();
+        AddressInfo = new AccountDetailsAddressInfoViewModel();
 
         new AccountSecurityViewModel()
         {

@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Identity;
 using Infrastructure.Entities;
 using Infrastructure.Models;
 using Infrastructure.Factories;
-using Silicon_AspNetMVC.Models.Sections;
 
 namespace Silicon_AspNetMVC.Controllers
 {
@@ -32,7 +31,8 @@ namespace Silicon_AspNetMVC.Controllers
             var viewModel = new AccountViewModel()
             {
                 Navigation = new NavigationViewModel("Details"),
-                AddressInfo = new AccountDetailsAddressInfoModel()
+                AddressInfo = new AccountDetailsAddressInfoViewModel(),
+                Details = new AccountDetailsBasicInfoViewModel() 
             };
 
             var user = await _signInManager.UserManager.GetUserAsync(User);
@@ -43,15 +43,33 @@ namespace Silicon_AspNetMVC.Controllers
                 if (result.StatusCode == Infrastructure.Models.StatusCode.OK)
                 {
                     var addressModel = (AddressModel)result.ContentResult!;
-                    viewModel.AddressInfo.AddressLine1 = addressModel.AddressLine1;
-                    viewModel.AddressInfo.AddressLine2 = addressModel.AddressLine2;
-                    viewModel.AddressInfo.PostalCode = addressModel.PostalCode;
-                    viewModel.AddressInfo.City = addressModel.City;
+                    viewModel.AddressInfo = new AccountDetailsAddressInfoViewModel(addressModel);
                 }
             }
             return View(viewModel);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> AccountBasicInfo(AccountViewModel viewModel)
+        {
+            var user = await _signInManager.UserManager.GetUserAsync(User);
+
+            if (user is not null)
+            {
+                var userModel = UserFactory.Create(
+                    viewModel.Details.FirstName,
+                    viewModel.Details.LastName,
+                    viewModel.Details.Email,
+                    viewModel.Details.Phone!,
+                    viewModel.Details.Bio!,
+                    user.Id
+                    );
+
+                var result = await _userService.UpdateUserAsync(userModel);
+                return RedirectToAction(nameof(Details));
+            }
+            return View(viewModel);
+        }
 
         [HttpPost]
         public async Task<IActionResult> AccountAddressInfo(AccountViewModel viewModel)

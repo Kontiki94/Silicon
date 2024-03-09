@@ -2,7 +2,6 @@
 using Infrastructure.Factories;
 using Infrastructure.Models;
 using Infrastructure.Repositories;
-using System.Reflection.Metadata.Ecma335;
 
 namespace Infrastructure.Services;
 
@@ -85,7 +84,6 @@ public class AddressService(AddressRepository addressRepository)
         catch (Exception ex) { return ResponseFactory.Error(ex.Message); }
     }
 
-    // Problemet är att det inte existerar någon address att gå på, måste använda ID för att hitta rätt. 
     public async Task<ResponseResult> GetAddressByIdAsync(string userId)
     {
         try
