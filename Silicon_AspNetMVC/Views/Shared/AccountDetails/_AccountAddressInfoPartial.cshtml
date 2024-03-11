@@ -1,17 +1,17 @@
 ﻿@model AccountViewModel
 
-<div class="address">
+<div class="address-fields">
     <h5>Address</h5>
     <div class="address-fields">
         <div class="validation" id="first-address">
             <label asp-for="AddressInfo.AddressLine1">Address line 1</label>
             <span asp-validation-for="AddressInfo.AddressLine1"></span>
-            <input asp-for="AddressInfo.AddressLine1" value="@Model.AddressInfo.AddressLine1"/>
         </div>
+        <input asp-for="AddressInfo.AddressLine1" value="@Model.AddressInfo.AddressLine1" />
         <div class="validation">
             <label asp-for="AddressInfo.AddressLine2">Address line 2<span>(optional)</span></label>
-            <input asp-for="AddressInfo.AddressLine2"/>
         </div>
+            <input asp-for="AddressInfo.AddressLine2" />
     </div>
     <div class="city-info">
         <div class="postal">
@@ -19,14 +19,14 @@
                 <label asp-for="AddressInfo.PostalCode">Postal Code</label>
                 <span asp-validation-for="AddressInfo.PostalCode"></span>
             </div>
-            <input asp-for="AddressInfo.PostalCode"/>
+            <input asp-for="AddressInfo.PostalCode" />
         </div>
         <div class="city">
             <div class="validation">
                 <label asp-for="AddressInfo.City">City</label>
                 <span asp-validation-for="AddressInfo.City"></span>
             </div>
-            <input asp-for="AddressInfo.City"/>
+            <input asp-for="AddressInfo.City" />
         </div>
     </div>
     <div class="address-button">

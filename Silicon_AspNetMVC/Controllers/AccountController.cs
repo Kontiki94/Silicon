@@ -33,6 +33,7 @@ namespace Silicon_AspNetMVC.Controllers
             {
                 Navigation = new NavigationViewModel("Details"),
                 AddressInfo = new AccountDetailsAddressInfoViewModel(),
+                Details = new AccountDetailsBasicInfoViewModel(),
             };
 
             var user = await _signInManager.UserManager.GetUserAsync(User);
@@ -53,26 +54,29 @@ namespace Silicon_AspNetMVC.Controllers
         [HttpPost]
         public async Task<IActionResult> AccountBasicInfo(AccountViewModel viewModel)
         {
-            var user = await _signInManager.UserManager.GetUserAsync(User);
-
-            if (user is not null)
+            if (ModelState.IsValid)
             {
-                var userModel = UserFactory.Create(
-                    viewModel.Details.FirstName,
-                    viewModel.Details.LastName,
-                    viewModel.Details.Email,
-                    viewModel.Details.Phone!,
-                    viewModel.Details.Bio!,
-                    user.Id,
-                    user.PasswordHash!,
-                    user.NormalizedEmail!,
-                    user.NormalizedUserName!,
-                    user.UserName!
-                    );
+                var user = await _signInManager.UserManager.GetUserAsync(User);
 
-                var result = await _userService.UpdateUserAsync(userModel);
-                if (result.StatusCode == Infrastructure.Models.StatusCode.OK)
-                    return RedirectToAction(nameof(Details));
+                if (user is not null)
+                {
+                    var userModel = UserFactory.Create(
+                        viewModel.Details.FirstName,
+                        viewModel.Details.LastName,
+                        viewModel.Details.Email,
+                        viewModel.Details.Phone!,
+                        viewModel.Details.Bio!,
+                        user.Id,
+                        user.PasswordHash!,
+                        user.NormalizedEmail!,
+                        user.NormalizedUserName!,
+                        user.UserName!
+                        );
+
+                    var result = await _userService.UpdateUserAsync(userModel);
+                    if (result.StatusCode == Infrastructure.Models.StatusCode.OK)
+                        return RedirectToAction(nameof(Details));
+                }
             }
 
             return View(viewModel);
@@ -85,19 +89,22 @@ namespace Silicon_AspNetMVC.Controllers
 
             var user = await _signInManager.UserManager.GetUserAsync(User);
 
-            if (user is not null)
+            if (ModelState.IsValid)
             {
-                var addressModel = AddressFactory.Create(
-                    viewModel.AddressInfo.Id!,
-                    viewModel.AddressInfo.AddressLine1,
-                    viewModel.AddressInfo.AddressLine2,
-                    viewModel.AddressInfo.PostalCode,
-                    viewModel.AddressInfo.City,
-                    user.Id
-                    );
+                if (user is not null)
+                {
+                    var addressModel = AddressFactory.Create(
+                        viewModel.AddressInfo.Id!,
+                        viewModel.AddressInfo.AddressLine1,
+                        viewModel.AddressInfo.AddressLine2,
+                        viewModel.AddressInfo.PostalCode,
+                        viewModel.AddressInfo.City,
+                        user.Id
+                        );
 
-                var result = await _addressService.CreateOrUpdateAddressAsync(addressModel);
-                return RedirectToAction(nameof(Details));
+                    var result = await _addressService.CreateOrUpdateAddressAsync(addressModel);
+                    return RedirectToAction(nameof(Details));
+                }
             }
 
             return View("Details", viewModel);

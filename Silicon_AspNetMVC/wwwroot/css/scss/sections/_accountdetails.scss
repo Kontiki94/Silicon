@@ -196,9 +196,15 @@
                 }
             }
 
-            .address {
+            .address-fields {
                 display: flex;
                 flex-direction: column;
+
+                .validation {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                }
 
                 label {
                     margin-top: 1rem;
@@ -230,25 +236,31 @@
                     gap: 1rem;
                     margin-top: 1rem;
                 }
+
+                span {
+                    margin-top: 15px;
+                    position: relative;
+
+                    &.field-validation-error {
+                        @include text-s;
+                        color: $danger;
+
+                        &::after {
+                            position: absolute;
+                            right: 10px;
+                            top: 42px;
+                            z-index: 1;
+                            font-size: 2em;
+                            display: block;
+                            content: '\2BBF';
+                        }
+                    }
+                }
             }
         }
 
-        .address-fields {
-            display: flex;
-            flex-direction: row;
 
 
-            .validation {
-                display: flex;
-                flex-direction: column;
-                width: 100%;
-            }
-
-            #first-address {
-                margin-right: .5rem;
-            }
-        }
-                
 
         input {
             margin-bottom: .5rem;
