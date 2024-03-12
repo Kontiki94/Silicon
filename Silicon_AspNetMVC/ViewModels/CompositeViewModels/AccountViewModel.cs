@@ -1,12 +1,11 @@
 ﻿using Infrastructure.Entities;
-using Infrastructure.Models.Sections;
-using Silicon_AspNetMVC.Models.Sections;
 using Silicon_AspNetMVC.ViewModels.Account;
 namespace Silicon_AspNetMVC.ViewModels.CompositeViewModels;
 
 public class AccountViewModel
 {
     public UserEntity User { get; set; }
+    public ProfileViewModel Profile { get; set; }
     public AccountDetailsBasicInfoViewModel Details { get; set; }
     public AccountDetailsAddressInfoViewModel AddressInfo { get; set; }
     public SavedCoursesViewModel SavedCourses { get; set; }
@@ -18,6 +17,7 @@ public class AccountViewModel
     public AccountViewModel()
     {
         User ??= new UserEntity();
+        Profile = new ProfileViewModel();
         Details = new AccountDetailsBasicInfoViewModel();
         AddressInfo = new AccountDetailsAddressInfoViewModel();
 
