@@ -7,11 +7,13 @@ public class AccountDetailsBasicInfoViewModel
 {
     [DataType(DataType.Text)]
     [Display(Name = "First name", Prompt = "John", Order = 0)]
+    [MinLength(2, ErrorMessage = "Not valid.")]
     [Required(ErrorMessage = "Required")]
     public string FirstName { get; set; } = null!;
 
     [DataType(DataType.Text)]
     [Display(Name = "Last name", Prompt = "Doe", Order = 1)]
+    [MinLength(2, ErrorMessage = "Not valid.")]
     [Required(ErrorMessage = "Required")]
     public string LastName { get; set; } = null!;
 
@@ -25,6 +27,7 @@ public class AccountDetailsBasicInfoViewModel
     public string Email { get; set; } = null!;
 
     [DataType(DataType.PhoneNumber)]
+    [MinLength(8, ErrorMessage = "Not valid.")]
     [Display(Name = "Phone", Prompt = "Phone number", Order = 3)]
     public string? Phone { get; set; }
 

@@ -58,57 +58,6 @@ public class AccountController(UserService userService, SignInManager<UserEntity
         return View(viewModel);
     }
 
-    //[HttpPost]
-    //[Route("/details")]
-    //public async Task<IActionResult> Details(AccountViewModel viewModel)
-    //{
-    //    if (ModelState.IsValid)
-    //    {
-
-    //        if (viewModel.Details is not null)
-    //        {
-    //            if (viewModel.Details.FirstName is not null && viewModel.Details.LastName is not null && viewModel.Details.Email is not null)
-    //            {
-    //                var user = await _manager.GetUserAsync(User);
-    //                if (user is not null)
-    //                {
-    //                    user.FirstName = viewModel.Details.FirstName;
-    //                    user.LastName = viewModel.Details.LastName;
-    //                    user.Email = viewModel.Details.Email;
-    //                    user.PhoneNumber = viewModel.Details.Phone;
-    //                    user.Biography = viewModel.Details.Bio;
-
-    //                    var result = await _manager.UpdateAsync(user);
-    //                    if (!result.Succeeded)
-    //                    {
-    //                        ModelState.AddModelError("IncorrectValues", "Something went wrong, unable to save data.");
-    //                        ViewData["ErrorMessage"] = "Something went wrong, unable to save data.";
-    //                    }
-    //                }
-    //            }
-    //        }
-    //        if (viewModel.AddressInfo is not null)
-    //        {
-    //            if (viewModel.AddressInfo.AddressLine1 is not null && viewModel.AddressInfo.PostalCode is not null && viewModel.AddressInfo.City is not null)
-    //            {
-    //                var user = await _manager.GetUserAsync(User);
-    //                if (user is not null)
-    //                {
-    //                    var addressModel = await PopulateAddressInfo(viewModel);
-
-    //                    var result = await _addressService.CreateOrUpdateAddressAsync(addressModel);
-    //                    if (result.StatusCode == Infrastructure.Models.StatusCode.OK)
-    //                        return RedirectToAction(nameof(Details));
-    //                }
-    //            }
-    //        }
-    //    }
-    //    await PopulateBasicInfo(viewModel);
-    //    await PopulateAddressInfo(viewModel);
-    //    return View("Details", viewModel);
-    //}
-
-
     [HttpPost]
     public async Task<IActionResult> AccountBasicInfo([Bind(Prefix = "Details")] AccountDetailsBasicInfoViewModel viewModel)
     {
@@ -118,7 +67,7 @@ public class AccountController(UserService userService, SignInManager<UserEntity
         {
             if (ModelState.IsValid)
             {
-                var userEntity = await PopulateBasicInfo(viewModel);
+                var userEntity = await GenerateUserEntity(viewModel);
 
                 var result = await _userService.UpdateUserAsync(userEntity);
                 if (result.StatusCode == Infrastructure.Models.StatusCode.OK)
@@ -133,12 +82,17 @@ public class AccountController(UserService userService, SignInManager<UserEntity
                         Console.WriteLine($"ModelState Error: {error.ErrorMessage}");
                     }
                 }
+                ModelState.AddModelError("", "Please fill in all required fields.");
             }
         }
         var compositeViewModel = new AccountViewModel
         {
-            Details = viewModel
+            Details = viewModel,
+            AddressInfo = new AccountDetailsAddressInfoViewModel(),
         };
+
+
+        compositeViewModel.AddressInfo = await PopulateAddressInfo();
 
         return View("Details", compositeViewModel);
     }
@@ -146,14 +100,13 @@ public class AccountController(UserService userService, SignInManager<UserEntity
     [HttpPost]
     public async Task<IActionResult> AccountAddressInfo([Bind(Prefix = "AddressInfo")]AccountDetailsAddressInfoViewModel viewModel)
     {
-
         var user = await _signInManager.UserManager.GetUserAsync(User);
 
         if (user is not null)
         {
             if (ModelState.IsValid)
             {
-                var addressModel = await PopulateAddressInfo(viewModel);
+                var addressModel = await GenerateAddressModel(viewModel);
 
                 var result = await _addressService.CreateOrUpdateAddressAsync(addressModel);
                 if (result.StatusCode == Infrastructure.Models.StatusCode.OK)
@@ -168,10 +121,16 @@ public class AccountController(UserService userService, SignInManager<UserEntity
                         Console.WriteLine($"ModelState Error: {error.ErrorMessage}");
                     }
                 }
+                ModelState.AddModelError("", "Please fill in all required fields.");
             }
         }
-
-        return View("Details", viewModel);
+        var compositeViewModel = new AccountViewModel
+        {
+            Details = new AccountDetailsBasicInfoViewModel(),
+            AddressInfo = viewModel
+        };
+        compositeViewModel.Details = await PopulateBasicInfo();
+        return View("Details", compositeViewModel);
     }
 
 
@@ -245,7 +204,41 @@ public class AccountController(UserService userService, SignInManager<UserEntity
         return View(viewModel);
     }
 
-    private async Task<UserEntity> PopulateBasicInfo(AccountDetailsBasicInfoViewModel viewModel)
+    private async Task<AccountDetailsBasicInfoViewModel> PopulateBasicInfo()
+    {
+        var user = await _manager.GetUserAsync(User);
+
+        return new AccountDetailsBasicInfoViewModel
+        {
+            FirstName = user!.FirstName,
+            LastName = user.LastName,
+            Email = user.Email!,
+            Phone = user.PhoneNumber,
+            Bio = user.Biography
+        };
+    }
+
+    private async Task<AccountDetailsAddressInfoViewModel> PopulateAddressInfo()
+    {
+        var viewModel = new AccountDetailsAddressInfoViewModel();
+        var user = await _signInManager.UserManager.GetUserAsync(User);
+
+        if (user is not null)
+        {
+            viewModel.Id = user.Id;
+            var result = await _addressService.GetAddressByIdAsync(user.Id);
+
+            if (result.StatusCode == Infrastructure.Models.StatusCode.OK)
+            {
+                var addressModel = (AddressModel)result.ContentResult!;
+                viewModel = new AccountDetailsAddressInfoViewModel(addressModel);
+            }
+            return viewModel;
+        }
+        return null!;
+    }
+
+    private async Task<UserEntity> GenerateUserEntity(AccountDetailsBasicInfoViewModel viewModel)
     {
         var user = await _signInManager.UserManager.GetUserAsync(User);
 
@@ -263,7 +256,7 @@ public class AccountController(UserService userService, SignInManager<UserEntity
             );
     }
 
-    private async Task<AddressModel> PopulateAddressInfo(AccountDetailsAddressInfoViewModel viewModel)
+    private async Task<AddressModel> GenerateAddressModel(AccountDetailsAddressInfoViewModel viewModel)
     {
         var user = await _signInManager.UserManager.GetUserAsync(User);
 

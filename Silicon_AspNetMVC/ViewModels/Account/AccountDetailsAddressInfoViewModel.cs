@@ -12,7 +12,7 @@ public class AccountDetailsAddressInfoViewModel
     [Required(ErrorMessage = "Required")]
     public string AddressLine1 { get; set; } = "";
 
-    public string AddressLine2 { get; set; } = "";
+    public string? AddressLine2 { get; set; }
 
     [DataType(DataType.Text)]
     [Required(ErrorMessage = "Required")]
@@ -30,7 +30,7 @@ public class AccountDetailsAddressInfoViewModel
     {
         Id = model.Id ?? "";
         AddressLine1 = model.AddressLine1 ?? "";
-        AddressLine2 = model.AddressLine2 ?? "";
+        AddressLine2 = model.AddressLine2;
         PostalCode = model.PostalCode ?? "";
         City = model.City ?? "";
     }
