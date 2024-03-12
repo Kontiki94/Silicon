@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Identity;
 using Infrastructure.Entities;
 using Infrastructure.Models;
 using Infrastructure.Factories;
-using Microsoft.Identity.Client;
 
 namespace Silicon_AspNetMVC.Controllers;
 
@@ -53,6 +52,7 @@ public class AccountController(UserService userService, SignInManager<UserEntity
             viewModel.Details.Email = user.Email!;
             viewModel.Details.Phone = user.PhoneNumber;
             viewModel.Details.Bio = user.Biography;
+            viewModel.Profile = await PopulateProfileInfoAsync();
         }
 
         return View(viewModel);
@@ -87,18 +87,19 @@ public class AccountController(UserService userService, SignInManager<UserEntity
         }
         var compositeViewModel = new AccountViewModel
         {
-            Details = viewModel,
             AddressInfo = new AccountDetailsAddressInfoViewModel(),
+            Details = viewModel,
+            Profile = new ProfileViewModel()
         };
 
-
         compositeViewModel.AddressInfo = await PopulateAddressInfo();
+        compositeViewModel.Profile = await PopulateProfileInfoAsync();
 
         return View("Details", compositeViewModel);
     }
 
     [HttpPost]
-    public async Task<IActionResult> AccountAddressInfo([Bind(Prefix = "AddressInfo")]AccountDetailsAddressInfoViewModel viewModel)
+    public async Task<IActionResult> AccountAddressInfo([Bind(Prefix = "AddressInfo")] AccountDetailsAddressInfoViewModel viewModel)
     {
         var user = await _signInManager.UserManager.GetUserAsync(User);
 
@@ -126,10 +127,14 @@ public class AccountController(UserService userService, SignInManager<UserEntity
         }
         var compositeViewModel = new AccountViewModel
         {
+            AddressInfo = viewModel,
             Details = new AccountDetailsBasicInfoViewModel(),
-            AddressInfo = viewModel
+            Profile = new ProfileViewModel()
         };
+
+        compositeViewModel.Profile = await PopulateProfileInfoAsync();
         compositeViewModel.Details = await PopulateBasicInfo();
+
         return View("Details", compositeViewModel);
     }
 
@@ -202,6 +207,19 @@ public class AccountController(UserService userService, SignInManager<UserEntity
     {
         var viewModel = new SavedCoursesViewModel();
         return View(viewModel);
+    }
+
+    private async Task<ProfileViewModel> PopulateProfileInfoAsync()
+    {
+        var user = await _manager.GetUserAsync(User);
+
+        return new ProfileViewModel
+        {
+            FirstName = user!.FirstName,
+            LastName = user.LastName,
+            Email = user.Email!,
+
+        };
     }
 
     private async Task<AccountDetailsBasicInfoViewModel> PopulateBasicInfo()

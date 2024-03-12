@@ -1,10 +1,11 @@
-﻿
-
+﻿@{
+    ViewData["Title"] = $"{Model.Profile.FirstName} {Model.Profile.LastName}";
+}
 
 <aside>
     <div class="profile">
         <div class="image">
-            <img src="~/images/profiles/@Model.Profile.ProfileImage" alt="@($"{@Model.Profile.FirstName} {@Model.Profile.LastName}")" />
+            <img src="~/images/profiles/@Model.Profile.ProfileImageUrl" alt="@($"{@Model.Profile.FirstName} {@Model.Profile.LastName}")" />
         </div>
         <h5 class="user-name"> @Model.Profile.FirstName @Model.Profile.LastName</h5>
         <p>@User.Identity!.Name</p>
