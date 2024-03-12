@@ -8,13 +8,9 @@
 
 @await Html.PartialAsync("~/Views/Shared/Sections/_ManageYourWorkPartial.cshtml", new HomeManageWorkViewModel())
 
-<section id="download">
-    @await Html.PartialAsync("~/Views/Shared/Sections/_DownloadPartial.cshtml")
-</section>
-
+@await Html.PartialAsync("~/Views/Shared/Sections/_DownloadPartial.cshtml", new DownloadViewModel())
 
 @await Html.PartialAsync("~/Views/Shared/Sections/_ToolsPartial.cshtml", new ToolsViewModel())
-
 
 @await Html.PartialAsync("~/Views/Shared/Sections/_NewsletterPartial.cshtml", new NewsLetterViewModel())
 

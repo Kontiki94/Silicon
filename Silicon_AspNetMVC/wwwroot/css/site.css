@@ -941,33 +941,36 @@ footer .container .social-media {
     margin-right: 10rem;
   }
 }
-.download .container .content .right .boxes {
+.download .container .content .right .boxes .apps {
   padding-bottom: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 @media (min-width: 992px) {
-  .download .container .content .right .boxes {
+  .download .container .content .right .boxes .apps {
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: end;
   }
 }
-.download .container .content .right .boxes .box {
+.download .container .content .right .boxes .apps .box-text {
   margin-bottom: 2rem;
 }
-.download .container .content .right .boxes .box p {
+.download .container .content .right .boxes .apps .box-text p {
   margin: 0px;
 }
-.download .container .content .right .boxes .box h4 {
+.download .container .content .right .boxes .apps .box-text h4 {
   margin: 0px;
 }
-.download .container .content .right .boxes .box .five-stars {
+.download .container .content .right .boxes .apps .box-text .five-stars {
   color: #FFBA08;
   font-size: 12px;
 }
-.download .container .content .right .boxes .box img {
+.download .container .content .right .boxes .apps .box-img {
+  margin-bottom: 2rem;
+}
+.download .container .content .right .boxes .apps .box-img img {
   margin-bottom: 1rem;
   width: auto;
   height: 100%;
