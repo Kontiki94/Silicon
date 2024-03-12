@@ -25,7 +25,6 @@ public class AccountController(UserService userService, SignInManager<UserEntity
     [Route("/details")]
     public async Task<IActionResult> Details()
     {
-        ViewData["Title"] = "Details";
         if (!_signInManager.IsSignedIn(User))
             return RedirectToAction(nameof(Details));
 
@@ -36,24 +35,9 @@ public class AccountController(UserService userService, SignInManager<UserEntity
             Details = new AccountDetailsBasicInfoViewModel(),
         };
 
-        var user = await _signInManager.UserManager.GetUserAsync(User);
-        if (user is not null)
-        {
-            viewModel.AddressInfo.Id = user.Id;
-            var result = await _addressService.GetAddressByIdAsync(user.Id);
-            if (result.StatusCode == Infrastructure.Models.StatusCode.OK)
-            {
-                var addressModel = (AddressModel)result.ContentResult!;
-                viewModel.AddressInfo = new AccountDetailsAddressInfoViewModel(addressModel);
-            }
-
-            viewModel.Details.FirstName = user.FirstName;
-            viewModel.Details.LastName = user.LastName;
-            viewModel.Details.Email = user.Email!;
-            viewModel.Details.Phone = user.PhoneNumber;
-            viewModel.Details.Bio = user.Biography;
-            viewModel.Profile = await PopulateProfileInfoAsync();
-        }
+        viewModel.AddressInfo = await PopulateAddressInfo();
+        viewModel.Details = await PopulateBasicInfo();
+        viewModel.Profile = await PopulateProfileInfoAsync();
 
         return View(viewModel);
     }
@@ -141,11 +125,13 @@ public class AccountController(UserService userService, SignInManager<UserEntity
 
     [HttpGet]
     [Route("/security")]
-    public IActionResult Security()
+    public async Task<IActionResult> Security()
     {
         var viewModel = new AccountViewModel();
         viewModel.Navigation = new NavigationViewModel("Security");
+        viewModel.Profile = await PopulateProfileInfoAsync();
         ViewData["Title"] = "Security";
+        
         return View(viewModel);
     }
 
@@ -174,6 +160,7 @@ public class AccountController(UserService userService, SignInManager<UserEntity
                 }
             }
         }
+        
         return View("Security", viewModel);
     }
 
