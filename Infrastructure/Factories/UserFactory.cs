@@ -8,18 +8,38 @@ public class UserFactory
 {
     public static UserEntity Create()
     {
-		try
-		{
+        try
+        {
             var date = DateTime.Now;
 
-            return new UserEntity() 
-            { 
-                Id = Guid.NewGuid().ToString(), 
+            return new UserEntity()
+            {
+                Id = Guid.NewGuid().ToString(),
                 Created = date,
                 Updated = date
             };
-		}
-		catch { }
+        }
+        catch { }
+        return null!;
+    }
+
+    public static UserEntity Create(AccountDetailsBasicInfoModel model)
+    {
+        try
+        {
+            var date = DateTime.Now;
+
+            return new UserEntity()
+            {
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                Email = model.Email,
+                UserName = model.Email,
+                Created = date,
+                Updated = date
+            };
+        }
+        catch { }
         return null!;
     }
 

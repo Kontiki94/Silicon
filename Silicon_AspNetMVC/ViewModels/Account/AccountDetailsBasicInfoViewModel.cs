@@ -16,7 +16,7 @@ public class AccountDetailsBasicInfoViewModel
     public string LastName { get; set; } = null!;
 
     [DataType(DataType.ImageUrl)]
-    public string ProfileImage { get; set; } = null!;
+    public string? ProfileImage { get; set; }
 
     [DataType(DataType.EmailAddress)]
     [Display(Name = "Email", Prompt = "Email", Order = 2)]
