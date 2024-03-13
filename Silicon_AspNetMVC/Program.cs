@@ -36,6 +36,13 @@ public class Program
             x.Cookie.SecurePolicy = CookieSecurePolicy.Always;
         });
 
+        builder.Services.AddAuthentication().AddFacebook(x => {
+            x.AppId = "1050945166008168";
+            x.AppSecret = "8931cf2456fb589d5a8a968f489be5c0";
+            x.Fields.Add("first_name");
+            x.Fields.Add("last_name");
+        });
+
         var app = builder.Build();
         app.UseHsts();
         app.UseStatusCodePagesWithReExecute("/Error/PageNotFound", "?statusCode={0}");

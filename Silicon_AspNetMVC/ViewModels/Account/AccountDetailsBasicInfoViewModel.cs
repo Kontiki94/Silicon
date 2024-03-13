@@ -33,7 +33,9 @@ public class AccountDetailsBasicInfoViewModel
 
     [DataType(DataType.Text)]
     [Display(Name = "Bio", Prompt = "Add a short Bio", Order = 4)]
-    public string? Bio {  get; set; } 
+    public string? Bio {  get; set; }
+
+    public bool IsExternalAccount { get; set; }
 
     public AccountDetailsBasicInfoViewModel() { }
 
@@ -45,5 +47,6 @@ public class AccountDetailsBasicInfoViewModel
         Email = model.Email;
         Phone = model.Phone;
         Bio = model.Bio;
+        IsExternalAccount = model.IsExternalAccount;
     }
 }

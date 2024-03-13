@@ -18,7 +18,7 @@ public class AccountController(UserService userService, SignInManager<UserEntity
     private readonly UserManager<UserEntity> _manager = userManager;
     private readonly AddressService _addressService = addressService;
 
-
+    #region Account | GET
     [HttpGet]
     [Route("/details")]
     public async Task<IActionResult> Details()
@@ -37,7 +37,9 @@ public class AccountController(UserService userService, SignInManager<UserEntity
 
         return View(viewModel);
     }
+    #endregion
 
+    #region Account BasicInfo | Post
     [HttpPost]
     public async Task<IActionResult> AccountBasicInfo([Bind(Prefix = "Details")] AccountDetailsBasicInfoViewModel viewModel)
     {
@@ -49,7 +51,6 @@ public class AccountController(UserService userService, SignInManager<UserEntity
             if (result.StatusCode == Infrastructure.Models.StatusCode.OK)
                 TempData["SuccessMessage"] = "Account information saved successfully";
             return RedirectToAction(nameof(Details));
-
         }
         else
         {
@@ -75,8 +76,9 @@ public class AccountController(UserService userService, SignInManager<UserEntity
 
         return View("Details", compositeViewModel);
     }
+    #endregion
 
-
+    #region Account AddressInfo | Post
     [HttpPost]
     public async Task<IActionResult> AccountAddressInfo([Bind(Prefix = "AddressInfo")] AccountDetailsAddressInfoViewModel viewModel)
     {
@@ -112,8 +114,9 @@ public class AccountController(UserService userService, SignInManager<UserEntity
 
         return View("Details", compositeViewModel);
     }
+    #endregion 
 
-
+    #region Account Security | GET
     [HttpGet]
     [Route("/security")]
     public async Task<IActionResult> Security()
@@ -127,7 +130,9 @@ public class AccountController(UserService userService, SignInManager<UserEntity
 
         return View(viewModel);
     }
+    #endregion
 
+    #region Account Security | Post
     [HttpPost]
     [Route("/security")]
     public async Task<IActionResult> Security(AccountViewModel viewModel)
@@ -157,7 +162,9 @@ public class AccountController(UserService userService, SignInManager<UserEntity
         }
         return View("Security", viewModel);
     }
+    #endregion
 
+    #region Account Delete | Post
     [HttpPost]
     public async Task<IActionResult> Delete(AccountViewModel viewModel)
     {
@@ -178,7 +185,9 @@ public class AccountController(UserService userService, SignInManager<UserEntity
         }
         return View("Security", viewModel);
     }
+    #endregion
 
+   
     public IActionResult Cancel()
     {
         return RedirectToAction("Details", "Account");
@@ -214,7 +223,8 @@ public class AccountController(UserService userService, SignInManager<UserEntity
             LastName = user.LastName,
             Email = user.Email!,
             Phone = user.PhoneNumber,
-            Bio = user.Biography
+            Bio = user.Biography,
+            IsExternalAccount = user.IsExternalAccount,
         };
     }
 

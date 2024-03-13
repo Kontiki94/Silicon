@@ -12,6 +12,7 @@ public class UserEntity : IdentityUser
     public string? Biography { get; set; }
     public DateTime? Created { get; set; }
     public DateTime? Updated { get; set; }
+    public bool IsExternalAccount { get; set; } = false;
 
     public ICollection<UserAddressEntity> UserAddresses { get; set; } = new List<UserAddressEntity>();
 }
