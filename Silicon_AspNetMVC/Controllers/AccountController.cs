@@ -10,7 +10,6 @@ using Infrastructure.Models;
 using Infrastructure.Factories;
 
 namespace Silicon_AspNetMVC.Controllers;
-
 [Authorize]
 public class AccountController(UserService userService, SignInManager<UserEntity> signInManager, UserManager<UserEntity> userManager, AddressService addressService) : Controller
 {
@@ -24,9 +23,6 @@ public class AccountController(UserService userService, SignInManager<UserEntity
     [Route("/details")]
     public async Task<IActionResult> Details()
     {
-        if (!_signInManager.IsSignedIn(User))
-            return RedirectToAction(nameof(Details));
-
         var viewModel = new AccountViewModel()
         {
             Navigation = new NavigationViewModel("Details"),
@@ -53,6 +49,7 @@ public class AccountController(UserService userService, SignInManager<UserEntity
             if (result.StatusCode == Infrastructure.Models.StatusCode.OK)
                 TempData["SuccessMessage"] = "Account information saved successfully";
             return RedirectToAction(nameof(Details));
+
         }
         else
         {
@@ -78,6 +75,7 @@ public class AccountController(UserService userService, SignInManager<UserEntity
 
         return View("Details", compositeViewModel);
     }
+
 
     [HttpPost]
     public async Task<IActionResult> AccountAddressInfo([Bind(Prefix = "AddressInfo")] AccountDetailsAddressInfoViewModel viewModel)
@@ -123,6 +121,8 @@ public class AccountController(UserService userService, SignInManager<UserEntity
         var viewModel = new AccountViewModel();
         viewModel.Navigation = new NavigationViewModel("Security");
         viewModel.Profile = await PopulateProfileInfoAsync();
+        viewModel.SuccessMessage = TempData["SuccessMessage"]?.ToString() ?? "";
+        viewModel.ErrorMessage = TempData["ErrorMessage"]?.ToString() ?? "";
         ViewData["Title"] = "Security";
 
         return View(viewModel);
@@ -130,10 +130,11 @@ public class AccountController(UserService userService, SignInManager<UserEntity
 
     [HttpPost]
     [Route("/security")]
-    public IActionResult Security(AccountViewModel viewModel)
+    public async Task<IActionResult> Security(AccountViewModel viewModel)
     {
         var userEmail = _manager.GetUserName(User)!;
         viewModel.Navigation = new NavigationViewModel("Security");
+        viewModel.Profile = await PopulateProfileInfoAsync();
 
         if (viewModel.ChangePass is not null)
 
@@ -149,19 +150,20 @@ public class AccountController(UserService userService, SignInManager<UserEntity
 
                 if (result.Result.StatusCode == Infrastructure.Models.StatusCode.OK)
                 {
-                    return RedirectToAction("Details", "Account");
+                    TempData["SuccessMessage"] = "Password was updated!";
+                    return RedirectToAction(nameof(Security));
                 }
             }
         }
-
         return View("Security", viewModel);
     }
 
     [HttpPost]
-    public IActionResult Delete(AccountViewModel viewModel)
+    public async Task<IActionResult> Delete(AccountViewModel viewModel)
     {
         var userEmail = _manager.GetUserName(User)!;
         viewModel.Navigation = new NavigationViewModel("Security");
+        viewModel.Profile = await PopulateProfileInfoAsync();
         if (viewModel.Delete is not null)
         {
             if (viewModel.Delete.DeleteAccount == true)
@@ -169,7 +171,7 @@ public class AccountController(UserService userService, SignInManager<UserEntity
                 var result = _userService.DeleteUser(userEmail);
                 if (result.Result.StatusCode == Infrastructure.Models.StatusCode.OK)
                 {
-                    _signInManager.SignOutAsync();
+                    await _signInManager.SignOutAsync();
                     return RedirectToAction("SignUp", "Auth");
                 }
             }
@@ -268,5 +270,6 @@ public class AccountController(UserService userService, SignInManager<UserEntity
                     );
     }
 }
+
 
 

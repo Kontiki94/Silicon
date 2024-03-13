@@ -16,7 +16,7 @@ namespace Silicon_AspNetMVC.Controllers
 
         [HttpGet]
         [Route("/signin")]
-        public IActionResult SignIn()
+        public IActionResult SignIn(string returnUrl)
         {
             var viewModel = new SignInViewModel();
             ViewData["Title"] = "Sign In";
@@ -24,12 +24,14 @@ namespace Silicon_AspNetMVC.Controllers
             {
                 return RedirectToAction("Details", "Account");
             }
+            ViewData["ReturnUrl"] = returnUrl ?? Url.Content("~/");
+
             return View(viewModel);
         }
 
         [HttpPost]
         [Route("/signin")]
-        public async Task<IActionResult> SignIn(SignInViewModel viewModel)
+        public async Task<IActionResult> SignIn(SignInViewModel viewModel, string returnUrl)
         {
             ViewData["Title"] = "Sign In";
 
@@ -38,14 +40,10 @@ namespace Silicon_AspNetMVC.Controllers
                 var result = await _userService.SignInUserAsync(viewModel.Form);
                 if (result.StatusCode == Infrastructure.Models.StatusCode.OK)
                 {
-                    var claims = new List<Claim>()
+                    if(!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
                     {
-                        new(ClaimTypes.NameIdentifier, viewModel.Form.Id.ToString()),
-                        new(ClaimTypes.Name, viewModel.Form.Email),
-                        new(ClaimTypes.Email, viewModel.Form.Email),
-                    };
-
-                    await HttpContext.SignInAsync("AuthCookie", new ClaimsPrincipal(new ClaimsIdentity(claims, "AuthCookie")));
+                        return Redirect(returnUrl);
+                    }
                     return RedirectToAction("Details", "Account");
                 }
             }
@@ -79,8 +77,8 @@ namespace Silicon_AspNetMVC.Controllers
             return View(viewModel);
         }
 
-
         [HttpGet]
+        [Route("/signout")]
         public new async Task<IActionResult> SignOut()
         {
             await _signInManager.SignOutAsync();

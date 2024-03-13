@@ -1,5 +1,6 @@
 using Infrastructure.Contexts;
 using Infrastructure.Entities;
+using Infrastructure.Helpers.Middlewares;
 using Infrastructure.Repositories;
 using Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
@@ -12,12 +13,6 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder(args);
         builder.Services.AddControllersWithViews();
-        builder.Services.AddAuthentication("AuthCookie").AddCookie("AuthCookie", x =>
-        {
-            x.LoginPath = "/signin";
-            x.ExpireTimeSpan = TimeSpan.FromMinutes(60);
-            x.SlidingExpiration = true;
-        });
 
         builder.Services.AddDbContext<DataContext>(x => x.UseSqlServer(builder.Configuration.GetConnectionString("SqlServer")));
         builder.Services.AddScoped<AddressRepository>();
@@ -31,6 +26,16 @@ public class Program
             x.Password.RequiredLength = 8;
         }).AddEntityFrameworkStores<DataContext>();
 
+        builder.Services.ConfigureApplicationCookie(x =>
+        {
+            x.Cookie.HttpOnly = true;
+            x.LoginPath = "/signin";
+            x.LogoutPath = "/signout";
+            x.ExpireTimeSpan = TimeSpan.FromMinutes(60);
+            x.SlidingExpiration = true;
+            x.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+        });
+
         var app = builder.Build();
         app.UseHsts();
         app.UseStatusCodePagesWithReExecute("/Error/PageNotFound", "?statusCode={0}");
@@ -40,6 +45,7 @@ public class Program
 
         app.UseAuthentication();
         app.UseAuthorization();
+        app.UseUserSessionValidation();
 
         app.MapControllerRoute(
             name: "default",
