@@ -4,6 +4,7 @@ namespace Silicon_AspNetMVC.Models.Sections;
 
 public class ContactFormModel
 {
+    [DataType(DataType.Text)]
     [Display(Name = "Full name", Prompt = "Enter your full name", Order = 0)]
     [Required(ErrorMessage = "Name is required")]
     public string FullName { get; set; } = null!;
@@ -22,7 +23,7 @@ public class ContactFormModel
     [DataType(DataType.MultilineText)]
     [Display(Name = "Message", Prompt = "Enter your message here", Order = 3)]
     [Required(ErrorMessage = "Message is required")]
-    [StringLength(500, MinimumLength = 5, ErrorMessage = "Your message must be between 5 and 500 characters")]
+    [MinLength (2, ErrorMessage = "Your message must be minimum 2 characters")]
     public string Message { get; set; } = null!;
 
 }

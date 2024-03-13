@@ -194,10 +194,16 @@ public class AccountController(UserService userService, SignInManager<UserEntity
     }
 
     [Route("/saved")]
-    public IActionResult SavedCourses()
+    public async Task <IActionResult> SavedCourses()
     {
-        var viewModel = new SavedCoursesViewModel();
+        var viewModel = new AccountViewModel()
+        {
+            Navigation = new NavigationViewModel("SavedCourses"),
+            Profile = await PopulateProfileInfoAsync()
+        };
         return View(viewModel);
+
+
     }
 
     private async Task<ProfileViewModel> PopulateProfileInfoAsync()
@@ -279,7 +285,34 @@ public class AccountController(UserService userService, SignInManager<UserEntity
                     user!.Id
                     );
     }
+
+    [HttpPost]
+    public async Task<IActionResult> AccountAddressInfo(AccountViewModel viewModel)
+    {
+        viewModel.Navigation = new NavigationViewModel("Details");
+
+        var user = await _signInManager.UserManager.GetUserAsync(User);
+
+        if (user is not null)
+        {
+            var addressModel = AddressFactory.Create(
+                viewModel.AddressInfo.Id!,
+                viewModel.AddressInfo.AddressLine1,
+                viewModel.AddressInfo.AddressLine2,
+                viewModel.AddressInfo.PostalCode,
+                viewModel.AddressInfo.City,
+                user.Id
+                );
+
+            var result = await _addressService.CreateOrUpdateAddressAsync(addressModel);
+            return RedirectToAction(nameof(Details));
+        }
+
+        return View("Details", viewModel);
+    }
+
 }
+
 
 
 
