@@ -6,6 +6,18 @@
             @await Html.PartialAsync("~/Views/Shared/Component/_AccountNavbarPartial.cshtml")
         </div>
         <div class="security-details">
+            @if (!string.IsNullOrEmpty(Model.SuccessMessage))
+            {
+                <div class="alert alert-success" id="successMessage" role="alert">
+                    @Model.SuccessMessage
+                </div>
+            }
+@*             else if (!string.IsNullOrEmpty(Model.ErrorMessage))
+            {
+                <div class="alert alert-danger" id="errorMessage" role="alert">
+                    @Model.ErrorMessage
+                </div>
+            } *@
             <h2>Security</h2>
             <h5>Password</h5>
             <form asp-controller="Account" asp-action="Security" method="post" novalidate>
@@ -56,6 +68,7 @@
 </section>
 
 @await Html.PartialAsync("_ValidationScriptPartial")
+@await Html.PartialAsync("_UserMessageScriptPartial")
 
 
 

@@ -13,6 +13,7 @@ public class AccountViewModel
     public AccountDeleteViewModel Delete { get; set; } = null!;
     public AccountChangePasswordViewModel ChangePass { get; set; } = null!;
     public string SuccessMessage { get; set; }
+    public string ErrorMessage { get; set; }
 
 
     public AccountViewModel()
@@ -22,6 +23,7 @@ public class AccountViewModel
         Details = new AccountDetailsBasicInfoViewModel();
         AddressInfo = new AccountDetailsAddressInfoViewModel();
         SuccessMessage = "";
+        ErrorMessage = "";
 
         new AccountSecurityViewModel()
         {
