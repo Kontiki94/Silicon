@@ -45,31 +45,27 @@ public class AccountController(UserService userService, SignInManager<UserEntity
     [HttpPost]
     public async Task<IActionResult> AccountBasicInfo([Bind(Prefix = "Details")] AccountDetailsBasicInfoViewModel viewModel)
     {
-        var user = await _signInManager.UserManager.GetUserAsync(User);
-
-        if (user is not null)
+        if (ModelState.IsValid)
         {
-            if (ModelState.IsValid)
-            {
-                var userEntity = await GenerateUserEntityAsync(viewModel);
+            var userEntity = await GenerateUserEntityAsync(viewModel);
 
-                var result = await _userService.UpdateUserAsync(userEntity);
-                if (result.StatusCode == Infrastructure.Models.StatusCode.OK)
-                    TempData["SuccessMessage"] = "Account information saved successfully";
-                    return RedirectToAction(nameof(Details));
-            }
-            else
-            {
-                foreach (var modelStateEntry in ModelState.Values)
-                {
-                    foreach (var error in modelStateEntry.Errors)
-                    {
-                        Console.WriteLine($"ModelState Error: {error.ErrorMessage}");
-                    }
-                }
-                ModelState.AddModelError("", "Please fill in all required fields.");
-            }
+            var result = await _userService.UpdateUserAsync(userEntity);
+            if (result.StatusCode == Infrastructure.Models.StatusCode.OK)
+                TempData["SuccessMessage"] = "Account information saved successfully";
+            return RedirectToAction(nameof(Details));
         }
+        else
+        {
+            foreach (var modelStateEntry in ModelState.Values)
+            {
+                foreach (var error in modelStateEntry.Errors)
+                {
+                    Console.WriteLine($"ModelState Error: {error.ErrorMessage}");
+                }
+            }
+            ModelState.AddModelError("", "Please fill in all required fields.");
+        }
+
         var compositeViewModel = new AccountViewModel
         {
             AddressInfo = new AccountDetailsAddressInfoViewModel(),
@@ -80,37 +76,32 @@ public class AccountController(UserService userService, SignInManager<UserEntity
         compositeViewModel.AddressInfo = await PopulateAddressInfoAsync();
         compositeViewModel.Profile = await PopulateProfileInfoAsync();
 
-
         return View("Details", compositeViewModel);
     }
 
     [HttpPost]
     public async Task<IActionResult> AccountAddressInfo([Bind(Prefix = "AddressInfo")] AccountDetailsAddressInfoViewModel viewModel)
     {
-        var user = await _signInManager.UserManager.GetUserAsync(User);
-
-        if (user is not null)
+        if (ModelState.IsValid)
         {
-            if (ModelState.IsValid)
-            {
-                var addressModel = await GenerateAddressModelAsync(viewModel);
+            var addressModel = await GenerateAddressModelAsync(viewModel);
 
-                var result = await _addressService.CreateOrUpdateAddressAsync(addressModel);
-                if (result.StatusCode == Infrastructure.Models.StatusCode.OK)
-                    return RedirectToAction(nameof(Details));
-            }
-            else
-            {
-                foreach (var modelStateEntry in ModelState.Values)
-                {
-                    foreach (var error in modelStateEntry.Errors)
-                    {
-                        Console.WriteLine($"ModelState Error: {error.ErrorMessage}");
-                    }
-                }
-                ModelState.AddModelError("", "Please fill in all required fields.");
-            }
+            var result = await _addressService.CreateOrUpdateAddressAsync(addressModel);
+            if (result.StatusCode == Infrastructure.Models.StatusCode.OK)
+                return RedirectToAction(nameof(Details));
         }
+        else
+        {
+            foreach (var modelStateEntry in ModelState.Values)
+            {
+                foreach (var error in modelStateEntry.Errors)
+                {
+                    Console.WriteLine($"ModelState Error: {error.ErrorMessage}");
+                }
+            }
+            ModelState.AddModelError("", "Please fill in all required fields.");
+        }
+
         var compositeViewModel = new AccountViewModel
         {
             AddressInfo = viewModel,
