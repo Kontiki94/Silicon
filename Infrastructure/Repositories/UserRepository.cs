@@ -1,10 +1,8 @@
 ﻿using Infrastructure.Contexts;
-using Infrastructure.Entitys;
+using Infrastructure.Entities;
 using Infrastructure.Factories;
 using Infrastructure.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Conventions;
-using System.Diagnostics;
 using System.Linq.Expressions;
 
 namespace Infrastructure.Repositories;
@@ -35,13 +33,6 @@ public class UserRepository(DataContext context) : Repo<UserEntity>(context)
         return base.GetAllAsync();
     }
 
-    public async Task<UserEntity?> GetUserAndIncludeCredentialsAsync(Expression<Func<UserEntity, bool>> predicate)
-    {
-        //return await _context.Users
-        //    .Include(u => u.Credentials)
-        //    .FirstOrDefaultAsync(predicate);
-        return null;
-    }
 
     public virtual async Task<ResponseResult> UpdateAsync(UserEntity entity)
     {

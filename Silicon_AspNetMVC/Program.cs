@@ -1,5 +1,5 @@
 using Infrastructure.Contexts;
-using Infrastructure.Entitys;
+using Infrastructure.Entities;
 using Infrastructure.Repositories;
 using Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
@@ -31,11 +31,9 @@ public class Program
             x.Password.RequiredLength = 8;
         }).AddEntityFrameworkStores<DataContext>();
 
-
-
-
         var app = builder.Build();
         app.UseHsts();
+        app.UseStatusCodePagesWithReExecute("/Error/PageNotFound", "?statusCode={0}");
         app.UseHttpsRedirection();
         app.UseStaticFiles();
         app.UseRouting();
@@ -46,11 +44,6 @@ public class Program
         app.MapControllerRoute(
             name: "default",
             pattern: "{controller=Home}/{action=Index}/{id?}");
-
-        app.MapControllerRoute(
-            name: "Error",
-            pattern: "{*url}",
-            defaults: new { controller = "Error", action = "PageNotFound" });
 
         app.Run();
     }

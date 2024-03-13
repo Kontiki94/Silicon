@@ -1,4 +1,4 @@
-﻿using Infrastructure.Entitys;
+﻿using Infrastructure.Entities;
 using Infrastructure.Models;
 
 namespace Infrastructure.Factories;
@@ -15,16 +15,52 @@ public class AddressFactory
         return null!;
     }
 
-    public static AddressEntity Create(string streetName, string postalCode, string city)
+    public static AddressEntity Create(string userId, string adressLine1, string? addressLine2, string postalCode, string city)
+    {
+        try
+        {
+            return new AddressEntity
+            {
+                UserId = userId,
+                AddressLine1 = adressLine1,
+                AddressLine2 = addressLine2 ?? "",
+                PostalCode = postalCode,
+                City = city,
+            };
+        }
+        catch { }
+        return null!;
+    }
+
+    public static AddressEntity Create(string adressLine1, string? addressLine2, string postalCode, string city)
     {
         try
         {
             return new AddressEntity
             {
 
-                StreetName = streetName,
+                AddressLine1 = adressLine1,
+                AddressLine2 = addressLine2 ?? "",
                 PostalCode = postalCode,
-                City = city
+                City = city,
+            };
+        }
+        catch { }
+        return null!;
+    }
+
+    public static AddressModel Create(string id, string adressLine1, string? addressLine2, string postalCode, string city, string userId)
+    {
+        try
+        {
+            return new AddressModel
+            {
+                Id = id,
+                AddressLine1 = adressLine1,
+                AddressLine2 = addressLine2 ?? "",
+                PostalCode = postalCode,
+                City = city,
+                UserId = userId
             };
         }
         catch { }
@@ -38,9 +74,25 @@ public class AddressFactory
             return new AddressModel
             {
                 Id = entity.Id,
-                StreetName = entity.StreetName,
+                AddressLine1 = entity.AddressLine1,
+                AddressLine2 = entity.AddressLine2 ?? "",
                 PostalCode = entity.PostalCode,
-                City = entity.City
+                City = entity.City,
+                UserId = entity.UserId.ToString()
+            };
+        }
+        catch { }
+        return null!;
+    }
+
+    public static UserAddressEntity Create(string userId, string addressId)
+    {
+        try
+        {
+            return new UserAddressEntity
+            {
+                UserId = userId,
+                AddressId = addressId
             };
         }
         catch { }

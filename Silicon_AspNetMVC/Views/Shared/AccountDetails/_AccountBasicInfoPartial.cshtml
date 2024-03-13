@@ -1,46 +1,53 @@
 ﻿@model AccountViewModel
 
-<div class="user-details">
-    <h1>Account Details</h1>
-    <h5>Basic Info</h5>
-    <div class="name">
-        <div class="firstname">
-            <div class="validation">
-                <label asp-for="Details.FirstName">First name</label>
-                <span asp-validation-for="Details.FirstName"></span>
+<form asp-controller="Account" asp-action="AccountBasicInfo" method="post" novalidate>
+    <div class="user-details">
+        <h2>Account Details</h2>
+        <h5>Basic Info</h5>
+        <span asp-validation-summary="All" class="text-danger"></span>
+        <div class="name">
+            <div class="firstname">
+                <div class="validation">
+                    <label asp-for="Details.FirstName">First name</label>
+                    <span asp-validation-for="Details.FirstName"></span>
+                </div>
+                <input asp-for="Details.FirstName" />
             </div>
-            <input asp-for="Details.FirstName" />
+            <div class="lastname">
+                <div class="validation">
+                    <label asp-for="Details.LastName">Last name</label>
+                    <span asp-validation-for="Details.LastName"></span>
+                </div>
+                <input asp-for="Details.LastName" />
+            </div>
         </div>
-        <div class="lastname">
-            <div class="validation">
-                <label asp-for="Details.LastName">Last name</label>
-                <span asp-validation-for="Details.LastName"></span>
+        <div class="contact-info">
+            <div class="email">
+                <div class="validation">
+                    <label asp-for="Details.Email">Email Address</label>
+                    <span asp-validation-for="Details.Email"></span>
+                </div>
+                <input asp-for="Details.Email" />
             </div>
-            <input asp-for="Details.LastName" />
+            <div class="phone">
+                <div class="validation">
+                    <label asp-for="Details.Phone">Phone</label>
+                    <span asp-validation-for="Details.Phone"></span>
+                </div>
+                <input asp-for="Details.Phone" />
+            </div>
         </div>
     </div>
-    <div class="contact-info">
-        <div class="email">
-            <div class="validation">
-                <label asp-for="Details.Email">Email Address</label>
-                <span asp-validation-for="Details.Email"></span>
-            </div>
-            <input asp-for="Details.Email" />
-        </div>
-        <div class="phone">
-            <div class="validation">
-                <label asp-for="Details.Phone">Phone</label>
-                <span asp-validation-for="Details.Phone"></span>
-            </div>
-            <input asp-for="Details.Phone" />
+    <div class="bio">
+        <label asp-for="Details.Bio">Bio <span>(optional)</span></label>
+        <textarea asp-for="Details.Bio"></textarea>
+        <div class="user-buttons">
+            <a asp-controller="Account" asp-action="Cancel" class="btn-gray">Cancel</a>
+            <button type="submit" class="btn-theme" id="knappen">Save Changes</button>
         </div>
     </div>
-</div>
-<div class="bio">
-    <label asp-for="Details.Bio">Bio <span>(optional)</span></label>
-    <textarea asp-for="Details.Bio"></textarea>
-    <div class="user-buttons">
-        <a asp-controller="Account" asp-action="Cancel" class="btn-gray">Cancel</a>
-        <button type="submit" class="btn-theme">Save Changes</button>
-    </div>
-</div>
+</form>
+
+
+@await Html.PartialAsync("_UserMessageScriptPartial")
+@await Html.PartialAsync("_ValidationScriptPartial")

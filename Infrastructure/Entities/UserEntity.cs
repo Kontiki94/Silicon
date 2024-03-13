@@ -1,11 +1,10 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
 
-namespace Infrastructure.Entitys;
+namespace Infrastructure.Entities;
 
 public class UserEntity : IdentityUser
 {
-
     [Required]
     public string FirstName { get; set; } = null!;
     [Required]
@@ -14,5 +13,8 @@ public class UserEntity : IdentityUser
     public DateTime? Created { get; set; }
     public DateTime? Updated { get; set; }
 
-    public ICollection<AddressEntity> Address { get; set; } = new List<AddressEntity>();
+    public ICollection<UserAddressEntity> UserAddresses { get; set; } = new List<UserAddressEntity>();
 }
+
+
+

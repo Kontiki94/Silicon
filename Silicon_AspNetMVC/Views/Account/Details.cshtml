@@ -1,5 +1,9 @@
 ﻿@model AccountViewModel
 
+@{
+    ViewData["Title"] = "Details";
+}
+
 <section id="details">
     <div class="container">
 
@@ -9,15 +13,24 @@
 
         <div class="account-details">
 
-            <form asp-controller="Account" asp-action="UpdateBasicInfo" method="post" novalidate>
-                @await Html.PartialAsync("~/Views/Shared/AccountDetails/_AccountBasicInfoPartial.cshtml")
-            </form>
+            @if (!string.IsNullOrEmpty(Model.SuccessMessage))
+            {
+                <div class="alert alert-success" id="successMessage" role="alert">
+                    @Model.SuccessMessage
+                </div>
+            }
+
+            @await Html.PartialAsync("~/Views/Shared/AccountDetails/_AccountBasicInfoPartial.cshtml")
 
             <div class="divider"></div>
 
-            <form asp-controller="Account" asp-action="UpdateAddressInfo" method="post" novalidate>
-                @await Html.PartialAsync("~/Views/Shared/AccountDetails/_AccountAddressInfoPartial.cshtml")
-            </form>
+            @await Html.PartialAsync("~/Views/Shared/AccountDetails/_AccountAddressInfoPartial.cshtml")
+
         </div>
     </div>
 </section>
+
+
+@await Html.PartialAsync("_UserMessageScriptPartial")
+@await Html.PartialAsync("_ValidationScriptPartial")
+

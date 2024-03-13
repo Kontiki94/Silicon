@@ -6,6 +6,8 @@ namespace Silicon_AspNetMVC.ViewModels.Account
     {
         public string Title { get; set; } = "Saved Items";
 
+
+        // Ta bort den här. Finns redan i annan viewmodel! 
         public AccountDetailsBasicInfoModel Account { get; set; } = new AccountDetailsBasicInfoModel()
         {
             FirstName = "John",

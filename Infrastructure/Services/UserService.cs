@@ -1,10 +1,11 @@
-﻿using Infrastructure.Entitys;
+﻿using Infrastructure.Entities;
 using Infrastructure.Factories;
 using Infrastructure.Models;
 using Infrastructure.Models.Sections;
 using Infrastructure.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Silicon_AspNetMVC.Models.Sections;
 
 
 namespace Infrastructure.Services
@@ -42,6 +43,35 @@ namespace Infrastructure.Services
             {
                 return ResponseFactory.Error(ex.Message);
             }
+        }
+
+        public async Task<ResponseResult> GetUserByIdAsync(string Id)
+        {
+            try
+            {
+                var result = await _repository.GetOneAsync(x => x.Id == Id);
+                if (result.StatusCode == StatusCode.OK)
+                {
+                    var userEntity = (UserEntity)result.ContentResult!;
+                    var userModel = new AccountDetailsBasicInfoModel()
+                    {
+                        FirstName = userEntity.FirstName,
+                        LastName = userEntity.LastName,
+                        Email = userEntity.Email!,
+                        Phone = userEntity.PhoneNumber!,
+                        Bio = userEntity.Biography
+                        
+                    };
+                    var addressModel = UserFactory.Create(userModel);
+                    return new ResponseResult()
+                    {
+                        StatusCode = result.StatusCode,
+                        ContentResult = addressModel,
+                    };
+                }
+                return ResponseFactory.NotFound("Address not found");
+            }
+            catch (Exception ex) { return ResponseFactory.Error(ex.Message); }
         }
 
         public async Task<ResponseResult> SignInUserAsync(SignInModel model)
@@ -90,7 +120,7 @@ namespace Infrastructure.Services
         {
             try
             {
-                var entityToUpdate = await _repository.UpdateOneAsync(x => x.Email == entity.Email, entity);
+                var entityToUpdate = await _repository.UpdateOneAsync(x => x.Id == entity.Id, entity);
                 if (entityToUpdate != null)
                 {
                     return ResponseFactory.Ok(entityToUpdate);
