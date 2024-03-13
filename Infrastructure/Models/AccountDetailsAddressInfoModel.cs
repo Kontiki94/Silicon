@@ -4,6 +4,8 @@ namespace Silicon_AspNetMVC.Models.Sections
 {
     public class AccountDetailsAddressInfoModel
     {
+        public string? Id { get; set; }
+
         [DataType(DataType.Text)]
         [Display(Name = "Address Line 1", Prompt = "Enter your address line ", Order = 5)]
         [Required(ErrorMessage = "Required")]

@@ -9,13 +9,13 @@
 
         <div class="account-details">
 
-            <form asp-controller="Account" asp-action="UpdateBasicInfo" method="post" novalidate>
+            <form asp-controller="Account" asp-action="AccountBasicInfo" method="post" novalidate>
                 @await Html.PartialAsync("~/Views/Shared/AccountDetails/_AccountBasicInfoPartial.cshtml")
             </form>
 
             <div class="divider"></div>
 
-            <form asp-controller="Account" asp-action="UpdateAddressInfo" method="post" novalidate>
+            <form asp-controller="Account" asp-action="AccountAddressInfo" method="post" novalidate>
                 @await Html.PartialAsync("~/Views/Shared/AccountDetails/_AccountAddressInfoPartial.cshtml")
             </form>
         </div>

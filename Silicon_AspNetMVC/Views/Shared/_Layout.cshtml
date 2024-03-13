@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -15,13 +16,21 @@
             <div class="container">
                 <a id="logo" asp-controller="Home" asp-action="Index"><img src="~/images/icons/silicon-logo-light_theme.svg" alt=""></a>
 
-                <div id="menu" class="hide" >
+                <div id="menu" class="hide">
+
                     <nav>
                         <a class="menu-link asp-fragment" asp-controller="Home" asp-action="Index" asp-fragment="overview">Overview</a>
                         <a class="menu-link asp-fragment" asp-controller="Home" asp-action="Index" asp-fragment="features">Features</a>
                         <a class="menu-link" asp-controller="Contact" asp-action="Index">Contact</a>
-                        <a class="menu-link" asp-controller="Courses" asp-action="Index">Courses</a>
+
+                        @if (User.Identity!.IsAuthenticated)
+                        {
+                            <a class="menu-link" asp-controller="Courses" asp-action="Index">Courses</a>
+                            <a class="menu-link" asp-controller="Details" asp-action="Index">Details</a>
+                        }
+
                     </nav>
+
                 </div>
 
                 <div class="btn-switch">
@@ -34,8 +43,15 @@
                 </div>
 
                 <div class="account-buttons hide" id="account-buttons">
-                    <a class="btn-gray" asp-controller="Auth" asp-action="SignIn"><i class="fa-regular fa-right-to-bracket"></i><span>Sign In</span></a>
-                    <a class="btn-theme" asp-controller="Auth" asp-action="SignUp"><i class="fa-regular fa-user"></i><span>Sign Up</span></a>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <a class="btn-gray" asp-controller="Auth" asp-action="SignOut"><i class="fa-regular fa-right-from-bracket"></i><span>Sign Out</span></a>
+                    }
+                    else
+                    {
+                        <a class="btn-gray" asp-controller="Auth" asp-action="SignIn"><i class="fa-regular fa-right-to-bracket"></i><span>Sign In</span></a>
+                        <a class="btn-theme" asp-controller="Auth" asp-action="SignUp"><i class="fa-regular fa-user"></i><span>Sign Up</span></a>
+                    }
                 </div>
 
                 <button onclick="toggleMenu()" class="btn-mobile">

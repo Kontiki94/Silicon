@@ -5,7 +5,7 @@ namespace Silicon_AspNetMVC.ViewModels.Account
     public class SavedCoursesViewModel
     {
         public string Title { get; set; } = "Saved Items";
-       
+
         public CourseDetailsModel CourseDetails { get; set; } = new CourseDetailsModel()
         {
             CourseImage = new() { ImageUrl = "/images/video-game-design.svg", AltText = "" },

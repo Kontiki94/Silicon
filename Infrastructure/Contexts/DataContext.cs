@@ -1,23 +1,20 @@
-﻿using Infrastructure.Entities.HomeEntities;
-using Infrastructure.Entitys;
+﻿using Infrastructure.Entities;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Contexts;
 
-public class DataContext : DbContext
+public class DataContext(DbContextOptions<DataContext> options) : IdentityDbContext<UserEntity>(options)
 {
-    public DataContext(DbContextOptions<DataContext> options) : base(options)
-    {
-    }
-
-    public DbSet<UserEntity> Users { get; set; }
-    public DbSet<AddressEntity> Address { get; set; }
-    public DbSet<UserCredentialsEntity> UserCredentials { get; set; }
-    public DbSet<ManageWorkEntity> ManageWork { get; set; }
-    public DbSet<DarkLightEntity> DarkLight { get; set; }
+    public DbSet<AddressEntity> Addresses { get; set; }
+    public DbSet<UserAddressEntity> UserAddress { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<UserAddressEntity>()
+                .HasKey(ua => new { ua.UserId, ua.AddressId });
+
         base.OnModelCreating(modelBuilder);
     }
 }

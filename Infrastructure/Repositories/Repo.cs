@@ -46,8 +46,8 @@ public abstract class Repo<TEntity>(DataContext context) where TEntity : class
     {
         try
         {
-            var result = await _context.Set<TEntity>().ToListAsync();
-            return ResponseFactory.Ok();
+            var result = await _context.Set<TEntity>().ToListAsync();               //IEnumerable<TEntity> ? 
+            return ResponseFactory.Ok();                                            //Skicka tillbaks result? return ResponseFactory.Ok(result)
         }
         catch (Exception ex)
         {

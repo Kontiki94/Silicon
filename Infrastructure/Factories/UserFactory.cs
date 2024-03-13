@@ -1,6 +1,6 @@
-﻿using Infrastructure.Entitys;
-using Infrastructure.Helpers;
+﻿using Infrastructure.Entities;
 using Infrastructure.Models;
+using Silicon_AspNetMVC.Models.Sections;
 
 namespace Infrastructure.Factories;
 
@@ -23,30 +23,49 @@ public class UserFactory
         return null!;
     }
 
-    public static (UserEntity, UserCredentialsEntity) Create(SignUpModel model)
+    public static UserEntity Create(SignUpModel model)
     {
         try
         {
             var date = DateTime.Now;
-            var user = new UserEntity()
+
+            return new UserEntity()
             {
-                Id = Guid.NewGuid().ToString(),
                 FirstName = model.FirstName,
                 LastName = model.LastName,
                 Email = model.Email,
+                UserName = model.Email,
                 Created = date,
                 Updated = date
             };
-
-            UserCredentialsEntity credentials = PasswordHasher.GenerateSecurePassword(model.Password);
-            credentials.Id = Guid.NewGuid().ToString();
-            credentials.UserId = user.Id;
-            user.Credentials = new List<UserCredentialsEntity> { credentials };
-            user.Password = credentials.HashedPassword;
-
-            return (user, credentials);
         }
         catch { }
-        return (null!, null!);
+        return null!;
+    }
+
+    public static UserEntity Create(string firstName, string lastName, string email, string phone, string bio, string userId, string passwordHash, string normalizedEmail, string normalizedUserName, string userName)
+    {
+        try
+        {
+            var date = DateTime.Now;
+
+            return new UserEntity()
+            {
+                FirstName = firstName,
+                LastName = lastName,
+                Email = email,
+                UserName = email,
+                PhoneNumber = phone,
+                Biography = bio,
+                Created = date,
+                Updated = date,
+                Id = userId,
+                PasswordHash = passwordHash,
+                NormalizedEmail = email,
+                NormalizedUserName = email,
+            };
+        }
+        catch { }
+        return null!;
     }
 }
