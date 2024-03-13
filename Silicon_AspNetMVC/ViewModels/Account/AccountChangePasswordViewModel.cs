@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Silicon_AspNetMVC.ViewModels.Account;
 
@@ -11,7 +12,7 @@ public class AccountChangePasswordViewModel
 
     [Display(Name = "New Password", Prompt = "******", Order = 1)]
     [DataType(DataType.Password)]
-    [Required(ErrorMessage = "Required")]
+    [Required(ErrorMessage = "Password not strong enough")]
     [RegularExpression(@"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,}$", ErrorMessage = "Password not strong enough")]
     public string NewPassword { get; set; } = null!;
 
