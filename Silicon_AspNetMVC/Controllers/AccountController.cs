@@ -194,7 +194,7 @@ public class AccountController(UserService userService, SignInManager<UserEntity
     [Route("/saved")]
     public IActionResult SavedCourses()
     {
-        var viewModel = new SavedCoursesViewModel();
+        var viewModel = new AccountViewModel();
         return View(viewModel);
     }
 

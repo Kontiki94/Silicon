@@ -1,14 +1,14 @@
-﻿@model SavedCoursesViewModel
+﻿@model AccountViewModel
 
 <section id="saved-courses">
     <div class="container">
         <div class="menu-bar">
             <div class="profile">
                 <div class="image">
-                    <img src="@Model.Account.ProfileImage" alt="" />
+                    <img src="@Model.SavedCourses.Account.ProfileImage" alt="" />
                 </div>
-                <h5 class="user-name">@Model.Account.FirstName @Model.Account.LastName</h5>
-                <p>@Model.Account.Email</p>
+                <h5 class="user-name">@Model.SavedCourses.Account.FirstName @Model.SavedCourses.Account.LastName</h5>
+                <p>@Model.SavedCourses.Account.Email</p>
             </div>
             <nav class="options">
                 <a class="menu-link" asp-controller="Account" asp-action="Details"><i class="fa-regular fa-gear"></i>Account Details</a>
@@ -18,7 +18,7 @@
             </nav>
         </div>
         <div class="content">
-            <h2>@Model.Title</h2>
+            <h2>@Model.SavedCourses.Title</h2>
             <div class="saved-items">
                 <div class="course-card">
                     <div class="image">
@@ -27,19 +27,19 @@
                     <a class="bookmark" asp-controller="" asp-action=""><i class="fa-solid fa-bookmark"></i></a>
                     <div class="hide"><p>Remove</p></div>
                     <div class="course-info">
-                        <h5 class="title">@Model.CourseDetails.Title</h5>
-                        <p class="author">By @Model.CourseDetails.Author.AuthorName</p>
-                        <p class="price">$@Model.CourseDetails.Price</p>
+                        <h5 class="title">@Model.SavedCourses.CourseDetails.Title</h5>
+                        <p class="author">By @Model.SavedCourses.CourseDetails.Author.AuthorName</p>
+                        <p class="price">$@Model.SavedCourses.CourseDetails.Price</p>
                         <div class="divider"></div>                        
                     </div>
                     <div class="bottom">
                         <div>
                             <i class="fa-sharp fa-solid fa-clock"></i>
-                            <p>@Model.CourseDetails.ViewHours hours</p>
+                            <p>@Model.SavedCourses.CourseDetails.ViewHours hours</p>
                         </div>
                         <div>
                             <i class="fa-sharp fa-light fa-thumbs-up"></i>
-                            <p>@Model.CourseDetails.Likes</p>
+                            <p>@Model.SavedCourses.CourseDetails.Likes</p>
                         </div>
                     </div>
                     
@@ -51,19 +51,19 @@
                     <a class="bookmark" asp-controller="" asp-action=""><i class="fa-solid fa-bookmark"></i></a>
                     <div class="hide"><p>Remove</p></div>
                     <div class="course-info">
-                        <h5 class="title">@Model.CourseDetails.Title</h5>
-                        <p class="author">By @Model.CourseDetails.Author.AuthorName</p>
-                        <p class="price">$@Model.CourseDetails.Price</p>
+                        <h5 class="title">@Model.SavedCourses.CourseDetails.Title</h5>
+                        <p class="author">By @Model.SavedCourses.CourseDetails.Author.AuthorName</p>
+                        <p class="price">$@Model.SavedCourses.CourseDetails.Price</p>
                         <div class="divider"></div>
                     </div>
                     <div class="bottom">
                         <div>
                             <i class="fa-sharp fa-solid fa-clock"></i>
-                            <p>@Model.CourseDetails.ViewHours hours</p>
+                            <p>@Model.SavedCourses.CourseDetails.ViewHours hours</p>
                         </div>
                         <div>
                             <i class="fa-sharp fa-light fa-thumbs-up"></i>
-                            <p>@Model.CourseDetails.Likes</p>
+                            <p>@Model.SavedCourses.CourseDetails.Likes</p>
                         </div>
                     </div>
                 </div>
@@ -74,19 +74,19 @@
                     <a class="bookmark" asp-controller="" asp-action=""><i class="fa-solid fa-bookmark"></i></a>
                     <div class="hide"><p>Remove</p></div>
                     <div class="course-info">
-                        <h5 class="title">@Model.CourseDetails.Title</h5>
-                        <p class="author">By @Model.CourseDetails.Author.AuthorName</p>
-                        <p class="price">$@Model.CourseDetails.Price</p>
+                        <h5 class="title">@Model.SavedCourses.CourseDetails.Title</h5>
+                        <p class="author">By @Model.SavedCourses.CourseDetails.Author.AuthorName</p>
+                        <p class="price">$@Model.SavedCourses.CourseDetails.Price</p>
                         <div class="divider"></div>
                     </div>
                     <div class="bottom">
                         <div>
                             <i class="fa-sharp fa-solid fa-clock"></i>
-                            <p>@Model.CourseDetails.ViewHours hours</p>
+                            <p>@Model.SavedCourses.CourseDetails.ViewHours hours</p>
                         </div>
                         <div>
                             <i class="fa-sharp fa-light fa-thumbs-up"></i>
-                            <p>@Model.CourseDetails.Likes</p>
+                            <p>@Model.SavedCourses.CourseDetails.Likes</p>
                         </div>
                     </div>
                 </div>

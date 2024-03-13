@@ -25,7 +25,6 @@ namespace Silicon_AspNetMVC.Controllers
                 return RedirectToAction("Details", "Account");
             }
             ViewData["ReturnUrl"] = returnUrl ?? Url.Content("~/");
-
             return View(viewModel);
         }
 
