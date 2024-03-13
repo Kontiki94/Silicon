@@ -19,7 +19,6 @@ public class AccountController(UserService userService, SignInManager<UserEntity
     private readonly UserManager<UserEntity> _manager = userManager;
     private readonly AddressService _addressService = addressService;
 
-    // Fixa en GET för att förpopulera användaruppgifter och bild. 
 
     [HttpGet]
     [Route("/details")]
@@ -35,8 +34,8 @@ public class AccountController(UserService userService, SignInManager<UserEntity
             Details = new AccountDetailsBasicInfoViewModel(),
         };
 
-        viewModel.AddressInfo = await PopulateAddressInfo();
-        viewModel.Details = await PopulateBasicInfo();
+        viewModel.AddressInfo = await PopulateAddressInfoAsync();
+        viewModel.Details = await PopulateBasicInfoAsync();
         viewModel.Profile = await PopulateProfileInfoAsync();
 
         return View(viewModel);
@@ -51,7 +50,7 @@ public class AccountController(UserService userService, SignInManager<UserEntity
         {
             if (ModelState.IsValid)
             {
-                var userEntity = await GenerateUserEntity(viewModel);
+                var userEntity = await GenerateUserEntityAsync(viewModel);
 
                 var result = await _userService.UpdateUserAsync(userEntity);
                 if (result.StatusCode == Infrastructure.Models.StatusCode.OK)
@@ -76,7 +75,7 @@ public class AccountController(UserService userService, SignInManager<UserEntity
             Profile = new ProfileViewModel()
         };
 
-        compositeViewModel.AddressInfo = await PopulateAddressInfo();
+        compositeViewModel.AddressInfo = await PopulateAddressInfoAsync();
         compositeViewModel.Profile = await PopulateProfileInfoAsync();
 
         return View("Details", compositeViewModel);
@@ -91,7 +90,7 @@ public class AccountController(UserService userService, SignInManager<UserEntity
         {
             if (ModelState.IsValid)
             {
-                var addressModel = await GenerateAddressModel(viewModel);
+                var addressModel = await GenerateAddressModelAsync(viewModel);
 
                 var result = await _addressService.CreateOrUpdateAddressAsync(addressModel);
                 if (result.StatusCode == Infrastructure.Models.StatusCode.OK)
@@ -117,7 +116,7 @@ public class AccountController(UserService userService, SignInManager<UserEntity
         };
 
         compositeViewModel.Profile = await PopulateProfileInfoAsync();
-        compositeViewModel.Details = await PopulateBasicInfo();
+        compositeViewModel.Details = await PopulateBasicInfoAsync();
 
         return View("Details", compositeViewModel);
     }
@@ -209,7 +208,7 @@ public class AccountController(UserService userService, SignInManager<UserEntity
         };
     }
 
-    private async Task<AccountDetailsBasicInfoViewModel> PopulateBasicInfo()
+    private async Task<AccountDetailsBasicInfoViewModel> PopulateBasicInfoAsync()
     {
         var user = await _manager.GetUserAsync(User);
 
@@ -223,7 +222,7 @@ public class AccountController(UserService userService, SignInManager<UserEntity
         };
     }
 
-    private async Task<AccountDetailsAddressInfoViewModel> PopulateAddressInfo()
+    private async Task<AccountDetailsAddressInfoViewModel> PopulateAddressInfoAsync()
     {
         var viewModel = new AccountDetailsAddressInfoViewModel();
         var user = await _signInManager.UserManager.GetUserAsync(User);
@@ -243,7 +242,7 @@ public class AccountController(UserService userService, SignInManager<UserEntity
         return null!;
     }
 
-    private async Task<UserEntity> GenerateUserEntity(AccountDetailsBasicInfoViewModel viewModel)
+    private async Task<UserEntity> GenerateUserEntityAsync(AccountDetailsBasicInfoViewModel viewModel)
     {
         var user = await _signInManager.UserManager.GetUserAsync(User);
 
@@ -261,7 +260,7 @@ public class AccountController(UserService userService, SignInManager<UserEntity
             );
     }
 
-    private async Task<AddressModel> GenerateAddressModel(AccountDetailsAddressInfoViewModel viewModel)
+    private async Task<AddressModel> GenerateAddressModelAsync(AccountDetailsAddressInfoViewModel viewModel)
     {
         var user = await _signInManager.UserManager.GetUserAsync(User);
 

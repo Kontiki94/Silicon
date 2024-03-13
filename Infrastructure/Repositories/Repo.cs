@@ -21,7 +21,6 @@ public abstract class Repo<TEntity>(DataContext context) where TEntity : class
         catch (Exception ex)
         {
             return ResponseFactory.Error(ex.Message);
-
         }
     }
 
