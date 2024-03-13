@@ -26,7 +26,6 @@
                         @if (User.Identity!.IsAuthenticated)
                         {
                             <a class="menu-link" asp-controller="Courses" asp-action="Index">Courses</a>
-                            <a class="menu-link" asp-controller="Details" asp-action="Index">Details</a>
                         }
 
                     </nav>
@@ -45,7 +44,9 @@
                 <div class="account-buttons hide" id="account-buttons">
                     @if (User.Identity.IsAuthenticated)
                     {
+
                         <a class="btn-gray" asp-controller="Auth" asp-action="SignOut"><i class="fa-regular fa-right-from-bracket"></i><span>Sign Out</span></a>
+                        <a asp-controller="Account" asp-action="Details"><img class="profile-image" src="~/images/profiles/john-doe.png" /></a>
                     }
                     else
                     {

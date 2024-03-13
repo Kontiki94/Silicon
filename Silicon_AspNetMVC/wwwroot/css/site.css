@@ -450,6 +450,10 @@ header .container .account-buttons {
 header .container .account-buttons button {
   max-width: 100%;
 }
+header .container .account-buttons .profile-image {
+  max-width: 50px;
+  max-height: 50px;
+}
 header .container .btn-mobile {
   font-size: 1.8rem;
   background: transparent;
