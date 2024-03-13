@@ -32,6 +32,7 @@ public class AccountController(UserService userService, SignInManager<UserEntity
             Navigation = new NavigationViewModel("Details"),
             AddressInfo = new AccountDetailsAddressInfoViewModel(),
             Details = new AccountDetailsBasicInfoViewModel(),
+            SuccessMessage = TempData["SuccessMessage"]?.ToString() ?? ""
         };
 
         viewModel.AddressInfo = await PopulateAddressInfoAsync();
@@ -54,6 +55,7 @@ public class AccountController(UserService userService, SignInManager<UserEntity
 
                 var result = await _userService.UpdateUserAsync(userEntity);
                 if (result.StatusCode == Infrastructure.Models.StatusCode.OK)
+                    TempData["SuccessMessage"] = "Account information saved successfully";
                     return RedirectToAction(nameof(Details));
             }
             else
@@ -72,11 +74,12 @@ public class AccountController(UserService userService, SignInManager<UserEntity
         {
             AddressInfo = new AccountDetailsAddressInfoViewModel(),
             Details = viewModel,
-            Profile = new ProfileViewModel()
+            Profile = new ProfileViewModel(),
         };
 
         compositeViewModel.AddressInfo = await PopulateAddressInfoAsync();
         compositeViewModel.Profile = await PopulateProfileInfoAsync();
+
 
         return View("Details", compositeViewModel);
     }
@@ -130,7 +133,7 @@ public class AccountController(UserService userService, SignInManager<UserEntity
         viewModel.Navigation = new NavigationViewModel("Security");
         viewModel.Profile = await PopulateProfileInfoAsync();
         ViewData["Title"] = "Security";
-        
+
         return View(viewModel);
     }
 
@@ -159,7 +162,7 @@ public class AccountController(UserService userService, SignInManager<UserEntity
                 }
             }
         }
-        
+
         return View("Security", viewModel);
     }
 

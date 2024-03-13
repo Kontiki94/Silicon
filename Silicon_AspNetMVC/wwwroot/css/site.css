@@ -1673,14 +1673,21 @@ footer .container .social-media {
   background-color: #6366F1;
   color: #fff;
 }
+#details .container .account-details {
+  /*            #successMessage {
+                  display: inline;
+                  margin: 0;
+              }*/
+}
 @media (min-width: 992px) {
   #details .container .account-details {
     border-left: 1px solid #E2E5F1;
     padding-left: 7rem;
   }
 }
-#details .container .account-details h1 {
+#details .container .account-details h2 {
   margin-bottom: 1.2rem;
+  margin-top: 0.5rem;
 }
 #details .container .account-details .user-details .name, #details .container .account-details .user-details .contact-info {
   display: flex;

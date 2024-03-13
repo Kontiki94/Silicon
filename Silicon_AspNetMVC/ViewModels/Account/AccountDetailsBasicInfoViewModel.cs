@@ -7,8 +7,8 @@ public class AccountDetailsBasicInfoViewModel
 {
     [DataType(DataType.Text)]
     [Display(Name = "First name", Prompt = "John", Order = 0)]
-    [MinLength(2, ErrorMessage = "Not valid.")]
-    [Required(ErrorMessage = "Required")]
+    //[MinLength(2, ErrorMessage = "Not valid.")]
+    //[Required(ErrorMessage = "Required")]
     public string FirstName { get; set; } = null!;
 
     [DataType(DataType.Text)]

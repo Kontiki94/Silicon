@@ -43,9 +43,11 @@
         <textarea asp-for="Details.Bio"></textarea>
         <div class="user-buttons">
             <a asp-controller="Account" asp-action="Cancel" class="btn-gray">Cancel</a>
-            <button type="submit" class="btn-theme">Save Changes</button>
+            <button type="submit" class="btn-theme" id="knappen">Save Changes</button>
         </div>
     </div>
 </form>
-@await Html.PartialAsync("_ValidationScriptPartial")
 
+
+@await Html.PartialAsync("_UserMessageScriptPartial")
+@await Html.PartialAsync("_ValidationScriptPartial")
