@@ -11,7 +11,7 @@
             <p>Don't have an account yet? <a asp-controller="Auth" asp-action="SignUp">Sign up here.</a></p>
         </div>
         <div class="login-box">
-            <form asp-controller="Auth" asp-action="SignIn" method="post" novalidate>
+            <form asp-controller="Auth" asp-action="SignIn" asp-route-ReturnUrl="@ViewData["ReturnUrl"]" method="post" novalidate>
                 <span class="text-danger">
                     @Model.ErrorMessage
                 </span>

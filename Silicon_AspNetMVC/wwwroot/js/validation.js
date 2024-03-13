@@ -61,8 +61,8 @@ const checkboxValidator = (element) => {
 }
 
 let forms = document.querySelectorAll('form');
-let inputs = forms[0].querySelectorAll('input');
 
+<<<<<<< HEAD
 inputs.forEach(input => {
     if (input.dataset.val === 'true') {
         if (input.type === 'checkbox') {
@@ -84,8 +84,34 @@ inputs.forEach(input => {
                         break;
                 }
             });
+=======
+forms.forEach(form => {
+    let inputs = form.querySelectorAll('input');
+
+    inputs.forEach(input => {
+        if (input.dataset.val === 'true') {
+            if (input.type === 'checkbox') {
+                input.addEventListener('change', (e) => {
+                    checkboxValidator(e.target)
+                });
+            } else {
+                input.addEventListener('keyup', (e) => {
+                    switch (e.target.type) {
+                        case 'text':
+                            textValidator(e.target);
+                            break;
+                        case 'email':
+                            emailValidator(e.target);
+                            break;
+                        case 'password':
+                            passwordValidator(e.target);
+                            break;
+                    }
+                });
+            }
+>>>>>>> a38e278274047a902b9d8a68497adcc3b05129da
         }
-    }
+    });
 });
 
 let textareas = document.querySelectorAll('textarea')

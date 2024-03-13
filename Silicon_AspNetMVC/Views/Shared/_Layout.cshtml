@@ -17,7 +17,6 @@
                 <a id="logo" asp-controller="Home" asp-action="Index"><img src="~/images/icons/silicon-logo-light_theme.svg" alt=""></a>
 
                 <div id="menu" class="hide">
-
                     <nav>
                         <a class="menu-link asp-fragment" asp-controller="Home" asp-action="Index" asp-fragment="overview">Overview</a>
                         <a class="menu-link asp-fragment" asp-controller="Home" asp-action="Index" asp-fragment="features">Features</a>
@@ -26,11 +25,9 @@
                         @if (User.Identity!.IsAuthenticated)
                         {
                             <a class="menu-link" asp-controller="Courses" asp-action="Index">Courses</a>
-                            <a class="menu-link" asp-controller="Details" asp-action="Index">Details</a>
                         }
 
                     </nav>
-
                 </div>
 
                 <div class="btn-switch">
@@ -45,7 +42,9 @@
                 <div class="account-buttons hide" id="account-buttons">
                     @if (User.Identity.IsAuthenticated)
                     {
+
                         <a class="btn-gray" asp-controller="Auth" asp-action="SignOut"><i class="fa-regular fa-right-from-bracket"></i><span>Sign Out</span></a>
+                        <a asp-controller="Account" asp-action="Details"><img class="profile-image" src="~/images/profiles/john-doe.png" /></a>
                     }
                     else
                     {

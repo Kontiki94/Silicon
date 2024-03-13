@@ -49,7 +49,6 @@ public class AddressFactory
         return null!;
     }
 
-
     public static AddressModel Create(string id, string adressLine1, string? addressLine2, string postalCode, string city, string userId)
     {
         try

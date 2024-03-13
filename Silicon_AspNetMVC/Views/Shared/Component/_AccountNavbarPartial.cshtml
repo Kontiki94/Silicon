@@ -1,16 +1,20 @@
-﻿
+﻿@{
+    ViewData["Title"] = $"{Model.Profile.FirstName} {Model.Profile.LastName}";
+}
 
-<div class="profile">
-    <div class="image">
-        <img src="@Model.Details.ProfileImage" alt="@($"{@Model.Details.FirstName} {@Model.Details.LastName}")" />
+<aside>
+    <div class="profile">
+        <div class="image">
+            <img src="~/images/profiles/@Model.Profile.ProfileImageUrl" alt="@($"{@Model.Profile.FirstName} {@Model.Profile.LastName}")" />
+        </div>
+        <h5 class="user-name"> @Model.Profile.FirstName @Model.Profile.LastName</h5>
+        <p>@User.Identity!.Name</p>
     </div>
-    <h5 class="user-name"> @Model.Details.FirstName @Model.Details.LastName</h5>
-    <p>@User.Identity!.Name</p>
-</div>
-<nav class="options">
-    <a class="@((Model.Navigation.ActiveAction == "Details") ? "active" : "") menu-link" asp-controller="Account" asp-action="Details"><i class="fa-regular fa-gear"></i>Account Details</a>
-    <a class="@((Model.Navigation.ActiveAction == "Security") ? "active" : "") menu-link" asp-controller="Account" asp-action="Security"><i class="fa-regular fa-lock"></i>Security</a>
-    <a class="@((Model.Navigation.ActiveAction == "SavedCourses") ? "active" : "") menu-link" asp-controller="Account" asp-action="SavedCourses"><i class="fa-sharp fa-regular fa-bookmark"></i>Saved Courses</a>
-    <a class="menu-link" asp-controller="Auth" asp-action="SignOut"><i class="fa-solid fa-right-from-bracket"></i>Sign Out</a>
-</nav>
+    <nav class="options">
+        <a class="@((Model.Navigation.ActiveAction == "Details") ? "active" : "") menu-link" asp-controller="Account" asp-action="Details"><i class="fa-regular fa-gear"></i>Account Details</a>
+        <a class="@((Model.Navigation.ActiveAction == "Security") ? "active" : "") menu-link" asp-controller="Account" asp-action="Security"><i class="fa-regular fa-lock"></i>Security</a>
+        <a class="@((Model.Navigation.ActiveAction == "SavedCourses") ? "active" : "") menu-link" asp-controller="Account" asp-action="SavedCourses"><i class="fa-sharp fa-regular fa-bookmark"></i>Saved Courses</a>
+        <a class="menu-link" asp-controller="Auth" asp-action="SignOut"><i class="fa-solid fa-right-from-bracket"></i>Sign Out</a>
+    </nav>
+</aside>
 

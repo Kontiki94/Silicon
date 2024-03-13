@@ -94,8 +94,14 @@
                 padding-left: 7rem;
             }
 
-            h1 {
+/*            #successMessage {
+                display: inline;
+                margin: 0;
+            }*/
+
+            h2 {
                 margin-bottom: 1.2rem;
+                margin-top: .5rem;
             }
 
             .user-details {
@@ -165,14 +171,10 @@
                     font-weight: 300;
                 }
 
-
                 .user-buttons {
                     display: flex;
                     gap: 1rem;
                     margin-top: 1rem;
-
-                    user-buttons {
-                    }
                 }
 
                 span {
@@ -196,18 +198,9 @@
                 }
             }
 
-            .address {
+            .address-fields {
                 display: flex;
                 flex-direction: column;
-
-                label {
-                    margin-top: 1rem;
-                }
-
-                span {
-                    padding-left: .4rem;
-                    font-weight: 400;
-                }
 
                 .city-info {
                     display: flex;
@@ -225,55 +218,80 @@
                     }
                 }
 
+                .validation {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+
+                    label {
+                        margin-top: 1rem;
+                    }
+
+                    span {
+                        padding-left: .4rem;
+                        font-weight: 400;
+                    }
+
+                    .address-button {
+                        display: flex;
+                        gap: 1rem;
+                        margin-top: 1rem;
+                    }
+                }
+
+                span {
+                    margin-top: 15px;
+                    position: relative;
+
+                    &.field-validation-error {
+                        @include text-s;
+                        color: $danger;
+
+                        &::after {
+                            position: absolute;
+                            right: 10px;
+                            top: 42px;
+                            z-index: 1;
+                            font-size: 2em;
+                            display: block;
+                            content: '\2BBF';
+                        }
+                    }
+                }
+
                 .address-button {
                     display: flex;
+                    flex-direction: row;
                     gap: 1rem;
                     margin-top: 1rem;
                 }
             }
-        }
 
-        .address-fields {
-            display: flex;
-            flex-direction: row;
+            input {
+                margin-bottom: .5rem;
+                padding: 0.6rem;
+                border: .5px solid $gray-400;
+                border-radius: .4rem;
 
-
-            .validation {
-                display: flex;
-                flex-direction: column;
-                width: 100%;
+                &.input-validation-error {
+                    border: 0.050rem solid $danger !important;
+                    color: $danger;
+                }
             }
 
-            #first-address {
-                margin-right: .5rem;
+            label {
+                font-weight: 700;
+                margin-bottom: .2rem;
             }
-        }
-                
 
-        input {
-            margin-bottom: .5rem;
-            padding: 0.6rem;
-            border: .5px solid $gray-400;
-            border-radius: .4rem;
-
-            &.input-validation-error {
-                border: 0.050rem solid $danger !important;
-                color: $danger;
+            span.field-validation-error {
+                color: $danger !important;
             }
-        }
 
-        label {
-            font-weight: 700;
-            margin-bottom: .2rem;
-        }
-
-        span.field-validation-error {
-            color: $danger !important;
-        }
-
-        h5 {
-            color: $theme;
-            margin-bottom: 1rem;
+            h5 {
+                color: $theme;
+                margin-bottom: 1rem;
+            }
         }
     }
 }
