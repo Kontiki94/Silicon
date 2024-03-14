@@ -7,9 +7,23 @@
 
     .main-holder {
         width: 480px;
+        position: relative;
+
+        .alert-danger {
+            position: absolute;
+            width: 250px;
+            top: -65px;
+            left: 0;
+            width: 100%;
+            display: none;
+        }
+
+        .alert-danger:not(:empty) {
+            display: block;
+        }
 
         .section-title {
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
             align-items: flex-start;
             padding-right: 9rem;
 
@@ -19,15 +33,18 @@
         }
 
         .login-box {
+            position: relative;
             display: flex;
             flex-direction: column;
             gap: 1.5rem;
+
+
 
             .text-danger {
                 color: $danger;
                 margin-bottom: .3rem;
                 display: inline-block;
-                height: 0; 
+                height: 0;
             }
 
             .email, .password {
