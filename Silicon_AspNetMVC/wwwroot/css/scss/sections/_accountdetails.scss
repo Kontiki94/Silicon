@@ -12,6 +12,7 @@
         }
 
         .menu-bar {
+            position: relative;
             display: flex;
             flex-direction: column;
             margin-bottom: 30px;
@@ -94,17 +95,28 @@
                 padding-left: 7rem;
             }
 
-/*            #successMessage {
-                display: inline;
-                margin: 0;
-            }*/
-
             h2 {
                 margin-bottom: 1.2rem;
                 margin-top: .5rem;
             }
 
             .user-details {
+                .section-title {
+                    position: relative;
+
+                    .alert {
+                        position: absolute;
+                        top: -55px;
+                        left: -10px;
+                        width: 100%;
+                        display: none;
+                    }
+
+                    .alert:not(:empty) {
+                        display: block;
+                    }
+                }
+
                 .name, .contact-info {
                     display: flex;
                     flex-direction: row;

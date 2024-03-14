@@ -1,10 +1,8 @@
 ﻿using Infrastructure.Entities;
 using Infrastructure.Services;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Silicon_AspNetMVC.ViewModels.Auth;
-using System;
 using System.Security.Claims;
 
 namespace Silicon_AspNetMVC.Controllers
@@ -19,12 +17,18 @@ namespace Silicon_AspNetMVC.Controllers
         [Route("/signin")]
         public IActionResult SignIn(string returnUrl)
         {
-            var viewModel = new SignInViewModel();
             ViewData["Title"] = "Sign In";
+            var viewModel = new SignInViewModel()
+            {
+                SuccessMessage = TempData["SuccessMessage"]?.ToString(),
+                ErrorMessage = TempData["ErrorMessage"]?.ToString()
+            };
+
             if (_signInManager.IsSignedIn(User))
             {
                 return RedirectToAction("Details", "Account");
             }
+
             ViewData["ReturnUrl"] = returnUrl ?? Url.Content("~/");
 
             return View(viewModel);
@@ -48,8 +52,8 @@ namespace Silicon_AspNetMVC.Controllers
                     return RedirectToAction("Details", "Account");
                 }
             }
-            viewModel.ErrorMessage = "Invalid e-mail or password";
-            return View(viewModel);
+            TempData["ErrorMessage"] = "Invalid e-mail or password";
+            return RedirectToAction("Signin", "Auth");
         }
 
         [Route("/signup")]
@@ -114,6 +118,7 @@ namespace Silicon_AspNetMVC.Controllers
                     UserName = userInfo.Principal.FindFirstValue(ClaimTypes.Email)!,
                     IsExternalAccount = true
                 };
+
                 var user = await _manager.FindByEmailAsync(userEntity.Email);
                 if (user is null)
                 {
