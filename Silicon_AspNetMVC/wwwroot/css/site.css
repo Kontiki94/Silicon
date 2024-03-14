@@ -1704,14 +1704,14 @@ footer .container .social-media {
 #details .container .account-details .user-details .section-title {
   position: relative;
 }
-#details .container .account-details .user-details .section-title .alert-success {
+#details .container .account-details .user-details .section-title .alert {
   position: absolute;
   top: -55px;
   left: -10px;
   width: 100%;
   display: none;
 }
-#details .container .account-details .user-details .section-title .alert-success:not(:empty) {
+#details .container .account-details .user-details .section-title .alert:not(:empty) {
   display: block;
 }
 #details .container .account-details .user-details .name, #details .container .account-details .user-details .contact-info {

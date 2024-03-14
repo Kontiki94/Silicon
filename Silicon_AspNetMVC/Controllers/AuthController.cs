@@ -51,7 +51,6 @@ namespace Silicon_AspNetMVC.Controllers
                     {
                         return Redirect(returnUrl);
                     }
-                    TempData["SuccessMessage"] = "Signed in successfully.";
                     return RedirectToAction("Details", "Account");
                 }
             }

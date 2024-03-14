@@ -28,7 +28,8 @@ public class AccountController(UserService userService, SignInManager<UserEntity
             Navigation = new NavigationViewModel("Details"),
             AddressInfo = new AccountDetailsAddressInfoViewModel(),
             Details = new AccountDetailsBasicInfoViewModel(),
-            SuccessMessage = TempData["SuccessMessage"]?.ToString() ?? ""
+            SuccessMessage = TempData["SuccessMessage"]?.ToString() ?? "",
+            ErrorMessage = TempData["ErrorMessage"]?.ToString() ?? "",
         };
 
         viewModel.AddressInfo = await PopulateAddressInfoAsync();
@@ -49,26 +50,20 @@ public class AccountController(UserService userService, SignInManager<UserEntity
 
             var result = await _userService.UpdateUserAsync(userEntity);
             if (result.StatusCode == Infrastructure.Models.StatusCode.OK)
-                TempData["SuccessMessage"] = "Account information saved successfully";
-            return RedirectToAction(nameof(Details));
-        }
-        else
-        {
-            foreach (var modelStateEntry in ModelState.Values)
             {
-                foreach (var error in modelStateEntry.Errors)
-                {
-                    Console.WriteLine($"ModelState Error: {error.ErrorMessage}");
-                }
+                TempData["SuccessMessage"] = "Account information saved successfully";
+                return RedirectToAction(nameof(Details));
             }
-            ModelState.AddModelError("", "Please fill in all required fields.");
         }
+
+        TempData["ErrorMessage"] = "Please fill in all required fields.";
 
         var compositeViewModel = new AccountViewModel
         {
             AddressInfo = new AccountDetailsAddressInfoViewModel(),
             Details = viewModel,
             Profile = new ProfileViewModel(),
+            ErrorMessage = TempData["ErrorMessage"]?.ToString()!
         };
 
         compositeViewModel.AddressInfo = await PopulateAddressInfoAsync();
@@ -187,7 +182,7 @@ public class AccountController(UserService userService, SignInManager<UserEntity
     }
     #endregion
 
-   
+
     public IActionResult Cancel()
     {
         return RedirectToAction("Details", "Account");

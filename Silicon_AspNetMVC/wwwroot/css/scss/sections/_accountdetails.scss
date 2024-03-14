@@ -103,7 +103,8 @@
             .user-details {
                 .section-title {
                     position: relative;
-                    .alert-success {
+
+                    .alert {
                         position: absolute;
                         top: -55px;
                         left: -10px;
@@ -111,7 +112,7 @@
                         display: none;
                     }
 
-                    .alert-success:not(:empty) {
+                    .alert:not(:empty) {
                         display: block;
                     }
                 }
