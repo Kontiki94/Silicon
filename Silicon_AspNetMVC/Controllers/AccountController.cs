@@ -83,25 +83,18 @@ public class AccountController(UserService userService, SignInManager<UserEntity
 
             var result = await _addressService.CreateOrUpdateAddressAsync(addressModel);
             if (result.StatusCode == Infrastructure.Models.StatusCode.OK)
-                return RedirectToAction(nameof(Details));
+                TempData["SuccessMessage"] = "Address information saved successfully.";
+            return RedirectToAction(nameof(Details));
         }
-        else
-        {
-            foreach (var modelStateEntry in ModelState.Values)
-            {
-                foreach (var error in modelStateEntry.Errors)
-                {
-                    Console.WriteLine($"ModelState Error: {error.ErrorMessage}");
-                }
-            }
-            ModelState.AddModelError("", "Please fill in all required fields.");
-        }
+
+        TempData["ErrorMessage"] = "Please fill in all required fields.";
 
         var compositeViewModel = new AccountViewModel
         {
             AddressInfo = viewModel,
             Details = new AccountDetailsBasicInfoViewModel(),
-            Profile = new ProfileViewModel()
+            Profile = new ProfileViewModel(),
+            ErrorMessage = TempData["ErrorMessage"]?.ToString()!
         };
 
         compositeViewModel.Profile = await PopulateProfileInfoAsync();
