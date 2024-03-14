@@ -1,44 +1,37 @@
-﻿<section class="download">
+﻿@model DownloadViewModel
+
+<section id="@Model.Id" class="download">
     <div class="container">
         <div class="content">
             <div class="img-container">
-                <img src="~/images/iphone.svg" />
+                <img src="@Model.Image.ImageUrl" alt="@Model.Image.AltText"/>
             </div>
             <div class="right">
-                <h1>Download Our App for Any Devices:</h1>
+                <h1>@Model.SectionTitle.Title</h1>
                 <div class="boxes">
-                    <div class="box">
-                        <p>App Store</p>
-                        <div class="five-stars">
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                        </div>
-                        <h4>Editor's Choice</h4>
-                        <p>rating 4.7, 187K+ reviews</p>
-                    </div>
-                    <div class="box">
-                        <img src="~/images/appstore.svg" />
-                    </div>                      
-                    
-                    <div class="box">
-                        <p>Google Play</p>
-                        <div class="five-stars">
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                        </div>
-                        <h4>App of the Day</h4>
-                        <p>rating 4.8, 30K+ reviews</p>
-                    </div>
-                    <div class="box">
-                        <img src="~/images/googleplay.svg" />
-                    </div>                        
-                    
+                    @if (Model.DownloadBox is not null)
+                    {
+                        foreach (var box in Model.DownloadBox)
+                        {
+                            <div class="apps">
+                                <div class="box-text">
+                                    <p>@box.StoreName</p>
+                                    <div class="five-stars">
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                    </div>
+                                    <h4>@box.Title</h4>
+                                    <p>@box.Rating</p>
+                                </div>
+                                <div class="box-img">
+                                    <a href="@box.LinkUrl"><img src="@box.Image.ImageUrl" alt="@box.Image.AltText" /></a>
+                                </div>
+                            </div>                           
+                        }
+                    }                 
                 </div>                
             </div>
         </div>        

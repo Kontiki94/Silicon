@@ -1,10 +1,8 @@
 ﻿using Infrastructure.Entities;
 using Infrastructure.Services;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Silicon_AspNetMVC.ViewModels.Auth;
-using System;
 using System.Security.Claims;
 
 namespace Silicon_AspNetMVC.Controllers
@@ -120,6 +118,7 @@ namespace Silicon_AspNetMVC.Controllers
                     UserName = userInfo.Principal.FindFirstValue(ClaimTypes.Email)!,
                     IsExternalAccount = true
                 };
+
                 var user = await _manager.FindByEmailAsync(userEntity.Email);
                 if (user is null)
                 {
