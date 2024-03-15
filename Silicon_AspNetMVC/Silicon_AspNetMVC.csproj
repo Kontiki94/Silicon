@@ -7,13 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Helpers\**" />
     <Compile Remove="Views\Shared\Partials\**" />
-    <Content Remove="Helpers\**" />
     <Content Remove="Views\Shared\Partials\**" />
-    <EmbeddedResource Remove="Helpers\**" />
     <EmbeddedResource Remove="Views\Shared\Partials\**" />
-    <None Remove="Helpers\**" />
     <None Remove="Views\Shared\Partials\**" />
   </ItemGroup>
 
