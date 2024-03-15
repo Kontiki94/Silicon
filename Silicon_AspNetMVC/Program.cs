@@ -4,7 +4,6 @@ using Infrastructure.Helpers.Middlewares;
 using Infrastructure.Repositories;
 using Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
-using Silicon_AspNetMVC.Helpers;
 
 namespace Silicon_AspNetMVC;
 

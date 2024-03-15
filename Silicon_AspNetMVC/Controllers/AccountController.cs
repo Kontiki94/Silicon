@@ -15,7 +15,7 @@ public class AccountController(UserService userService, SignInManager<UserEntity
 {
     private readonly UserService _userService = userService;
     private readonly SignInManager<UserEntity> _signInManager = signInManager;
-    private readonly UserManager<UserEntity> _manager = userManager;
+    private readonly UserManager<UserEntity> _userManager = userManager;
     private readonly AddressService _addressService = addressService;
 
     #region Account | GET
@@ -125,7 +125,7 @@ public class AccountController(UserService userService, SignInManager<UserEntity
     [Route("/security")]
     public async Task<IActionResult> Security(AccountViewModel viewModel)
     {
-        var userEmail = _manager.GetUserName(User)!;
+        var userEmail = _userManager.GetUserName(User)!;
         viewModel.Navigation = new NavigationViewModel("Security");
         viewModel.Profile = await PopulateProfileInfoAsync();
 
@@ -156,7 +156,7 @@ public class AccountController(UserService userService, SignInManager<UserEntity
     [HttpPost]
     public async Task<IActionResult> Delete(AccountViewModel viewModel)
     {
-        var userEmail = _manager.GetUserName(User)!;
+        var userEmail = _userManager.GetUserName(User)!;
         viewModel.Navigation = new NavigationViewModel("Security");
         viewModel.Profile = await PopulateProfileInfoAsync();
         if (viewModel.Delete is not null)
@@ -194,7 +194,7 @@ public class AccountController(UserService userService, SignInManager<UserEntity
 
     private async Task<ProfileViewModel> PopulateProfileInfoAsync()
     {
-        var user = await _manager.GetUserAsync(User);
+        var user = await _userManager.GetUserAsync(User);
 
         return new ProfileViewModel
         {
@@ -207,7 +207,7 @@ public class AccountController(UserService userService, SignInManager<UserEntity
 
     private async Task<AccountDetailsBasicInfoViewModel> PopulateBasicInfoAsync()
     {
-        var user = await _manager.GetUserAsync(User);
+        var user = await _userManager.GetUserAsync(User);
 
         return new AccountDetailsBasicInfoViewModel
         {
