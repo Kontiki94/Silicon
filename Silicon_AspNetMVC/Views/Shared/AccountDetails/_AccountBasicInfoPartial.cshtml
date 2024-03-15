@@ -2,8 +2,22 @@
 
 <form asp-controller="Account" asp-action="AccountBasicInfo" method="post" novalidate>
     <div class="user-details">
-        <h2>Account Details</h2>
-        <h5>Basic Info</h5>
+        <div class="section-title">
+            @if (!string.IsNullOrEmpty(Model.SuccessMessage))
+            {
+                <span class="alert alert-success" role="alert" id="userMessage">
+                    @Model.SuccessMessage
+                </span>
+            }
+            @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+            {
+                <span class="alert alert-danger" role="alert" id="userMessage">
+                    @Model.ErrorMessage
+                </span>
+            }
+            <h2>Account Details</h2>
+            <h5>Basic Info</h5>
+        </div>
         <span asp-validation-summary="All" class="text-danger"></span>
         <div class="name">
             <div class="firstname">

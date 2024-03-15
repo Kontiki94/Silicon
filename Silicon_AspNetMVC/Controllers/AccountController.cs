@@ -15,7 +15,7 @@ public class AccountController(UserService userService, SignInManager<UserEntity
 {
     private readonly UserService _userService = userService;
     private readonly SignInManager<UserEntity> _signInManager = signInManager;
-    private readonly UserManager<UserEntity> _manager = userManager;
+    private readonly UserManager<UserEntity> _userManager = userManager;
     private readonly AddressService _addressService = addressService;
 
     #region Account | GET
@@ -28,7 +28,8 @@ public class AccountController(UserService userService, SignInManager<UserEntity
             Navigation = new NavigationViewModel("Details"),
             AddressInfo = new AccountDetailsAddressInfoViewModel(),
             Details = new AccountDetailsBasicInfoViewModel(),
-            SuccessMessage = TempData["SuccessMessage"]?.ToString() ?? ""
+            SuccessMessage = TempData["SuccessMessage"]?.ToString() ?? "",
+            ErrorMessage = TempData["ErrorMessage"]?.ToString() ?? "",
         };
 
         viewModel.AddressInfo = await PopulateAddressInfoAsync();
@@ -49,26 +50,20 @@ public class AccountController(UserService userService, SignInManager<UserEntity
 
             var result = await _userService.UpdateUserAsync(userEntity);
             if (result.StatusCode == Infrastructure.Models.StatusCode.OK)
-                TempData["SuccessMessage"] = "Account information saved successfully";
-            return RedirectToAction(nameof(Details));
-        }
-        else
-        {
-            foreach (var modelStateEntry in ModelState.Values)
             {
-                foreach (var error in modelStateEntry.Errors)
-                {
-                    Console.WriteLine($"ModelState Error: {error.ErrorMessage}");
-                }
+                TempData["SuccessMessage"] = "Account information saved successfully";
+                return RedirectToAction(nameof(Details));
             }
-            ModelState.AddModelError("", "Please fill in all required fields.");
         }
+
+        TempData["ErrorMessage"] = "Please fill in all required fields.";
 
         var compositeViewModel = new AccountViewModel
         {
             AddressInfo = new AccountDetailsAddressInfoViewModel(),
             Details = viewModel,
             Profile = new ProfileViewModel(),
+            ErrorMessage = TempData["ErrorMessage"]?.ToString()!
         };
 
         compositeViewModel.AddressInfo = await PopulateAddressInfoAsync();
@@ -88,25 +83,18 @@ public class AccountController(UserService userService, SignInManager<UserEntity
 
             var result = await _addressService.CreateOrUpdateAddressAsync(addressModel);
             if (result.StatusCode == Infrastructure.Models.StatusCode.OK)
-                return RedirectToAction(nameof(Details));
+                TempData["SuccessMessage"] = "Address information saved successfully.";
+            return RedirectToAction(nameof(Details));
         }
-        else
-        {
-            foreach (var modelStateEntry in ModelState.Values)
-            {
-                foreach (var error in modelStateEntry.Errors)
-                {
-                    Console.WriteLine($"ModelState Error: {error.ErrorMessage}");
-                }
-            }
-            ModelState.AddModelError("", "Please fill in all required fields.");
-        }
+
+        TempData["ErrorMessage"] = "Please fill in all required fields.";
 
         var compositeViewModel = new AccountViewModel
         {
             AddressInfo = viewModel,
             Details = new AccountDetailsBasicInfoViewModel(),
-            Profile = new ProfileViewModel()
+            Profile = new ProfileViewModel(),
+            ErrorMessage = TempData["ErrorMessage"]?.ToString()!
         };
 
         compositeViewModel.Profile = await PopulateProfileInfoAsync();
@@ -137,7 +125,7 @@ public class AccountController(UserService userService, SignInManager<UserEntity
     [Route("/security")]
     public async Task<IActionResult> Security(AccountViewModel viewModel)
     {
-        var userEmail = _manager.GetUserName(User)!;
+        var userEmail = _userManager.GetUserName(User)!;
         viewModel.Navigation = new NavigationViewModel("Security");
         viewModel.Profile = await PopulateProfileInfoAsync();
 
@@ -168,7 +156,7 @@ public class AccountController(UserService userService, SignInManager<UserEntity
     [HttpPost]
     public async Task<IActionResult> Delete(AccountViewModel viewModel)
     {
-        var userEmail = _manager.GetUserName(User)!;
+        var userEmail = _userManager.GetUserName(User)!;
         viewModel.Navigation = new NavigationViewModel("Security");
         viewModel.Profile = await PopulateProfileInfoAsync();
         if (viewModel.Delete is not null)
@@ -187,7 +175,7 @@ public class AccountController(UserService userService, SignInManager<UserEntity
     }
     #endregion
 
-   
+
     public IActionResult Cancel()
     {
         return RedirectToAction("Details", "Account");
@@ -202,13 +190,11 @@ public class AccountController(UserService userService, SignInManager<UserEntity
             Profile = await PopulateProfileInfoAsync()
         };
         return View(viewModel);
-
-
     }
 
     private async Task<ProfileViewModel> PopulateProfileInfoAsync()
     {
-        var user = await _manager.GetUserAsync(User);
+        var user = await _userManager.GetUserAsync(User);
 
         return new ProfileViewModel
         {
@@ -221,7 +207,7 @@ public class AccountController(UserService userService, SignInManager<UserEntity
 
     private async Task<AccountDetailsBasicInfoViewModel> PopulateBasicInfoAsync()
     {
-        var user = await _manager.GetUserAsync(User);
+        var user = await _userManager.GetUserAsync(User);
 
         return new AccountDetailsBasicInfoViewModel
         {
@@ -285,32 +271,6 @@ public class AccountController(UserService userService, SignInManager<UserEntity
                     user!.Id
                     );
     }
-
-    [HttpPost]
-    public async Task<IActionResult> AccountAddressInfo(AccountViewModel viewModel)
-    {
-        viewModel.Navigation = new NavigationViewModel("Details");
-
-        var user = await _signInManager.UserManager.GetUserAsync(User);
-
-        if (user is not null)
-        {
-            var addressModel = AddressFactory.Create(
-                viewModel.AddressInfo.Id!,
-                viewModel.AddressInfo.AddressLine1,
-                viewModel.AddressInfo.AddressLine2,
-                viewModel.AddressInfo.PostalCode,
-                viewModel.AddressInfo.City,
-                user.Id
-                );
-
-            var result = await _addressService.CreateOrUpdateAddressAsync(addressModel);
-            return RedirectToAction(nameof(Details));
-        }
-
-        return View("Details", viewModel);
-    }
-
 }
 
 

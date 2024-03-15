@@ -1,10 +1,9 @@
 ﻿using Infrastructure.Entities;
 using Infrastructure.Services;
-using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Silicon_AspNetMVC.ViewModels.Auth;
-using System;
 using System.Security.Claims;
 
 namespace Silicon_AspNetMVC.Controllers
@@ -33,11 +32,8 @@ namespace Silicon_AspNetMVC.Controllers
         [Route("/signin")]
         public async Task<IActionResult> SignIn(SignInViewModel viewModel, string returnUrl)
         {
+            ViewData["ReturnUrl"] = returnUrl ?? Url.Content("~/");
             ViewData["Title"] = "Sign In";
-            if (returnUrl is null)
-            {
-                ModelState.Remove("returnUrl");
-            }
             if (ModelState.IsValid)
             {
                 var result = await _userService.SignInUserAsync(viewModel.Form);
@@ -47,7 +43,6 @@ namespace Silicon_AspNetMVC.Controllers
                     {
                         return Redirect(returnUrl);
                     }
-                    return RedirectToAction("Details", "Account");
                 }
             }
             viewModel.ErrorMessage = "Invalid e-mail or password";

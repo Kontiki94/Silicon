@@ -13,13 +13,6 @@
 
         <div class="account-details">
 
-            @if (!string.IsNullOrEmpty(Model.SuccessMessage))
-            {
-                <div class="alert alert-success" id="successMessage" role="alert">
-                    @Model.SuccessMessage
-                </div>
-            }
-
             @await Html.PartialAsync("~/Views/Shared/AccountDetails/_AccountBasicInfoPartial.cshtml")
 
             <div class="divider"></div>

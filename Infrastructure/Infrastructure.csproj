@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Repositories\HomeRepository\**" />
+    <EmbeddedResource Remove="Repositories\HomeRepository\**" />
+    <None Remove="Repositories\HomeRepository\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="8.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.2">
@@ -21,7 +27,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Repositories\HomeRepository\" />
     <Folder Include="Services\HomeService\" />
   </ItemGroup>
 
