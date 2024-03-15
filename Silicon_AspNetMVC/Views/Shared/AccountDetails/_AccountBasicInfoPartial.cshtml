@@ -25,7 +25,14 @@
                     <label asp-for="Details.FirstName">First name</label>
                     <span asp-validation-for="Details.FirstName"></span>
                 </div>
-                <input asp-for="Details.FirstName" disabled="@Model.Details.IsExternalAccount" />
+                @if (Model.Details.IsExternalAccount)
+                {
+                    <input asp-for="Details.FirstName" disabled="@Model.Details.IsExternalAccount" />
+                }
+                else
+                {
+                    <input asp-for="Details.FirstName"/>
+                }
             </div>
             <div class="lastname">
                 <div class="validation">
@@ -48,7 +55,7 @@
                     <label asp-for="Details.Phone">Phone</label>
                     <span asp-validation-for="Details.Phone"></span>
                 </div>
-                <input asp-for="Details.Phone" />
+                <input asp-for="Details.Phone"/>
             </div>
         </div>
     </div>

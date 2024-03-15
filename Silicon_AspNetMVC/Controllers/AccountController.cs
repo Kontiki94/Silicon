@@ -182,7 +182,7 @@ public class AccountController(UserService userService, SignInManager<UserEntity
     }
 
     [Route("/saved")]
-    public async Task <IActionResult> SavedCourses()
+    public async Task<IActionResult> SavedCourses()
     {
         var viewModel = new AccountViewModel()
         {

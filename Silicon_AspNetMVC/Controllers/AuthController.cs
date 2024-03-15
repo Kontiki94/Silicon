@@ -118,7 +118,6 @@ namespace Silicon_AspNetMVC.Controllers
                     UserName = userInfo.Principal.FindFirstValue(ClaimTypes.Email)!,
                     IsExternalAccount = true
                 };
-
                 var user = await _manager.FindByEmailAsync(userEntity.Email);
                 if (user is null)
                 {
