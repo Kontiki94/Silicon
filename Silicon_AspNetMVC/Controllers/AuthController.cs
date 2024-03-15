@@ -4,15 +4,16 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Silicon_AspNetMVC.ViewModels.Auth;
+using System;
 using System.Security.Claims;
 
 namespace Silicon_AspNetMVC.Controllers
 {
-    public class AuthController(UserService userService, SignInManager<UserEntity> signInManager) : Controller
+    public class AuthController(UserService userService, SignInManager<UserEntity> signInManager, UserManager<UserEntity> userManager) : Controller
     {
-
         private readonly UserService _userService = userService;
         private readonly SignInManager<UserEntity> _signInManager = signInManager;
+        private readonly UserManager<UserEntity> _manager = userManager;
 
         [HttpGet]
         [Route("/signin")]
@@ -33,13 +34,16 @@ namespace Silicon_AspNetMVC.Controllers
         public async Task<IActionResult> SignIn(SignInViewModel viewModel, string returnUrl)
         {
             ViewData["Title"] = "Sign In";
-
+            if (returnUrl is null)
+            {
+                ModelState.Remove("returnUrl");
+            }
             if (ModelState.IsValid)
             {
                 var result = await _userService.SignInUserAsync(viewModel.Form);
                 if (result.StatusCode == Infrastructure.Models.StatusCode.OK)
                 {
-                    if(!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
+                    if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
                     {
                         return Redirect(returnUrl);
                     }
@@ -83,5 +87,64 @@ namespace Silicon_AspNetMVC.Controllers
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
         }
+
+        #region External Account | Facebook
+        [HttpGet]
+        public IActionResult Facebook()
+        {
+            var authProps = _signInManager.ConfigureExternalAuthenticationProperties("Facebook", Url.Action("ExternalCallback"));
+            return new ChallengeResult("Facebook", authProps);
+        }
+
+        public IActionResult Google()
+        {
+            var authProps = _signInManager.ConfigureExternalAuthenticationProperties("Google", Url.Action("ExternalCallback"));
+            return new ChallengeResult("Google", authProps);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ExternalCallback()
+        {
+            var userInfo = await _signInManager.GetExternalLoginInfoAsync();
+            if (userInfo is not null)
+            {
+                var userEntity = new UserEntity()
+                {
+                    FirstName = userInfo.Principal.FindFirstValue(ClaimTypes.GivenName)!,
+                    LastName = userInfo.Principal.FindFirstValue(ClaimTypes.Surname)!,
+                    Email = userInfo.Principal.FindFirstValue(ClaimTypes.Email)!,
+                    UserName = userInfo.Principal.FindFirstValue(ClaimTypes.Email)!,
+                    IsExternalAccount = true
+                };
+                var user = await _manager.FindByEmailAsync(userEntity.Email);
+                if (user is null)
+                {
+                    var result = await _manager.CreateAsync(userEntity);
+                    if (result.Succeeded)
+                    {
+                        user = await _manager.FindByEmailAsync(userEntity.Email);
+                    }
+                }
+                if (user is not null)
+                {
+                    if (user.FirstName != userEntity.FirstName || user.LastName != userEntity.LastName || user.Email != userEntity.Email)
+                    {
+                        user.FirstName = userEntity.FirstName;
+                        user.LastName = userEntity.LastName;
+                        user.Email = userEntity.Email;
+
+                        await _manager.UpdateAsync(user);
+                    }
+
+                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    if (HttpContext.User is not null)
+                    {
+                        return RedirectToAction("Details", "Account");
+                    }
+                }
+            }
+            return RedirectToAction("Index", "Home");
+        }
     }
+    #endregion
 }

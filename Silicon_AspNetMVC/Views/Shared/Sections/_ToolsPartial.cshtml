@@ -1,41 +1,20 @@
-﻿<section class="tools">
-    <div class="container">
-        <h1>Integrate Top Work Tools</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin volutpat mollis egestas. Nam luctus facilisis ultrices. Pellentesque volutpat ligula est. Mattis fermentum, at nec lacus.</p>
-        <div class="tool-boxes">
-            <div class="box">
-                <img src="~/images/icons/google-icon.svg" alt="google icon"/>
-                <p>Lorem magnis pretium sed curabitur nunc facilisi nunc cursus sagittis.</p>
-            </div>
-            <div class="box">
-                <img src="~/images/icons/zoom-icon.svg" alt="zoom icon" />
-                <p>Lorem magnis pretium sed curabitur nunc facilisi nunc cursus sagittis.</p>
-            </div>
-            <div class="box">
-                <img src="~/images/icons/slack-icon.svg" alt="slack icon" />
-                <p>Lorem magnis pretium sed curabitur nunc facilisi nunc cursus sagittis.</p>
-            </div>
-            <div class="box">
-                <img src="~/images/icons/gmail-icon.svg" alt="gmail icon" />
-                <p>Lorem magnis pretium sed curabitur nunc facilisi nunc cursus sagittis.</p>
-            </div>
-            <div class="box">
-                <img src="~/images/icons/trello-icon.svg" alt="trello icon" />
-                <p>Lorem magnis pretium sed curabitur nunc facilisi nunc cursus sagittis.</p>
-            </div>
-            <div class="box">
-                <img src="~/images/icons/mailchimp-icon.svg" alt="mailchimp icon" />
-                <p>Lorem magnis pretium sed curabitur nunc facilisi nunc cursus sagittis.</p>
-            </div>
-            <div class="box">
-                <img src="~/images/icons/dropbox-icon.svg" alt="dropbox icon" />
-                <p>Lorem magnis pretium sed curabitur nunc facilisi nunc cursus sagittis.</p>
-            </div>
-            <div class="box">
-                <img src="~/images/icons/evernote-icon.svg" alt="evernote icon" />
-                <p>Lorem magnis pretium sed curabitur nunc facilisi nunc cursus sagittis.</p>
-            </div>
-        </div>
+﻿@model ToolsViewModel
 
+<section id="@Model.Id" class="tools">
+    <div class="container">
+        <h1>@Model.SectionTitle.Title</h1>
+        <p>@Model.SectionTitle.Subtitle</p>
+        <div class="tool-boxes">
+            @if (Model.ToolBoxes is not null)
+            {
+                foreach (var tool in Model.ToolBoxes)
+                {
+                    <div class="box">
+                        <img src="@tool.BoxImage.ImageUrl" alt="@tool.BoxImage.AltText"/>
+                        <p>@tool.BoxText</p>
+                    </div>
+                }
+            }           
+        </div>
     </div>
 </section>

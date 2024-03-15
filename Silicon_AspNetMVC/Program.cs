@@ -24,6 +24,7 @@ public class Program
             x.User.RequireUniqueEmail = true;
             x.SignIn.RequireConfirmedAccount = false;
             x.Password.RequiredLength = 8;
+            x.Lockout.MaxFailedAccessAttempts = 3;
         }).AddEntityFrameworkStores<DataContext>();
 
         builder.Services.ConfigureApplicationCookie(x =>
@@ -34,6 +35,13 @@ public class Program
             x.ExpireTimeSpan = TimeSpan.FromMinutes(60);
             x.SlidingExpiration = true;
             x.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+        });
+
+        builder.Services.AddAuthentication().AddFacebook(x => {
+            x.AppId = "1050945166008168";
+            x.AppSecret = "8931cf2456fb589d5a8a968f489be5c0";
+            x.Fields.Add("first_name");
+            x.Fields.Add("last_name");
         });
 
         var app = builder.Build();

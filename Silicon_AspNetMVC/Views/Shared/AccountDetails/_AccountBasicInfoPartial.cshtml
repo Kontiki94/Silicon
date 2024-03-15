@@ -11,14 +11,14 @@
                     <label asp-for="Details.FirstName">First name</label>
                     <span asp-validation-for="Details.FirstName"></span>
                 </div>
-                <input asp-for="Details.FirstName" />
+                <input asp-for="Details.FirstName" disabled="@Model.Details.IsExternalAccount" />
             </div>
             <div class="lastname">
                 <div class="validation">
                     <label asp-for="Details.LastName">Last name</label>
                     <span asp-validation-for="Details.LastName"></span>
                 </div>
-                <input asp-for="Details.LastName" />
+                <input asp-for="Details.LastName" disabled="@Model.Details.IsExternalAccount" />
             </div>
         </div>
         <div class="contact-info">
@@ -27,7 +27,7 @@
                     <label asp-for="Details.Email">Email Address</label>
                     <span asp-validation-for="Details.Email"></span>
                 </div>
-                <input asp-for="Details.Email" />
+                <input asp-for="Details.Email" disabled="@Model.Details.IsExternalAccount" />
             </div>
             <div class="phone">
                 <div class="validation">

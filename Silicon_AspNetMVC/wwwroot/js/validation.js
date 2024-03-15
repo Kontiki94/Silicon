@@ -61,7 +61,6 @@ const checkboxValidator = (element) => {
 }
 
 let forms = document.querySelectorAll('form');
-
 forms.forEach(form => {
     let inputs = form.querySelectorAll('input');
 
@@ -89,3 +88,14 @@ forms.forEach(form => {
         }
     });
 });
+
+let textareas = document.querySelectorAll('textarea')
+textareas.forEach(textarea => {
+    if (textarea.dataset.val === 'true') {
+        textarea.addEventListener('keyup', (e) => {
+            textValidator(e.target)
+        });
+    }
+});
+
+            

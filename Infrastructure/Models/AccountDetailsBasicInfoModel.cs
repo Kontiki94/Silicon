@@ -10,4 +10,5 @@ public class AccountDetailsBasicInfoModel
     public string Email { get; set; } = null!;
     public string Phone { get; set; } = null!;
     public string? Bio { get; set; }
+    public bool IsExternalAccount { get; set; }
 }

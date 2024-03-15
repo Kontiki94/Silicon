@@ -1,6 +1,9 @@
+.background-contact {
+    background-color: $gray-100;
+}
 header {
     padding: 15px 0;
-
+       
     .container {
         display: grid;
         align-items: center;
@@ -95,6 +98,11 @@ header {
 
             button {
                 max-width: 100%;
+            }
+
+            .profile-image {
+                max-width: 50px;
+                max-height: 50px;
             }
         }
 

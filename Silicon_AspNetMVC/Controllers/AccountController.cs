@@ -18,7 +18,7 @@ public class AccountController(UserService userService, SignInManager<UserEntity
     private readonly UserManager<UserEntity> _manager = userManager;
     private readonly AddressService _addressService = addressService;
 
-
+    #region Account | GET
     [HttpGet]
     [Route("/details")]
     public async Task<IActionResult> Details()
@@ -37,35 +37,33 @@ public class AccountController(UserService userService, SignInManager<UserEntity
 
         return View(viewModel);
     }
+    #endregion
 
+    #region Account BasicInfo | Post
     [HttpPost]
     public async Task<IActionResult> AccountBasicInfo([Bind(Prefix = "Details")] AccountDetailsBasicInfoViewModel viewModel)
     {
-        var user = await _signInManager.UserManager.GetUserAsync(User);
-
-        if (user is not null)
+        if (ModelState.IsValid)
         {
-            if (ModelState.IsValid)
-            {
-                var userEntity = await GenerateUserEntityAsync(viewModel);
+            var userEntity = await GenerateUserEntityAsync(viewModel);
 
-                var result = await _userService.UpdateUserAsync(userEntity);
-                if (result.StatusCode == Infrastructure.Models.StatusCode.OK)
-                    TempData["SuccessMessage"] = "Account information saved successfully";
-                return RedirectToAction(nameof(Details));
-            }
-            else
-            {
-                foreach (var modelStateEntry in ModelState.Values)
-                {
-                    foreach (var error in modelStateEntry.Errors)
-                    {
-                        Console.WriteLine($"ModelState Error: {error.ErrorMessage}");
-                    }
-                }
-                ModelState.AddModelError("", "Please fill in all required fields.");
-            }
+            var result = await _userService.UpdateUserAsync(userEntity);
+            if (result.StatusCode == Infrastructure.Models.StatusCode.OK)
+                TempData["SuccessMessage"] = "Account information saved successfully";
+            return RedirectToAction(nameof(Details));
         }
+        else
+        {
+            foreach (var modelStateEntry in ModelState.Values)
+            {
+                foreach (var error in modelStateEntry.Errors)
+                {
+                    Console.WriteLine($"ModelState Error: {error.ErrorMessage}");
+                }
+            }
+            ModelState.AddModelError("", "Please fill in all required fields.");
+        }
+
         var compositeViewModel = new AccountViewModel
         {
             AddressInfo = new AccountDetailsAddressInfoViewModel(),
@@ -76,37 +74,34 @@ public class AccountController(UserService userService, SignInManager<UserEntity
         compositeViewModel.AddressInfo = await PopulateAddressInfoAsync();
         compositeViewModel.Profile = await PopulateProfileInfoAsync();
 
-
         return View("Details", compositeViewModel);
     }
+    #endregion
 
+    #region Account AddressInfo | Post
     [HttpPost]
     public async Task<IActionResult> AccountAddressInfo([Bind(Prefix = "AddressInfo")] AccountDetailsAddressInfoViewModel viewModel)
     {
-        var user = await _signInManager.UserManager.GetUserAsync(User);
-
-        if (user is not null)
+        if (ModelState.IsValid)
         {
-            if (ModelState.IsValid)
-            {
-                var addressModel = await GenerateAddressModelAsync(viewModel);
+            var addressModel = await GenerateAddressModelAsync(viewModel);
 
-                var result = await _addressService.CreateOrUpdateAddressAsync(addressModel);
-                if (result.StatusCode == Infrastructure.Models.StatusCode.OK)
-                    return RedirectToAction(nameof(Details));
-            }
-            else
-            {
-                foreach (var modelStateEntry in ModelState.Values)
-                {
-                    foreach (var error in modelStateEntry.Errors)
-                    {
-                        Console.WriteLine($"ModelState Error: {error.ErrorMessage}");
-                    }
-                }
-                ModelState.AddModelError("", "Please fill in all required fields.");
-            }
+            var result = await _addressService.CreateOrUpdateAddressAsync(addressModel);
+            if (result.StatusCode == Infrastructure.Models.StatusCode.OK)
+                return RedirectToAction(nameof(Details));
         }
+        else
+        {
+            foreach (var modelStateEntry in ModelState.Values)
+            {
+                foreach (var error in modelStateEntry.Errors)
+                {
+                    Console.WriteLine($"ModelState Error: {error.ErrorMessage}");
+                }
+            }
+            ModelState.AddModelError("", "Please fill in all required fields.");
+        }
+
         var compositeViewModel = new AccountViewModel
         {
             AddressInfo = viewModel,
@@ -119,8 +114,9 @@ public class AccountController(UserService userService, SignInManager<UserEntity
 
         return View("Details", compositeViewModel);
     }
+    #endregion 
 
-
+    #region Account Security | GET
     [HttpGet]
     [Route("/security")]
     public async Task<IActionResult> Security()
@@ -134,7 +130,9 @@ public class AccountController(UserService userService, SignInManager<UserEntity
 
         return View(viewModel);
     }
+    #endregion
 
+    #region Account Security | Post
     [HttpPost]
     [Route("/security")]
     public async Task<IActionResult> Security(AccountViewModel viewModel)
@@ -164,7 +162,9 @@ public class AccountController(UserService userService, SignInManager<UserEntity
         }
         return View("Security", viewModel);
     }
+    #endregion
 
+    #region Account Delete | Post
     [HttpPost]
     public async Task<IActionResult> Delete(AccountViewModel viewModel)
     {
@@ -185,17 +185,25 @@ public class AccountController(UserService userService, SignInManager<UserEntity
         }
         return View("Security", viewModel);
     }
+    #endregion
 
+   
     public IActionResult Cancel()
     {
         return RedirectToAction("Details", "Account");
     }
 
     [Route("/saved")]
-    public IActionResult SavedCourses()
+    public async Task <IActionResult> SavedCourses()
     {
-        var viewModel = new AccountViewModel();
+        var viewModel = new AccountViewModel()
+        {
+            Navigation = new NavigationViewModel("SavedCourses"),
+            Profile = await PopulateProfileInfoAsync()
+        };
         return View(viewModel);
+
+
     }
 
     private async Task<ProfileViewModel> PopulateProfileInfoAsync()
@@ -221,7 +229,8 @@ public class AccountController(UserService userService, SignInManager<UserEntity
             LastName = user.LastName,
             Email = user.Email!,
             Phone = user.PhoneNumber,
-            Bio = user.Biography
+            Bio = user.Biography,
+            IsExternalAccount = user.IsExternalAccount,
         };
     }
 
@@ -276,6 +285,34 @@ public class AccountController(UserService userService, SignInManager<UserEntity
                     user!.Id
                     );
     }
+
+    [HttpPost]
+    public async Task<IActionResult> AccountAddressInfo(AccountViewModel viewModel)
+    {
+        viewModel.Navigation = new NavigationViewModel("Details");
+
+        var user = await _signInManager.UserManager.GetUserAsync(User);
+
+        if (user is not null)
+        {
+            var addressModel = AddressFactory.Create(
+                viewModel.AddressInfo.Id!,
+                viewModel.AddressInfo.AddressLine1,
+                viewModel.AddressInfo.AddressLine2,
+                viewModel.AddressInfo.PostalCode,
+                viewModel.AddressInfo.City,
+                user.Id
+                );
+
+            var result = await _addressService.CreateOrUpdateAddressAsync(addressModel);
+            return RedirectToAction(nameof(Details));
+        }
+
+        return View("Details", viewModel);
+    }
+
 }
+
+
 
 
