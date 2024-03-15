@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240313151034_Init")]
+    [Migration("20240313212136_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -99,6 +99,9 @@ namespace Infrastructure.Migrations
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsExternalAccount")
+                        .HasColumnType("bit");
 
                     b.Property<string>("LastName")
                         .IsRequired()

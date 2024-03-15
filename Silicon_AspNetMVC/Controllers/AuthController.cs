@@ -1,5 +1,6 @@
 ﻿using Infrastructure.Entities;
 using Infrastructure.Services;
+using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Silicon_AspNetMVC.ViewModels.Auth;
@@ -17,20 +18,13 @@ namespace Silicon_AspNetMVC.Controllers
         [Route("/signin")]
         public IActionResult SignIn(string returnUrl)
         {
+            var viewModel = new SignInViewModel();
             ViewData["Title"] = "Sign In";
-            var viewModel = new SignInViewModel()
-            {
-                SuccessMessage = TempData["SuccessMessage"]?.ToString(),
-                ErrorMessage = TempData["ErrorMessage"]?.ToString()
-            };
-
             if (_signInManager.IsSignedIn(User))
             {
                 return RedirectToAction("Details", "Account");
             }
-
             ViewData["ReturnUrl"] = returnUrl ?? Url.Content("~/");
-
             return View(viewModel);
         }
 
@@ -38,8 +32,8 @@ namespace Silicon_AspNetMVC.Controllers
         [Route("/signin")]
         public async Task<IActionResult> SignIn(SignInViewModel viewModel, string returnUrl)
         {
+            ViewData["ReturnUrl"] = returnUrl ?? Url.Content("~/");
             ViewData["Title"] = "Sign In";
-
             if (ModelState.IsValid)
             {
                 var result = await _userService.SignInUserAsync(viewModel.Form);
@@ -49,11 +43,10 @@ namespace Silicon_AspNetMVC.Controllers
                     {
                         return Redirect(returnUrl);
                     }
-                    return RedirectToAction("Details", "Account");
                 }
             }
-            TempData["ErrorMessage"] = "Invalid e-mail or password";
-            return RedirectToAction("Signin", "Auth");
+            viewModel.ErrorMessage = "Invalid e-mail or password";
+            return View(viewModel);
         }
 
         [Route("/signup")]

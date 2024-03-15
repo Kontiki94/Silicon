@@ -61,7 +61,10 @@ const checkboxValidator = (element) => {
 }
 
 let forms = document.querySelectorAll('form');
+<<<<<<< HEAD
+=======
 
+>>>>>>> 8868755345cf4a71e7728eeae073a27a0b764e70
 forms.forEach(form => {
     let inputs = form.querySelectorAll('input');
 
@@ -91,7 +94,6 @@ forms.forEach(form => {
 });
 
 let textareas = document.querySelectorAll('textarea')
-
 textareas.forEach(textarea => {
     if (textarea.dataset.val === 'true') {
         textarea.addEventListener('keyup', (e) => {

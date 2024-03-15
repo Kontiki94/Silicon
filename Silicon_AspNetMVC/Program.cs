@@ -24,6 +24,7 @@ public class Program
             x.User.RequireUniqueEmail = true;
             x.SignIn.RequireConfirmedAccount = false;
             x.Password.RequiredLength = 8;
+            x.Lockout.MaxFailedAccessAttempts = 3;
         }).AddEntityFrameworkStores<DataContext>();
 
         builder.Services.ConfigureApplicationCookie(x =>
