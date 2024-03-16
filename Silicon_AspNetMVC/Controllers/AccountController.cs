@@ -44,10 +44,35 @@ public class AccountController(UserService userService, SignInManager<UserEntity
     [HttpPost]
     public async Task<IActionResult> AccountBasicInfo([Bind(Prefix = "Details")] AccountDetailsBasicInfoViewModel viewModel)
     {
-        if (ModelState.IsValid)
-        {
-            var userEntity = await GenerateUserEntityAsync(viewModel);
+        var externalUser = await _signInManager.GetExternalLoginInfoAsync();
+        var userEmail = TempData["Email"]?.ToString();
 
+        if (externalUser is not null)
+        {
+            bool isFacebookUser = externalUser.LoginProvider == "Facebook";
+            bool isGoogleUser = externalUser.LoginProvider == "Google";
+            if (isFacebookUser || isGoogleUser)
+            {
+                var existingUser = await _userManager.FindByEmailAsync(userEmail!);
+
+                if (existingUser is not null)
+                {
+                    existingUser.Biography = viewModel.Bio;
+                    existingUser.PhoneNumber = viewModel.Phone;
+
+                    var result = await _userService.UpdateUserAsync(existingUser);
+                    if (result.StatusCode == Infrastructure.Models.StatusCode.OK)
+                    {
+                        TempData["SuccessMessage"] = "Account information successfully saved";
+                        return RedirectToAction(nameof(Details));
+                    }
+                }
+            }
+        }
+        else if (ModelState.IsValid)
+        {
+
+            var userEntity = await GenerateUserEntityAsync(viewModel);
             var result = await _userService.UpdateUserAsync(userEntity);
             if (result.StatusCode == Infrastructure.Models.StatusCode.OK)
             {
@@ -257,6 +282,7 @@ public class AccountController(UserService userService, SignInManager<UserEntity
                     user.UserName!
             );
     }
+
 
     private async Task<AddressModel> GenerateAddressModelAsync(AccountDetailsAddressInfoViewModel viewModel)
     {
