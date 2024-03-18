@@ -45,15 +45,15 @@ public class AccountController(UserService userService, SignInManager<UserEntity
     public async Task<IActionResult> AccountBasicInfo([Bind(Prefix = "Details")] AccountDetailsBasicInfoViewModel viewModel)
     {
         var externalUser = await _signInManager.GetExternalLoginInfoAsync();
-        var userEmail = TempData["Email"]?.ToString();
+        var claims = HttpContext.User.Identities.FirstOrDefault();
 
-        if (externalUser is not null)
+        if (claims?.Name is not null)
         {
-            bool isFacebookUser = externalUser.LoginProvider == "Facebook";
-            bool isGoogleUser = externalUser.LoginProvider == "Google";
+            bool isFacebookUser = externalUser?.LoginProvider == "Facebook";
+            bool isGoogleUser = externalUser?.LoginProvider == "Google";
             if (isFacebookUser || isGoogleUser)
             {
-                var existingUser = await _userManager.FindByEmailAsync(userEmail!);
+                var existingUser = await _userManager.FindByEmailAsync(claims.Name);
 
                 if (existingUser is not null)
                 {
