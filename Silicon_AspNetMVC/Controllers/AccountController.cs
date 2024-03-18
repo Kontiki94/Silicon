@@ -18,6 +18,7 @@ public class AccountController(UserService userService, SignInManager<UserEntity
     private readonly UserManager<UserEntity> _userManager = userManager;
     private readonly AddressService _addressService = addressService;
 
+
     #region Account | GET
     [HttpGet]
     [Route("/details")]
@@ -46,12 +47,14 @@ public class AccountController(UserService userService, SignInManager<UserEntity
     {
         var externalUser = await _signInManager.GetExternalLoginInfoAsync();
         var claims = HttpContext.User.Identities.FirstOrDefault();
+
         if (externalUser is not null)
         {
             if (claims?.Name is not null)
             {
                 bool isFacebookUser = externalUser?.LoginProvider == "Facebook";
                 bool isGoogleUser = externalUser?.LoginProvider == "Google";
+
                 if (isFacebookUser || isGoogleUser)
                 {
                     var existingUser = await _userManager.FindByEmailAsync(claims.Name);
@@ -62,6 +65,7 @@ public class AccountController(UserService userService, SignInManager<UserEntity
                         existingUser.PhoneNumber = viewModel.Phone;
 
                         var result = await _userService.UpdateUserAsync(existingUser);
+
                         if (result.StatusCode == Infrastructure.Models.StatusCode.OK)
                         {
                             TempData["SuccessMessage"] = "Account information successfully saved";
@@ -75,6 +79,7 @@ public class AccountController(UserService userService, SignInManager<UserEntity
         {
             var userEntity = await GenerateUserEntityAsync(viewModel);
             var result = await _userService.UpdateUserAsync(userEntity);
+
             if (result.StatusCode == Infrastructure.Models.StatusCode.OK)
             {
                 TempData["SuccessMessage"] = "Account information saved successfully";
