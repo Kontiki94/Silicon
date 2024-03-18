@@ -46,25 +46,27 @@ public class AccountController(UserService userService, SignInManager<UserEntity
     {
         var externalUser = await _signInManager.GetExternalLoginInfoAsync();
         var claims = HttpContext.User.Identities.FirstOrDefault();
-
-        if (claims?.Name is not null)
+        if (externalUser is not null)
         {
-            bool isFacebookUser = externalUser?.LoginProvider == "Facebook";
-            bool isGoogleUser = externalUser?.LoginProvider == "Google";
-            if (isFacebookUser || isGoogleUser)
+            if (claims?.Name is not null)
             {
-                var existingUser = await _userManager.FindByEmailAsync(claims.Name);
-
-                if (existingUser is not null)
+                bool isFacebookUser = externalUser?.LoginProvider == "Facebook";
+                bool isGoogleUser = externalUser?.LoginProvider == "Google";
+                if (isFacebookUser || isGoogleUser)
                 {
-                    existingUser.Biography = viewModel.Bio;
-                    existingUser.PhoneNumber = viewModel.Phone;
+                    var existingUser = await _userManager.FindByEmailAsync(claims.Name);
 
-                    var result = await _userService.UpdateUserAsync(existingUser);
-                    if (result.StatusCode == Infrastructure.Models.StatusCode.OK)
+                    if (existingUser is not null)
                     {
-                        TempData["SuccessMessage"] = "Account information successfully saved";
-                        return RedirectToAction(nameof(Details));
+                        existingUser.Biography = viewModel.Bio;
+                        existingUser.PhoneNumber = viewModel.Phone;
+
+                        var result = await _userService.UpdateUserAsync(existingUser);
+                        if (result.StatusCode == Infrastructure.Models.StatusCode.OK)
+                        {
+                            TempData["SuccessMessage"] = "Account information successfully saved";
+                            return RedirectToAction(nameof(Details));
+                        }
                     }
                 }
             }
