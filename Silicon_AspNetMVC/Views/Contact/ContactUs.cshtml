@@ -33,9 +33,21 @@
                 </div>
             </div>
         </div>       
-        <div class="contact-form">
+        <div class="contact-form">          
             <form method="post" asp-controller="Contact" asp-action="ContactUs" novalidate>
                 <h2>@Model.FormTitle</h2>
+                @if (!string.IsNullOrEmpty(Model.SuccessMessage))
+                {
+                    <span class="alert alert-success" role="alert" id="userMessage">
+                        @Model.SuccessMessage
+                    </span>
+                }
+                @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+                {
+                    <span class="alert alert-danger" role="alert" id="userMessage">
+                        @Model.ErrorMessage
+                    </span>
+                }
                 <div class="form-content">
                     <div id="form-fullname" class="input-group">
                         <label asp-for="Form.FullName"></label>
@@ -73,5 +85,6 @@
     </div>
 </section>
 
- @await Html.PartialAsync("_ValidationScriptPartial") 
+@await Html.PartialAsync("_UserMessageScriptPartial")
+@await Html.PartialAsync("_ValidationScriptPartial") 
 

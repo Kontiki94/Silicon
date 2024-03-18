@@ -13,6 +13,7 @@
         }
 
         .upper {
+
             .box {
                 display: flex;
 
@@ -47,7 +48,7 @@
             height: 100%;
             background-color: $white;
             border-radius: 0.5rem;
-
+            padding-top:1rem;
 
             @include xl {
                 position: absolute;
@@ -64,6 +65,20 @@
 
                 @include xl {
                     padding: 2rem;
+                }
+
+                position: relative;
+
+                .alert {
+                    display: none;
+                    position: absolute;
+                    top: -20px;
+                    left: 0;
+                    width: 100%;
+                }
+
+                .alert:not(:empty) {
+                    display: block;
                 }
 
                 .form-content {

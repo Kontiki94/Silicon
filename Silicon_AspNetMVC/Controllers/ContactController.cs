@@ -10,7 +10,11 @@ namespace Silicon_AspNetMVC.Controllers
         [HttpGet]    
         public IActionResult ContactUs()
         {
-            var viewModel = new ContactViewModel();
+            var viewModel = new ContactViewModel() 
+            { 
+                SuccessMessage = TempData["SuccessMessage"]?.ToString() ?? "",
+                ErrorMessage = TempData["ErrorMessage"]?.ToString() ?? "",
+            };
             ViewData["Title"] = "Contact Us";
             return View(viewModel);
         }
@@ -19,13 +23,24 @@ namespace Silicon_AspNetMVC.Controllers
         [HttpPost]
         public IActionResult ContactUs(ContactViewModel viewModel)
         {
-            if (!ModelState.IsValid)                //om formuläret inte är rätt ifyllt, retunera vy med felmeddelande
+            ViewData["Title"] = "Contact Us";
+            if (ModelState.IsValid)                
             {
-                ViewData["Title"] = "Contact Us";
-                return View(viewModel);
+                TempData["SuccessMessage"] = "Contact was sent";
+                return RedirectToAction("ContactUs", "Contact");     
+                
             }
-            
-            return RedirectToAction("ContactUs", "Contact");     //Om rätt ifyllt, tillbaks till vyn (eller RedirectToAction("Vy", "controller") om vi vill gå någon annanstans)
+            else
+            {
+                TempData["ErrorMessage"] = "Please fill in all requierd fields.";
+                viewModel = new ContactViewModel()
+                {
+                    SuccessMessage = TempData["SuccessMessage"]?.ToString() ?? "",
+                    ErrorMessage = TempData["ErrorMessage"]?.ToString() ?? "",
+                };
+            }
+            return View(viewModel);
+           
         }
     }
 }
