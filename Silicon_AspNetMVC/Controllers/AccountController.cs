@@ -18,7 +18,6 @@ public class AccountController(UserService userService, SignInManager<UserEntity
     private readonly UserManager<UserEntity> _userManager = userManager;
     private readonly AddressService _addressService = addressService;
 
-
     #region Account | GET
     [HttpGet]
     [Route("/details")]

@@ -6,6 +6,7 @@ using Infrastructure.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Silicon_AspNetMVC.Models.Sections;
+using System.Security.Claims;
 
 
 namespace Infrastructure.Services
@@ -16,6 +17,7 @@ namespace Infrastructure.Services
         private readonly AddressService _addressService = addressService;
         private readonly UserManager<UserEntity> _userManager = userManager;
         private readonly SignInManager<UserEntity> _signInManager = signInManager;
+       
 
 
         public async Task<ResponseResult> CreateUserAsync(SignUpModel model)
