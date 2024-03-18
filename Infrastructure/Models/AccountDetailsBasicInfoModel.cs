@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Silicon_AspNetMVC.Models.Sections;
+﻿namespace Silicon_AspNetMVC.Models.Sections;
 
 public class AccountDetailsBasicInfoModel
 {

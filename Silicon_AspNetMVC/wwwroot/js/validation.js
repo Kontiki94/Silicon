@@ -91,7 +91,6 @@ forms.forEach(form => {
 });
 
 let textareas = document.querySelectorAll('textarea')
-
 textareas.forEach(textarea => {
     if (textarea.dataset.val === 'true') {
         textarea.addEventListener('keyup', (e) => {

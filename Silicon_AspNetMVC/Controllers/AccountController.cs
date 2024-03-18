@@ -15,7 +15,7 @@ public class AccountController(UserService userService, SignInManager<UserEntity
 {
     private readonly UserService _userService = userService;
     private readonly SignInManager<UserEntity> _signInManager = signInManager;
-    private readonly UserManager<UserEntity> _manager = userManager;
+    private readonly UserManager<UserEntity> _userManager = userManager;
     private readonly AddressService _addressService = addressService;
 
     #region Account | GET
@@ -44,10 +44,34 @@ public class AccountController(UserService userService, SignInManager<UserEntity
     [HttpPost]
     public async Task<IActionResult> AccountBasicInfo([Bind(Prefix = "Details")] AccountDetailsBasicInfoViewModel viewModel)
     {
-        if (ModelState.IsValid)
+        var externalUser = await _signInManager.GetExternalLoginInfoAsync();
+        var userEmail = TempData["Email"]?.ToString();
+
+        if (externalUser is not null)
+        {
+            bool isFacebookUser = externalUser.LoginProvider == "Facebook";
+            bool isGoogleUser = externalUser.LoginProvider == "Google";
+            if (isFacebookUser || isGoogleUser)
+            {
+                var existingUser = await _userManager.FindByEmailAsync(userEmail!);
+
+                if (existingUser is not null)
+                {
+                    existingUser.Biography = viewModel.Bio;
+                    existingUser.PhoneNumber = viewModel.Phone;
+
+                    var result = await _userService.UpdateUserAsync(existingUser);
+                    if (result.StatusCode == Infrastructure.Models.StatusCode.OK)
+                    {
+                        TempData["SuccessMessage"] = "Account information successfully saved";
+                        return RedirectToAction(nameof(Details));
+                    }
+                }
+            }
+        }
+        else if (ModelState.IsValid)
         {
             var userEntity = await GenerateUserEntityAsync(viewModel);
-
             var result = await _userService.UpdateUserAsync(userEntity);
             if (result.StatusCode == Infrastructure.Models.StatusCode.OK)
             {
@@ -125,7 +149,7 @@ public class AccountController(UserService userService, SignInManager<UserEntity
     [Route("/security")]
     public async Task<IActionResult> Security(AccountViewModel viewModel)
     {
-        var userEmail = _manager.GetUserName(User)!;
+        var userEmail = _userManager.GetUserName(User)!;
         viewModel.Navigation = new NavigationViewModel("Security");
         viewModel.Profile = await PopulateProfileInfoAsync();
 
@@ -156,7 +180,7 @@ public class AccountController(UserService userService, SignInManager<UserEntity
     [HttpPost]
     public async Task<IActionResult> Delete(AccountViewModel viewModel)
     {
-        var userEmail = _manager.GetUserName(User)!;
+        var userEmail = _userManager.GetUserName(User)!;
         viewModel.Navigation = new NavigationViewModel("Security");
         viewModel.Profile = await PopulateProfileInfoAsync();
         if (viewModel.Delete is not null)
@@ -182,7 +206,7 @@ public class AccountController(UserService userService, SignInManager<UserEntity
     }
 
     [Route("/saved")]
-    public async Task <IActionResult> SavedCourses()
+    public async Task<IActionResult> SavedCourses()
     {
         var viewModel = new AccountViewModel()
         {
@@ -194,7 +218,7 @@ public class AccountController(UserService userService, SignInManager<UserEntity
 
     private async Task<ProfileViewModel> PopulateProfileInfoAsync()
     {
-        var user = await _manager.GetUserAsync(User);
+        var user = await _userManager.GetUserAsync(User);
 
         return new ProfileViewModel
         {
@@ -207,7 +231,7 @@ public class AccountController(UserService userService, SignInManager<UserEntity
 
     private async Task<AccountDetailsBasicInfoViewModel> PopulateBasicInfoAsync()
     {
-        var user = await _manager.GetUserAsync(User);
+        var user = await _userManager.GetUserAsync(User);
 
         return new AccountDetailsBasicInfoViewModel
         {
@@ -257,6 +281,7 @@ public class AccountController(UserService userService, SignInManager<UserEntity
                     user.UserName!
             );
     }
+
 
     private async Task<AddressModel> GenerateAddressModelAsync(AccountDetailsAddressInfoViewModel viewModel)
     {

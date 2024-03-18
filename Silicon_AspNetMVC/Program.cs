@@ -24,6 +24,7 @@ public class Program
             x.User.RequireUniqueEmail = true;
             x.SignIn.RequireConfirmedAccount = false;
             x.Password.RequiredLength = 8;
+            x.Lockout.MaxFailedAccessAttempts = 3;
         }).AddEntityFrameworkStores<DataContext>();
 
         builder.Services.ConfigureApplicationCookie(x =>
@@ -43,13 +44,18 @@ public class Program
             x.Fields.Add("last_name");
         });
 
+        builder.Services.AddAuthentication().AddGoogle(x => {
+            x.ClientId = "871403104408-3qnretnk4vvejte5totml0h9adjjrp0l.apps.googleusercontent.com";
+            x.ClientSecret = "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";
+            x.CallbackPath = "/signin-google";
+        });
+
         var app = builder.Build();
         app.UseHsts();
         app.UseStatusCodePagesWithReExecute("/Error/PageNotFound", "?statusCode={0}");
         app.UseHttpsRedirection();
         app.UseStaticFiles();
         app.UseRouting();
-
         app.UseAuthentication();
         app.UseAuthorization();
         app.UseUserSessionValidation();
