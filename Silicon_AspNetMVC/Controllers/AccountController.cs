@@ -44,20 +44,6 @@ public class AccountController(UserService userService, SignInManager<UserEntity
     [HttpPost]
     public async Task<IActionResult> AccountBasicInfo([Bind(Prefix = "Details")] AccountDetailsBasicInfoViewModel viewModel)
     {
-<<<<<<< HEAD
-        var user = await PopulateBasicInfoAsync();
-        if (user.IsExternalAccount)
-        {
-            ModelState.Remove("Details.FirstName");
-            ModelState.Remove("Details.Lastname");
-            ModelState.Remove("Details.Email");
-        }
-        if (ModelState.IsValid)
-        {
-            var userEnt = await GenerateUserEntityAsync(user);
-
-            var result = await _userService.UpdateUserAsync(userEnt);
-=======
         var externalUser = await _signInManager.GetExternalLoginInfoAsync();
         var userEmail = TempData["Email"]?.ToString();
 
@@ -87,7 +73,6 @@ public class AccountController(UserService userService, SignInManager<UserEntity
         {
             var userEntity = await GenerateUserEntityAsync(viewModel);
             var result = await _userService.UpdateUserAsync(userEntity);
->>>>>>> 8ef95bc3b945c1be490543994a19effd8ca05057
             if (result.StatusCode == Infrastructure.Models.StatusCode.OK)
             {
                 TempData["SuccessMessage"] = "Account information saved successfully";
