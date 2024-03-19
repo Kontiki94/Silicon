@@ -112,10 +112,6 @@ namespace Silicon_AspNetMVC.Controllers
                     IsExternalAccount = true
                 };
 
-                TempData["FirstName"] = userEntity.FirstName.ToString();
-                TempData["LastName"] = userEntity.LastName.ToString();
-                TempData["Email"] = userEntity.Email.ToString();
-
                 var user = await _manager.FindByEmailAsync(userEntity.Email);
                 if (user is null)
                 {

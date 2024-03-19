@@ -6,6 +6,9 @@
 # Ignore migration folder
 migrations/*
 
+/Migrations/
+*.Designer.cs
+
 # User-specific files
 *.rsuser
 *.suo

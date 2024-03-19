@@ -23,20 +23,29 @@ public class AccountController(UserService userService, SignInManager<UserEntity
     [Route("/details")]
     public async Task<IActionResult> Details()
     {
-        var viewModel = new AccountViewModel()
+        try
         {
-            Navigation = new NavigationViewModel("Details"),
-            AddressInfo = new AccountDetailsAddressInfoViewModel(),
-            Details = new AccountDetailsBasicInfoViewModel(),
-            SuccessMessage = TempData["SuccessMessage"]?.ToString() ?? "",
-            ErrorMessage = TempData["ErrorMessage"]?.ToString() ?? "",
-        };
+            var viewModel = new AccountViewModel()
+            {
+                Navigation = new NavigationViewModel("Details"),
+                AddressInfo = new AccountDetailsAddressInfoViewModel(),
+                Details = new AccountDetailsBasicInfoViewModel(),
+                SuccessMessage = TempData["SuccessMessage"]?.ToString() ?? "",
+                ErrorMessage = TempData["ErrorMessage"]?.ToString() ?? "",
+            };
 
-        viewModel.AddressInfo = await PopulateAddressInfoAsync();
-        viewModel.Details = await PopulateBasicInfoAsync();
-        viewModel.Profile = await PopulateProfileInfoAsync();
+            viewModel.AddressInfo = await PopulateAddressInfoAsync();
+            viewModel.Details = await PopulateBasicInfoAsync();
+            viewModel.Profile = await PopulateProfileInfoAsync();
 
-        return View(viewModel);
+            return View(viewModel);
+        }
+        catch (Exception)
+        {
+            TempData["ErrorMessage"] = "An error occurred, please try again.";
+            return RedirectToAction("Home", "Index");
+        }
+
     }
     #endregion
 
@@ -44,23 +53,19 @@ public class AccountController(UserService userService, SignInManager<UserEntity
     [HttpPost]
     public async Task<IActionResult> AccountBasicInfo([Bind(Prefix = "Details")] AccountDetailsBasicInfoViewModel viewModel)
     {
-        var externalUser = await _signInManager.GetExternalLoginInfoAsync();
-        var userEmail = TempData["Email"]?.ToString();
 
-        if (externalUser is not null)
+        try
         {
-            bool isFacebookUser = externalUser.LoginProvider == "Facebook";
-            bool isGoogleUser = externalUser.LoginProvider == "Google";
-            if (isFacebookUser || isGoogleUser)
+            var externalUser = await _signInManager.GetExternalLoginInfoAsync();
+            var claims = HttpContext.User.Identities.FirstOrDefault();
+            var email = claims?.Name;
+
+            if (externalUser is not null)
             {
-                var existingUser = await _userManager.FindByEmailAsync(userEmail!);
-
-                if (existingUser is not null)
+                if (email is not null)
                 {
-                    existingUser.Biography = viewModel.Bio;
-                    existingUser.PhoneNumber = viewModel.Phone;
+                    var result = await CheckAndUpdateExternalUserAsync(viewModel, email!);
 
-                    var result = await _userService.UpdateUserAsync(existingUser);
                     if (result.StatusCode == Infrastructure.Models.StatusCode.OK)
                     {
                         TempData["SuccessMessage"] = "Account information successfully saved";
@@ -68,32 +73,38 @@ public class AccountController(UserService userService, SignInManager<UserEntity
                     }
                 }
             }
-        }
-        else if (ModelState.IsValid)
-        {
-            var userEntity = await GenerateUserEntityAsync(viewModel);
-            var result = await _userService.UpdateUserAsync(userEntity);
-            if (result.StatusCode == Infrastructure.Models.StatusCode.OK)
+            else if (ModelState.IsValid)
             {
-                TempData["SuccessMessage"] = "Account information saved successfully";
-                return RedirectToAction(nameof(Details));
+                var userEntity = await GenerateUserEntityAsync(viewModel);
+                var result = await _userService.UpdateUserAsync(userEntity);
+
+                if (result.StatusCode == Infrastructure.Models.StatusCode.OK)
+                {
+                    TempData["SuccessMessage"] = "Account information saved successfully";
+                    return RedirectToAction(nameof(Details));
+                }
             }
+
+            TempData["ErrorMessage"] = "Please fill in all required fields.";
+
+            var compositeViewModel = new AccountViewModel
+            {
+                AddressInfo = new AccountDetailsAddressInfoViewModel(),
+                Details = viewModel,
+                Profile = new ProfileViewModel(),
+                ErrorMessage = TempData["ErrorMessage"]?.ToString()!
+            };
+
+            compositeViewModel.AddressInfo = await PopulateAddressInfoAsync();
+            compositeViewModel.Profile = await PopulateProfileInfoAsync();
+
+            return View("Details", compositeViewModel);
         }
-
-        TempData["ErrorMessage"] = "Please fill in all required fields.";
-
-        var compositeViewModel = new AccountViewModel
+        catch (Exception)
         {
-            AddressInfo = new AccountDetailsAddressInfoViewModel(),
-            Details = viewModel,
-            Profile = new ProfileViewModel(),
-            ErrorMessage = TempData["ErrorMessage"]?.ToString()!
-        };
-
-        compositeViewModel.AddressInfo = await PopulateAddressInfoAsync();
-        compositeViewModel.Profile = await PopulateProfileInfoAsync();
-
-        return View("Details", compositeViewModel);
+            TempData["ErrorMessage"] = "An error occurred, please try again.";
+            return View("Details");
+        }
     }
     #endregion
 
@@ -101,30 +112,38 @@ public class AccountController(UserService userService, SignInManager<UserEntity
     [HttpPost]
     public async Task<IActionResult> AccountAddressInfo([Bind(Prefix = "AddressInfo")] AccountDetailsAddressInfoViewModel viewModel)
     {
-        if (ModelState.IsValid)
+        try
         {
-            var addressModel = await GenerateAddressModelAsync(viewModel);
+            if (ModelState.IsValid)
+            {
+                var addressModel = await GenerateAddressModelAsync(viewModel);
 
-            var result = await _addressService.CreateOrUpdateAddressAsync(addressModel);
-            if (result.StatusCode == Infrastructure.Models.StatusCode.OK)
-                TempData["SuccessMessage"] = "Address information saved successfully.";
-            return RedirectToAction(nameof(Details));
+                var result = await _addressService.CreateOrUpdateAddressAsync(addressModel);
+                if (result.StatusCode == Infrastructure.Models.StatusCode.OK)
+                    TempData["SuccessMessage"] = "Address information saved successfully.";
+                return RedirectToAction(nameof(Details));
+            }
+
+            TempData["ErrorMessage"] = "Please fill in all required fields.";
+
+            var compositeViewModel = new AccountViewModel
+            {
+                AddressInfo = viewModel,
+                Details = new AccountDetailsBasicInfoViewModel(),
+                Profile = new ProfileViewModel(),
+                ErrorMessage = TempData["ErrorMessage"]?.ToString()!
+            };
+
+            compositeViewModel.Profile = await PopulateProfileInfoAsync();
+            compositeViewModel.Details = await PopulateBasicInfoAsync();
+
+            return View("Details", compositeViewModel);
         }
-
-        TempData["ErrorMessage"] = "Please fill in all required fields.";
-
-        var compositeViewModel = new AccountViewModel
+        catch (Exception)
         {
-            AddressInfo = viewModel,
-            Details = new AccountDetailsBasicInfoViewModel(),
-            Profile = new ProfileViewModel(),
-            ErrorMessage = TempData["ErrorMessage"]?.ToString()!
-        };
-
-        compositeViewModel.Profile = await PopulateProfileInfoAsync();
-        compositeViewModel.Details = await PopulateBasicInfoAsync();
-
-        return View("Details", compositeViewModel);
+            TempData["ErrorMessage"] = "An error occurred, please try again.";
+            return View("Details");
+        }
     }
     #endregion 
 
@@ -218,83 +237,125 @@ public class AccountController(UserService userService, SignInManager<UserEntity
 
     private async Task<ProfileViewModel> PopulateProfileInfoAsync()
     {
-        var user = await _userManager.GetUserAsync(User);
-
-        return new ProfileViewModel
+        try
         {
-            FirstName = user!.FirstName,
-            LastName = user.LastName,
-            Email = user.Email!,
-
-        };
+            var user = await _userManager.GetUserAsync(User);
+            return new ProfileViewModel
+            {
+                FirstName = user!.FirstName,
+                LastName = user.LastName,
+                Email = user.Email!,
+            };
+        }
+        catch (Exception) { return new ProfileViewModel(); }
     }
 
     private async Task<AccountDetailsBasicInfoViewModel> PopulateBasicInfoAsync()
     {
-        var user = await _userManager.GetUserAsync(User);
-
-        return new AccountDetailsBasicInfoViewModel
+        try
         {
-            FirstName = user!.FirstName,
-            LastName = user.LastName,
-            Email = user.Email!,
-            Phone = user.PhoneNumber,
-            Bio = user.Biography,
-            IsExternalAccount = user.IsExternalAccount,
-        };
+            var user = await _userManager.GetUserAsync(User);
+
+            return new AccountDetailsBasicInfoViewModel
+            {
+                FirstName = user!.FirstName,
+                LastName = user.LastName,
+                Email = user.Email!,
+                Phone = user.PhoneNumber,
+                Bio = user.Biography,
+                IsExternalAccount = user.IsExternalAccount,
+            };
+        }
+        catch (Exception) { return new AccountDetailsBasicInfoViewModel(); }
     }
 
     private async Task<AccountDetailsAddressInfoViewModel> PopulateAddressInfoAsync()
     {
-        var viewModel = new AccountDetailsAddressInfoViewModel();
-        var user = await _signInManager.UserManager.GetUserAsync(User);
-
-        if (user is not null)
+        try
         {
-            viewModel.Id = user.Id;
-            var result = await _addressService.GetAddressByIdAsync(user.Id);
+            var viewModel = new AccountDetailsAddressInfoViewModel();
+            var user = await _signInManager.UserManager.GetUserAsync(User);
 
-            if (result.StatusCode == Infrastructure.Models.StatusCode.OK)
+            if (user is not null)
             {
-                var addressModel = (AddressModel)result.ContentResult!;
-                viewModel = new AccountDetailsAddressInfoViewModel(addressModel);
+                viewModel.Id = user.Id;
+                var result = await _addressService.GetAddressByIdAsync(user.Id);
+
+                if (result.StatusCode == Infrastructure.Models.StatusCode.OK)
+                {
+                    var addressModel = (AddressModel)result.ContentResult!;
+                    viewModel = new AccountDetailsAddressInfoViewModel(addressModel);
+                }
             }
             return viewModel;
         }
-        return null!;
+        catch (Exception) { return new AccountDetailsAddressInfoViewModel(); }
     }
 
     private async Task<UserEntity> GenerateUserEntityAsync(AccountDetailsBasicInfoViewModel viewModel)
     {
-        var user = await _signInManager.UserManager.GetUserAsync(User);
+        try
+        {
+            var user = await _signInManager.UserManager.GetUserAsync(User);
 
-        return UserFactory.Create(
-            viewModel.FirstName,
-                    viewModel.LastName,
-                    viewModel.Email,
-                    viewModel.Phone!,
-                    viewModel.Bio!,
-                    user!.Id,
-                    user.PasswordHash!,
-                    user.NormalizedEmail!,
-                    user.NormalizedUserName!,
-                    user.UserName!
-            );
+            return UserFactory.Create(
+                        viewModel.FirstName,
+                        viewModel.LastName,
+                        viewModel.Email,
+                        viewModel.Phone!,
+                        viewModel.Bio!,
+                        user!.Id,
+                        user.PasswordHash!,
+                        user.NormalizedEmail!,
+                        user.NormalizedUserName!,
+                        user.UserName!
+                );
+        }
+        catch (Exception) { return null!; }
     }
-
 
     private async Task<AddressModel> GenerateAddressModelAsync(AccountDetailsAddressInfoViewModel viewModel)
     {
-        var user = await _signInManager.UserManager.GetUserAsync(User);
+        try
+        {
+            var user = await _signInManager.UserManager.GetUserAsync(User);
 
-        return AddressFactory.Create(
-                    viewModel.Id!,
-                    viewModel.AddressLine1,
-                    viewModel.AddressLine2,
-                    viewModel.PostalCode,
-                    viewModel.City,
-                    user!.Id
-                    );
+            return AddressFactory.Create(
+                        viewModel.Id!,
+                        viewModel.AddressLine1,
+                        viewModel.AddressLine2,
+                        viewModel.PostalCode,
+                        viewModel.City,
+                        user!.Id
+                );
+        }
+        catch (Exception) { return null!; }
+    }
+
+    public async Task<ResponseResult> CheckAndUpdateExternalUserAsync(AccountDetailsBasicInfoViewModel viewModel, string email)
+    {
+        try
+        {
+            var externalUser = await _signInManager.GetExternalLoginInfoAsync();
+            bool isFacebookUser = externalUser?.LoginProvider == "Facebook";
+            bool isGoogleUser = externalUser?.LoginProvider == "Google";
+
+            if (isFacebookUser || isGoogleUser)
+            {
+                var existingUser = await _userManager.FindByEmailAsync(email);
+
+                if (existingUser is not null)
+                {
+                    existingUser.Biography = viewModel.Bio;
+                    existingUser.PhoneNumber = viewModel.Phone;
+
+                    var result = await _userService.UpdateUserAsync(existingUser);
+                    return result;
+                }
+            }
+            return ResponseFactory.NotFound();
+        }
+        catch (Exception) { return ResponseFactory.Error(); }
     }
 }
 
