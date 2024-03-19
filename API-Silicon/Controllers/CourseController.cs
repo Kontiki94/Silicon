@@ -1,30 +1,63 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Infrastructure.Context;
+using Infrastructure.Repositories;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Razor.TagHelpers;
+using Microsoft.EntityFrameworkCore;
 
 namespace API_Silicon.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CourseController : ControllerBase
+    public class CourseController(DataContext context, CourseRepository courseRepository) : ControllerBase
     {
+        private readonly DataContext _context = context;
+        private readonly CourseRepository _courseRepository = courseRepository;
+
         [HttpPost]
-        public IActionResult Create()
+        public async Task<IActionResult> Create(string email)
         {
-            return Ok();
+            if (!string.IsNullOrEmpty(email))
+            {
+
+            }
+            return BadRequest();
         }
 
         #region READ
-        [HttpGet]
-        public IActionResult GetOne()
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetOne(string id)
         {
-            return Ok();
+            if (string.IsNullOrEmpty(id))
+            {
+                return BadRequest("Invalid id");
+            }
+
+            var response = await _courseRepository.GetOneAsync(x => x.Id == id);
+            if (response.StatusCode == Infrastructure.Models.StatusCode.OK)
+            {
+                return Ok(response.ContentResult);
+            }
+            return NotFound();
         }
 
         [HttpGet]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            return Ok();
+            try
+            {
+                var courses = await _courseRepository.GetAllAsync();
+                if (courses is not null)
+                {
+                    return Ok(courses);
+                }
+                return NotFound();
+
+            }
+            catch (Exception) { return BadRequest(); }
         }
+
+
         #endregion
 
         #region UPDATE
@@ -36,7 +69,7 @@ namespace API_Silicon.Controllers
         #endregion
 
         #region DELETE
-        [HttpPut]
+        [HttpDelete]
         public IActionResult Delete()
         {
             return Ok();
