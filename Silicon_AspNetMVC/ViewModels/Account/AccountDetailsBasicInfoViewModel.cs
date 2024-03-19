@@ -1,4 +1,5 @@
-﻿using Silicon_AspNetMVC.Models.Sections;
+﻿using Silicon_AspNetMVC.Helpers;
+using Silicon_AspNetMVC.Models.Sections;
 using System.ComponentModel.DataAnnotations;
 
 namespace Silicon_AspNetMVC.ViewModels.Account;
@@ -27,7 +28,6 @@ public class AccountDetailsBasicInfoViewModel
     public string Email { get; set; } = null!;
 
     [DataType(DataType.PhoneNumber)]
-    [MinLength(8, ErrorMessage = "Not valid.")]
     [Display(Name = "Phone", Prompt = "Phone number", Order = 3)]
     public string? Phone { get; set; }
 

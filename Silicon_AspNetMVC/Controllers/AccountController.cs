@@ -44,6 +44,7 @@ public class AccountController(UserService userService, SignInManager<UserEntity
     [HttpPost]
     public async Task<IActionResult> AccountBasicInfo([Bind(Prefix = "Details")] AccountDetailsBasicInfoViewModel viewModel)
     {
+<<<<<<< HEAD
         var user = await PopulateBasicInfoAsync();
         if (user.IsExternalAccount)
         {
@@ -56,6 +57,37 @@ public class AccountController(UserService userService, SignInManager<UserEntity
             var userEnt = await GenerateUserEntityAsync(user);
 
             var result = await _userService.UpdateUserAsync(userEnt);
+=======
+        var externalUser = await _signInManager.GetExternalLoginInfoAsync();
+        var userEmail = TempData["Email"]?.ToString();
+
+        if (externalUser is not null)
+        {
+            bool isFacebookUser = externalUser.LoginProvider == "Facebook";
+            bool isGoogleUser = externalUser.LoginProvider == "Google";
+            if (isFacebookUser || isGoogleUser)
+            {
+                var existingUser = await _userManager.FindByEmailAsync(userEmail!);
+
+                if (existingUser is not null)
+                {
+                    existingUser.Biography = viewModel.Bio;
+                    existingUser.PhoneNumber = viewModel.Phone;
+
+                    var result = await _userService.UpdateUserAsync(existingUser);
+                    if (result.StatusCode == Infrastructure.Models.StatusCode.OK)
+                    {
+                        TempData["SuccessMessage"] = "Account information successfully saved";
+                        return RedirectToAction(nameof(Details));
+                    }
+                }
+            }
+        }
+        else if (ModelState.IsValid)
+        {
+            var userEntity = await GenerateUserEntityAsync(viewModel);
+            var result = await _userService.UpdateUserAsync(userEntity);
+>>>>>>> 8ef95bc3b945c1be490543994a19effd8ca05057
             if (result.StatusCode == Infrastructure.Models.StatusCode.OK)
             {
                 TempData["SuccessMessage"] = "Account information saved successfully";
@@ -264,6 +296,7 @@ public class AccountController(UserService userService, SignInManager<UserEntity
                     user.UserName!
             );
     }
+
 
     private async Task<AddressModel> GenerateAddressModelAsync(AccountDetailsAddressInfoViewModel viewModel)
     {
