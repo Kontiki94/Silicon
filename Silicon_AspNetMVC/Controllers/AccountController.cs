@@ -44,11 +44,18 @@ public class AccountController(UserService userService, SignInManager<UserEntity
     [HttpPost]
     public async Task<IActionResult> AccountBasicInfo([Bind(Prefix = "Details")] AccountDetailsBasicInfoViewModel viewModel)
     {
+        var user = await PopulateBasicInfoAsync();
+        if (user.IsExternalAccount)
+        {
+            ModelState.Remove("Details.FirstName");
+            ModelState.Remove("Details.Lastname");
+            ModelState.Remove("Details.Email");
+        }
         if (ModelState.IsValid)
         {
-            var userEntity = await GenerateUserEntityAsync(viewModel);
+            var userEnt = await GenerateUserEntityAsync(user);
 
-            var result = await _userService.UpdateUserAsync(userEntity);
+            var result = await _userService.UpdateUserAsync(userEnt);
             if (result.StatusCode == Infrastructure.Models.StatusCode.OK)
             {
                 TempData["SuccessMessage"] = "Account information saved successfully";
@@ -182,7 +189,7 @@ public class AccountController(UserService userService, SignInManager<UserEntity
     }
 
     [Route("/saved")]
-    public async Task <IActionResult> SavedCourses()
+    public async Task<IActionResult> SavedCourses()
     {
         var viewModel = new AccountViewModel()
         {

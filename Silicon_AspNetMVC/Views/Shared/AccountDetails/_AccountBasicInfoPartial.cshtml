@@ -25,7 +25,7 @@
                     <label asp-for="Details.FirstName">First name</label>
                     <span asp-validation-for="Details.FirstName"></span>
                 </div>
-                <input asp-for="Details.FirstName" disabled="@Model.Details.IsExternalAccount" />
+                <input name="firstName" asp-for="Details.FirstName" disabled="@Model.Details.IsExternalAccount" />
             </div>
             <div class="lastname">
                 <div class="validation">
