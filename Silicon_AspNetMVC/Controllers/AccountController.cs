@@ -63,7 +63,7 @@ public class AccountController(UserService userService, SignInManager<UserEntity
             {
                 if (email is not null)
                 {
-                    var result = await CheckAndUpdateExternalUser(viewModel, email!);
+                    var result = await CheckAndUpdateExternalUserAsync(viewModel, email!);
 
                     if (result.StatusCode == Infrastructure.Models.StatusCode.OK)
                     {
@@ -313,7 +313,6 @@ public class AccountController(UserService userService, SignInManager<UserEntity
         catch (Exception) { return null!; }
     }
 
-
     private async Task<AddressModel> GenerateAddressModelAsync(AccountDetailsAddressInfoViewModel viewModel)
     {
         try
@@ -332,7 +331,7 @@ public class AccountController(UserService userService, SignInManager<UserEntity
         catch (Exception) { return null!; }
     }
 
-    public async Task<ResponseResult> CheckAndUpdateExternalUser(AccountDetailsBasicInfoViewModel viewModel, string email)
+    public async Task<ResponseResult> CheckAndUpdateExternalUserAsync(AccountDetailsBasicInfoViewModel viewModel, string email)
     {
         try
         {
@@ -353,9 +352,9 @@ public class AccountController(UserService userService, SignInManager<UserEntity
                     return result;
                 }
             }
-            return null!;
+            return ResponseFactory.NotFound();
         }
-        catch (Exception) { throw; }
+        catch (Exception) { return ResponseFactory.Error(); }
     }
 }
 
