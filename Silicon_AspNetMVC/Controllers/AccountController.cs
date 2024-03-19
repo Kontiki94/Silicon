@@ -57,31 +57,18 @@ public class AccountController(UserService userService, SignInManager<UserEntity
         {
             var externalUser = await _signInManager.GetExternalLoginInfoAsync();
             var claims = HttpContext.User.Identities.FirstOrDefault();
+            var email = claims?.Name;
 
             if (externalUser is not null)
             {
-                if (claims?.Name is not null)
+                if (email is not null)
                 {
-                    bool isFacebookUser = externalUser?.LoginProvider == "Facebook";
-                    bool isGoogleUser = externalUser?.LoginProvider == "Google";
+                    var result = await CheckAndUpdateExternalUser(viewModel, email!);
 
-                    if (isFacebookUser || isGoogleUser)
+                    if (result.StatusCode == Infrastructure.Models.StatusCode.OK)
                     {
-                        var existingUser = await _userManager.FindByEmailAsync(claims.Name);
-
-                        if (existingUser is not null)
-                        {
-                            existingUser.Biography = viewModel.Bio;
-                            existingUser.PhoneNumber = viewModel.Phone;
-
-                            var result = await _userService.UpdateUserAsync(existingUser);
-
-                            if (result.StatusCode == Infrastructure.Models.StatusCode.OK)
-                            {
-                                TempData["SuccessMessage"] = "Account information successfully saved";
-                                return RedirectToAction(nameof(Details));
-                            }
-                        }
+                        TempData["SuccessMessage"] = "Account information successfully saved";
+                        return RedirectToAction(nameof(Details));
                     }
                 }
             }
@@ -343,6 +330,32 @@ public class AccountController(UserService userService, SignInManager<UserEntity
                 );
         }
         catch (Exception) { return null!; }
+    }
+
+    public async Task<ResponseResult> CheckAndUpdateExternalUser(AccountDetailsBasicInfoViewModel viewModel, string email)
+    {
+        try
+        {
+            var externalUser = await _signInManager.GetExternalLoginInfoAsync();
+            bool isFacebookUser = externalUser?.LoginProvider == "Facebook";
+            bool isGoogleUser = externalUser?.LoginProvider == "Google";
+
+            if (isFacebookUser || isGoogleUser)
+            {
+                var existingUser = await _userManager.FindByEmailAsync(email);
+
+                if (existingUser is not null)
+                {
+                    existingUser.Biography = viewModel.Bio;
+                    existingUser.PhoneNumber = viewModel.Phone;
+
+                    var result = await _userService.UpdateUserAsync(existingUser);
+                    return result;
+                }
+            }
+            return null!;
+        }
+        catch (Exception) { throw; }
     }
 }
 
