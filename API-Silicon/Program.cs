@@ -1,12 +1,12 @@
 using Infrastructure.Context;
 using Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Query.Internal;
 
 var builder = WebApplication.CreateBuilder(args);
 
 
 builder.Services.AddScoped<SubscriberRepo>();
+builder.Services.AddScoped<CoursesRepository>();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

@@ -39,16 +39,16 @@ public abstract class Repo<TEntity>(DataContext context) where TEntity : class
         return null!;
     }
 
-    public virtual async Task<ResponseResult> GetAllAsync()
+    public virtual async Task<IEnumerable<TEntity>> GetAllAsync()
     {
         try
         {
             var result = await _context.Set<TEntity>().ToListAsync();
-            return ResponseFactory.Ok(result);
+            return result;
         }
-        catch (Exception ex)
+        catch (Exception)
         {
-            return ResponseFactory.Error(ex.Message);
+            return null!;
         }
     }
 

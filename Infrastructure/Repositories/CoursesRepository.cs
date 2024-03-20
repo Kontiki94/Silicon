@@ -3,7 +3,7 @@ using Infrastructure.Entities;
 
 namespace Infrastructure.Repositories;
 
-public class CourseRepository(DataContext context) : Repo<CourseEntity>(context)
+public class CoursesRepository(DataContext context) : Repo<CoursesEntity>(context)
 {
     private readonly DataContext _context = context;
 }
