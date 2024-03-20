@@ -1,0 +1,57 @@
+﻿@model CoursesModel
+
+<section class="create">
+
+    <form asp-action="Create" asp-controller="Courses" method="post">
+
+        <h2>Create A New Course</h2>
+
+        <div>
+            <label asp-for="Title"></label>
+            <input asp-for="Title" />
+        </div>
+        <div>
+            <label asp-for="Price"></label>
+            <input asp-for="Price" />
+        </div>
+        <div>
+            <label asp-for="DiscountPrice"></label>
+            <input asp-for="DiscountPrice" />
+        </div>
+        <div>
+            <label asp-for="CourseImage"></label>
+            <input asp-for="CourseImage" />
+        </div>
+        <div>
+            <label asp-for="Rating"></label>
+            <input asp-for="Rating" />
+        </div>
+        <div>
+            <label asp-for="Reviews"></label>
+            <input asp-for="Reviews" />
+        </div>
+        <div>
+            <label asp-for="Views"></label>
+            <input asp-for="Views" />
+        </div>
+        <div>
+            <label asp-for="Likes"></label>
+            <input asp-for="Likes" />
+        </div>
+        <div>
+            <label asp-for="ViewHours"></label>
+            <input asp-for="ViewHours" />
+        </div>
+        <div>
+            <label asp-for="AuthorName"></label>
+            <input asp-for="AuthorName" />
+        </div>
+
+        <button class="btn-theme" type="submit">Create</button>
+
+    </form>
+
+    <div class="img-container">
+        <img src="~/images/green_atomic.png" />
+    </div>
+</section>

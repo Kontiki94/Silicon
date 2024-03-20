@@ -2671,3 +2671,32 @@ footer .container .social-media {
   margin-bottom: 0.8rem;
   padding-right: 0.5rem;
 }
+
+.create {
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+.create form {
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  padding: 0 5rem;
+}
+.create form div {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  margin-bottom: 1.2rem;
+  max-width: 100%;
+}
+.create form div label {
+  color: #0B0F19;
+  font-weight: 700;
+}
+.create form div input {
+  border: 0.5px solid #D4D7E5;
+  border-radius: 0.4rem;
+  padding: 0.5rem;
+}
