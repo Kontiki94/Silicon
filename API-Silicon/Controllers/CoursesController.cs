@@ -1,4 +1,5 @@
-﻿using Infrastructure.Context;
+﻿using API_Silicon.Filters;
+using Infrastructure.Context;
 using Infrastructure.DTOs;
 using Infrastructure.Entities;
 using Infrastructure.Models;
@@ -10,6 +11,7 @@ namespace API_Silicon.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [UseApiKey]
     public class CoursesController(DataContext context, CoursesRepository courseRepository) : ControllerBase
     {
         private readonly DataContext _context = context;
