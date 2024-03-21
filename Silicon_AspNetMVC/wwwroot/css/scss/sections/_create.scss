@@ -1,21 +1,28 @@
 ﻿.create {
     margin-top: 2rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
+
+    h2 {
+        margin-bottom: 2rem;
+        text-align: center;
+    }
 
     form {
-        justify-content: center;
-        align-items: center;
-        align-self: center;
-        padding: 0 5rem;
+        display: flex;
+        flex-direction: column;
+        padding: 0 1.5rem;
+
+        @include lg {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            padding: 0 5rem;
+        }
 
         div {
             display: flex;
             flex-direction: column;
-            align-self: center;
             margin-bottom: 1.2rem;
             max-width: 100%;
+            padding-left: .6rem;
 
             label {
                 color: $gray-900;
@@ -28,8 +35,11 @@
                 padding: 0.5rem;
             }
         }
-    }
 
-    .img-container {
+        .btn-theme {
+            margin-top: 0.4rem;
+            grid-column: 2 / span 1;
+            margin-bottom: 20px;
+        }
     }
 }

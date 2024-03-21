@@ -2674,22 +2674,29 @@ footer .container .social-media {
 
 .create {
   margin-top: 2rem;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
+}
+.create h2 {
+  margin-bottom: 2rem;
+  text-align: center;
 }
 .create form {
-  justify-content: center;
-  align-items: center;
-  align-self: center;
-  padding: 0 5rem;
+  display: flex;
+  flex-direction: column;
+  padding: 0 1.5rem;
+}
+@media (min-width: 992px) {
+  .create form {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 0 5rem;
+  }
 }
 .create form div {
   display: flex;
   flex-direction: column;
-  align-self: center;
   margin-bottom: 1.2rem;
   max-width: 100%;
+  padding-left: 0.6rem;
 }
 .create form div label {
   color: #0B0F19;
@@ -2699,4 +2706,9 @@ footer .container .social-media {
   border: 0.5px solid #D4D7E5;
   border-radius: 0.4rem;
   padding: 0.5rem;
+}
+.create form .btn-theme {
+  margin-top: 0.4rem;
+  grid-column: 2/span 1;
+  margin-bottom: 20px;
 }
