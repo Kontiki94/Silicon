@@ -6,6 +6,7 @@
         public string Title { get; set; } = null!;
         public bool IsBestSeller { get; set; } = false;
         public string? CourseImage { get; set; }
+        public string? CourseImageAltText { get; set; }
         public string? Price { get; set; }
         public string? DiscountPrice { get; set; }
         public string? Rating { get; set; }
@@ -19,6 +20,7 @@
         public string? AuthorName { get; set; }
         public string? AutherBio { get; set; }
         public string? AuthorImage { get; set; }
+        public string? AutherImageAltText { get; set; }
         public string? YouTubeSubscribers { get; set; }
         public string? FaceBookFollowers { get; set; }
 
