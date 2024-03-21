@@ -11,7 +11,7 @@ public class CourseEntity
     public decimal? Views { get; set; }
     public string? Likes { get; set; }
     public int? ViewHours { get; set; }
-    public decimal Price { get; set; }
+    public string? Price { get; set; }
     public decimal? DiscountPrice { get; set; }
     public int? Articles { get; set; }
     public int? Resources { get; set; }

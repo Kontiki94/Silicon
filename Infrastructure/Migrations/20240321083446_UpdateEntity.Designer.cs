@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240319113716_InitApiDb")]
-    partial class InitApiDb
+    [Migration("20240321083446_UpdateEntity")]
+    partial class UpdateEntity
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -113,9 +113,8 @@ namespace Infrastructure.Migrations
                     b.Property<string>("Likes")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("Price")
-                        .HasPrecision(10, 2)
-                        .HasColumnType("decimal(10,2)");
+                    b.Property<string>("Price")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ProgramDetails")
                         .HasColumnType("nvarchar(max)");
@@ -148,6 +147,89 @@ namespace Infrastructure.Migrations
                     b.HasIndex("AuthorId");
 
                     b.ToTable("Course");
+                });
+
+            modelBuilder.Entity("Infrastructure.Entities.CoursesEntity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("AccessTime")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Articles")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AutherBio")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AuthorImage")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AuthorName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Categories")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CourseDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CourseImage")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DiscountPrice")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FaceBookFollowers")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsBestSeller")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("LearnPoints")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LikesInNumbers")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LikesInPercent")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Price")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProgramDetails")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Rating")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Resources")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Reviews")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ViewHours")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Views")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("YouTubeSubscribers")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Courses");
                 });
 
             modelBuilder.Entity("Infrastructure.Entities.SubscribeEntity", b =>

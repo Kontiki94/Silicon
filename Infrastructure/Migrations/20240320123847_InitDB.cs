@@ -5,7 +5,7 @@
 namespace Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class InitApiDb : Migration
+    public partial class InitDB : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -43,6 +43,28 @@ namespace Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Courses",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Price = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DiscountPrice = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CourseImage = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Rating = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Reviews = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Views = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Likes = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ViewHours = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AuthorName = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Courses", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Subscribe",
                 columns: table => new
                 {
@@ -74,7 +96,7 @@ namespace Infrastructure.Migrations
                     Views = table.Column<decimal>(type: "decimal(10,2)", precision: 10, scale: 2, nullable: true),
                     Likes = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ViewHours = table.Column<int>(type: "int", nullable: true),
-                    Price = table.Column<decimal>(type: "decimal(10,2)", precision: 10, scale: 2, nullable: false),
+                    Price = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DiscountPrice = table.Column<decimal>(type: "decimal(10,2)", precision: 10, scale: 2, nullable: true),
                     Articles = table.Column<int>(type: "int", nullable: true),
                     Resources = table.Column<int>(type: "int", nullable: true),
@@ -110,6 +132,9 @@ namespace Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "Course");
+
+            migrationBuilder.DropTable(
+                name: "Courses");
 
             migrationBuilder.DropTable(
                 name: "Subscribe");

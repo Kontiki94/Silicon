@@ -11,6 +11,7 @@ public class DataContext(DbContextOptions<DataContext> options) : DbContext(opti
     public DbSet<AuthorEntity> Author { get; set; }
     public DbSet<ContactEntity> Contact { get; set; }
     public DbSet<CourseEntity> Course { get; set; }
+    public DbSet<CoursesEntity> Courses { get; set; }
     public DbSet<SubscribeEntity> Subscribe { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
