@@ -53,6 +53,7 @@ public class AccountController(UserService userService, SignInManager<UserEntity
     [HttpPost]
     public async Task<IActionResult> AccountBasicInfo([Bind(Prefix = "Details")] AccountDetailsBasicInfoViewModel viewModel)
     {
+
         try
         {
             var externalUser = await _signInManager.GetExternalLoginInfoAsync();
