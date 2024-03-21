@@ -1,62 +1,61 @@
 ﻿using Infrastructure.Models;
 
-namespace Infrastructure.Factories
+namespace Infrastructure.Factories;
+
+public class ResponseFactory
 {
-    public class ResponseFactory
+    public static ResponseResult Ok()
     {
-        public static ResponseResult Ok()
+        return new ResponseResult
         {
-            return new ResponseResult
-            {
-                Message = "Succeeded",
-                StatusCode = StatusCode.OK
-            };
-        }
+            Message = "Succeeded",
+            StatusCode = StatusCode.OK
+        };
+    }
 
-        public static ResponseResult Ok(string? message = null)
+    public static ResponseResult Ok(string? message = null)
+    {
+        return new ResponseResult
         {
-            return new ResponseResult
-            {
-                Message = message ?? "Succeeded",
-                StatusCode = StatusCode.OK
-            };
-        }
+            Message = message ?? "Succeeded",
+            StatusCode = StatusCode.OK
+        };
+    }
 
-        public static ResponseResult Ok(object obj, string? message = null)
+    public static ResponseResult Ok(object obj, string? message = null)
+    {
+        return new ResponseResult
         {
-            return new ResponseResult
-            {
-                ContentResult = obj,
-                Message = message ?? "Succeeded",
-                StatusCode = StatusCode.OK
-            };
-        }
+            ContentResult = obj,
+            Message = message ?? "Succeeded",
+            StatusCode = StatusCode.OK
+        };
+    }
 
-        public static ResponseResult Error(string? message = null)
+    public static ResponseResult Error(string? message = null)
+    {
+        return new ResponseResult
         {
-            return new ResponseResult
-            {
-                Message = message ?? "Failed",
-                StatusCode = StatusCode.ERROR
-            };
-        }
+            Message = message ?? "Failed",
+            StatusCode = StatusCode.ERROR
+        };
+    }
 
-        public static ResponseResult NotFound(string? message = null)
+    public static ResponseResult NotFound(string? message = null)
+    {
+        return new ResponseResult
         {
-            return new ResponseResult
-            {
-                Message = message ?? "Not found",
-                StatusCode = StatusCode.NOT_FOUND
-            };
-        }
+            Message = message ?? "Not found",
+            StatusCode = StatusCode.NOT_FOUND
+        };
+    }
 
-        public static ResponseResult Exists(string? message = null)
+    public static ResponseResult Exists(string? message = null)
+    {
+        return new ResponseResult
         {
-            return new ResponseResult
-            {
-                Message = message ?? "Already exists",
-                StatusCode = StatusCode.EXISTS
-            };
-        }
+            Message = message ?? "Already exists",
+            StatusCode = StatusCode.EXISTS
+        };
     }
 }

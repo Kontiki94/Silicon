@@ -1,6 +1,5 @@
 ﻿@model CoursesViewModel
 @await Html.PartialAsync("~/Views/Shared/Courses/_CoursesPartial.cshtml", Model)
 
-<section id="skills">
-    @await Html.PartialAsync("~/Views/Shared/Courses/_SkillsPartial.cshtml")
-</section>
+
+    @await Html.PartialAsync("~/Views/Shared/Courses/_SkillsPartial.cshtml", Model)

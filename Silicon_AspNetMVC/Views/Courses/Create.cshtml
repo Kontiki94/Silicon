@@ -1,0 +1,108 @@
+﻿@model CoursesModel
+
+<section class="create">
+
+    <h2>Create A New Course</h2>
+    <form asp-action="Create" asp-controller="Courses" method="post">
+
+        <div class="course-info">
+            <h3>General Info</h3>
+            <div>
+                <label asp-for="Title"></label>
+                <input asp-for="Title" />
+            </div>
+            <div>
+                <label asp-for="Price"></label>
+                <input asp-for="Price" />
+            </div>
+            <div>
+                <label asp-for="DiscountPrice"></label>
+                <input asp-for="DiscountPrice" />
+            </div>
+            <div>
+                <label asp-for="CourseImage"></label>
+                <input asp-for="CourseImage" />
+            </div>
+            <div>
+                <label asp-for="Rating"></label>
+                <input asp-for="Rating" />
+            </div>
+            <div>
+                <label asp-for="Reviews"></label>
+                <input asp-for="Reviews" />
+            </div>
+            <div>
+                <label asp-for="Views"></label>
+                <input asp-for="Views" />
+            </div>
+            <div>
+                <label asp-for="LikesInPercent"></label>
+                <input asp-for="LikesInPercent" />
+            </div>
+            <div>
+                <label asp-for="LikesInNumbers"></label>
+                <input asp-for="LikesInNumbers" />
+            </div>
+        </div>
+
+        <div class="author-info">
+            <h3>Author Info</h3>
+            <div>
+                <label asp-for="AuthorName"></label>
+                <input asp-for="AuthorName" />
+            </div>
+            <div>
+                <label asp-for="AutherBio"></label>
+                <input asp-for="AutherBio" />
+            </div>
+            <div>
+                <label asp-for="AuthorImage"></label>
+                <input asp-for="AuthorImage" />
+            </div>
+            <div>
+                <label asp-for="YouTubeSubscribers"></label>
+                <input asp-for="YouTubeSubscribers" />
+            </div>
+            <div>
+                <label asp-for="FaceBookFollowers"></label>
+                <input asp-for="FaceBookFollowers" />
+            </div>
+        </div>
+
+        <div class="course-details">
+            <h3>Course Details</h3>
+            <div>
+                <label asp-for="CourseDescription"></label>
+                <input asp-for="CourseDescription" />
+            </div>
+            <div>
+                <label asp-for="ViewHours"></label>
+                <input asp-for="ViewHours" />
+            </div>
+            <div>
+                <label asp-for="Resources"></label>
+                <input asp-for="Resources" />
+            </div>
+            <div>
+                <label asp-for="AccessTime"></label>
+                <input asp-for="AccessTime" />
+            </div>
+            <div>
+                <label asp-for="ProgramDetails"></label>
+                <input asp-for="ProgramDetails" />
+            </div>
+            <div>
+                <label asp-for="LearnPoints"></label>
+                <input asp-for="LearnPoints" />
+            </div>
+            <div>
+                <label asp-for="Categories"></label>
+                <input asp-for="Categories" />
+            </div>
+        </div>
+
+        <button class="btn-theme" type="submit">Create A New Course</button>
+
+    </form>
+
+</section>

@@ -5,7 +5,7 @@
             <h1>@Model.NewsletterTitle.Title</h1>
             <img src="@Model.NewsletterImage.ImageUrl" alt="@Model.NewsletterImage.AltText" />
         </div>
-        <form asp-controller="Home" asp-action="" asp-fragment="newsletter" novalidate>
+        <form asp-controller="Home" asp-action="Subscribe" asp-fragment="newsletter" method="post" novalidate>
             <div class="checkbox-content">
                 <div class="news-title">
                     <h5>@Model.NewsletterTitle.Subtitle</h5>
@@ -21,8 +21,9 @@
                 </div>
             </div>
             <div class="subscribe">
-                <input type="text" name="email" placeholder="Your Email" class="input-email" />
+                <input asp-for="@Model.Subscriber.Email" type="text" name="email" placeholder="Your Email" class="input-email" />
                 <button class="btn-theme" href="#"><span>* Subscribe</span></button>
+                <span asp-validation-for="@Model.Subscriber.Email"></span>
             </div>
         </form>
     </div>

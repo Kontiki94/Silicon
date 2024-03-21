@@ -1,4 +1,5 @@
-﻿using Silicon_AspNetMVC.Models.Components;
+﻿using Infrastructure.Models;
+using Silicon_AspNetMVC.Models.Components;
 
 namespace Silicon_AspNetMVC.ViewModels.Home;
 
@@ -7,6 +8,8 @@ public class NewsLetterViewModel
     public SectionTitleModel NewsletterTitle { get; set; } = new SectionTitleModel();
     public List<CheckBoxViewModel> Checkbox { get; set; } = [];
     public ImageViewModel NewsletterImage { get; set; } = new ImageViewModel();
+
+    public SubscribeModel Subscriber { get; set; } = new SubscribeModel();
 
     public NewsLetterViewModel()
     {
