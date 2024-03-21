@@ -2679,6 +2679,9 @@ footer .container .social-media {
   display: flex;
   align-items: center;
 }
+#saved-courses .container .content .saved-items .course-card .bottom p {
+  padding-right: 0.3rem;
+}
 #saved-courses .container .content .saved-items .course-card .bottom i {
   margin-bottom: 0.8rem;
   padding-right: 0.5rem;

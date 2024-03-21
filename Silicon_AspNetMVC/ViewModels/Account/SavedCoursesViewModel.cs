@@ -6,15 +6,15 @@ namespace Silicon_AspNetMVC.ViewModels.Account
     {
         public string Title { get; set; } = "Saved Items";
 
-        public CourseDetailsModel CourseDetails { get; set; } = new CourseDetailsModel()
+        public CoursesModel Course { get; set; } = new CoursesModel()
         {
-            CourseImage = new() { ImageUrl = "/images/video-game-design.svg", AltText = "" },
+            CourseImage = "/images/video-game-design.svg",
             Title = "Blender Character Creator v2.0 for Video Games Design",
-            Author = new() { AuthorName = "Ralph Edwards" },
-            Price = (decimal?)18.99,
-            ViewHours = 160,
-            Likes = "92% (3.1K)"
-
+            AuthorName = "Ralph Edwards",
+            Price = "18.99",
+            ViewHours = "160",
+            LikesInPercent = "92%",
+            LikesInNumbers = "(3.1K)"
         };
     }
 }
