@@ -1,4 +1,5 @@
 ﻿using Infrastructure.Entities;
+using System.ComponentModel.DataAnnotations;
 
 namespace Infrastructure.Models;
 
@@ -8,6 +9,7 @@ public class CoursesModel
     public string Title { get; set; } = null!;
     public bool IsBestSeller { get; set; } = false;
     public string? CourseImage { get; set; }
+    public string? CourseImageAltText { get; set; }
     public string? Price { get; set; }
     public string? DiscountPrice { get; set; }
     public string? Rating { get; set; }
@@ -21,6 +23,7 @@ public class CoursesModel
     public string? AuthorName { get; set; }
     public string? AutherBio { get; set; }
     public string? AuthorImage { get; set; }
+    public string? AutherImageAltText { get; set; }
     public string? YouTubeSubscribers { get; set; }
     public string? FaceBookFollowers { get; set; }
 
@@ -44,6 +47,7 @@ public class CoursesModel
             Title = coursesEntity.Title,
             IsBestSeller = coursesEntity.IsBestSeller,
             CourseImage = coursesEntity.CourseImage,
+            CourseImageAltText = coursesEntity.CourseImageAltText,
             Price = coursesEntity.Price,
             DiscountPrice = coursesEntity.DiscountPrice,
             Rating = coursesEntity.Rating,
@@ -54,6 +58,7 @@ public class CoursesModel
             AuthorName = coursesEntity.AuthorName,
             AutherBio = coursesEntity.AutherBio,
             AuthorImage = coursesEntity.AuthorImage,
+            AutherImageAltText = coursesEntity.
             YouTubeSubscribers = coursesEntity.YouTubeSubscribers,
             FaceBookFollowers = coursesEntity.FaceBookFollowers,
             CourseDescription = coursesEntity.CourseDescription,

@@ -12,6 +12,8 @@ public class CourseRegistrationForm
     public bool IsBestSeller { get; set; } = false;
     [Display(Name = "CourseImage")]
     public string? CourseImage { get; set; }
+    [Display(Name = "CourseImageAltText")]
+    public string? CourseImageAltText { get; set; }
     [Display(Name = "Price")]
     public string? Price { get; set; }
     [Display(Name = "DiscountPrice")]
@@ -35,6 +37,8 @@ public class CourseRegistrationForm
     public string? AutherBio { get; set; }
     [Display(Name = "AuthorImage")]
     public string? AuthorImage { get; set; }
+    [Display(Name = "AutherImageAltText")]
+    public string? AutherImageAltText { get; set; }
     [Display(Name = "YouTubeSubscribers")]
     public string? YouTubeSubscribers { get; set; }
     [Display(Name = "FaceBookFollowers")]
