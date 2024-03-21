@@ -9,6 +9,7 @@ public class CoursesEntity
     public int Id { get; set; }
     public bool IsBestSeller { get; set; } = false;
     public string? CourseImage { get; set; }
+    public string? CourseImageAltText { get; set; }
     public string Title { get; set; } = null!;
     public string? Price { get; set; }
     public string? DiscountPrice { get; set; }
@@ -22,6 +23,7 @@ public class CoursesEntity
     public string? AuthorName { get; set; }
     public string? AutherBio { get; set; }
     public string? AuthorImage { get; set; }
+    public string? AutherImageAltText { get; set; }
     public string? YouTubeSubscribers { get; set; }
     public string? FaceBookFollowers { get; set; }
 
@@ -43,6 +45,7 @@ public class CoursesEntity
             Title = DTO.Title,
             IsBestSeller = DTO.IsBestSeller,
             CourseImage = DTO.CourseImage,
+            CourseImageAltText = DTO.CourseImageAltText,
             Price = DTO.Price,
             DiscountPrice = DTO.DiscountPrice,
             Rating = DTO.Rating,
@@ -53,6 +56,7 @@ public class CoursesEntity
             AuthorName = DTO.AuthorName,
             AutherBio = DTO.AutherBio,
             AuthorImage = DTO.AuthorImage,
+            AutherImageAltText = DTO.AutherImageAltText,
             YouTubeSubscribers = DTO.YouTubeSubscribers,
             FaceBookFollowers = DTO.FaceBookFollowers,
             CourseDescription = DTO.CourseDescription,
