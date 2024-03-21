@@ -8,6 +8,7 @@ namespace Silicon_AspNetMVC.ViewModels.Courses
         public IEnumerable<CoursesModel> AllCourses { get; set; } = [];
 
         public IEnumerable<CourseDetailsModel> Courses { get; set; } = [];
+        public string? ErrorMessage { get; set; }
         
     }
 }

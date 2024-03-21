@@ -31,31 +31,39 @@
         </div>
         <div class="grid">
 
-            @foreach (var course in Model.AllCourses!)
+            @if (Model.Courses != null)
             {
-                <div class="course-card">
-                    <a class="content">
-                        <div class="image">
-                            <img src="~/images/@course.CourseImage" alt="" />
-                        </div>
-                        <div class="course-info">
-                            <p class="title">@course.Title</p>
-                            <p class="author">@course.AuthorName</p>
-                            <p class="price">$ @course.Price</p>
-                        </div>
-                        <div class="divider"></div>
-                        <footer>
-                            <div>
-                                <i class="fa-sharp fa-solid fa-clock"></i>
-                                <p>@course.ViewHours hours</p>
+
+                @foreach (var course in Model.AllCourses!)
+                {
+                    <div class="course-card">
+                        <a class="content">
+                            <div class="image">
+                                <img src="~/images/@course.CourseImage" alt="" />
                             </div>
-                            <div>
-                                <i class="fa-sharp fa-light fa-thumbs-up"></i>
-                                <p>@course.Views</p>
+                            <div class="course-info">
+                                <p class="title">@course.Title</p>
+                                <p class="author">@course.AuthorName</p>
+                                <p class="price">$ @course.Price</p>
                             </div>
-                        </footer>
-                    </a>
-                </div>
+                            <div class="divider"></div>
+                            <footer>
+                                <div>
+                                    <i class="fa-sharp fa-solid fa-clock"></i>
+                                    <p>@course.ViewHours hours</p>
+                                </div>
+                                <div>
+                                    <i class="fa-sharp fa-light fa-thumbs-up"></i>
+                                    <p>@course.Views</p>
+                                </div>
+                            </footer>
+                        </a>
+                    </div>
+                }
+            }
+            else
+            {
+                <span>@TempData["ErrorMessage"]</span>
             }
 
         </div>
