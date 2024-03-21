@@ -15,43 +15,40 @@ namespace API_Silicon.Controllers
         private readonly DataContext _context = context;
         private readonly CoursesRepository _courseRepository = courseRepository;
 
+        #region CREATE
         [HttpPost]
         public async Task<IActionResult> Create(CourseRegistrationForm DTO)
         {
-            if (ModelState.IsValid)
+            try
             {
-                var courseEntity = new CoursesEntity
+                if (ModelState.IsValid)
                 {
-                    Title = DTO.Title,
-                    Price = DTO.Price,
-                    DiscountPrice = DTO.DiscountPrice,
-                    CourseImage = DTO.CourseImage,
-                    Rating = DTO.Rating,
-                    Reviews = DTO.Reviews,
-                    Views = DTO.Views,
-                    Likes = DTO.Likes,
-                    ViewHours = DTO.ViewHours,
-                    AuthorName = DTO.AuthorName
-                };
-                _context.Courses.Add(courseEntity);
-                await _context.SaveChangesAsync();
+                    CoursesEntity coursesEntity = DTO;
+                    _context.Courses.Add(coursesEntity);
+                    await _context.SaveChangesAsync();
 
-                return Created("", (CoursesModel)courseEntity);
+                    return Created("", (CoursesModel)coursesEntity);
+                }
+                return BadRequest();
             }
-            return BadRequest();
+            catch (Exception) { return BadRequest(); }
         }
+        #endregion
 
         #region READ
         [HttpGet("{id}")]
         public async Task<IActionResult> GetOne(int id)
         {
-
-            var response = await _courseRepository.GetOneAsync(x => x.Id == id);
-            if (response.StatusCode == Infrastructure.Models.StatusCode.OK)
+            try
             {
-                return Ok(response.ContentResult);
+                var response = await _courseRepository.GetOneAsync(x => x.Id == id);
+                if (response.StatusCode == Infrastructure.Models.StatusCode.OK)
+                {
+                    return Ok(response.ContentResult);
+                }
+                return NotFound();
             }
-            return NotFound();
+            catch (Exception) { return BadRequest(); }
         }
 
         [HttpGet]
@@ -69,8 +66,6 @@ namespace API_Silicon.Controllers
             }
             catch (Exception) { return BadRequest(); }
         }
-
-
         #endregion
 
         #region UPDATE
@@ -89,6 +84,5 @@ namespace API_Silicon.Controllers
 
         }
         #endregion
-
     }
 }

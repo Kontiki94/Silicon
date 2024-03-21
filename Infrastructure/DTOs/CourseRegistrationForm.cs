@@ -8,22 +8,54 @@ public class CourseRegistrationForm
     [Required]
     [Display(Name = "Title")]
     public string Title { get; set; } = null!;
+    [Display(Name = "IsBestSeller")]
+    public bool IsBestSeller { get; set; } = false;
+    [Display(Name = "CourseImage")]
+    public string? CourseImage { get; set; }
     [Display(Name = "Price")]
     public string? Price { get; set; }
-    [Display(Name = "Discount Price")]
+    [Display(Name = "DiscountPrice")]
     public string? DiscountPrice { get; set; }
-    [Display(Name = "Course Image")]
-    public string? CourseImage { get; set; }
     [Display(Name = "Rating")]
     public string? Rating { get; set; }
     [Display(Name = "Reviews")]
     public string? Reviews { get; set; }
     [Display(Name = "Views")]
     public string? Views { get; set; }
-    [Display(Name = "Likes")]
-    public string? Likes { get; set; }
-    [Display(Name = "View hours")]
-    public string? ViewHours { get; set; }
-    [Display(Name = "Author Name")]
+    [Display(Name = "LikesInPercent")]
+    public string? LikesInPercent { get; set; }
+    [Display(Name = "LikesInNumbers")]
+    public string? LikesInNumbers { get; set; }
+
+
+    // AutherInfo
+    [Display(Name = "AuthorName")]
     public string? AuthorName { get; set; }
+    [Display(Name = "AutherBio")]
+    public string? AutherBio { get; set; }
+    [Display(Name = "AuthorImage")]
+    public string? AuthorImage { get; set; }
+    [Display(Name = "YouTubeSubscribers")]
+    public string? YouTubeSubscribers { get; set; }
+    [Display(Name = "FaceBookFollowers")]
+    public string? FaceBookFollowers { get; set; }
+
+
+    // CourseDetails
+    [Display(Name = "CourseDescription")]
+    public string? CourseDescription { get; set; }
+    [Display(Name = "ViewHours")]
+    public string? ViewHours { get; set; }
+    [Display(Name = "Articles")]
+    public string? Articles { get; set; }
+    [Display(Name = "Resources")]
+    public string? Resources { get; set; }
+    [Display(Name = "AccessTime")]
+    public string? AccessTime { get; set; }
+    [Display(Name = "Program Details")]
+    public List<string>? ProgramDetails { get; set; }
+    [Display(Name = "Learn Points")]
+    public List<string>? LearnPoints { get; set; }
+    [Display(Name = "Categories")]
+    public List<string>? Categories { get; set; }
 }
