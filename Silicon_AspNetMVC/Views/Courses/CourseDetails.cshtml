@@ -1,6 +1,6 @@
 ﻿
-@model CoursesCourseDetailsViewModel
+@model OneCourseModel
 
-@await Html.PartialAsync("~/Views/Shared/Courses/_CourseShowcasePartial.cshtml", Model.CourseDetails)
-@await Html.PartialAsync("~/Views/Shared/Courses/_CourseDetailsPartial.cshtml", Model.CourseDetails)
-@await Html.PartialAsync("~/Views/Shared/Courses/_CourseAuthorPartial.cshtml", Model.Author)
+@* @await Html.PartialAsync("~/Views/Shared/Courses/_CourseShowcasePartial.cshtml", Model.CourseDetails) *@
+@await Html.PartialAsync("~/Views/Shared/Courses/_CourseDetailsPartial.cshtml")
+@await Html.PartialAsync("~/Views/Shared/Courses/_CourseAuthorPartial.cshtml")

@@ -1,4 +1,4 @@
-﻿@model CourseDetailsModel
+﻿@model OneCourseModel
 <section id="course-description" class="container">
     <div class="course-content">
         <div class="description-section">
@@ -45,8 +45,8 @@
                     @foreach (var detail in Model.ProgramDetails)
                     {
                         <li class="item">
-                            <p class="title">@detail.Title</p>
-                            <p class="subtitle">@detail.Subtitle</p>
+                            <p class="title">@Model.ProgramDetails</p>
+                            <p class="subtitle">@Model.ProgramDetails</p>
                         </li>
                     }
                 }

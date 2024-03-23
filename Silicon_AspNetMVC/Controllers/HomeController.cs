@@ -39,6 +39,6 @@ public class HomeController : Controller
                 ViewData["Subscribed"] = true;
             }
         }
-        return View("Index", "Home");
+        return View(viewModel);
     }
 }
