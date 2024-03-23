@@ -15,13 +15,13 @@ builder.Services.AddDbContext<DataContext>(x =>
 
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "API-Silicon", Description="Api for handling the webpage silicon" });
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Silicon API", Description="API for Silicon Web App" });
     c.AddSecurityDefinition("ApiKey", new OpenApiSecurityScheme
     {
-        Description = "API Key Authorization",
+        Description = "Set apikey in query",
         Type = SecuritySchemeType.ApiKey,
-        Name = "ApiKey",
-        In = ParameterLocation.Header,
+        Name = "key",
+        In = ParameterLocation.Query,
         Scheme = "ApiKeyScheme"
     });
     var key = new OpenApiSecurityScheme()
@@ -33,11 +33,6 @@ builder.Services.AddSwaggerGen(c =>
         },
         In = ParameterLocation.Header
     };
-    var requirement = new OpenApiSecurityRequirement
-        {
-            { key, new List<string>() }
-        };
-    c.AddSecurityRequirement(requirement);
 });
 
 //builder.Services.AddCors(x =>
