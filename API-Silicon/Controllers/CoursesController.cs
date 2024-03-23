@@ -19,6 +19,7 @@ namespace API_Silicon.Controllers
 
         #region CREATE
         [HttpPost]
+        
         public async Task<IActionResult> Create(CourseRegistrationForm DTO)
         {
             try
@@ -54,6 +55,7 @@ namespace API_Silicon.Controllers
         }
 
         [HttpGet]
+        [UseApiKey]
         public async Task<IActionResult> GetAll()
         {
             try

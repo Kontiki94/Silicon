@@ -5,46 +5,38 @@ using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
 builder.Services.AddScoped<SubscriberRepo>();
 builder.Services.AddScoped<CoursesRepository>();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddDbContext<DataContext>(x =>
-    x.UseSqlServer(builder.Configuration.GetConnectionString("SqlServer")));
 
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Silicon API", Description="API for Silicon Web App" });
     c.AddSecurityDefinition("ApiKey", new OpenApiSecurityScheme
     {
-        Description = "Set apikey in query",
-        Type = SecuritySchemeType.ApiKey,
+        Description = "API Key Authorization",
         Name = "key",
         In = ParameterLocation.Query,
-        Scheme = "ApiKeyScheme"
+        Type = SecuritySchemeType.ApiKey
     });
-    var key = new OpenApiSecurityScheme()
+
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
     {
-        Reference = new OpenApiReference
         {
-            Type = ReferenceType.SecurityScheme,
-            Id = "ApiKey"
-        },
-        In = ParameterLocation.Header
-    };
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "ApiKey"
+                }
+            }, new string[] {}
+        }
+    });
 });
 
-//builder.Services.AddCors(x =>
-//{
-//    x.AddPolicy("CustomOriginPolicy", policy =>
-//    {
-//        policy.WithOrigins()
-//        .AllowAnyMethod()
-//        .AllowAnyHeader();
-//    });
-//});
-
+builder.Services.AddDbContext<DataContext>(x =>
+    x.UseSqlServer(builder.Configuration.GetConnectionString("SqlServer")));
 
 var app = builder.Build();
 
