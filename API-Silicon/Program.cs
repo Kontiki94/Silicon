@@ -1,6 +1,7 @@
 using Infrastructure.Context;
 using Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,33 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<DataContext>(x =>
     x.UseSqlServer(builder.Configuration.GetConnectionString("SqlServer")));
+
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Api Key Auth", Version = "v1" });
+    c.AddSecurityDefinition("ApiKey", new OpenApiSecurityScheme
+    {
+        Description = "ApiKey must appear in header",
+        Type = SecuritySchemeType.ApiKey,
+        Name = "XApiKey",
+        In = ParameterLocation.Header,
+        Scheme = "ApiKeyScheme"
+    });
+    var key = new OpenApiSecurityScheme()
+    {
+        Reference = new OpenApiReference
+        {
+            Type = ReferenceType.SecurityScheme,
+            Id = "ApiKey"
+        },
+        In = ParameterLocation.Header
+    };
+    var requirement = new OpenApiSecurityRequirement
+                    {
+                             { key, new List<string>() }
+                    };
+    c.AddSecurityRequirement(requirement);
+});
 
 //builder.Services.AddCors(x =>
 //{

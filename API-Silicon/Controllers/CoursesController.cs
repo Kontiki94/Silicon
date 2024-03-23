@@ -11,7 +11,6 @@ namespace API_Silicon.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [UseApiKey]
     public class CoursesController(DataContext context, CoursesRepository courseRepository) : ControllerBase
     {
         private readonly DataContext _context = context;
@@ -79,10 +78,19 @@ namespace API_Silicon.Controllers
         #endregion
 
         #region DELETE
-        [HttpDelete]
-        public IActionResult Delete()
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
         {
-            return Ok();
+            try
+            {
+                var courseToDelete = await _courseRepository.DeleteOneAsync(x => x.Id == id);
+                if (courseToDelete)
+                {
+                    return Ok();
+                }
+                return NotFound();
+            }
+            catch (Exception) { return BadRequest(); }
 
         }
         #endregion
