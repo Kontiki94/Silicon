@@ -57,8 +57,8 @@ public class CoursesController : Controller
         using var http = new HttpClient();
         var response = await http.GetAsync($"https://localhost:7091/api/courses/{id}?key=NmUyM2YyZTktOGUxYy00YTc2LTk4YzktMjEzOWYzMjI1ZTEz");
         var json = await response.Content.ReadAsStringAsync();
-        var data = JsonConvert.DeserializeObject<OneCourseModel>(json);
-        OneCourseModel viewModel = data!;
+        var data = JsonConvert.DeserializeObject<CoursesModel>(json);
+        CoursesModel viewModel = data!;
         return View(viewModel);
     }
 }
