@@ -3,7 +3,6 @@ using Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
-
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddScoped<SubscriberRepo>();
@@ -11,7 +10,9 @@ builder.Services.AddScoped<CoursesRepository>();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
+
 // https://swagger.io/docs/specification/authentication/api-keys/
+
 builder.Services.AddSwaggerGen(c =>
 {
     c.AddSecurityDefinition("ApiKey", new OpenApiSecurityScheme
