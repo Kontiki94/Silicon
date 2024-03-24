@@ -19,7 +19,7 @@ namespace API_Silicon.Controllers
 
         #region CREATE
         [HttpPost]
-        
+
         public async Task<IActionResult> Create(CourseRegistrationForm DTO)
         {
             try
@@ -73,10 +73,29 @@ namespace API_Silicon.Controllers
         #endregion
 
         #region UPDATE
-        [HttpPut]
-        public IActionResult Update()
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(CourseRegistrationForm DTO, int id)
         {
-            return Ok();
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    CoursesEntity entity = DTO;
+                    entity.Id = id;
+
+                    var updatedCourse = await _courseRepository.UpdateAsync(x => x.Id == id, entity);
+
+                    if (updatedCourse.StatusCode == Infrastructure.Models.StatusCode.OK)
+                    {
+                        return Ok(updatedCourse);
+                    }
+
+                    return NotFound();
+                }
+
+                return BadRequest(ModelState);
+            }
+            catch (Exception) { return BadRequest(); }
         }
         #endregion
 
@@ -94,7 +113,6 @@ namespace API_Silicon.Controllers
                 return NotFound();
             }
             catch (Exception) { return BadRequest(); }
-
         }
         #endregion
     }

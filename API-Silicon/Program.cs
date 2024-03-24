@@ -12,7 +12,6 @@ builder.Services.AddEndpointsApiExplorer();
 
 
 // https://swagger.io/docs/specification/authentication/api-keys/
-
 builder.Services.AddSwaggerGen(c =>
 {
     c.AddSecurityDefinition("ApiKey", new OpenApiSecurityScheme
