@@ -10,5 +10,9 @@ namespace Silicon_AspNetMVC.Controllers
             var viewModel = new PageNotFoundViewModel();
             return View(viewModel);
         }
+
+        [Route("/denied")]
+        public IActionResult AccessDenied(int statusCode) => View();
+        
     }
 }

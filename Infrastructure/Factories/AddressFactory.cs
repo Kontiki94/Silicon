@@ -49,6 +49,21 @@ public class AddressFactory
         return null!;
     }
 
+    public static AddressEntity Update(AddressEntity existingEntity, AddressModel model)
+    {
+        try
+        {
+            existingEntity.AddressLine1 = model.AddressLine1;
+            existingEntity.AddressLine2 = model.AddressLine2;
+            existingEntity.PostalCode = model.PostalCode;
+            existingEntity.City = model.City;
+
+            return existingEntity;
+        }
+        catch { }
+        return null!;
+    }
+
     public static AddressModel Create(string id, string adressLine1, string? addressLine2, string postalCode, string city, string userId)
     {
         try

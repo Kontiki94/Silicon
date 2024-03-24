@@ -27,21 +27,13 @@ public class CoursesController : Controller
             }
             else
             {
-                TempData["ErrorMessage"] = "Unable to contact the server, please try again later";
-                viewModel.AllCourses = new List<CoursesModel>();
+                ViewData["Status"] = "ConnectionFailed";
             }
         }
-        catch (HttpRequestException ex)
+        catch 
         {
-            TempData["ErrorMessage"] = "API not responding, contact web admin";
-            viewModel.AllCourses = new List<CoursesModel>();
+            ViewData["Status"] = "ConnectionFailed";
         }
-        catch (Exception ex)
-        {
-            TempData["ErrorMessage"] = "API not responding, contact web admin";
-            viewModel.AllCourses = new List<CoursesModel>();
-        }
-
         return View(viewModel);
     }
 

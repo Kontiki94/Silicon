@@ -1,4 +1,6 @@
-﻿namespace Silicon_AspNetMVC.Models.Sections
+﻿using Microsoft.EntityFrameworkCore.Metadata.Conventions;
+
+namespace Silicon_AspNetMVC.Models.Sections
 {
     public class CoursesModel
     {
@@ -31,8 +33,10 @@
         public string? Articles { get; set; }
         public string? Resources { get; set; }
         public string? AccessTime { get; set; }
-        public List<string>? ProgramDetails { get; set; }
-        public List<string>? LearnPoints { get; set; }
+        // Bör vara en Dictionary, rubrik/text
+        public Dictionary<string, string>? ProgramDetails { get; set; }
+        // Bör vara en array så vi kan splita upp värdena och sen omvandla till en lista. 
+        public string[]? LearnPoints { get; set; }
         public List<string>? Categories { get; set; }
     }
 }

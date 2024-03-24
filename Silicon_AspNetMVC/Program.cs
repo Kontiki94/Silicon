@@ -3,13 +3,14 @@ using Infrastructure.Entities;
 using Infrastructure.Helpers.Middlewares;
 using Infrastructure.Repositories;
 using Infrastructure.Services;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace Silicon_AspNetMVC;
 
 public class Program
 {
-    public static void Main(string[] args)
+    public static async Task Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
         builder.Services.AddControllersWithViews();
@@ -19,22 +20,32 @@ public class Program
         builder.Services.AddScoped<AddressService>();
         builder.Services.AddScoped<UserRepository>();
         builder.Services.AddScoped<UserService>();
+
         builder.Services.AddDefaultIdentity<UserEntity>(x =>
         {
             x.User.RequireUniqueEmail = true;
             x.SignIn.RequireConfirmedAccount = false;
             x.Password.RequiredLength = 8;
             x.Lockout.MaxFailedAccessAttempts = 3;
-        }).AddEntityFrameworkStores<DataContext>();
+        })
+            .AddRoles<IdentityRole>()
+            .AddEntityFrameworkStores<DataContext>();
 
         builder.Services.ConfigureApplicationCookie(x =>
         {
             x.Cookie.HttpOnly = true;
             x.LoginPath = "/signin";
             x.LogoutPath = "/signout";
+            x.AccessDeniedPath = "/denied";
             x.ExpireTimeSpan = TimeSpan.FromMinutes(60);
             x.SlidingExpiration = true;
             x.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+        });
+
+        builder.Services.AddAuthorization(x =>
+        {
+            x.AddPolicy("SuperUser", policy => policy.RequireRole("SuperUser"));
+            x.AddPolicy("AuthenticatedUsers", policy => policy.RequireRole("SuperUser", "User"));
         });
 
         builder.Services.AddAuthentication().AddFacebook(x => {
@@ -59,6 +70,18 @@ public class Program
         app.UseAuthentication();
         app.UseAuthorization();
         app.UseUserSessionValidation();
+
+        using (var scope = app.Services.CreateScope())
+        {
+            var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+
+            string[] roles = ["SuperUser", "User"];
+            foreach (var role in roles)
+                if (!await roleManager.RoleExistsAsync(role))
+                {
+                    await roleManager.CreateAsync(new IdentityRole(role));
+                }
+        }
 
         app.MapControllerRoute(
             name: "default",

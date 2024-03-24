@@ -17,7 +17,7 @@
                         {
                             foreach (var course in Model.AllCourses)
                             {
-                                <option value="">@course.Title</option>
+                                <option value="">@course.Categories</option>
                             }
                         }
 
@@ -61,11 +61,11 @@
                     </div>
                 }
             }
-            else
+            
+            @if (ViewData["Status"]?.ToString() == "ConnectionFailed")
             {
-                <span>@TempData["ErrorMessage"]</span>
+                <span class="alert alert-danger">Failed to contact server. Please try again later...</span>
             }
-
         </div>
     </div>
 </section>
