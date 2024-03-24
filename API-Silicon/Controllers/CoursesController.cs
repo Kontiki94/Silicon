@@ -49,6 +49,7 @@ namespace API_Silicon.Controllers
                 {
                     return Ok(response.ContentResult);
                 }
+
                 return NotFound();
             }
             catch (Exception) { return BadRequest(); }

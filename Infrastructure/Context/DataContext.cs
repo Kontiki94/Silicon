@@ -6,9 +6,7 @@ namespace Infrastructure.Context;
 
 public class DataContext(DbContextOptions<DataContext> options) : DbContext(options)
 {
-    public DbSet<AuthorEntity> Author { get; set; }
     public DbSet<ContactEntity> Contact { get; set; }
-    public DbSet<CourseEntity> Course { get; set; }
     public DbSet<CoursesEntity> Courses { get; set; }
     public DbSet<SubscribeEntity> Subscribe { get; set; }
 
