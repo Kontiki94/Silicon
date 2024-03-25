@@ -40,13 +40,13 @@
         <div class="details-section">
             <p class="details-title">Program Details</p>
             <ol class="detail-list">
-                @if (Model.ProgramDetails is not null)
+                @if (Model.ProgramDetailsTitle is not null && Model.ProgramDetailsText is not null)
                 {
-                    @foreach (var detail in Model.ProgramDetails)
+                    @foreach (var (detail, detailText) in Model.ProgramDetailsTitle.Zip(Model.ProgramDetailsText))
                     {
                         <li class="item">
-                            <p class="title">@Model.ProgramDetails</p>
-                            <p class="subtitle">@Model.ProgramDetails</p>
+                            <p class="title">@detail</p>
+                            <p class="subtitle">@detailText</p>
                         </li>
                     }
                 }
