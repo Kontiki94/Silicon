@@ -45,7 +45,7 @@ public class CoursesController : Controller
             using var http = new HttpClient();
             var json = JsonConvert.SerializeObject(model);
             using var content = new StringContent(json, Encoding.UTF8, "application/json");
-            var response = await http.PostAsync("https://localhost:7091/api/courses", content);
+            var response = await http.PostAsync("https://localhost:7091/api/courses?key=NmUyM2YyZTktOGUxYy00YTc2LTk4YzktMjEzOWYzMjI1ZTEz", content);
             if (response.IsSuccessStatusCode)
             {
                 return RedirectToAction("Index", "Courses");

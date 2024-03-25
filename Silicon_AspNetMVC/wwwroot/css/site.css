@@ -1003,29 +1003,32 @@ footer .container .social-media {
 .courses .section-title .search-div {
   display: flex;
   flex-direction: row;
-  gap: 3rem;
   margin-top: 1rem;
+  gap: 30px;
 }
-.courses .section-title .search-div select {
-  width: 130%;
-  height: 1.9rem;
-  border-color: #D4D7E5;
-  color: #EFF2FC;
-}
-.courses .section-title .search-div select option {
-  color: #0B0F19;
+.courses .section-title .search-div .dropdown .select-menu {
+  margin-bottom: 0.3rem;
+  padding: 0.65rem;
+  border: 0.5px solid #D4D7E5;
+  border-radius: 0.4rem;
+  color: #565973;
+  width: 208px;
 }
 .courses .section-title .search-div .search {
   position: relative;
+  color: #565973;
 }
 .courses .section-title .search-div .search input {
-  padding-left: 15px;
-  border: 1px solid #D4D7E5;
+  width: 300px;
+  margin-bottom: 0.3rem;
+  padding: 0.6rem;
+  border: 0.5px solid #D4D7E5;
+  border-radius: 0.4rem;
 }
 .courses .section-title .search-div .search i {
   position: absolute;
-  top: 7px;
-  right: 10px;
+  top: 15px;
+  right: 12px;
 }
 .courses .grid {
   display: grid;
@@ -1064,11 +1067,27 @@ footer .container .social-media {
 .courses .grid .course-card .content .course-info .title {
   margin-top: 1rem;
   font-weight: 800;
+  padding-right: 29px;
 }
 .courses .grid .course-card .content .course-info .price {
   color: #6366F1;
   font-size: 1.2rem;
   font-weight: 700;
+}
+.courses .grid .course-card .content .course-info .discount-div {
+  display: flex;
+  flex-direction: row;
+  font-size: 1.2rem;
+}
+.courses .grid .course-card .content .course-info .discount-div .discount-price {
+  color: red;
+  font-weight: 700;
+  padding-right: 0.5rem;
+}
+.courses .grid .course-card .content .course-info .discount-div .original-price {
+  text-decoration: line-through;
+  font-size: 1rem;
+  color: #9397AD;
 }
 .courses .grid .course-card .content .course-info .author {
   line-height: 160%;
@@ -1081,9 +1100,32 @@ footer .container .social-media {
   color: #33354D;
   padding-left: 5px;
 }
-.courses .grid .course-card .content img {
+.courses .grid .course-card .content .image {
+  position: relative;
+}
+.courses .grid .course-card .content .image img {
   width: 100%;
   max-width: 100%;
+}
+.courses .grid .course-card .content .image .best-seller {
+  position: absolute;
+  top: 10px;
+  left: 15px;
+  color: white;
+  background-color: #22C55E;
+  padding: 0.1rem 0.6rem;
+  border-radius: 0.3rem;
+}
+.courses .grid .course-card .content .image i {
+  position: absolute;
+  top: 15px;
+  right: 16px;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  font-size: 1rem;
+  background-color: #fff;
+  color: #000;
+  padding: 0.7rem;
 }
 .courses .grid .course-card .content .divider {
   width: 90%;
