@@ -56,8 +56,10 @@ public class CourseRegistrationForm
     public string? Resources { get; set; }
     [Display(Name = "AccessTime")]
     public string? AccessTime { get; set; }
-    [Display(Name = "Program Details")]
-    public List<string>? ProgramDetails { get; set; }
+    [Display(Name = "Program Details Title")]
+    public List<string>? ProgramDetailsTitle { get; set; }
+    [Display(Name = "Program Details Text")]
+    public List<string>? ProgramDetailsText { get; set; }
     [Display(Name = "Learn Points")]
     public List<string>? LearnPoints { get; set; }
     [Display(Name = "Categories")]

@@ -53,7 +53,8 @@ namespace Infrastructure.Migrations
                     Articles = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Resources = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     AccessTime = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ProgramDetails = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ProgramDetailsTitle = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ProgramDetailsText = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LearnPoints = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Categories = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },

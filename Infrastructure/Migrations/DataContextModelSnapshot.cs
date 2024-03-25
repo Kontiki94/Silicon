@@ -105,7 +105,10 @@ namespace Infrastructure.Migrations
                     b.Property<string>("Price")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ProgramDetails")
+                    b.Property<string>("ProgramDetailsText")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProgramDetailsTitle")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Rating")

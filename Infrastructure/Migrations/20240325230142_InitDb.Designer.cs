@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240324111353_InitDb")]
+    [Migration("20240325230142_InitDb")]
     partial class InitDb
     {
         /// <inheritdoc />
@@ -108,7 +108,10 @@ namespace Infrastructure.Migrations
                     b.Property<string>("Price")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ProgramDetails")
+                    b.Property<string>("ProgramDetailsText")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProgramDetailsTitle")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Rating")
