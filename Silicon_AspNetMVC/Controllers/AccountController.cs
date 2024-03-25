@@ -8,13 +8,15 @@ using Microsoft.AspNetCore.Identity;
 using Infrastructure.Entities;
 using Infrastructure.Models;
 using Infrastructure.Factories;
+using Silicon_AspNetMVC.Helpers;
 
 namespace Silicon_AspNetMVC.Controllers;
 [Authorize]
-public class AccountController(UserService userService, SignInManager<UserEntity> signInManager, UserManager<UserEntity> userManager, AddressService addressService) : Controller
+public class AccountController(UserService userService, SignInManager<UserEntity> signInManager, UserManager<UserEntity> userManager, AddressService addressService, ControllerService controllerService) : Controller
 {
     private readonly UserService _userService = userService;
     private readonly SignInManager<UserEntity> _signInManager = signInManager;
+    private readonly ControllerService _controllerService = controllerService;
     private readonly UserManager<UserEntity> _userManager = userManager;
     private readonly AddressService _addressService = addressService;
 
@@ -45,7 +47,6 @@ public class AccountController(UserService userService, SignInManager<UserEntity
             TempData["ErrorMessage"] = "An error occurred, please try again.";
             return RedirectToAction("Home", "Index");
         }
-
     }
     #endregion
 
@@ -53,7 +54,6 @@ public class AccountController(UserService userService, SignInManager<UserEntity
     [HttpPost]
     public async Task<IActionResult> AccountBasicInfo([Bind(Prefix = "Details")] AccountDetailsBasicInfoViewModel viewModel)
     {
-
         try
         {
             var externalUser = await _signInManager.GetExternalLoginInfoAsync();
@@ -64,7 +64,7 @@ public class AccountController(UserService userService, SignInManager<UserEntity
             {
                 if (email is not null)
                 {
-                    var result = await CheckAndUpdateExternalUserAsync(viewModel, email!);
+                    var result = await _controllerService.CheckAndUpdateExternalUserAsync(viewModel, email!);
 
                     if (result.StatusCode == Infrastructure.Models.StatusCode.OK)
                     {
@@ -173,7 +173,6 @@ public class AccountController(UserService userService, SignInManager<UserEntity
         viewModel.Profile = await PopulateProfileInfoAsync();
 
         if (viewModel.ChangePass is not null)
-
         {
             if (viewModel.ChangePass.ConfirmPassword != null && viewModel.ChangePass.Password != null && viewModel.ChangePass.NewPassword != null && viewModel.ChangePass.NewPassword == viewModel.ChangePass.ConfirmPassword)
             {
@@ -330,32 +329,6 @@ public class AccountController(UserService userService, SignInManager<UserEntity
                 );
         }
         catch (Exception) { return null!; }
-    }
-
-    public async Task<ResponseResult> CheckAndUpdateExternalUserAsync(AccountDetailsBasicInfoViewModel viewModel, string email)
-    {
-        try
-        {
-            var externalUser = await _signInManager.GetExternalLoginInfoAsync();
-            bool isFacebookUser = externalUser?.LoginProvider == "Facebook";
-            bool isGoogleUser = externalUser?.LoginProvider == "Google";
-
-            if (isFacebookUser || isGoogleUser)
-            {
-                var existingUser = await _userManager.FindByEmailAsync(email);
-
-                if (existingUser is not null)
-                {
-                    existingUser.Biography = viewModel.Bio;
-                    existingUser.PhoneNumber = viewModel.Phone;
-
-                    var result = await _userService.UpdateUserAsync(existingUser);
-                    return result;
-                }
-            }
-            return ResponseFactory.NotFound();
-        }
-        catch (Exception) { return ResponseFactory.Error(); }
     }
 }
 

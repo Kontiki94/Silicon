@@ -32,7 +32,6 @@ namespace Infrastructure.Services
                 if (exists)
                 {
                     return ResponseFactory.Exists();
-                    
                 }
                 else
                 {
@@ -68,7 +67,6 @@ namespace Infrastructure.Services
                         Email = userEntity.Email!,
                         Phone = userEntity.PhoneNumber!,
                         Bio = userEntity.Biography
-                        
                     };
                     var addressModel = UserFactory.Create(userModel);
                     return new ResponseResult()
