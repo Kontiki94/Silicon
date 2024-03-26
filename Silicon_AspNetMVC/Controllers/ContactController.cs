@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Silicon_AspNetMVC.ViewModels.Contact;
+using Newtonsoft.Json;
+using Silicon_AspNetMVC.Models.Sections;
+using System.Text;
 
 namespace Silicon_AspNetMVC.Controllers
 {
@@ -10,10 +12,10 @@ namespace Silicon_AspNetMVC.Controllers
         [HttpGet]    
         public IActionResult ContactUs()
         {
-            var viewModel = new ContactViewModel() 
+            var viewModel = new ContactModel() 
             { 
-                SuccessMessage = TempData["SuccessMessage"]?.ToString() ?? "",
-                ErrorMessage = TempData["ErrorMessage"]?.ToString() ?? "",
+                //SuccessMessage = TempData["SuccessMessage"]?.ToString() ?? "",
+                //ErrorMessage = TempData["ErrorMessage"]?.ToString() ?? "",
             };
             ViewData["Title"] = "Contact Us";
             return View(viewModel);
@@ -21,25 +23,27 @@ namespace Silicon_AspNetMVC.Controllers
 
         [Route("/contact")]
         [HttpPost]
-        public IActionResult ContactUs(ContactViewModel viewModel)
+        public async Task<IActionResult> ContactUs(ContactModel Model)
         {
             ViewData["Title"] = "Contact Us";
             if (ModelState.IsValid)                
             {
-                TempData["SuccessMessage"] = "Contact was sent";
-                return RedirectToAction("ContactUs", "Contact");     
+                using var http = new HttpClient();
+                var json = JsonConvert.SerializeObject(Model);
+                using var content = new StringContent(json, Encoding.UTF8, "application/json");
+                var response = await http.PostAsync("https://localhost:7091/api/contact", content);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    ViewData["Status"] = "Success";
+                }              
                 
             }
             else
             {
-                TempData["ErrorMessage"] = "Please fill in all requierd fields.";
-                viewModel = new ContactViewModel()
-                {
-                    SuccessMessage = TempData["SuccessMessage"]?.ToString() ?? "",
-                    ErrorMessage = TempData["ErrorMessage"]?.ToString() ?? "",
-                };
-            }
-            return View(viewModel);
+                ViewData["Status"] = "Error";              
+            }            
+                return View(Model);
            
         }
     }
