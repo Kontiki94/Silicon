@@ -9,9 +9,12 @@
 
         <div class="header-container">
             <div class="tags">
-                <div class="tag-1">
-                    <span class="text-s">Best seller</span>
-                </div>
+                @if (Model.IsBestSeller)
+                {
+                    <div class="tag-1">
+                        <span class="text-s">Best seller</span>
+                    </div>
+                }
                 <div class="tag-2">
                     <span class="text-s">Digital</span>
                 </div>
