@@ -1,0 +1,59 @@
+﻿:root {
+    $transparent: transparent;
+    $white: #FFFFFF;
+    $gray-100: #F3F6FF;
+    $gray-200: #EFF2FC;
+    $gray-300: #E2E5F1;
+    $gray-400: #D4D7E5;
+    $gray-500: #B4B7C9;
+    $gray-600: #9397AD;
+    $gray-700: #565973;
+    $gray-800: #33354D;
+    $gray-900: #0B0F19;
+    $black: #000000;
+    $danger: #EF4444;
+    $success: #22C55E;
+    $warning: #FFBA08;
+    $info: #4C82F7;
+
+    $theme: #6366F1;
+    --font-standard: "Manrope", sans-serif;
+}
+
+:root.dark {
+    $gray-100: #0B0F19;
+    $gray-200: #33354D;
+    $gray-300: #565973;
+    $gray-300: #9397AD;
+    $gray-400: #B4B7C9;
+    $gray-500: #D4D7E5;
+    $gray-600: #E2E5F1;
+    $gray-700: #EFF2FC;
+    $gray-800: #F3F6FF;
+    $gray-900: #FFFFFF;
+    $white: #FFFFFF;
+    $black: #000000;
+    $color-theme: #6366F1;
+    $color-danger: #E57E88;
+    $color-success: #BCF7D2;
+    $color-warning: #FFE8AD;
+    $font-standard: "Manrope", sans-serif;
+    $theme: #6366F1;
+
+    /*    $transparent: transparent;
+    $white: #FFFFFF;
+    $gray-100: #F3F6FF;
+    $gray-200: #EFF2FC;
+    $gray-300: #E2E5F1;
+    $gray-400: #D4D7E5;
+    $gray-500: #B4B7C9;
+    $gray-600: #9397AD;
+    $gray-700: #565973;
+    $gray-800: #33354D;
+    $gray-900: #0B0F19;
+    $black: #000000;
+    $danger: #EF4444;
+    $success: #22C55E;
+    $warning: #FFBA08;
+    $info: #4C82F7;*/
+}

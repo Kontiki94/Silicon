@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Infrastructure.Models;
+﻿namespace Infrastructure.Models;
 
 public class AddressModel
 {

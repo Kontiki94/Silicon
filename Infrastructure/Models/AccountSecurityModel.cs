@@ -1,7 +1,4 @@
-﻿using Infrastructure.Helpers;
-using System.ComponentModel.DataAnnotations;
-
-namespace Infrastructure.Models.Sections;
+﻿namespace Infrastructure.Models.Sections;
 
 public class AccountSecurityModel
 {

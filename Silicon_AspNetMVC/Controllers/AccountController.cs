@@ -74,7 +74,7 @@ public class AccountController(UserService userService, SignInManager<UserEntity
                 }
             }
             else if (ModelState.IsValid)
-            {
+            { 
                 var userEntity = await GenerateUserEntityAsync(viewModel);
                 var result = await _userService.UpdateUserAsync(userEntity);
 
