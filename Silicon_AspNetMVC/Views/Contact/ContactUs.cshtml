@@ -1,5 +1,8 @@
 ﻿
-@model ContactViewModel
+@model ContactModel
+@{
+    ViewData["Title"] = "Get In Contact With Us";
+}
 
 
 <section class="contact">
@@ -33,23 +36,47 @@
                 </div>
             </div>
         </div>       
-        <div class="contact-form">
+        <div class="contact-form">          
             <form method="post" asp-controller="Contact" asp-action="ContactUs" novalidate>
-                <h2>@Model.FormTitle</h2>
+                <h2>@ViewData["Title"]</h2>
+                @* @if (!string.IsNullOrEmpty(Model.SuccessMessage))
+                {
+                    <span class="alert alert-success" role="alert" id="userMessage">
+                        @Model.SuccessMessage
+                    </span>
+                }
+                @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+                {
+                    <span class="alert alert-danger" role="alert" id="userMessage">
+                        @Model.ErrorMessage
+                    </span>
+                } *@
+                @if (ViewData["Status"]?.ToString() == "Success")
+                {
+                    <span class="alert alert-success" role="alert" id="userMessage">
+                        Contact was sent!
+                    </span>
+                }
+                @if (ViewData["Status"]?.ToString() == "Error")
+                {
+                    <span class="alert alert-danger" role="alert" id="userMessage">
+                        Please fill in all required fields!
+                    </span>
+                }
                 <div class="form-content">
                     <div id="form-fullname" class="input-group">
-                        <label asp-for="Form.FullName"></label>
-                        <span asp-validation-for="Form.FullName"></span>
-                        <input asp-for="Form.FullName"/>
+                        <label asp-for="Name"></label>
+                        <span asp-validation-for="Name"></span>
+                        <input asp-for="Name"/>
                     </div>
                     <div id="form-email" class="input-group">
-                        <label asp-for="Form.Email"></label>
-                        <span asp-validation-for="Form.Email"></span>
-                        <input asp-for="Form.Email" />
+                        <label asp-for="Email"></label>
+                        <span asp-validation-for="Email"></span>
+                        <input asp-for="Email" />
                     </div>
                     <div id="form-service" class="input-group">       
-                        <label asp-for="Form.SelectedService"></label>
-                        <select asp-for="Form.SelectedService">
+                        <label asp-for="Service"></label>
+                        <select asp-for="Service">
                             <option value="Choose">Choose the service you are interested in...</option>
                             <option value="Account">Account</option>
                             <option value="Courses">Courses</option>
@@ -57,9 +84,9 @@
                         </select>
                     </div>
                     <div id="form-message" class="input-group">
-                        <label asp-for="Form.Message"></label>
-                        <span asp-validation-for="Form.Message"></span>                       
-                        <textarea asp-for="Form.Message"></textarea>
+                        <label asp-for="Message"></label>
+                        <span asp-validation-for="Message"></span>                       
+                        <textarea asp-for="Message"></textarea>
                     </div>
                     <button class="btn-theme-s" type="submit">Send Contact Request</button>
                     
@@ -73,5 +100,6 @@
     </div>
 </section>
 
- @await Html.PartialAsync("_ValidationScriptPartial") 
+@await Html.PartialAsync("_UserMessageScriptPartial")
+@await Html.PartialAsync("_ValidationScriptPartial") 
 

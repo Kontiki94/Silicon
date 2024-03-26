@@ -6,14 +6,12 @@
 
 <section id="@Model.Title" class="container">
     <div class="courses">
-
         <div class="section-title">
             <h1 class="h1">Courses</h1>
             <div class="search-div">
                 <div class="dropdown">
                     <select name="All Categories" class="select-menu">
                         <option value="">All Categories</option>
-
                         @if (Model.AllCourses != null)
                         {
                             foreach (var course in Model.AllCourses)
@@ -24,7 +22,6 @@
                                 }
                             }
                         }
-
                     </select>
                 </div>
                 <div class="search">
@@ -34,14 +31,12 @@
             </div>
         </div>
         <div class="grid">
-
-            @if (Model.Courses != null)
+            @if (Model.AllCourses != null)
             {
-
                 @foreach (var course in Model.AllCourses!)
                 {
                     <div class="course-card">
-                        <a class="content">
+                        <a asp-action="CourseDetails" asp-controller="Courses" asp-route-id="@course.Id" class="content">
                             <div class="image">
                                 <img src="~/images/@course.CourseImage" alt="" />
 
@@ -83,7 +78,6 @@
                     </div>
                 }
             }
-
             @if (ViewData["Status"]?.ToString() == "ConnectionFailed")
             {
                 <span class="alert alert-danger">Failed to contact server. Please try again later...</span>

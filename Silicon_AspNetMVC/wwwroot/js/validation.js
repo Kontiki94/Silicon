@@ -61,7 +61,6 @@ const checkboxValidator = (element) => {
 }
 
 let forms = document.querySelectorAll('form');
-
 forms.forEach(form => {
     let inputs = form.querySelectorAll('input');
 
@@ -71,7 +70,8 @@ forms.forEach(form => {
                 input.addEventListener('change', (e) => {
                     checkboxValidator(e.target)
                 });
-            } else {
+            }
+            else {
                 input.addEventListener('keyup', (e) => {
                     switch (e.target.type) {
                         case 'text':

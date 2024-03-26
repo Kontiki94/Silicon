@@ -56,11 +56,16 @@ public class CoursesController : Controller
 
 
 
-    [Route("/coursedetails")]
-    public IActionResult CourseDetails()
+    [Route("/course/{id}")]
+    public async Task<IActionResult> CourseDetails(string id)
     {
         ViewData["Title"] = "Course Details";
-        var viewModel = new CoursesCourseDetailsViewModel();
+
+        using var http = new HttpClient();
+        var response = await http.GetAsync($"https://localhost:7091/api/courses/{id}?key=NmUyM2YyZTktOGUxYy00YTc2LTk4YzktMjEzOWYzMjI1ZTEz");
+        var json = await response.Content.ReadAsStringAsync();
+        var data = JsonConvert.DeserializeObject<CoursesModel>(json);
+        CoursesModel viewModel = data!;
         return View(viewModel);
     }
 }
