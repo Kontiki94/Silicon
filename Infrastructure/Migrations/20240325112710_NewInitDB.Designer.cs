@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240321083446_UpdateEntity")]
-    partial class UpdateEntity
+    [Migration("20240325112710_NewInitDB")]
+    partial class NewInitDB
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -56,8 +56,11 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Infrastructure.Entities.ContactEntity", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -166,6 +169,9 @@ namespace Infrastructure.Migrations
                     b.Property<string>("AutherBio")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("AutherImageAltText")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("AuthorImage")
                         .HasColumnType("nvarchar(max)");
 
@@ -179,6 +185,9 @@ namespace Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CourseImage")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CourseImageAltText")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DiscountPrice")
