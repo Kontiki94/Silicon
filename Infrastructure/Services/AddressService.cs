@@ -9,18 +9,6 @@ public class AddressService(AddressRepository addressRepository)
 {
     private readonly AddressRepository _addressRepository = addressRepository;
 
-    //public async Task<ResponseResult> GetOrCreateAddressAsync(string addressLine1, string? addressLine2, string postalCode, string city)
-    //{
-    //    try
-    //    {
-    //        var result = await GetAddressAsync(addressLine1, addressLine2, postalCode, city);
-    //        if (result.StatusCode == StatusCode.NOT_FOUND)
-    //            result = await CreateAddressAsync(addressLine1, addressLine2, postalCode, city);
-
-    //        return result;
-    //    }
-    //    catch (Exception ex) { return ResponseFactory.Error(ex.Message); }
-    //}
 
     public async Task<ResponseResult> CreateAddressAsync(AddressModel model)
     {
@@ -63,12 +51,9 @@ public class AddressService(AddressRepository addressRepository)
                 if (addressResult.StatusCode == StatusCode.OK)
                 {
                     var existingAddress = (AddressEntity)addressResult.ContentResult!;
-                    existingAddress.AddressLine1 = model.AddressLine1;
-                    existingAddress.AddressLine2 = model.AddressLine2;
-                    existingAddress.PostalCode = model.PostalCode;
-                    existingAddress.City = model.City;
+                    var updatedAddressEntity = AddressFactory.Update(existingAddress, model);
+                    var updateResult = await _addressRepository.UpdateOneAsync(a => a.UserId == model.UserId, updatedAddressEntity);
 
-                    var updateResult = await _addressRepository.UpdateOneAsync(a => a.UserId == model.UserId, existingAddress);
                     if (updateResult.StatusCode == StatusCode.OK)
                         return ResponseFactory.Ok(existingAddress);
 

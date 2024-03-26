@@ -11,19 +11,23 @@ using System.Security.Claims;
 
 namespace Infrastructure.Services
 {
-    public class UserService(UserRepository repository, AddressService addressService, UserManager<UserEntity> userManager, SignInManager<UserEntity> signInManager)
+    public class UserService(UserRepository repository, UserManager<UserEntity> userManager, SignInManager<UserEntity> signInManager)
     {
         private readonly UserRepository _repository = repository;
-        private readonly AddressService _addressService = addressService;
         private readonly UserManager<UserEntity> _userManager = userManager;
         private readonly SignInManager<UserEntity> _signInManager = signInManager;
-       
-
 
         public async Task<ResponseResult> CreateUserAsync(SignUpModel model)
         {
             try
             {
+                var standardRole = "User";
+
+                if(!await _userManager.Users.AnyAsync())
+                {
+                    standardRole = "SuperUser";
+                }
+
                 var exists = await _userManager.Users.AnyAsync(x => x.Email == model.Email);
                 if (exists)
                 {
@@ -36,6 +40,7 @@ namespace Infrastructure.Services
                     
                     if (result.Succeeded)
                     {
+                        await _userManager.AddToRoleAsync(newUser, standardRole);
                         return ResponseFactory.Ok();
                     }
                     return ResponseFactory.Error("Something went wrong");
@@ -62,7 +67,6 @@ namespace Infrastructure.Services
                         Email = userEntity.Email!,
                         Phone = userEntity.PhoneNumber!,
                         Bio = userEntity.Biography
-                        
                     };
                     var addressModel = UserFactory.Create(userModel);
                     return new ResponseResult()

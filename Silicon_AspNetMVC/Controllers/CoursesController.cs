@@ -14,15 +14,26 @@ public class CoursesController : Controller
 
         var viewModel = new CoursesViewModel();
 
-        using var http = new HttpClient();
-        var response = await http.GetAsync("https://localhost:7091/api/courses");
-        if (response.IsSuccessStatusCode)
+        try
         {
-            var json = await response.Content.ReadAsStringAsync();
-            var data = JsonConvert.DeserializeObject<IEnumerable<CoursesModel>>(json);
-            viewModel.AllCourses = data!;
-        }
+            using var http = new HttpClient();
+            var response = await http.GetAsync("https://localhost:7091/api/courses?key=NmUyM2YyZTktOGUxYy00YTc2LTk4YzktMjEzOWYzMjI1ZTEz");
 
+            if (response.IsSuccessStatusCode)
+            {
+                var json = await response.Content.ReadAsStringAsync();
+                var data = JsonConvert.DeserializeObject<IEnumerable<CoursesModel>>(json);
+                viewModel.AllCourses = data!;
+            }
+            else
+            {
+                ViewData["Status"] = "ConnectionFailed";
+            }
+        }
+        catch 
+        {
+            ViewData["Status"] = "ConnectionFailed";
+        }
         return View(viewModel);
     }
 
@@ -34,7 +45,7 @@ public class CoursesController : Controller
             using var http = new HttpClient();
             var json = JsonConvert.SerializeObject(model);
             using var content = new StringContent(json, Encoding.UTF8, "application/json");
-            var response = await http.PostAsync("https://localhost:7091/api/courses", content);
+            var response = await http.PostAsync("https://localhost:7091/api/courses?key=NmUyM2YyZTktOGUxYy00YTc2LTk4YzktMjEzOWYzMjI1ZTEz", content);
             if (response.IsSuccessStatusCode)
             {
                 return RedirectToAction("Index", "Courses");
@@ -45,11 +56,16 @@ public class CoursesController : Controller
 
 
 
-    [Route("/coursedetails")]
-    public IActionResult CourseDetails()
+    [Route("/course/{id}")]
+    public async Task<IActionResult> CourseDetails(string id)
     {
         ViewData["Title"] = "Course Details";
-        var viewModel = new CoursesCourseDetailsViewModel();
+
+        using var http = new HttpClient();
+        var response = await http.GetAsync($"https://localhost:7091/api/courses/{id}?key=NmUyM2YyZTktOGUxYy00YTc2LTk4YzktMjEzOWYzMjI1ZTEz");
+        var json = await response.Content.ReadAsStringAsync();
+        var data = JsonConvert.DeserializeObject<CoursesModel>(json);
+        CoursesModel viewModel = data!;
         return View(viewModel);
     }
 }

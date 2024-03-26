@@ -22,7 +22,7 @@
             </div>
             <div class="subscribe">
                 <input asp-for="@Model.Subscriber.Email" type="text" name="email" placeholder="Your Email" class="input-email" />
-                <button class="btn-theme" href="#"><span>* Subscribe</span></button>
+                <button class="btn-theme" type="submit"><span>* Subscribe</span></button>
                 <span asp-validation-for="@Model.Subscriber.Email"></span>
             </div>
         </form>
