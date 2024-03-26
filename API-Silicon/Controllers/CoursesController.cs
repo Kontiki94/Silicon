@@ -1,4 +1,5 @@
-﻿using Infrastructure.Context;
+﻿using API_Silicon.Filters;
+using Infrastructure.Context;
 using Infrastructure.DTOs;
 using Infrastructure.Entities;
 using Infrastructure.Models;
@@ -10,6 +11,7 @@ namespace API_Silicon.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [UseApiKey]
     public class CoursesController(DataContext context, CoursesRepository courseRepository) : ControllerBase
     {
         private readonly DataContext _context = context;
@@ -17,6 +19,7 @@ namespace API_Silicon.Controllers
 
         #region CREATE
         [HttpPost]
+
         public async Task<IActionResult> Create(CourseRegistrationForm DTO)
         {
             try
@@ -46,12 +49,14 @@ namespace API_Silicon.Controllers
                 {
                     return Ok(response.ContentResult);
                 }
+
                 return NotFound();
             }
             catch (Exception) { return BadRequest(); }
         }
 
         [HttpGet]
+        [UseApiKey]
         public async Task<IActionResult> GetAll()
         {
             try
@@ -69,19 +74,46 @@ namespace API_Silicon.Controllers
         #endregion
 
         #region UPDATE
-        [HttpPut]
-        public IActionResult Update()
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(CourseRegistrationForm DTO, int id)
         {
-            return Ok();
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    CoursesEntity entity = DTO;
+                    entity.Id = id;
+
+                    var updatedCourse = await _courseRepository.UpdateAsync(x => x.Id == id, entity);
+
+                    if (updatedCourse.StatusCode == Infrastructure.Models.StatusCode.OK)
+                    {
+                        return Ok(updatedCourse);
+                    }
+
+                    return NotFound();
+                }
+
+                return BadRequest(ModelState);
+            }
+            catch (Exception) { return BadRequest(); }
         }
         #endregion
 
         #region DELETE
-        [HttpDelete]
-        public IActionResult Delete()
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
         {
-            return Ok();
-
+            try
+            {
+                var courseToDelete = await _courseRepository.DeleteOneAsync(x => x.Id == id);
+                if (courseToDelete)
+                {
+                    return Ok();
+                }
+                return NotFound();
+            }
+            catch (Exception) { return BadRequest(); }
         }
         #endregion
     }
