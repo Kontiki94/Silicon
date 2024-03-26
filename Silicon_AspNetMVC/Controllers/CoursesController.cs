@@ -14,19 +14,26 @@ public class CoursesController : Controller
 
         var viewModel = new CoursesViewModel();
 
-        using var http = new HttpClient();
-        var response = await http.GetAsync("https://localhost:7091/api/courses?key=NmUyM2YyZTktOGUxYy00YTc2LTk4YzktMjEzOWYzMjI1ZTEz");
-        if (response.IsSuccessStatusCode)
+        try
         {
-            var json = await response.Content.ReadAsStringAsync();
-            var data = JsonConvert.DeserializeObject<IEnumerable<CoursesModel>>(json);
-            viewModel.AllCourses = data!;
-        }
-        else
-        {
-            TempData["ErrorMessage"] = "Unable to contact the server, please try again later";
-        }
+            using var http = new HttpClient();
+            var response = await http.GetAsync("https://localhost:7091/api/courses?key=NmUyM2YyZTktOGUxYy00YTc2LTk4YzktMjEzOWYzMjI1ZTEz");
 
+            if (response.IsSuccessStatusCode)
+            {
+                var json = await response.Content.ReadAsStringAsync();
+                var data = JsonConvert.DeserializeObject<IEnumerable<CoursesModel>>(json);
+                viewModel.AllCourses = data!;
+            }
+            else
+            {
+                ViewData["Status"] = "ConnectionFailed";
+            }
+        }
+        catch 
+        {
+            ViewData["Status"] = "ConnectionFailed";
+        }
         return View(viewModel);
     }
 

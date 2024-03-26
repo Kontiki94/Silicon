@@ -1,4 +1,6 @@
-﻿namespace Silicon_AspNetMVC.Models.Sections
+﻿using Microsoft.EntityFrameworkCore.Metadata.Conventions;
+
+namespace Silicon_AspNetMVC.Models.Sections
 {
     public class CoursesModel
     {
