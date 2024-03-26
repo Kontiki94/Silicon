@@ -36,7 +36,7 @@
                 @foreach (var course in Model.AllCourses!)
                 {
                     <div class="course-card">
-                        <a class="content">
+                        <a asp-action="CourseDetails" asp-controller="Courses" asp-route-id="@course.Id" class="content">
                             <div class="image">
                                 <img src="~/images/@course.CourseImage" alt="" />
 
