@@ -1,6 +1,6 @@
 :root {
     --color-gray-001: #FFFFFF;
-    --color-gray-100: #F3F6FF;
+    --color-gray-100: #FEFEFE;
     --color-gray-200: #EFF2FC;
     --color-gray-300: #E2E5F1;
     --color-gray-400: #D4D7E5;
@@ -17,14 +17,13 @@
     --color-success: #BCF7D2;
     --color-warning: #FFE8AD;
     --font-standard: "Manrope", sans-serif;
-
     color-scheme: light;
 }
 
 
 :root.dark {
     --color-gray-001: #0B0F19;
-    --color-gray-100: #1A1F2A;
+    --color-gray-100: #12161F;
     --color-gray-200: #565973;
     --color-gray-300: #9397AD;
     --color-gray-400: #B4B7C9;

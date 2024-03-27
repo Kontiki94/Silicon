@@ -4,7 +4,7 @@ section {
 
 
     .courses {
-        margin-top: 60px;
+        padding-top: 60px;
 
         .section-title {
             display: flex;
@@ -27,7 +27,7 @@ section {
                     .select-menu {
                         margin-bottom: .3rem;
                         padding: 0.65rem;
-                        border: .5px solid var(--color-gray-400);
+                        border: .3px solid var(--color-gray-200);
                         border-radius: .4rem;
                         color: var(--color-gray-700);
                         background-color: var(--color-gray-100);
@@ -170,10 +170,15 @@ section {
                     }
 
                     footer {
+                        background-color: var(--color-gray-100);
                         padding: 0;
                         padding-top: 1rem;
                         padding-left: 1rem;
                         gap: 2rem;
+
+                        p {
+                            color: var(--color-gray-600);
+                        }
 
                         &, * {
                             display: flex;

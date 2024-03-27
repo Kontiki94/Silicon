@@ -1,9 +1,11 @@
 .background-contact {
-    background-color: $gray-100;
+    background-color: var(--color-gray-100);
 }
+
 header {
     padding: 15px 0;
-       
+    background-color: var(--color-gray-001);
+
     .container {
         display: grid;
         align-items: center;
@@ -25,6 +27,7 @@ header {
             grid-area: menu;
             display: none;
 
+
             @include lg {
                 display: block;
             }
@@ -32,6 +35,10 @@ header {
             nav {
                 display: flex;
                 gap: 15px;
+
+                a {
+                    color: var(--color-gray-900) !important;
+                }
             }
         }
 
@@ -52,6 +59,7 @@ header {
             nav {
                 display: block;
                 margin-top: 160px;
+
 
                 a {
                     display: block;
@@ -103,7 +111,6 @@ header {
 
             button {
                 max-width: 100%;
-
             }
 
             .profile-image {
