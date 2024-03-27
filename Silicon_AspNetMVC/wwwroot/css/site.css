@@ -1,5 +1,49 @@
 ﻿@charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap");
+:root {
+  --color-gray-001: #FFFFFF;
+  --color-gray-100: #F3F6FF;
+  --color-gray-200: #EFF2FC;
+  --color-gray-300: #E2E5F1;
+  --color-gray-400: #D4D7E5;
+  --color-gray-500: #B4B7C9;
+  --color-gray-600: #9397AD;
+  --color-gray-700: #565973;
+  --color-gray-800: #33354D;
+  --color-gray-900: #0B0F19;
+  --color-white: #FFFFFF;
+  --color-black: #000000;
+  --color-gray-000: #EFF2FC;
+  --color-theme: #6366F1;
+  --color-danger: #E57E88;
+  --color-success: #BCF7D2;
+  --color-warning: #FFE8AD;
+  --font-standard: "Manrope", sans-serif;
+  color-scheme: light;
+}
+
+:root.dark {
+  --color-gray-001: #0B0F19;
+  --color-gray-100: #1A1F2A;
+  --color-gray-200: #565973;
+  --color-gray-300: #9397AD;
+  --color-gray-400: #B4B7C9;
+  --color-gray-500: #D4D7E5;
+  --color-gray-600: #E2E5F1;
+  --color-gray-700: #EFF2FC;
+  --color-gray-800: #F3F6FF;
+  --color-gray-900: #FFFFFF;
+  --color-white: #000000;
+  --color-black: #FFFFFF;
+  --color-gray-000: #EFF2FC;
+  --color-theme: #6366F1;
+  --color-danger: #E57E88;
+  --color-success: #BCF7D2;
+  --color-warning: #FFE8AD;
+  --font-standard: "Manrope", sans-serif;
+  color-scheme: dark;
+}
+
 html, body {
   line-height: 160%;
   font-weight: 400;
@@ -182,29 +226,7 @@ h6, .h6 {
   grid-template-rows: auto 1fr auto;
 }
 
-:root {
-  --font-standard: "Manrope", sans-serif;
-}
-
-:root.dark {
-  /*    $transparent: transparent;
-  $white: #FFFFFF;
-  $gray-100: #F3F6FF;
-  $gray-200: #EFF2FC;
-  $gray-300: #E2E5F1;
-  $gray-400: #D4D7E5;
-  $gray-500: #B4B7C9;
-  $gray-600: #9397AD;
-  $gray-700: #565973;
-  $gray-800: #33354D;
-  $gray-900: #0B0F19;
-  $black: #000000;
-  $danger: #EF4444;
-  $success: #22C55E;
-  $warning: #FFBA08;
-  $info: #4C82F7;*/
-}
-
+/*@import './core/_variables.scss';*/
 a {
   line-height: 160%;
   font-weight: 400;
@@ -737,6 +759,7 @@ footer .container .social-media {
 
 .showcase {
   margin-bottom: 80px;
+  background-color: var(--theme-gray-900);
 }
 @media (min-width: 1400px) {
   .showcase {
@@ -747,7 +770,6 @@ footer .container .social-media {
 }
 .showcase .background-image {
   position: relative;
-  z-index: -1;
   display: none;
 }
 @media (min-width: 1400px) {
@@ -1008,129 +1030,135 @@ footer .container .social-media {
   max-width: 60%;
 }
 
-.courses {
-  margin-top: 60px;
-  margin-bottom: 120px;
+section {
+  background-color: var(--color-gray-001);
+  padding-bottom: 120px;
 }
-.courses .section-title {
+section .courses {
+  margin-top: 60px;
+}
+section .courses .section-title {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   margin-bottom: 30px;
 }
 @media (min-width: 768px) {
-  .courses .section-title {
+  section .courses .section-title {
     flex-direction: row;
   }
 }
-.courses .section-title .search-div {
+section .courses .section-title .search-div {
   display: flex;
   flex-direction: row;
   margin-top: 1rem;
   gap: 30px;
 }
-.courses .section-title .search-div .dropdown .select-menu {
+section .courses .section-title .search-div .dropdown .select-menu {
   margin-bottom: 0.3rem;
   padding: 0.65rem;
-  border: 0.5px solid #D4D7E5;
+  border: 0.5px solid var(--color-gray-400);
   border-radius: 0.4rem;
-  color: #565973;
+  color: var(--color-gray-700);
+  background-color: var(--color-gray-100);
   width: 208px;
 }
-.courses .section-title .search-div .search {
+section .courses .section-title .search-div .search {
   position: relative;
-  color: #565973;
+  color: var(--color-gray-700);
 }
-.courses .section-title .search-div .search input {
+section .courses .section-title .search-div .search input {
   width: 300px;
   margin-bottom: 0.3rem;
   padding: 0.6rem;
-  border: 0.5px solid #D4D7E5;
+  border: 0.5px solid var(--color-gray-100);
   border-radius: 0.4rem;
+  background-color: var(--color-gray-100);
 }
-.courses .section-title .search-div .search i {
+section .courses .section-title .search-div .search i {
   position: absolute;
   top: 15px;
   right: 12px;
 }
-.courses .grid {
+section .courses .grid {
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   gap: 2rem 1rem;
 }
 @media (min-width: 768px) {
-  .courses .grid {
+  section .courses .grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 @media (min-width: 992px) {
-  .courses .grid {
+  section .courses .grid {
     grid-template-columns: repeat(3, 1fr);
   }
 }
-.courses .grid .course-card {
+section .courses .grid .course-card {
+  background-color: var(--color-gray-100);
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.0588235294), 0 4px 5px rgba(0, 0, 0, 0.0470588235);
   border-radius: 1.1rem;
   overflow: hidden;
   padding: 5px;
-  border: 1px solid #E2E5F1;
   padding: 1px;
 }
-.courses .grid .course-card:hover {
+section .courses .grid .course-card:hover {
   transition: transform 0.3s ease;
   transform: scale(1.02);
 }
-.courses .grid .course-card .content {
+section .courses .grid .course-card .content {
   padding: 0;
   text-decoration: none;
 }
-.courses .grid .course-card .content .course-info {
+section .courses .grid .course-card .content .course-info {
   padding-left: 15px;
 }
-.courses .grid .course-card .content .course-info .title {
+section .courses .grid .course-card .content .course-info .title {
   margin-top: 1rem;
   font-weight: 800;
-  padding-right: 29px;
+  padding-right: 32px;
+  color: var(--color-gray-900);
 }
-.courses .grid .course-card .content .course-info .price {
+section .courses .grid .course-card .content .course-info .price {
   color: #6366F1;
   font-size: 1.2rem;
   font-weight: 700;
 }
-.courses .grid .course-card .content .course-info .discount-div {
+section .courses .grid .course-card .content .course-info .discount-div {
   display: flex;
   flex-direction: row;
   font-size: 1.2rem;
 }
-.courses .grid .course-card .content .course-info .discount-div .discount-price {
+section .courses .grid .course-card .content .course-info .discount-div .discount-price {
   color: red;
   font-weight: 700;
   padding-right: 0.5rem;
 }
-.courses .grid .course-card .content .course-info .discount-div .original-price {
+section .courses .grid .course-card .content .course-info .discount-div .original-price {
   text-decoration: line-through;
   font-size: 1rem;
-  color: #9397AD;
+  color: var(--color-gray-600);
 }
-.courses .grid .course-card .content .course-info .author {
+section .courses .grid .course-card .content .course-info .author {
   line-height: 160%;
   font-weight: 400;
   color: #565973;
   font-family: "Manrope", sans-serif;
   font-size: 14px !important;
 }
-.courses .grid .course-card .content p {
-  color: #33354D;
+section .courses .grid .course-card .content p {
+  color: var(--color-gray-800);
   padding-left: 5px;
 }
-.courses .grid .course-card .content .image {
+section .courses .grid .course-card .content .image {
   position: relative;
 }
-.courses .grid .course-card .content .image img {
+section .courses .grid .course-card .content .image img {
   width: 100%;
   max-width: 100%;
 }
-.courses .grid .course-card .content .image .best-seller {
+section .courses .grid .course-card .content .image .best-seller {
   position: absolute;
   top: 10px;
   left: 15px;
@@ -1139,7 +1167,7 @@ footer .container .social-media {
   padding: 0.1rem 0.6rem;
   border-radius: 0.3rem;
 }
-.courses .grid .course-card .content .image i {
+section .courses .grid .course-card .content .image i {
   position: absolute;
   top: 15px;
   right: 16px;
@@ -1150,23 +1178,23 @@ footer .container .social-media {
   color: #000;
   padding: 0.7rem;
 }
-.courses .grid .course-card .content .divider {
+section .courses .grid .course-card .content .divider {
   width: 90%;
   height: 1px;
-  background-color: #E2E5F1;
+  background-color: var(--color-gray-200);
   margin-left: 25px;
 }
-.courses .grid .course-card .content footer {
+section .courses .grid .course-card .content footer {
   padding: 0;
   padding-top: 1rem;
   padding-left: 1rem;
   gap: 2rem;
 }
-.courses .grid .course-card .content footer, .courses .grid .course-card .content footer * {
+section .courses .grid .course-card .content footer, section .courses .grid .course-card .content footer * {
   display: flex;
   align-items: center;
 }
-.courses .grid .course-card .content i {
+section .courses .grid .course-card .content i {
   padding-right: 0.1rem;
   margin-bottom: 1.2rem;
 }

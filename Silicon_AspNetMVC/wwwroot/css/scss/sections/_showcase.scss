@@ -1,5 +1,6 @@
 .showcase {
     margin-bottom: 80px;
+    background-color: var(--theme-gray-900);
 
     @include xxl {
         display: flex;
@@ -9,7 +10,6 @@
 
     .background-image {
         position: relative;
-        z-index: -1;
         display: none;
 
         @include xxl {
@@ -20,6 +20,7 @@
     .container {
         height: 100%;
         display: flex;
+
         @include xxl {
             position: absolute;
             left: 0;
