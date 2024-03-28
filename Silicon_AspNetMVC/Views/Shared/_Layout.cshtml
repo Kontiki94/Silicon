@@ -20,7 +20,7 @@
     <div class="wrapper">
         <header class="@((ViewContext.RouteData.Values["Controller"]!.ToString() == "Contact") ? "background-contact" : "")">
             <div class="container">
-                <a id="logo" asp-controller="Home" asp-action="Index"><img src="~/images/icons/silicon-logo-light_theme.svg" alt=""></a>
+                <a id="logo" asp-controller="Home" asp-action="Index"><img src="~/images/icons/@(isDark ? "silicon-logo-dark.svg" : "silicon-logo-light_theme.svg")" alt="Silicon-logo"></a>
 
                 <div id="menu" class="hide">
                     <nav>
