@@ -1496,11 +1496,17 @@ section .courses .grid .course-card .content i {
 }
 
 #signup {
-  margin-top: 50px;
+  padding-top: 50px;
 }
 #signup .container {
   display: flex;
   justify-content: center;
+}
+#signup .container h1 {
+  color: var(--color-gray-900);
+}
+#signup .container p {
+  color: var(--color-gray-700);
 }
 #signup .container .form-content {
   width: 480px;
@@ -1542,7 +1548,8 @@ section .courses .grid .course-card .content i {
   content: "⮿";
 }
 #signup .container .form-content .input-field input {
-  border: 1px solid #D4D7E5;
+  border: 1px solid var(--color-gray-400);
+  background-color: var(--color-gray-100);
   padding: 8px;
   border-radius: 0.3rem;
   margin-bottom: 0.4rem;
@@ -1555,6 +1562,7 @@ section .courses .grid .course-card .content i {
   font-weight: 800;
   margin-top: 15px;
   margin-bottom: 5px;
+  color: var(--color-gray-800);
 }
 #signup .container .form-content .checkbox {
   margin-top: 20px;
