@@ -776,7 +776,7 @@ footer .container .social-media {
 
 .showcase {
   margin-bottom: 80px;
-  background-color: var(--theme-gray-900);
+  background-color: var(--color-gray-001);
 }
 @media (min-width: 1400px) {
   .showcase {
@@ -822,6 +822,7 @@ footer .container .social-media {
 .showcase .container .content .d4 {
   margin-top: 50px;
   margin-bottom: 35px;
+  color: var(--color-gray-900);
 }
 .showcase .container .content .brands {
   margin-top: 30px;
@@ -835,6 +836,7 @@ footer .container .social-media {
 }
 .showcase .container .content h6 {
   margin-top: 90px;
+  color: var(--color-gray-900);
 }
 .showcase .container .content a {
   margin-top: 50px;
