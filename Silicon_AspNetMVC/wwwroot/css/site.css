@@ -675,7 +675,7 @@ footer .container .social-media {
   flex-direction: column-reverse;
   justify-content: center;
   align-items: center;
-  margin-top: 80px;
+  padding-top: 80px;
 }
 @media (min-width: 992px) {
   #manage-work {
@@ -685,6 +685,10 @@ footer .container .social-media {
 }
 #manage-work .presentation {
   padding-bottom: 1.5rem;
+}
+#manage-work .presentation h2 {
+  color: var(--color-gray-900);
+  margin-bottom: 1.5rem;
 }
 @media (min-width: 992px) {
   #manage-work .presentation {
@@ -701,6 +705,9 @@ footer .container .social-media {
   padding-top: 0.2rem;
   padding-right: 0.8rem;
   color: #6366F1;
+}
+#manage-work .presentation div:nth-child(n) p {
+  color: var(--color-gray-700);
 }
 #manage-work .presentation .btn-theme {
   margin-top: 2.5rem;
