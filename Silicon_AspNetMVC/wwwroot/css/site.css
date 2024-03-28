@@ -2038,8 +2038,8 @@ section .courses .grid .course-card .content i {
 }
 
 #security {
-  margin-top: 40px;
-  margin-bottom: 60px;
+  padding-top: 40px;
+  padding-bottom: 60px;
 }
 #security .container {
   display: grid;
@@ -2078,10 +2078,11 @@ section .courses .grid .course-card .content i {
   }
 }
 #security .container .menu-bar .profile h5 {
-  color: black;
+  color: var(--color-gray-900);
   margin-bottom: 0;
 }
 #security .container .menu-bar .profile p {
+  color: var(--color-gray-600);
   margin-bottom: 2rem;
 }
 #security .container .menu-bar .options {
@@ -2094,7 +2095,7 @@ section .courses .grid .course-card .content i {
   }
 }
 #security .container .menu-bar .options a {
-  color: #000;
+  color: var(--color-gray-900);
   font-weight: 700;
   padding: 10px;
   max-width: 300px;
@@ -2102,7 +2103,6 @@ section .courses .grid .course-card .content i {
   margin-bottom: 0.2rem;
   text-decoration: none;
   border-radius: 0.4rem;
-  border: 1px solid white;
 }
 #security .container .menu-bar .options a i {
   padding-right: 1rem;
@@ -2120,7 +2120,7 @@ section .courses .grid .course-card .content i {
 }
 @media (min-width: 992px) {
   #security .security-details {
-    border-left: 1px solid #E2E5F1;
+    border-left: 1px solid var(--color-gray-300);
     padding-left: 7rem;
   }
 }
@@ -2171,10 +2171,11 @@ section .courses .grid .course-card .content i {
   font-weight: 800;
   margin-top: 20px;
   margin-bottom: 5px;
-  color: #0B0F19;
+  color: var(--color-gray-900);
 }
 #security .security-details .input-group input {
-  border: 1px solid #D4D7E5;
+  border: 1px solid var(--color-gray-400);
+  background-color: var(--color-gray-100);
   padding: 8px;
   border-radius: 0.3rem;
   margin-bottom: 0.4rem;
@@ -2195,7 +2196,7 @@ section .courses .grid .course-card .content i {
   margin-bottom: 30px;
 }
 #security .security-details .delete-section {
-  border-top: 1px solid #E2E5F1;
+  border-top: 1px solid var(--color-gray-300);
   padding-top: 30px;
 }
 #security .security-details .delete-section .checkbox label {
