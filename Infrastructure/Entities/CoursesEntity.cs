@@ -1,4 +1,5 @@
 ﻿using Infrastructure.DTOs;
+using System.ComponentModel.DataAnnotations.Schema;
 
 
 namespace Infrastructure.Entities;

@@ -4,6 +4,7 @@ using Infrastructure.DTOs;
 using Infrastructure.Entities;
 using Infrastructure.Models;
 using Infrastructure.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -12,6 +13,7 @@ namespace API_Silicon.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [UseApiKey]
+    //[Authorize]
     public class CoursesController(DataContext context, CoursesRepository courseRepository) : ControllerBase
     {
         private readonly DataContext _context = context;
@@ -19,7 +21,6 @@ namespace API_Silicon.Controllers
 
         #region CREATE
         [HttpPost]
-
         public async Task<IActionResult> Create(CourseRegistrationForm DTO)
         {
             try

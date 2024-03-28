@@ -8,22 +8,17 @@ public class UseApiKeyAttribute : Attribute, IAsyncActionFilter
 {
     public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
     {
-        var config = context.HttpContext.RequestServices.GetRequiredService<IConfiguration>();
-        var apiKey = config.GetValue<string>("ApiKey");
-        apiKey = apiKey!.Trim();
+        var config = context.HttpContext.RequestServices.GetService<IConfiguration>();
+        var secret = config?["ApiKey:Secret"];
 
-        if (!context.HttpContext.Request.Query.TryGetValue("key", out var providedKey))
+        if (!string.IsNullOrEmpty(secret) && context.HttpContext.Request.Query.TryGetValue("key", out var providedKey))
         {
+            if (!string.IsNullOrEmpty(providedKey) && secret == providedKey)
+            {
+                await next();
+                return;
+            }
             context.Result = new UnauthorizedResult();
-            return;
         }
-
-        if (!apiKey!.Equals(providedKey))
-        {
-            context.Result = new UnauthorizedResult();
-            return;
-        }
-
-        await next();
     }
 }
