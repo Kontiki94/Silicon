@@ -2810,11 +2810,15 @@ section .courses .grid .course-card .content i {
 }
 
 .create {
-  margin-top: 2rem;
+  padding-top: 2rem;
 }
 .create h2 {
   margin-bottom: 2rem;
   text-align: center;
+  color: var(--color-gray-900);
+}
+.create h3 {
+  color: var(--color-gray-900);
 }
 .create form {
   display: flex;
@@ -2836,11 +2840,12 @@ section .courses .grid .course-card .content i {
   padding-left: 0.6rem;
 }
 .create form div label {
-  color: #0B0F19;
+  color: var(--color-gray-800);
   font-weight: 700;
 }
 .create form div input {
-  border: 0.5px solid #D4D7E5;
+  border: 0.5px solid var(--color-gray-400);
+  background-color: var(--color-gray-100);
   border-radius: 0.4rem;
   padding: 0.5rem;
 }
