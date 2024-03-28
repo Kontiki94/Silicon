@@ -1329,12 +1329,12 @@ section .courses .grid .course-card .content i {
 }
 
 #signin {
+  height: 100vh;
   background-color: var(--color-gray-001);
-  padding-top: 61.5px;
+  padding-top: 120px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-bottom: 4rem;
 }
 #signin .main-holder {
   width: 480px;
@@ -1395,6 +1395,8 @@ section .courses .grid .course-card .content i {
   margin-bottom: 1.2rem;
 }
 #signin .main-holder .login-box .checkbox input[type=checkbox] {
+  background-color: var(--color-gray-500);
+  color: var(--color-gray-500);
   margin-right: 0.8rem;
   margin-top: 0.5rem;
   margin-left: 0.4rem;
@@ -1734,8 +1736,8 @@ section .courses .grid .course-card .content i {
 }
 
 #details {
-  margin-top: 40px;
-  margin-bottom: 60px;
+  padding-top: 40px;
+  padding-bottom: 60px;
 }
 #details .container {
   display: grid;
@@ -1775,10 +1777,11 @@ section .courses .grid .course-card .content i {
   }
 }
 #details .container .menu-bar .profile h5 {
-  color: black;
+  color: var(--color-gray-900);
   margin-bottom: 0;
 }
 #details .container .menu-bar .profile p {
+  color: var(--color-gray-600);
   margin-bottom: 2rem;
 }
 #details .container .menu-bar .options {
@@ -1791,7 +1794,7 @@ section .courses .grid .course-card .content i {
   }
 }
 #details .container .menu-bar .options a {
-  color: #000;
+  color: var(--color-gray-900);
   font-weight: 700;
   padding: 10px;
   max-width: 300px;
@@ -1799,7 +1802,6 @@ section .courses .grid .course-card .content i {
   margin-bottom: 0.2rem;
   text-decoration: none;
   border-radius: 0.4rem;
-  border: 1px solid white;
 }
 #details .container .menu-bar .options a i {
   padding-right: 1rem;
@@ -1824,6 +1826,7 @@ section .courses .grid .course-card .content i {
 #details .container .account-details h2 {
   margin-bottom: 1.2rem;
   margin-top: 0.5rem;
+  color: var(--color-gray-900);
 }
 #details .container .account-details .user-details .section-title {
   position: relative;
@@ -1881,7 +1884,7 @@ section .courses .grid .course-card .content i {
 #details .container .account-details .divider {
   width: 100%;
   height: 1px;
-  background-color: #E2E5F1;
+  background-color: var(--color-gray-400);
   margin-top: 2.5rem;
   margin-bottom: 3.5rem;
 }
@@ -1889,7 +1892,8 @@ section .courses .grid .course-card .content i {
   max-width: 100%;
   width: 100%;
   height: 7rem;
-  border: 0.5px solid #D4D7E5;
+  background-color: var(--color-gray-100);
+  border: 0.5px solid var(--color-gray-400);
   border-radius: 0.4rem;
   padding: 0.5rem;
 }
@@ -1900,6 +1904,10 @@ section .courses .grid .course-card .content i {
   display: flex;
   gap: 1rem;
   margin-top: 1rem;
+}
+#details .container .account-details .bio .user-buttons .btn-gray {
+  color: var(--color-gray-800);
+  background-color: var(--color-gray-200);
 }
 #details .container .account-details .bio span {
   margin-top: 15px;
@@ -1951,11 +1959,6 @@ section .courses .grid .course-card .content i {
   padding-left: 0.4rem;
   font-weight: 400;
 }
-#details .container .account-details .address-fields .validation .address-button {
-  display: flex;
-  gap: 1rem;
-  margin-top: 1rem;
-}
 #details .container .account-details .address-fields span {
   margin-top: 15px;
   position: relative;
@@ -1983,10 +1986,16 @@ section .courses .grid .course-card .content i {
   gap: 1rem;
   margin-top: 1rem;
 }
+#details .container .account-details .address-fields .btn-gray {
+  color: var(--color-gray-900);
+  background-color: var(--color-gray-200);
+}
 #details .container .account-details input {
   margin-bottom: 0.5rem;
   padding: 0.6rem;
-  border: 0.5px solid #D4D7E5;
+  background-color: var(--color-gray-100);
+  border: 0.5px solid var(--color-gray-200);
+  color: var(--color-gray-700);
   border-radius: 0.4rem;
 }
 #details .container .account-details input.input-validation-error {
@@ -1996,6 +2005,7 @@ section .courses .grid .course-card .content i {
 #details .container .account-details label {
   font-weight: 700;
   margin-bottom: 0.2rem;
+  color: var(--color-gray-900);
 }
 #details .container .account-details span.field-validation-error {
   color: #EF4444 !important;
