@@ -13,7 +13,7 @@ namespace API_Silicon.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [UseApiKey]
-    //[Authorize]
+    [Authorize]
     public class CoursesController(DataContext context, CoursesRepository courseRepository) : ControllerBase
     {
         private readonly DataContext _context = context;

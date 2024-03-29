@@ -11,9 +11,9 @@ public class UseApiKeyAttribute : Attribute, IAsyncActionFilter
         var config = context.HttpContext.RequestServices.GetService<IConfiguration>();
         var secret = config?["ApiKey:Secret"];
 
-        if (!string.IsNullOrEmpty(secret) && context.HttpContext.Request.Query.TryGetValue("key", out var providedKey))
+        if (!string.IsNullOrEmpty(secret) && context.HttpContext.Request.Query.TryGetValue("key", out var key))
         {
-            if (!string.IsNullOrEmpty(providedKey) && secret == providedKey)
+            if (!string.IsNullOrEmpty(key) && secret == key)
             {
                 await next();
                 return;

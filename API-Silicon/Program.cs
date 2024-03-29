@@ -9,34 +9,8 @@ builder.Services.AddScoped<SubscriberRepo>();
 builder.Services.AddScoped<CoursesRepository>();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-//builder.Services.RegisterJwt(builder.Configuration);
+builder.Services.RegisterJwt(builder.Configuration);
 builder.Services.RegisterSwagger();
-
-//// https://swagger.io/docs/specification/authentication/api-keys/
-//builder.Services.AddSwaggerGen(c =>
-//{
-//    c.AddSecurityDefinition("ApiKey", new OpenApiSecurityScheme
-//    {
-//        Description = "API Key Authorization",
-//        Name = "key",
-//        In = ParameterLocation.Query,
-//        Type = SecuritySchemeType.ApiKey
-//    });
-
-//    c.AddSecurityRequirement(new OpenApiSecurityRequirement
-//    {
-//        {
-//            new OpenApiSecurityScheme
-//            {
-//                Reference = new OpenApiReference
-//                {
-//                    Type = ReferenceType.SecurityScheme,
-//                    Id = "ApiKey"
-//                }
-//            }, new string[] {}
-//        }
-//    });
-//});
 
 builder.Services.AddDbContext<DataContext>(x =>
     x.UseSqlServer(builder.Configuration.GetConnectionString("SqlServer")));

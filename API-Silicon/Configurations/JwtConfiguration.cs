@@ -1,32 +1,32 @@
-﻿//using Microsoft.AspNetCore.Authentication.JwtBearer;
-//using Microsoft.IdentityModel.Tokens;
-//using System.Text;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
-//namespace API_Silicon.Configurations
-//{
-//    public static class JwtConfiguration
-//    {
-//        public static void RegisterJwt(this IServiceCollection services, IConfiguration configuration)
-//        {
-//            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-//                .AddJwtBearer(x =>
-//                {
-//                    x.TokenValidationParameters = new TokenValidationParameters
-//                    {
-//                        ValidateIssuer = true,
-//                        ValidIssuer = configuration["Jwt:Issuer"],
+namespace API_Silicon.Configurations
+{
+    public static class JwtConfiguration
+    {
+        public static void RegisterJwt(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(x =>
+                {
+                    x.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidIssuer = configuration["Jwt:Issuer"],
 
-//                        ValidateAudience = true,
-//                        ValidAudience = configuration["Jwt:Audience"],
+                        ValidateAudience = true,
+                        ValidAudience = configuration["Jwt:Audience"],
 
-//                        ValidateLifetime = true,
+                        ValidateLifetime = true,
 
-//                        ValidateIssuerSigningKey = true,
-//                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:secret"]!)),
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:secret"]!)),
 
-//                        ClockSkew = TimeSpan.Zero,
-//                    };
-//                });
-//        }
-//    }
-//}
+                        ClockSkew = TimeSpan.Zero,
+                    };
+                });
+        }
+    }
+}
