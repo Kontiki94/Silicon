@@ -3,16 +3,20 @@ using Infrastructure.Services;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using Silicon_AspNetMVC.ViewModels.Auth;
 using System.Security.Claims;
+using System.Text;
 
 namespace Silicon_AspNetMVC.Controllers
 {
-    public class AuthController(UserService userService, SignInManager<UserEntity> signInManager, UserManager<UserEntity> userManager) : Controller
+    public class AuthController(UserService userService, SignInManager<UserEntity> signInManager, UserManager<UserEntity> userManager, HttpClient httpClient, IConfiguration configuration) : Controller
     {
         private readonly UserService _userService = userService;
         private readonly SignInManager<UserEntity> _signInManager = signInManager;
         private readonly UserManager<UserEntity> _manager = userManager;
+        private readonly HttpClient _httpClient = httpClient;
+        private readonly IConfiguration _configuration = configuration;
 
         [HttpGet]
         [Route("/signin")]
@@ -22,7 +26,7 @@ namespace Silicon_AspNetMVC.Controllers
             ViewData["Title"] = "Sign In";
             if (_signInManager.IsSignedIn(User))
             {
-                return RedirectToAction("Details", "Account");
+                return RedirectToAction("Index", "Home");
             }
             ViewData["ReturnUrl"] = returnUrl ?? Url.Content("~/");
             return View(viewModel);
@@ -32,21 +36,44 @@ namespace Silicon_AspNetMVC.Controllers
         [Route("/signin")]
         public async Task<IActionResult> SignIn(SignInViewModel viewModel, string returnUrl)
         {
-            ViewData["ReturnUrl"] = returnUrl ?? Url.Content("~/");
-            ViewData["Title"] = "Sign In";
-            if (ModelState.IsValid)
+            try
             {
-                var result = await _userService.SignInUserAsync(viewModel.Form);
-                if (result.StatusCode == Infrastructure.Models.StatusCode.OK)
+                ViewData["ReturnUrl"] = returnUrl ?? Url.Content("~/");
+                ViewData["Title"] = "Sign In";
+                if (ModelState.IsValid)
                 {
-                    if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
+                    var result = await _userService.SignInUserAsync(viewModel.Form);
+                    if (result.StatusCode == Infrastructure.Models.StatusCode.OK)
                     {
-                        return Redirect(returnUrl);
+                        var content = new StringContent(JsonConvert.SerializeObject(viewModel.Form), Encoding.UTF8, "application/json");
+                        var response = await _httpClient.PostAsync($"https://localhost:7091/api/Auth/token?key={_configuration["ApiKey:Secret"]}", content);
+                        if (response.IsSuccessStatusCode)
+                        {
+                            var token = await response.Content.ReadAsStringAsync();
+                            var cookieOptions = new CookieOptions
+                            {
+                                HttpOnly = true,
+                                Secure = true,
+                                Expires = DateTime.Now.AddDays(1)
+                            };
+
+                            Response.Cookies.Append("AccessToken", token, cookieOptions);
+                        }
+
+                        if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
+                        {
+                            return Redirect(returnUrl);
+                        }
                     }
                 }
+                viewModel.ErrorMessage = "Invalid e-mail or password";
+                return View(viewModel);
             }
-            viewModel.ErrorMessage = "Invalid e-mail or password";
-            return View(viewModel);
+            catch (Exception ex)
+            {
+                viewModel.ErrorMessage = $"Server is down {ex.Message}";
+                return RedirectToAction("Index", "Home");
+            }
         }
 
         [Route("/signup")]
@@ -79,6 +106,7 @@ namespace Silicon_AspNetMVC.Controllers
         [Route("/signout")]
         public new async Task<IActionResult> SignOut()
         {
+            Response.Cookies.Delete("AccessToken");
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
         }

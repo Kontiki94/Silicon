@@ -1062,6 +1062,9 @@ section .courses .section-title {
   justify-content: space-between;
   margin-bottom: 30px;
 }
+section .courses .section-title h1 {
+  color: var(--color-gray-900);
+}
 @media (min-width: 768px) {
   section .courses .section-title {
     flex-direction: row;

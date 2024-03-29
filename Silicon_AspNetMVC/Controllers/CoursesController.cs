@@ -1,36 +1,45 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Silicon_AspNetMVC.Models.Sections;
 using Silicon_AspNetMVC.ViewModels.Courses;
+using System.Net.Http.Headers;
 using System.Text;
 
 namespace Silicon_AspNetMVC.Controllers;
 
-public class CoursesController : Controller
+[Authorize]
+public class CoursesController(HttpClient http, IConfiguration configuration) : Controller
 {
+    private readonly HttpClient _http = http;
+    private readonly IConfiguration _configuration = configuration;
+
+
     public async Task<IActionResult> Index()
     {
         ViewData["Title"] = "Courses";
-
         var viewModel = new CoursesViewModel();
 
         try
         {
-            using var http = new HttpClient();
-            var response = await http.GetAsync("https://localhost:7091/api/courses?key=NmUyM2YyZTktOGUxYy00YTc2LTk4YzktMjEzOWYzMjI1ZTEz");
+            if (HttpContext.Request.Cookies.TryGetValue("AccessToken", out var token))
+            {
+                _http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
-            if (response.IsSuccessStatusCode)
-            {
-                var json = await response.Content.ReadAsStringAsync();
-                var data = JsonConvert.DeserializeObject<IEnumerable<CoursesModel>>(json);
-                viewModel.AllCourses = data!;
-            }
-            else
-            {
-                ViewData["Status"] = "ConnectionFailed";
+                var apiResponse = await _http.GetAsync($"https://localhost:7091/api/courses?key={_configuration["ApiKey:Secret"]}");
+                if (apiResponse.IsSuccessStatusCode)
+                {
+                    var json = await apiResponse.Content.ReadAsStringAsync();
+                    var data = JsonConvert.DeserializeObject<IEnumerable<CoursesModel>>(json);
+                    viewModel.AllCourses = data!;
+                }
+                else
+                {
+                    ViewData["Status"] = "ConnectionFailed";
+                }
             }
         }
-        catch 
+        catch
         {
             ViewData["Status"] = "ConnectionFailed";
         }
@@ -61,11 +70,19 @@ public class CoursesController : Controller
     {
         ViewData["Title"] = "Course Details";
 
-        using var http = new HttpClient();
-        var response = await http.GetAsync($"https://localhost:7091/api/courses/{id}?key=NmUyM2YyZTktOGUxYy00YTc2LTk4YzktMjEzOWYzMjI1ZTEz");
-        var json = await response.Content.ReadAsStringAsync();
-        var data = JsonConvert.DeserializeObject<CoursesModel>(json);
-        CoursesModel viewModel = data!;
-        return View(viewModel);
+        if (HttpContext.Request.Cookies.TryGetValue("AccessToken", out var token))
+        {
+            _http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+            var apiResponse = await _http.GetAsync($"https://localhost:7091/api/courses/{id}?key={_configuration["ApiKey:Secret"]}");
+            if (apiResponse.IsSuccessStatusCode)
+            {
+                var json = await apiResponse.Content.ReadAsStringAsync();
+                var data = JsonConvert.DeserializeObject<CoursesModel>(json);
+                CoursesModel viewModel = data!;
+                return View(viewModel);
+            }
+        }
+        return View();
     }
 }
