@@ -13,7 +13,7 @@ namespace API_Silicon.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [UseApiKey]
-    [Authorize]
+
     public class CoursesController(DataContext context, CoursesRepository courseRepository) : ControllerBase
     {
         private readonly DataContext _context = context;
@@ -21,6 +21,7 @@ namespace API_Silicon.Controllers
 
         #region CREATE
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Create(CourseRegistrationForm DTO)
         {
             try
@@ -57,7 +58,6 @@ namespace API_Silicon.Controllers
         }
 
         [HttpGet]
-        [UseApiKey]
         public async Task<IActionResult> GetAll()
         {
             try
@@ -75,6 +75,7 @@ namespace API_Silicon.Controllers
         #endregion
 
         #region UPDATE
+        [Authorize]
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(CourseRegistrationForm DTO, int id)
         {
@@ -102,6 +103,7 @@ namespace API_Silicon.Controllers
         #endregion
 
         #region DELETE
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
