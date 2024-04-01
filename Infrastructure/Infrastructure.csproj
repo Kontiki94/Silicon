@@ -8,8 +8,11 @@
 
   <ItemGroup>
     <Compile Remove="Repositories\HomeRepository\**" />
+    <Compile Remove="Services\HomeService\**" />
     <EmbeddedResource Remove="Repositories\HomeRepository\**" />
+    <EmbeddedResource Remove="Services\HomeService\**" />
     <None Remove="Repositories\HomeRepository\**" />
+    <None Remove="Services\HomeService\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,10 +27,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Services\HomeService\" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
 </Project>

@@ -6,6 +6,7 @@ using Infrastructure.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Silicon_AspNetMVC.Helpers;
+using Silicon_AspNetMVC.Services;
 
 namespace Silicon_AspNetMVC;
 
@@ -23,6 +24,7 @@ public class Program
         builder.Services.AddScoped<UserRepository>();
         builder.Services.AddScoped<UserService>();
         builder.Services.AddScoped<ControllerService>();
+        builder.Services.AddScoped<AuthServices>();
 
         builder.Services.AddDefaultIdentity<UserEntity>(x =>
         {
