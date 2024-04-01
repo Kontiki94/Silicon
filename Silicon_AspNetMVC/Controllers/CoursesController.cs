@@ -51,13 +51,16 @@ public class CoursesController(HttpClient http, IConfiguration configuration) : 
     {
         if (ModelState.IsValid)
         {
-            using var http = new HttpClient();
-            var json = JsonConvert.SerializeObject(model);
-            using var content = new StringContent(json, Encoding.UTF8, "application/json");
-            var response = await http.PostAsync("https://localhost:7091/api/courses?key=NmUyM2YyZTktOGUxYy00YTc2LTk4YzktMjEzOWYzMjI1ZTEz", content);
-            if (response.IsSuccessStatusCode)
+            if (HttpContext.Request.Cookies.TryGetValue("AccessToken", out var token))
             {
-                return RedirectToAction("Index", "Courses");
+                _http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                var json = JsonConvert.SerializeObject(model);
+                using var content = new StringContent(json, Encoding.UTF8, "application/json");
+                var response = await _http.PostAsync($"https://localhost:7091/api/courses?key={_configuration["ApiKey:Secret"]}", content);
+                if (response.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Index", "Courses");
+                }
             }
         }
         return View(model);

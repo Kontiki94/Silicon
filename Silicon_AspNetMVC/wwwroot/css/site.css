@@ -849,7 +849,7 @@ footer .container .social-media {
 }
 
 .newsletter {
-  background-color: #F3F6FF;
+  background-color: var(--color-gray-200);
   padding-top: 80px;
   padding-bottom: 80px;
 }
@@ -864,6 +864,9 @@ footer .container .social-media {
 }
 .newsletter .container .top {
   text-align: center;
+}
+.newsletter .container .top h1 {
+  color: var(--color-gray-700);
 }
 @media (min-width: 1200px) {
   .newsletter .container .top {
@@ -887,6 +890,9 @@ footer .container .social-media {
 .newsletter .container .checkbox-content .news-title {
   width: 50%;
   text-align: center;
+}
+.newsletter .container .checkbox-content .news-title h5 {
+  color: var(--color-gray-700);
 }
 @media (min-width: 992px) {
   .newsletter .container .checkbox-content .news-title {
@@ -919,12 +925,12 @@ footer .container .social-media {
     display: flex;
     align-items: center;
     font-size: 14px;
-    color: #565973;
+    color: var(--color-gray-700);
   }
 }
 .newsletter .container .checkbox-content .checkboxes .box input[type=checkbox] {
   margin-right: 10px;
-  accent-color: #6366F1;
+  accent-color: var(--color-gray-700);
   width: 15px;
   height: 15px;
 }
@@ -946,7 +952,7 @@ footer .container .social-media {
 }
 .newsletter .container .subscribe .input-email {
   padding: 10px;
-  border: 2px solid #D4D7E5;
+  border: 2px solid var(--color-gray-400);
   border-radius: 7px;
 }
 

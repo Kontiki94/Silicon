@@ -1,5 +1,5 @@
 .newsletter {
-    background-color: $gray-100;
+    background-color: var(--color-gray-200);
     padding-top: 80px;
     padding-bottom: 80px;
 
@@ -13,6 +13,11 @@
 
         .top {
             text-align: center;
+
+            h1 {
+                color: var(--color-gray-700);
+            }
+
             @include xl {
                 display: flex;
                 gap: 40px;
@@ -30,9 +35,14 @@
                 grid-template-columns: 1fr auto;
                 margin-bottom: 20px;
             }
-            .news-title{
+
+            .news-title {
                 width: 50%;
                 text-align: center;
+
+                h5 {
+                    color: var(--color-gray-700);
+                }
 
                 @include lg {
                     text-align: left;
@@ -64,13 +74,13 @@
                         display: flex;
                         align-items: center;
                         font-size: 14px;
-                        color: $gray-700;
+                        color: var(--color-gray-700);
                     }
 
 
                     input[type="checkbox"] {
                         margin-right: 10px;
-                        accent-color: $theme;
+                        accent-color: var(--color-gray-700);
                         width: 15px;
                         height: 15px;
                     }
@@ -96,7 +106,7 @@
 
             .input-email {
                 padding: 10px;
-                border: 2px solid $gray-400;
+                border: 2px solid var(--color-gray-400);
                 border-radius: 7px;
             }
         }
