@@ -5,7 +5,7 @@
 namespace Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class InitDb : Migration
+    public partial class InitDB : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -14,7 +14,8 @@ namespace Infrastructure.Migrations
                 name: "Contact",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Service = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -53,7 +54,8 @@ namespace Infrastructure.Migrations
                     Articles = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Resources = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     AccessTime = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ProgramDetails = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ProgramDetailsTitle = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ProgramDetailsText = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LearnPoints = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Categories = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },

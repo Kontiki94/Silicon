@@ -34,7 +34,8 @@ public class CoursesEntity
     public string? Articles { get; set; }
     public string? Resources { get; set; }
     public string? AccessTime { get; set; }
-    public List<string>? ProgramDetails { get; set; }
+    public List<string>? ProgramDetailsTitle { get; set; }
+    public List<string>? ProgramDetailsText { get; set; }
     public List<string>? LearnPoints { get; set; }
     public List<string>? Categories { get; set; }
 
@@ -64,7 +65,8 @@ public class CoursesEntity
             ViewHours = DTO.ViewHours,
             Resources = DTO.Resources,
             AccessTime = DTO.AccessTime,
-            ProgramDetails = DTO.ProgramDetails,
+            ProgramDetailsTitle = DTO.ProgramDetailsTitle,
+            ProgramDetailsText = DTO.ProgramDetailsText,
             LearnPoints = DTO.LearnPoints,
             Categories = DTO.Categories,
         };

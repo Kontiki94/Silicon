@@ -23,8 +23,11 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Infrastructure.Entities.ContactEntity", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -105,7 +108,10 @@ namespace Infrastructure.Migrations
                     b.Property<string>("Price")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ProgramDetails")
+                    b.Property<string>("ProgramDetailsText")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProgramDetailsTitle")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Rating")

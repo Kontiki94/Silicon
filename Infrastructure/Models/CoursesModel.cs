@@ -34,7 +34,8 @@ public class CoursesModel
     public string? Articles { get; set; }
     public string? Resources { get; set; }
     public string? AccessTime { get; set; }
-    public List<string>? ProgramDetails { get; set; }
+    public List<string>? ProgramDetailsTitle { get; set; }
+    public List <string>? ProgramDetailsText { get; set; }
     public List<string>? LearnPoints { get; set; }
     public List<string>? Categories { get; set; }
 
@@ -65,7 +66,8 @@ public class CoursesModel
             ViewHours = coursesEntity.ViewHours,
             Resources = coursesEntity.Resources,
             AccessTime = coursesEntity.AccessTime,
-            ProgramDetails = coursesEntity.ProgramDetails,
+            ProgramDetailsTitle = coursesEntity.ProgramDetailsTitle,
+            ProgramDetailsText = coursesEntity.ProgramDetailsText,
             LearnPoints = coursesEntity.LearnPoints,
             Categories = coursesEntity.Categories,
         };
