@@ -10,13 +10,11 @@ using System.Text;
 
 namespace Silicon_AspNetMVC.Controllers;
 
-public class AuthController(UserService userService, SignInManager<UserEntity> signInManager, UserManager<UserEntity> userManager, HttpClient httpClient, IConfiguration configuration, AuthServices authServices) : Controller
+public class AuthController(UserService userService, SignInManager<UserEntity> signInManager, UserManager<UserEntity> userManager, AuthServices authServices) : Controller
 {
     private readonly UserService _userService = userService;
     private readonly SignInManager<UserEntity> _signInManager = signInManager;
     private readonly UserManager<UserEntity> _manager = userManager;
-    private readonly HttpClient _httpClient = httpClient;
-    private readonly IConfiguration _configuration = configuration;
     private readonly AuthServices _authServices = authServices;
 
 
@@ -161,19 +159,6 @@ public class AuthController(UserService userService, SignInManager<UserEntity> s
                 }
 
                 await _signInManager.SignInAsync(user, isPersistent: false);
-
-                var token = await _authServices.GetAuthTokenForExternalUserAsync(user.Email);
-                if (token != null)
-                {
-                    var cookieOptions = new CookieOptions
-                    {
-                        HttpOnly = true,
-                        Secure = true,
-                        Expires = DateTime.Now.AddDays(1)
-                    };
-
-                    Response.Cookies.Append("AccessToken", token, cookieOptions);
-                }
 
                 if (HttpContext.User is not null)
                 {
