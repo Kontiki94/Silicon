@@ -2,10 +2,12 @@
 using Infrastructure.Context;
 using Infrastructure.DTOs;
 using Infrastructure.Entities;
+using Infrastructure.Factories;
 using Infrastructure.Models;
 using Infrastructure.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace API_Silicon.Controllers
@@ -62,13 +64,20 @@ namespace API_Silicon.Controllers
         {
             try
             {
-                var courses = await _courseRepository.GetAllAsync();
+                var query = _context.Courses.Include(i => i.Category).AsQueryable();
+                query = query.OrderByDescending(o => o.Updated);
+                var courses = await query.ToListAsync();
                 if (courses is not null)
                 {
-                    return Ok(courses);
+                    var response = new CourseResult
+                    {
+                        Succeeded = true,
+                        Courses = CourseFactory.Create(courses),
+                    };
+
+                    return Ok(response);
                 }
                 return NotFound();
-
             }
             catch (Exception) { return BadRequest(); }
         }

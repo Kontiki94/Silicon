@@ -19,6 +19,8 @@ public class CoursesEntity
     public string? Views { get; set; }
     public string? LikesInPercent { get; set; }
     public string? LikesInNumbers { get; set; }
+    public DateTime Created {  get; set; }
+    public DateTime Updated {  get; set; }
 
     // AutherInfo
     public string? AuthorName { get; set; }
@@ -36,7 +38,8 @@ public class CoursesEntity
     public string? AccessTime { get; set; }
     public List<string>? ProgramDetails { get; set; }
     public List<string>? LearnPoints { get; set; }
-    public List<string>? Categories { get; set; }
+    public int? CategoryId { get; set; }
+    public CategoryEntity? Category { get; set; }
 
     // Implicit type converter
     public static implicit operator CoursesEntity(CourseRegistrationForm DTO)
@@ -66,7 +69,6 @@ public class CoursesEntity
             AccessTime = DTO.AccessTime,
             ProgramDetails = DTO.ProgramDetails,
             LearnPoints = DTO.LearnPoints,
-            Categories = DTO.Categories,
         };
     }
 }
