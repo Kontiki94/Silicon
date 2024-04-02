@@ -1,5 +1,5 @@
 ﻿using Infrastructure.DTOs;
-using System.ComponentModel.DataAnnotations.Schema;
+using Infrastructure.Models;
 
 
 namespace Infrastructure.Entities;
@@ -45,7 +45,7 @@ public class CoursesEntity
     // Implicit type converter
     public static implicit operator CoursesEntity(CourseRegistrationForm DTO)
     {
-        return new CoursesEntity
+        var courseEntity = new CoursesEntity
         {
             Title = DTO.Title,
             IsBestSeller = DTO.IsBestSeller,
@@ -72,6 +72,16 @@ public class CoursesEntity
             ProgramDetailsText = DTO.ProgramDetailsText,
             LearnPoints = DTO.LearnPoints,
         };
+
+        if (DTO.Category != null)
+        {
+            courseEntity.Category = new CategoryEntity
+            {
+                CategoryName = DTO.Category,
+            };
+        }
+
+        return courseEntity;
     }
 }
 

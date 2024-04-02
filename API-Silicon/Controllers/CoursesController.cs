@@ -59,12 +59,20 @@ namespace API_Silicon.Controllers
             catch (Exception) { return BadRequest(); }
         }
 
+
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll(string category = "", string searchQuery = "")
         {
             try
             {
                 var query = _context.Courses.Include(i => i.Category).AsQueryable();
+
+                if (!string.IsNullOrEmpty(category) && category != "all")
+                    query = query.Where(x => x.Category!.CategoryName == category);
+
+              if (!string.IsNullOrEmpty(searchQuery))
+                    query = query.Where(x => x.Title.Contains(searchQuery) || x.AuthorName!.Contains(searchQuery) || x.Category!.CategoryName.Contains(searchQuery));
+
                 query = query.OrderByDescending(o => o.Updated);
                 var courses = await query.ToListAsync();
                 if (courses is not null)

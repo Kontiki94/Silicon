@@ -37,7 +37,7 @@ public class CoursesModel
     public List <string>? ProgramDetailsText { get; set; }
     public List<string>? LearnPoints { get; set; }
 
-    public string Category { get; set; } = null!;
+    public string? Category { get; set; }
 
     // Implicit type converter
     public static implicit operator CoursesModel(CoursesEntity coursesEntity)

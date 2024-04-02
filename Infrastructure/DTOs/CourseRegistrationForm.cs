@@ -63,5 +63,5 @@ public class CourseRegistrationForm
     [Display(Name = "Learn Points")]
     public List<string>? LearnPoints { get; set; }
     [Display(Name = "Categories")]
-    public List<string>? Categories { get; set; }
+    public string? Category { get; set; }
 }

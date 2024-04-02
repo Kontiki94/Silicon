@@ -1,15 +1,29 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class InitDB : Migration
+    public partial class AddedCategoryEntity : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Categories",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CategoryName = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Categories", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Contact",
                 columns: table => new
@@ -24,44 +38,6 @@ namespace Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Contact", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Courses",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    IsBestSeller = table.Column<bool>(type: "bit", nullable: false),
-                    CourseImage = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CourseImageAltText = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Price = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DiscountPrice = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Rating = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Reviews = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Views = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LikesInPercent = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LikesInNumbers = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AuthorName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AutherBio = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AuthorImage = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AutherImageAltText = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    YouTubeSubscribers = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    FaceBookFollowers = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CourseDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ViewHours = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Articles = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Resources = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AccessTime = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ProgramDetailsTitle = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ProgramDetailsText = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LearnPoints = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Categories = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Courses", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -82,6 +58,74 @@ namespace Infrastructure.Migrations
                 {
                     table.PrimaryKey("PK_Subscribe", x => x.Id);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    HashedPassword = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Salt = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SecurityKey = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Courses",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    IsBestSeller = table.Column<bool>(type: "bit", nullable: false),
+                    CourseImage = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CourseImageAltText = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Price = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DiscountPrice = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Rating = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Reviews = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Views = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LikesInPercent = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LikesInNumbers = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Updated = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    AuthorName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AutherBio = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AuthorImage = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AutherImageAltText = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    YouTubeSubscribers = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FaceBookFollowers = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CourseDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ViewHours = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Articles = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Resources = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AccessTime = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ProgramDetailsTitle = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ProgramDetailsText = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LearnPoints = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CategoryId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Courses", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Courses_Categories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Categories",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Courses_CategoryId",
+                table: "Courses",
+                column: "CategoryId");
         }
 
         /// <inheritdoc />
@@ -95,6 +139,12 @@ namespace Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "Subscribe");
+
+            migrationBuilder.DropTable(
+                name: "Users");
+
+            migrationBuilder.DropTable(
+                name: "Categories");
         }
     }
 }

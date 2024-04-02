@@ -9,8 +9,9 @@ public class CourseFactory
     {
         try
         {
-            return new CoursesModel
+            var courseModel = new CoursesModel
             {
+                Id = entity.Id,
                 Title = entity.Title,
                 IsBestSeller = entity.IsBestSeller,
                 CourseImage = entity.CourseImage,
@@ -32,10 +33,17 @@ public class CourseFactory
                 ViewHours = entity.ViewHours,
                 Resources = entity.Resources,
                 AccessTime = entity.AccessTime,
-                ProgramDetails = entity.ProgramDetails,
                 LearnPoints = entity.LearnPoints,
-                Category = entity.Category!.CategoryName
+                ProgramDetailsText = entity.ProgramDetailsText,
+                ProgramDetailsTitle = entity.ProgramDetailsTitle,
             };
+
+            if (entity.Category != null)
+            {
+                courseModel.Category = entity.Category.CategoryName;
+            }
+
+            return courseModel;
         }
         catch { }
         return null!;
