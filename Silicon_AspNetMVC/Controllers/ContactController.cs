@@ -12,11 +12,7 @@ namespace Silicon_AspNetMVC.Controllers
         [HttpGet]    
         public IActionResult ContactUs()
         {
-            var viewModel = new ContactModel() 
-            { 
-                //SuccessMessage = TempData["SuccessMessage"]?.ToString() ?? "",
-                //ErrorMessage = TempData["ErrorMessage"]?.ToString() ?? "",
-            };
+            var viewModel = new ContactModel();             
             ViewData["Title"] = "Contact Us";
             return View(viewModel);
         }
@@ -35,16 +31,17 @@ namespace Silicon_AspNetMVC.Controllers
 
                 if (response.IsSuccessStatusCode)
                 {
-                    ViewData["Status"] = "Success";
-                }              
-                
+                    TempData["Status"] = "Success";
+                }
+
+                return RedirectToAction("ContactUs", "Contact");
             }
             else
             {
-                ViewData["Status"] = "Error";              
-            }            
+                TempData["Status"] = "Error";
+
                 return View(Model);
-           
+            }
         }
     }
 }

@@ -2198,7 +2198,7 @@ footer .container .social-media {
 .contact .container .contact-form form .alert {
   display: none;
   position: absolute;
-  top: -20px;
+  top: -30px;
   left: 0;
   width: 100%;
 }
