@@ -1616,18 +1616,14 @@ section .courses .items .course-card .content i {
 #course-showcase {
   position: relative;
   margin-bottom: 60px;
-}
-@media (min-width: 1600px) {
-  #course-showcase {
-    margin-bottom: 120px;
-  }
+  z-index: 1;
 }
 #course-showcase .header-image {
   width: 100%;
 }
 @media (min-width: 1600px) {
   #course-showcase .header-image {
-    height: 123%;
+    max-height: 90%;
     position: absolute;
     z-index: -1;
   }
@@ -2543,6 +2539,10 @@ section .courses .items .course-card .content i {
   background-color: black;
 }
 
+html, body {
+  background-color: var(--color-gray-001);
+}
+
 @media (min-width: 1600px) {
   .course-content {
     padding-top: 100px;
@@ -2564,7 +2564,7 @@ section .courses .items .course-card .content i {
   width: 85%;
 }
 .course-content .description-section .learn-points .description p:nth-child(1) {
-  color: #0B0F19;
+  color: var(--color-gray-900);
   font-size: 40px;
   font-weight: 800;
 }
@@ -2572,7 +2572,7 @@ section .courses .items .course-card .content i {
   margin-top: 40px;
 }
 .course-content .description-section .learn-points .learn p:nth-child(1) {
-  color: #0B0F19;
+  color: var(--color-gray-900);
   font-size: 28px;
   font-weight: 800;
   margin-top: 50px;
@@ -2585,20 +2585,20 @@ section .courses .items .course-card .content i {
   margin-bottom: 10px;
 }
 .course-content .description-section .learn-points .learn .list i {
-  color: #6366F1;
+  color: var(--color-theme);
 }
 .course-content .description-section .course-info .course-box {
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.0588235294), 0 4px 5px rgba(0, 0, 0, 0.0470588235);
   border-radius: 1.1rem;
   overflow: hidden;
-  border: 1px solid #E2E5F1;
+  border: 1px solid var(--color-gray-300);
   width: 430px;
   padding: 50px 50px 35px 50px;
   margin-top: 50px;
 }
 .course-content .description-section .course-info .course-box .title {
   font-size: 24px;
-  color: #0B0F19;
+  color: var(--color-gray-900);
   font-weight: 800;
   margin-bottom: 30px;
 }
@@ -2610,12 +2610,12 @@ section .courses .items .course-card .content i {
 }
 .course-content .description-section .course-info .course-box .course-price .discount-price {
   font-size: 32px;
-  color: #0B0F19;
+  color: var(--color-gray-900);
   font-weight: 800;
 }
 .course-content .description-section .course-info .course-box .course-price .ord-price {
   text-decoration: line-through;
-  color: #9397AD;
+  color: var(--color-gray-600);
   font-size: 20px;
 }
 .course-content .description-section .course-info .course-box a {
@@ -2638,7 +2638,7 @@ section .courses .items .course-card .content i {
 .course-content .details-section .details-title {
   font-size: 40px;
   font-weight: 800;
-  color: #0B0F19;
+  color: var(--color-gray-900);
   margin-bottom: 60px;
   margin-top: 60px;
 }
@@ -2650,13 +2650,13 @@ section .courses .items .course-card .content i {
 }
 @media (min-width: 1400px) {
   .course-content .details-section .detail-list {
-    border-left: 1px solid #E2E5F1;
+    border-left: 1px solid var(--color-gray-300);
   }
 }
 .course-content .details-section .detail-list .title {
   font-size: 24px;
   font-weight: 800;
-  color: #0B0F19;
+  color: var(--color-gray-900);
 }
 .course-content .details-section .detail-list .item {
   counter-increment: point;
@@ -2667,14 +2667,14 @@ section .courses .items .course-card .content i {
   content: counter(point);
   position: absolute;
   right: 110%;
-  color: #0B0F19;
+  color: var(--color-gray-900);
   width: 72px;
   height: 72px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   font-size: 16px;
-  background-color: #FFFFFF;
+  background-color: var(--color-white);
   border: 12px solid #F3F6FF;
   border-radius: 50%;
 }
