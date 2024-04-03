@@ -1867,7 +1867,7 @@ section .courses .items .course-card .content i {
   background-color: white;
   clip-path: circle();
   padding: 5px;
-  bottom: 5px;
+  bottom: 15px;
   right: 30px;
 }
 @media (min-width: 1400px) {
@@ -2181,7 +2181,7 @@ section .courses .items .course-card .content i {
   background-color: white;
   clip-path: circle();
   padding: 5px;
-  bottom: 5px;
+  bottom: 15px;
   right: 30px;
 }
 @media (min-width: 1400px) {
@@ -2822,7 +2822,7 @@ html, body {
   background-color: white;
   clip-path: circle();
   padding: 5px;
-  bottom: 5px;
+  bottom: 15px;
   right: 30px;
 }
 @media (min-width: 1400px) {
