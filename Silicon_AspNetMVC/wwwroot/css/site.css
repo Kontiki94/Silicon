@@ -2237,7 +2237,7 @@ section .courses .grid .course-card .content i {
 }
 
 .contact {
-  background-color: #F3F6FF;
+  background-color: var(--color-gray-100);
   z-index: 0;
 }
 .contact .container {
@@ -2247,9 +2247,16 @@ section .courses .grid .course-card .content i {
 .contact .container .nav {
   gap: 0.5rem;
   align-items: baseline;
+  color: var(--color-gray-600);
+}
+.contact .container .nav p {
+  color: var(--color-gray-600);
 }
 .contact .container .upper {
   padding-bottom: 5rem;
+}
+.contact .container .upper h1 {
+  color: var(--color-gray-900);
 }
 .contact .container .upper .box {
   display: flex;
@@ -2271,13 +2278,19 @@ section .courses .grid .course-card .content i {
 .contact .container .upper .box .box-content {
   padding: 1rem 2rem 0 0;
 }
+.contact .container .upper .box .box-content h5 {
+  color: var(--color-gray-900);
+}
+.contact .container .upper .box .box-content p {
+  color: var(--color-gray-700);
+}
 .contact .container .contact-form {
   box-shadow: 0px 4px 13px -2px rgba(19, 16, 34, 0.06), 0px 4.8px 24.4px -6px rgba(19, 16, 34, 0.1);
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100%;
-  background-color: #FFFFFF;
+  background-color: var(--color-white);
   border-radius: 0.5rem;
   padding-top: 1rem;
 }
@@ -2295,6 +2308,9 @@ section .courses .grid .course-card .content i {
   width: 100%;
   display: grid;
   position: relative;
+}
+.contact .container .contact-form form h2 {
+  color: var(--color-gray-900);
 }
 @media (min-width: 1200px) {
   .contact .container .contact-form form {
@@ -2331,6 +2347,7 @@ section .courses .grid .course-card .content i {
 }
 .contact .container .contact-form form .form-content .input-group {
   display: grid;
+  color: var(--color-gray-900);
 }
 .contact .container .contact-form form .form-content label {
   margin: 0;
@@ -2339,10 +2356,11 @@ section .courses .grid .course-card .content i {
 .contact .container .contact-form form .form-content input {
   padding: 1rem;
   border-radius: 0.5rem !important;
-  border: 0.06rem solid #D4D7E5;
+  border: 0.06rem solid var(--color-gray-400);
+  background-color: var(--color-gray-100);
 }
 .contact .container .contact-form form .form-content input::placeholder {
-  opacity: 0.4;
+  color: var(--color-gray-500);
 }
 .contact .container .contact-form form .form-content input.input-validation-error {
   border: 0.06rem solid #EF4444 !important;
@@ -2350,10 +2368,11 @@ section .courses .grid .course-card .content i {
 .contact .container .contact-form form .form-content textarea {
   padding: 1rem;
   border-radius: 0.5rem !important;
-  border: 0.06rem solid #D4D7E5;
+  border: 0.06rem solid var(--color-gray-400);
+  background-color: var(--color-gray-100);
 }
 .contact .container .contact-form form .form-content textarea::placeholder {
-  opacity: 0.4;
+  color: var(--color-gray-500);
 }
 .contact .container .contact-form form .form-content textarea.input-validation-error {
   border: 0.06rem solid #EF4444 !important;
@@ -2361,14 +2380,15 @@ section .courses .grid .course-card .content i {
 .contact .container .contact-form form .form-content select {
   padding: 1rem;
   border-radius: 0.5rem !important;
-  border: 0.06rem solid #D4D7E5;
-  color: #D4D7E5;
+  border: 0.06rem solid var(--color-gray-400);
+  color: var(--color-gray-500);
+  background-color: var(--color-gray-100);
 }
 .contact .container .contact-form form .form-content select option {
-  color: #565973;
+  color: var(--color-gray-700);
 }
 .contact .container .contact-form form .form-content select::placeholder {
-  opacity: 0.4;
+  color: var(--color-gray-500);
 }
 .contact .container .contact-form form .form-content select.input-validation-error {
   border: 0.06rem solid #EF4444 !important;
@@ -2651,8 +2671,8 @@ section .courses .grid .course-card .content i {
 }
 
 #saved-courses {
-  margin-top: 40px;
-  margin-bottom: 60px;
+  padding-top: 40px;
+  padding-bottom: 60px;
 }
 #saved-courses .container {
   display: grid;
@@ -2691,10 +2711,11 @@ section .courses .grid .course-card .content i {
   }
 }
 #saved-courses .container .menu-bar .profile h5 {
-  color: black;
+  color: var(--color-gray-900);
   margin-bottom: 0;
 }
 #saved-courses .container .menu-bar .profile p {
+  color: var(--color-gray-600);
   margin-bottom: 2rem;
 }
 #saved-courses .container .menu-bar .options {
@@ -2707,7 +2728,7 @@ section .courses .grid .course-card .content i {
   }
 }
 #saved-courses .container .menu-bar .options a {
-  color: #000;
+  color: var(--color-gray-900);
   font-weight: 700;
   padding: 10px;
   max-width: 300px;
@@ -2715,7 +2736,6 @@ section .courses .grid .course-card .content i {
   margin-bottom: 0.2rem;
   text-decoration: none;
   border-radius: 0.4rem;
-  border: 1px solid white;
 }
 #saved-courses .container .menu-bar .options a i {
   padding-right: 1rem;
@@ -2733,11 +2753,12 @@ section .courses .grid .course-card .content i {
 }
 @media (min-width: 992px) {
   #saved-courses .container .content {
-    border-left: 1px solid #E2E5F1;
+    border-left: 1px solid var(--color-gray-300);
   }
 }
 #saved-courses .container .content h2 {
   padding: 0 0 0.5rem 1rem;
+  color: var(--color-gray-900);
 }
 @media (min-width: 768px) {
   #saved-courses .container .content h2 {
@@ -2764,6 +2785,7 @@ section .courses .grid .course-card .content i {
   border-radius: 2%;
   box-shadow: 0px 4px 9px -1px rgba(19, 16, 34, 0.03), 0px 4.4px 20px -1px rgba(19, 16, 34, 0.05);
   position: relative;
+  background-color: var(--color-gray-100);
 }
 #saved-courses .container .content .saved-items .course-card .image img {
   width: 100%;
@@ -2793,8 +2815,10 @@ section .courses .grid .course-card .content i {
   display: none;
   color: #FFFFFF;
   background-color: #000000;
+  opacity: 0.8;
   padding: 5px;
   border-radius: 10%;
+  border: 1.6px solid var(--color-gray-200);
   position: absolute;
   top: -2.2rem;
   left: 85%;
@@ -2808,6 +2832,12 @@ section .courses .grid .course-card .content i {
 #saved-courses .container .content .saved-items .course-card .course-info {
   padding: 2rem 2rem 0 2rem;
 }
+#saved-courses .container .content .saved-items .course-card .course-info h5 {
+  color: var(--color-gray-800);
+}
+#saved-courses .container .content .saved-items .course-card .course-info p {
+  color: var(--color-gray-700);
+}
 #saved-courses .container .content .saved-items .course-card .course-info .price {
   color: #6366F1;
   font-size: 1.2rem;
@@ -2816,7 +2846,7 @@ section .courses .grid .course-card .content i {
 #saved-courses .container .content .saved-items .course-card .course-info .divider {
   width: 100%;
   height: 1px;
-  background-color: #E2E5F1;
+  background-color: var(--color-gray-300);
 }
 #saved-courses .container .content .saved-items .course-card .bottom {
   padding-top: 1rem;
@@ -2826,6 +2856,7 @@ section .courses .grid .course-card .content i {
 #saved-courses .container .content .saved-items .course-card .bottom, #saved-courses .container .content .saved-items .course-card .bottom * {
   display: flex;
   align-items: center;
+  color: var(--color-gray-600);
 }
 #saved-courses .container .content .saved-items .course-card .bottom p {
   padding-right: 0.3rem;
