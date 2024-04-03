@@ -1,16 +1,13 @@
 #course-showcase {
     position: relative;
     margin-bottom: 60px;
-
-    @include xxxl {
-        margin-bottom: 120px;
-    }
+    z-index: 1;
 
     .header-image {
         width: 100%;
 
         @include xxxl {
-            height: 123%;
+            max-height: 100%;
             position: absolute;
             z-index: -1;
         }

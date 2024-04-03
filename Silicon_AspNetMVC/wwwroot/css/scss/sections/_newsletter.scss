@@ -104,10 +104,30 @@
                 margin-top: 0px;
             }
 
+            span {
+                position: relative;
+
+                &.field-validation-error {
+                    @include text-s;
+                    color: $danger;
+
+                    &::after {
+                        position: absolute;
+                        right: 10px;
+                        top: 38px;
+                        z-index: 1;
+                        font-size: 2em;
+                        display: block;
+                        content: '\2BBF';
+                    }
+                }
+            }
+
             .input-email {
                 padding: 10px;
                 border: 2px solid var(--color-gray-400);
                 border-radius: 7px;
+                width: 100%;
             }
         }
     }

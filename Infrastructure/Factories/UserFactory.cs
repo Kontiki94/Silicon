@@ -63,7 +63,7 @@ public class UserFactory
         return null!;
     }
 
-    public static UserEntity Create(string firstName, string lastName, string email, string phone, string bio, string userId, string passwordHash, string normalizedEmail, string normalizedUserName, string userName)
+    public static UserEntity Create(string firstName, string lastName, string email, string phone, string bio, string userId, string passwordHash, string normalizedEmail, string normalizedUserName, string userName, string profileImage)
     {
         try
         {
@@ -80,6 +80,7 @@ public class UserFactory
                 Created = date,
                 Updated = date,
                 Id = userId,
+                ProfileImageUrl = profileImage,
                 PasswordHash = passwordHash,
                 NormalizedEmail = email,
                 NormalizedUserName = email,

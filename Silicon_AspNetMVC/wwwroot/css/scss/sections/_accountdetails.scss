@@ -12,7 +12,6 @@
         }
 
         .menu-bar {
-            position: relative;
             display: flex;
             flex-direction: column;
             margin-bottom: 30px;
@@ -34,6 +33,34 @@
 
                 @include md {
                     padding-right: 3rem;
+                }
+
+                .image {
+                    position: relative;
+                    img {
+                        clip-path: circle();
+                        max-width: 180px;
+                        max-height: 180px;
+                        border: 1px hidden;
+                    }
+
+                    .btn-upload {
+                        position: absolute;
+                        background-color: white;
+                        clip-path: circle();
+                        padding: 5px;
+                        bottom: 5px;
+                        right: 30px;
+
+                        @include xxl {
+                            right: 70px;
+                        }
+
+                        &:hover {
+                            background-color: black;
+                            cursor: pointer;
+                        }
+                    }
                 }
 
                 h5 {

@@ -1,5 +1,5 @@
 ﻿@model NewsLetterViewModel
-<section class="newsletter">
+<section id="newsletter" class="newsletter">
     <div class="container">
         <div class="top">
             <h1>@Model.NewsletterTitle.Title</h1>
@@ -14,17 +14,19 @@
                     @foreach (var item in Model.Checkbox)
                     {
                         <div class="box">
-                            <input type="checkbox" id="@item.Id" />
+                            <input type="checkbox" id="@item.Id"/>
                             <label asp-for="@item.Id">@item.Text</label>
                         </div>
                     }
                 </div>
             </div>
             <div class="subscribe">
-                <input asp-for="@Model.Subscriber.Email" type="text" name="email" placeholder="Your Email" class="input-email" />
+                <input asp-for="@Model.Subscriber.Email" type="email" placeholder="Your Email" class="input-email" />
                 <button class="btn-theme" type="submit"><span>* Subscribe</span></button>
                 <span asp-validation-for="@Model.Subscriber.Email"></span>
             </div>
         </form>
     </div>
 </section>
+
+@await Html.PartialAsync("_ValidationScriptPartial")

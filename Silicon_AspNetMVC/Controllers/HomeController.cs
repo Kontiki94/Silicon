@@ -24,13 +24,12 @@ public class HomeController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> Subscribe(SubscribeModel model)
+    public async Task<IActionResult> Subscribe(NewsLetterViewModel model)
     {
-        var viewModel = new HomeIndexViewModel();
         if (ModelState.IsValid)
         {
             using var http = new HttpClient();
-            var url = $"https://localhost:7091/api/Subscriber?email={model.Email}";
+            var url = $"https://localhost:7091/api/Subscriber?email={model.Subscriber.Email}";
             var request = new HttpRequestMessage(HttpMethod.Post, url);
             var response = await http.SendAsync(request);
 
@@ -39,6 +38,6 @@ public class HomeController : Controller
                 ViewData["Subscribed"] = true;
             }
         }
-        return View(viewModel);
+        return RedirectToAction("Index", "Home", "newsletter");
     }
 }
