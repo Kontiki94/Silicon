@@ -3,10 +3,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class AddedCategoryEntity : Migration
+    public partial class SeedWithDateTime : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -120,6 +122,35 @@ namespace Infrastructure.Migrations
                         column: x => x.CategoryId,
                         principalTable: "Categories",
                         principalColumn: "Id");
+                });
+
+            migrationBuilder.InsertData(
+                table: "Categories",
+                columns: new[] { "Id", "CategoryName" },
+                values: new object[,]
+                {
+                    { 1, "Web Development" },
+                    { 2, "HTML & CSS" },
+                    { 3, "Python" },
+                    { 4, "Game Development" },
+                    { 5, "App Development" },
+                    { 6, "Frontend Development" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Courses",
+                columns: new[] { "Id", "AccessTime", "Articles", "AutherBio", "AutherImageAltText", "AuthorImage", "AuthorName", "CategoryId", "CourseDescription", "CourseImage", "CourseImageAltText", "Created", "DiscountPrice", "FaceBookFollowers", "IsBestSeller", "LearnPoints", "LikesInNumbers", "LikesInPercent", "Price", "ProgramDetailsText", "ProgramDetailsTitle", "Rating", "Resources", "Reviews", "Title", "Updated", "ViewHours", "Views", "YouTubeSubscribers" },
+                values: new object[,]
+                {
+                    { 1, "Full lifetime access", "18", "Dolor ipsum amet cursus quisque porta adipiscing. Lorem convallis malesuada sed maecenas. Ac dui at vitae mauris cursus in nullam porta sem. Quis pellentesque elementum ac bibendum. Nunc aliquam in tortor facilisis. Vulputate eget risus, metus phasellus. Pellentesque faucibus amet, eleifend diam quam condimentum convallis ultricies placerat. Duis habitasse placerat amet, odio pellentesque rhoncus, feugiat at. Eget pellentesque tristique felis magna fringilla.", "Albert Flores image", "albert-flores.svg", "Robert Fox", 1, "Suspendisse natoque sagittis, consequat turpis. Sed tristique tellus morbi magna. At vel senectus accumsan, arcu mattis id tempor. Tellus sagittis, euismod porttitor sed tortor est id. Feugiat velit velit, tortor ut. Ut libero cursus nibh lorem urna amet tristique leo. Viverra lorem arcu nam nunc at ipsum quam. A proin id sagittis dignissim mauris condimentum ornare. Tempus mauris sed dictum ultrices.", "course_one", "course one", new DateTime(2024, 4, 3, 11, 48, 43, 479, DateTimeKind.Utc).AddTicks(8137), "", "240", true, "[\"Sed lectus donec amet eu turpis interdum.\",\"Nulla at consectetur vitae dignissim porttitor.\",\"Phasellus id vitae dui aliquet mi.\",\"Integer cursus vitae, odio feugiat iaculis aliquet diam, et purus.\",\"In aenean dolor diam tortor orci eu.\"]", "4.2", "94", "12.50", "[\"Nulla faucibus mauris pellentesque blandit faucibus non. Sit ut et at suspendisse gravida hendrerit tempus placerat.\",\"Lobortis diam elit id nibh ultrices sed penatibus donec. Nibh iaculis eu sit cras ultricies. Nam eu eget etiam egestas donec scelerisque ut ac enim. Vitae ac nisl, enim nec accumsan vitae est.\",\"Duis euismod enim, facilisis risus tellus pharetra lectus diam neque. Nec ultrices mi faucibus est. Magna ullamcorper potenti elementum ultricies auctor nec volutpat augue.\",\"Morbi porttitor risus imperdiet a, nisl mattis. Amet, faucibus eget in platea vitae, velit, erat eget velit. At lacus ut proin erat.\",\"Risus morbi euismod in congue scelerisque fusce pellentesque diam consequat. Nisi mauris nibh sed est morbi amet arcu urna. Malesuada feugiat quisque consectetur elementum diam vitae. Dictumst facilisis odio eu quis maecenas risus odio fames bibendum.\",\"Quis risus quisque diam diam. Volutpat neque eget eu faucibus sed urna fermentum risus. Est, mauris morbi nibh massa.\"]", "[\"Introduction. Getting started\",\"The ultimate HTML developer: advanced HTML\",\"CSS \\u0026 CSS3: basic\",\"JavaScript basics for beginners\",\"Understanding APIs\",\"C# and .NET from beginner to advanced\"]", null, "25", "1.2", "Fullstack Web Developer Course from Scratch", new DateTime(2024, 4, 3, 11, 48, 43, 479, DateTimeKind.Utc).AddTicks(8138), "220", null, "180" },
+                    { 2, null, null, null, null, null, "Jenny Wilson & Marvin McKinney", 2, null, "course_two", "course two", new DateTime(2024, 4, 3, 11, 48, 43, 479, DateTimeKind.Utc).AddTicks(8160), "", null, false, null, "3.1", "92", "15.99", null, null, null, null, null, "HTML, CSS, JavaScript Web Developer", new DateTime(2024, 4, 3, 11, 48, 43, 479, DateTimeKind.Utc).AddTicks(8161), "160", null, null },
+                    { 3, null, null, null, null, null, "Albert Flores", 6, null, "course_three", "course three", new DateTime(2024, 4, 3, 11, 48, 43, 479, DateTimeKind.Utc).AddTicks(8163), "9.99", null, false, null, "2.7", "98", "44.99", null, null, null, null, null, "The Complete Front-End Web Development Course", new DateTime(2024, 4, 3, 11, 48, 43, 479, DateTimeKind.Utc).AddTicks(8163), "100", null, null },
+                    { 4, null, null, null, null, null, "Marvin McKinney", 5, null, "course_four", "course four", new DateTime(2024, 4, 3, 11, 48, 43, 479, DateTimeKind.Utc).AddTicks(8164), "", null, false, null, "3.1", "92", "15.99", null, null, null, null, null, "iOS & Swift - The Complete iOS App Development Course", new DateTime(2024, 4, 3, 11, 48, 43, 479, DateTimeKind.Utc).AddTicks(8165), "220", null, null },
+                    { 5, null, null, null, null, null, "Esther Howard", 3, null, "course_five", "course five", new DateTime(2024, 4, 3, 11, 48, 43, 479, DateTimeKind.Utc).AddTicks(8166), "", null, true, null, "4.2", "94", "12.50", null, null, null, null, null, "Data Science & Machine Learning with Python", new DateTime(2024, 4, 3, 11, 48, 43, 479, DateTimeKind.Utc).AddTicks(8167), "220", null, null },
+                    { 6, null, null, null, null, null, "Robert Fox", 2, null, "course_six", "course six", new DateTime(2024, 4, 3, 11, 48, 43, 479, DateTimeKind.Utc).AddTicks(8168), "", null, false, null, "4.2", "94", "10.50", null, null, null, null, null, "Creative CSS Drawing Course: Make Art With CSS", new DateTime(2024, 4, 3, 11, 48, 43, 479, DateTimeKind.Utc).AddTicks(8168), "220", null, null },
+                    { 7, null, null, null, null, null, "Ralph Edwards", 4, null, "course_seven", "course seven", new DateTime(2024, 4, 3, 11, 48, 43, 479, DateTimeKind.Utc).AddTicks(8170), "", null, false, null, "3.1", "92", "18.99", null, null, null, null, null, "Blender Character Creator v2.0 for Video Games Design", new DateTime(2024, 4, 3, 11, 48, 43, 479, DateTimeKind.Utc).AddTicks(8170), "160", null, null },
+                    { 8, null, null, null, null, null, "Albert Flores", 4, null, "course_eight", "course eight", new DateTime(2024, 4, 3, 11, 48, 43, 479, DateTimeKind.Utc).AddTicks(8172), "12.99", null, false, null, "2.7", "98", "44.99", null, null, null, null, null, "The Ultimate Guide to 2D Mobile Game Development with Unity", new DateTime(2024, 4, 3, 11, 48, 43, 479, DateTimeKind.Utc).AddTicks(8172), "100", null, null },
+                    { 9, null, null, null, null, null, "Jenny Wilson", 5, null, "course_nine", "course nine", new DateTime(2024, 4, 3, 11, 48, 43, 479, DateTimeKind.Utc).AddTicks(8174), "", null, false, null, "3.1", "92", "14.50", null, null, null, null, null, "Learn JMETER from Scratch on Live Apps-Performance Testing", new DateTime(2024, 4, 3, 11, 48, 43, 479, DateTimeKind.Utc).AddTicks(8174), "160", null, null }
                 });
 
             migrationBuilder.CreateIndex(

@@ -4,6 +4,7 @@ using Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20240403114843_SeedWithDateTime")]
+    partial class SeedWithDateTime
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -212,7 +215,8 @@ namespace Infrastructure.Migrations
                             CourseDescription = "Suspendisse natoque sagittis, consequat turpis. Sed tristique tellus morbi magna. At vel senectus accumsan, arcu mattis id tempor. Tellus sagittis, euismod porttitor sed tortor est id. Feugiat velit velit, tortor ut. Ut libero cursus nibh lorem urna amet tristique leo. Viverra lorem arcu nam nunc at ipsum quam. A proin id sagittis dignissim mauris condimentum ornare. Tempus mauris sed dictum ultrices.",
                             CourseImage = "course_one",
                             CourseImageAltText = "course one",
-                            Created = new DateTime(2024, 4, 3, 11, 58, 30, 203, DateTimeKind.Utc).AddTicks(7509),
+                            Created = new DateTime(2024, 4, 3, 11, 48, 43, 479, DateTimeKind.Utc).AddTicks(8137),
+                            DiscountPrice = "",
                             FaceBookFollowers = "240",
                             IsBestSeller = true,
                             LearnPoints = "[\"Sed lectus donec amet eu turpis interdum.\",\"Nulla at consectetur vitae dignissim porttitor.\",\"Phasellus id vitae dui aliquet mi.\",\"Integer cursus vitae, odio feugiat iaculis aliquet diam, et purus.\",\"In aenean dolor diam tortor orci eu.\"]",
@@ -224,7 +228,7 @@ namespace Infrastructure.Migrations
                             Resources = "25",
                             Reviews = "1.2",
                             Title = "Fullstack Web Developer Course from Scratch",
-                            Updated = new DateTime(2024, 4, 3, 11, 58, 30, 203, DateTimeKind.Utc).AddTicks(7510),
+                            Updated = new DateTime(2024, 4, 3, 11, 48, 43, 479, DateTimeKind.Utc).AddTicks(8138),
                             ViewHours = "220",
                             YouTubeSubscribers = "180"
                         },
@@ -235,13 +239,14 @@ namespace Infrastructure.Migrations
                             CategoryId = 2,
                             CourseImage = "course_two",
                             CourseImageAltText = "course two",
-                            Created = new DateTime(2024, 4, 3, 11, 58, 30, 203, DateTimeKind.Utc).AddTicks(7539),
+                            Created = new DateTime(2024, 4, 3, 11, 48, 43, 479, DateTimeKind.Utc).AddTicks(8160),
+                            DiscountPrice = "",
                             IsBestSeller = false,
                             LikesInNumbers = "3.1",
                             LikesInPercent = "92",
                             Price = "15.99",
                             Title = "HTML, CSS, JavaScript Web Developer",
-                            Updated = new DateTime(2024, 4, 3, 11, 58, 30, 203, DateTimeKind.Utc).AddTicks(7540),
+                            Updated = new DateTime(2024, 4, 3, 11, 48, 43, 479, DateTimeKind.Utc).AddTicks(8161),
                             ViewHours = "160"
                         },
                         new
@@ -251,14 +256,14 @@ namespace Infrastructure.Migrations
                             CategoryId = 6,
                             CourseImage = "course_three",
                             CourseImageAltText = "course three",
-                            Created = new DateTime(2024, 4, 3, 11, 58, 30, 203, DateTimeKind.Utc).AddTicks(7542),
+                            Created = new DateTime(2024, 4, 3, 11, 48, 43, 479, DateTimeKind.Utc).AddTicks(8163),
                             DiscountPrice = "9.99",
                             IsBestSeller = false,
                             LikesInNumbers = "2.7",
                             LikesInPercent = "98",
                             Price = "44.99",
                             Title = "The Complete Front-End Web Development Course",
-                            Updated = new DateTime(2024, 4, 3, 11, 58, 30, 203, DateTimeKind.Utc).AddTicks(7542),
+                            Updated = new DateTime(2024, 4, 3, 11, 48, 43, 479, DateTimeKind.Utc).AddTicks(8163),
                             ViewHours = "100"
                         },
                         new
@@ -268,13 +273,14 @@ namespace Infrastructure.Migrations
                             CategoryId = 5,
                             CourseImage = "course_four",
                             CourseImageAltText = "course four",
-                            Created = new DateTime(2024, 4, 3, 11, 58, 30, 203, DateTimeKind.Utc).AddTicks(7544),
+                            Created = new DateTime(2024, 4, 3, 11, 48, 43, 479, DateTimeKind.Utc).AddTicks(8164),
+                            DiscountPrice = "",
                             IsBestSeller = false,
                             LikesInNumbers = "3.1",
                             LikesInPercent = "92",
                             Price = "15.99",
                             Title = "iOS & Swift - The Complete iOS App Development Course",
-                            Updated = new DateTime(2024, 4, 3, 11, 58, 30, 203, DateTimeKind.Utc).AddTicks(7544),
+                            Updated = new DateTime(2024, 4, 3, 11, 48, 43, 479, DateTimeKind.Utc).AddTicks(8165),
                             ViewHours = "220"
                         },
                         new
@@ -284,13 +290,14 @@ namespace Infrastructure.Migrations
                             CategoryId = 3,
                             CourseImage = "course_five",
                             CourseImageAltText = "course five",
-                            Created = new DateTime(2024, 4, 3, 11, 58, 30, 203, DateTimeKind.Utc).AddTicks(7546),
+                            Created = new DateTime(2024, 4, 3, 11, 48, 43, 479, DateTimeKind.Utc).AddTicks(8166),
+                            DiscountPrice = "",
                             IsBestSeller = true,
                             LikesInNumbers = "4.2",
                             LikesInPercent = "94",
                             Price = "12.50",
                             Title = "Data Science & Machine Learning with Python",
-                            Updated = new DateTime(2024, 4, 3, 11, 58, 30, 203, DateTimeKind.Utc).AddTicks(7546),
+                            Updated = new DateTime(2024, 4, 3, 11, 48, 43, 479, DateTimeKind.Utc).AddTicks(8167),
                             ViewHours = "220"
                         },
                         new
@@ -300,13 +307,14 @@ namespace Infrastructure.Migrations
                             CategoryId = 2,
                             CourseImage = "course_six",
                             CourseImageAltText = "course six",
-                            Created = new DateTime(2024, 4, 3, 11, 58, 30, 203, DateTimeKind.Utc).AddTicks(7548),
+                            Created = new DateTime(2024, 4, 3, 11, 48, 43, 479, DateTimeKind.Utc).AddTicks(8168),
+                            DiscountPrice = "",
                             IsBestSeller = false,
                             LikesInNumbers = "4.2",
                             LikesInPercent = "94",
                             Price = "10.50",
                             Title = "Creative CSS Drawing Course: Make Art With CSS",
-                            Updated = new DateTime(2024, 4, 3, 11, 58, 30, 203, DateTimeKind.Utc).AddTicks(7548),
+                            Updated = new DateTime(2024, 4, 3, 11, 48, 43, 479, DateTimeKind.Utc).AddTicks(8168),
                             ViewHours = "220"
                         },
                         new
@@ -316,13 +324,14 @@ namespace Infrastructure.Migrations
                             CategoryId = 4,
                             CourseImage = "course_seven",
                             CourseImageAltText = "course seven",
-                            Created = new DateTime(2024, 4, 3, 11, 58, 30, 203, DateTimeKind.Utc).AddTicks(7550),
+                            Created = new DateTime(2024, 4, 3, 11, 48, 43, 479, DateTimeKind.Utc).AddTicks(8170),
+                            DiscountPrice = "",
                             IsBestSeller = false,
                             LikesInNumbers = "3.1",
                             LikesInPercent = "92",
                             Price = "18.99",
                             Title = "Blender Character Creator v2.0 for Video Games Design",
-                            Updated = new DateTime(2024, 4, 3, 11, 58, 30, 203, DateTimeKind.Utc).AddTicks(7550),
+                            Updated = new DateTime(2024, 4, 3, 11, 48, 43, 479, DateTimeKind.Utc).AddTicks(8170),
                             ViewHours = "160"
                         },
                         new
@@ -332,14 +341,14 @@ namespace Infrastructure.Migrations
                             CategoryId = 4,
                             CourseImage = "course_eight",
                             CourseImageAltText = "course eight",
-                            Created = new DateTime(2024, 4, 3, 11, 58, 30, 203, DateTimeKind.Utc).AddTicks(7552),
+                            Created = new DateTime(2024, 4, 3, 11, 48, 43, 479, DateTimeKind.Utc).AddTicks(8172),
                             DiscountPrice = "12.99",
                             IsBestSeller = false,
                             LikesInNumbers = "2.7",
                             LikesInPercent = "98",
                             Price = "44.99",
                             Title = "The Ultimate Guide to 2D Mobile Game Development with Unity",
-                            Updated = new DateTime(2024, 4, 3, 11, 58, 30, 203, DateTimeKind.Utc).AddTicks(7552),
+                            Updated = new DateTime(2024, 4, 3, 11, 48, 43, 479, DateTimeKind.Utc).AddTicks(8172),
                             ViewHours = "100"
                         },
                         new
@@ -349,13 +358,14 @@ namespace Infrastructure.Migrations
                             CategoryId = 5,
                             CourseImage = "course_nine",
                             CourseImageAltText = "course nine",
-                            Created = new DateTime(2024, 4, 3, 11, 58, 30, 203, DateTimeKind.Utc).AddTicks(7554),
+                            Created = new DateTime(2024, 4, 3, 11, 48, 43, 479, DateTimeKind.Utc).AddTicks(8174),
+                            DiscountPrice = "",
                             IsBestSeller = false,
                             LikesInNumbers = "3.1",
                             LikesInPercent = "92",
                             Price = "14.50",
                             Title = "Learn JMETER from Scratch on Live Apps-Performance Testing",
-                            Updated = new DateTime(2024, 4, 3, 11, 58, 30, 203, DateTimeKind.Utc).AddTicks(7554),
+                            Updated = new DateTime(2024, 4, 3, 11, 48, 43, 479, DateTimeKind.Utc).AddTicks(8174),
                             ViewHours = "160"
                         });
                 });
