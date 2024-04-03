@@ -74,7 +74,7 @@ public class AccountController(UserService userService, SignInManager<UserEntity
                 }
             }
             else if (ModelState.IsValid)
-            { 
+            {
                 var userEntity = await GenerateUserEntityAsync(viewModel);
                 var result = await _userService.UpdateUserAsync(userEntity);
 
@@ -86,7 +86,7 @@ public class AccountController(UserService userService, SignInManager<UserEntity
             }
 
             TempData["ErrorMessage"] = "Please fill in all required fields.";
-
+            var user = await _userManager.GetUserAsync(User);
             var compositeViewModel = new AccountViewModel
             {
                 AddressInfo = new AccountDetailsAddressInfoViewModel(),
@@ -188,6 +188,11 @@ public class AccountController(UserService userService, SignInManager<UserEntity
                     TempData["SuccessMessage"] = "Password was updated!";
                     return RedirectToAction(nameof(Security));
                 }
+                else
+                {
+                    TempData["ErrorMessage"] = "Something went wrong. Try again";
+                    return RedirectToAction(nameof(Security));
+                }
             }
         }
         return View("Security", viewModel);
@@ -244,6 +249,7 @@ public class AccountController(UserService userService, SignInManager<UserEntity
                 FirstName = user!.FirstName,
                 LastName = user.LastName,
                 Email = user.Email!,
+                ProfileImageUrl = user.ProfileImageUrl
             };
         }
         catch (Exception) { return new ProfileViewModel(); }
@@ -307,7 +313,8 @@ public class AccountController(UserService userService, SignInManager<UserEntity
                         user.PasswordHash!,
                         user.NormalizedEmail!,
                         user.NormalizedUserName!,
-                        user.UserName!
+                        user.UserName!,
+                        user.ProfileImageUrl!
                 );
         }
         catch (Exception) { return null!; }
@@ -329,6 +336,14 @@ public class AccountController(UserService userService, SignInManager<UserEntity
                 );
         }
         catch (Exception) { return null!; }
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> UploadImage(IFormFile file)
+    {
+        await _userService.UploadUserProfileImageAsync(User, file);
+
+        return RedirectToAction("Details", "Account");
     }
 }
 

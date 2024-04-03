@@ -1,8 +1,8 @@
 ﻿@using Microsoft.AspNetCore.Identity
-
 @{
     var themeMode = Context.Request.Cookies["ThemeMode"] ?? "light";
     var isDark = (themeMode == "dark") ? true : false;
+    var user = await UserManager.GetUserAsync(User);
 }
 
 <!DOCTYPE html>
@@ -55,7 +55,7 @@
                     {
 
                         <a asp-controller="Auth" asp-action="SignOut" class="sign-out" title="Sign Out"><i class="fa-regular fa-right-from-bracket "></i></a>
-                        <a asp-controller="Account" asp-action="Details" title="Profile"><img class="profile-image" src="~/images/profiles/john-doe.png" /></a>
+                        <a asp-controller="Account" asp-action="Details" title="Profile"><img class="profile-image" src="~/images/profiles/@user!.ProfileImageUrl" /></a>
                     }
                     else
                     {

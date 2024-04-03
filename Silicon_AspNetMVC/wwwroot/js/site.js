@@ -23,7 +23,7 @@ const checkScreenSize = () => {
         accountButtons.classList.add('hide');
 
         barsIcon.classList.remove('hide');
-        
+
     } else {
         if (!menu.classList.contains('hide')) {
             menu.classList.add('hide');
@@ -64,10 +64,30 @@ document.addEventListener('DOMContentLoaded', function () {
             .then(res => {
                 if (res.ok)
                     window.location.reload()
-                else 
+                else
                     console.log("Not working")
             })
     })
 })
 
+
+//Upload profileimage
+document.addEventListener('DOMContentLoaded', function () {
+    handleProfileImageUpload()
+})
+
+function handleProfileImageUpload() {
+    try {
+        let fileUploader = document.querySelector('#fileUploader')
+
+        if (fileUploader != undefined) {
+            fileUploader.addEventListener('change', function () {
+                if (this.files.length > 0) {
+                    this.form.submit()
+                }
+            })
+        }
+    }
+    catch { }
+}
 
