@@ -314,7 +314,7 @@ public class AccountController(UserService userService, SignInManager<UserEntity
                         user.NormalizedEmail!,
                         user.NormalizedUserName!,
                         user.UserName!,
-                        user.ProfileImageUrl
+                        user.ProfileImageUrl!
                 );
         }
         catch (Exception) { return null!; }
