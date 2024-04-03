@@ -31,8 +31,8 @@ function select() {
 function searchQuery() {
     try {
         document.querySelector('#searchQuery').addEventListener('keyup', function () {
-            updateCoursesByFilter()
 
+            updateCoursesByFilter()
         })
     }
     catch { }
@@ -40,8 +40,6 @@ function searchQuery() {
 
 function updateCoursesByFilter() {
     const category = document.querySelector('.select .selected').getAttribute('data-value') || 'all'
-    console.log(category)
-
     const query = document.querySelector('#searchQuery').value
     const url = `/courses/index?category=${encodeURIComponent(category)}&searchQuery=${encodeURIComponent(query)}`
 
@@ -51,7 +49,6 @@ function updateCoursesByFilter() {
             const parser = new DOMParser()
             const dom = parser.parseFromString(data, 'text/html')
             const itemsContainer = document.querySelector('.items')
-            console.log(itemsContainer)
 
             if (itemsContainer) {
                 itemsContainer.innerHTML = dom.querySelector('.items').innerHTML

@@ -11,10 +11,10 @@
             <h1 class="h1">Courses</h1>
             <div class="search-div">
                 <div class="dropdown select">
-                    <div class=" selected">All categories</div>
+                    <div class="selected" data-value="all">All categories<i class="fa-sharp fa-light fa-circle-caret-down"></i></div>
                     <div class="select-options">
 
-                        <div class="option" data-value="All">All Categories</div>
+                        <div class="option" data-value="all">All Categories</div>
                         @if (Model.Categories != null)
                         {
                             foreach (var category in Model.Categories)
@@ -30,7 +30,6 @@
                 </div>
             </div>
         </div>
-        <div class="grid">
             @if (Model.AllCourses != null)
             {
                 <div class="items">
@@ -46,7 +45,7 @@
                                     {
                                         <span class="best-seller">Best Seller</span>
                                     }
-                                    <a asp-action="JoinCourse" asp-controller="Courses"> <i class="fa-sharp fa-regular fa-bookmark"></i></a>
+                                    <a asp-action="JoinCourse" asp-controller="Courses"> <i class="fa-sharp fa-regular fa-bookmark" title="Join Course"></i></a>
                                 </div>
                                 <div class="course-info">
                                     <h5 class="title">@course.Title</h5>
@@ -85,7 +84,6 @@
             {
                 <span class="alert alert-danger">Failed to contact server. Please try again later...</span>
             }
-        </div>
     </div>
 </section>
 

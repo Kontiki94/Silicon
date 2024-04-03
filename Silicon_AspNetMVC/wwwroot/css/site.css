@@ -1076,14 +1076,43 @@ section .courses .section-title .search-div {
   margin-top: 1rem;
   gap: 30px;
 }
-section .courses .section-title .search-div .dropdown .select-menu {
+section .courses .section-title .search-div .dropdown {
+  position: relative;
+  min-width: 300px;
+}
+section .courses .section-title .search-div .dropdown .selected {
+  position: relative;
   margin-bottom: 0.3rem;
   padding: 0.65rem;
   border: 0.3px solid var(--color-gray-200);
   border-radius: 0.4rem;
   color: var(--color-gray-700);
   background-color: var(--color-gray-100);
-  width: 208px;
+  cursor: pointer;
+}
+section .courses .section-title .search-div .dropdown .selected .fa-sharp {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}
+section .courses .section-title .search-div .dropdown .select-options {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: var(--color-gray-100);
+  border: 1px solid var(--color-gray-400);
+  border-radius: 0.2rem;
+  color: var(--color-gray-700);
+  z-index: 99;
+}
+section .courses .section-title .search-div .dropdown .select-options .option {
+  padding: 10px;
+  cursor: pointer;
+}
+section .courses .section-title .search-div .dropdown .select-options .option:hover {
+  background-color: var(--color-gray-400);
 }
 section .courses .section-title .search-div .search {
   position: relative;
@@ -1102,22 +1131,22 @@ section .courses .section-title .search-div .search i {
   top: 15px;
   right: 12px;
 }
-section .courses .grid {
+section .courses .items {
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   gap: 2rem 1rem;
 }
 @media (min-width: 768px) {
-  section .courses .grid {
+  section .courses .items {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 @media (min-width: 992px) {
-  section .courses .grid {
+  section .courses .items {
     grid-template-columns: repeat(3, 1fr);
   }
 }
-section .courses .grid .course-card {
+section .courses .items .course-card {
   background-color: var(--color-gray-100);
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.0588235294), 0 4px 5px rgba(0, 0, 0, 0.0470588235);
   border-radius: 1.1rem;
@@ -1125,62 +1154,62 @@ section .courses .grid .course-card {
   padding: 5px;
   padding: 1px;
 }
-section .courses .grid .course-card:hover {
-  transition: transform 0.3s ease;
-  transform: scale(1.02);
+section .courses .items .course-card:hover {
+  box-shadow: 0 3px 10px rgba(99, 102, 241, 0.7), 0 4px 5px rgba(99, 102, 241, 0.5);
+  cursor: pointer;
 }
-section .courses .grid .course-card .content {
+section .courses .items .course-card .content {
   padding: 0;
   text-decoration: none;
 }
-section .courses .grid .course-card .content .course-info {
+section .courses .items .course-card .content .course-info {
   padding-left: 15px;
 }
-section .courses .grid .course-card .content .course-info .title {
+section .courses .items .course-card .content .course-info .title {
   margin-top: 1rem;
   font-weight: 800;
   padding-right: 32px;
   color: var(--color-gray-900);
 }
-section .courses .grid .course-card .content .course-info .price {
+section .courses .items .course-card .content .course-info .price {
   color: #6366F1;
   font-size: 1.2rem;
   font-weight: 700;
 }
-section .courses .grid .course-card .content .course-info .discount-div {
+section .courses .items .course-card .content .course-info .discount-div {
   display: flex;
   flex-direction: row;
   font-size: 1.2rem;
 }
-section .courses .grid .course-card .content .course-info .discount-div .discount-price {
+section .courses .items .course-card .content .course-info .discount-div .discount-price {
   color: red;
   font-weight: 700;
   padding-right: 0.5rem;
 }
-section .courses .grid .course-card .content .course-info .discount-div .original-price {
+section .courses .items .course-card .content .course-info .discount-div .original-price {
   text-decoration: line-through;
   font-size: 1rem;
   color: var(--color-gray-600);
 }
-section .courses .grid .course-card .content .course-info .author {
+section .courses .items .course-card .content .course-info .author {
   line-height: 160%;
   font-weight: 400;
   color: #565973;
   font-family: "Manrope", sans-serif;
   font-size: 14px !important;
 }
-section .courses .grid .course-card .content p {
+section .courses .items .course-card .content p {
   color: var(--color-gray-800);
   padding-left: 5px;
 }
-section .courses .grid .course-card .content .image {
+section .courses .items .course-card .content .image {
   position: relative;
 }
-section .courses .grid .course-card .content .image img {
+section .courses .items .course-card .content .image img {
   width: 100%;
   max-width: 100%;
 }
-section .courses .grid .course-card .content .image .best-seller {
+section .courses .items .course-card .content .image .best-seller {
   position: absolute;
   top: 10px;
   left: 15px;
@@ -1189,7 +1218,7 @@ section .courses .grid .course-card .content .image .best-seller {
   padding: 0.1rem 0.6rem;
   border-radius: 0.3rem;
 }
-section .courses .grid .course-card .content .image i {
+section .courses .items .course-card .content .image i {
   position: absolute;
   top: 15px;
   right: 16px;
@@ -1200,27 +1229,27 @@ section .courses .grid .course-card .content .image i {
   color: #000;
   padding: 0.7rem;
 }
-section .courses .grid .course-card .content .divider {
+section .courses .items .course-card .content .divider {
   width: 90%;
   height: 1px;
   background-color: var(--color-gray-200);
   margin-left: 25px;
 }
-section .courses .grid .course-card .content footer {
+section .courses .items .course-card .content footer {
   background-color: var(--color-gray-100);
   padding: 0;
   padding-top: 1rem;
   padding-left: 1rem;
   gap: 2rem;
 }
-section .courses .grid .course-card .content footer p {
+section .courses .items .course-card .content footer p {
   color: var(--color-gray-600);
 }
-section .courses .grid .course-card .content footer, section .courses .grid .course-card .content footer * {
+section .courses .items .course-card .content footer, section .courses .items .course-card .content footer * {
   display: flex;
   align-items: center;
 }
-section .courses .grid .course-card .content i {
+section .courses .items .course-card .content i {
   padding-right: 0.1rem;
   margin-bottom: 1.2rem;
 }
@@ -2222,7 +2251,7 @@ section .courses .grid .course-card .content i {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  margin-top: 10rem;
+  padding-top: 10rem;
 }
 #not-found .container .image {
   margin-bottom: 1rem;
