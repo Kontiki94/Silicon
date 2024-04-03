@@ -18,7 +18,7 @@ public class DbSeeds
             {
                 Id = 1,
                 IsBestSeller = true,
-                CourseImage = "course_one",
+                CourseImage = "course_one.svg",
                 CourseImageAltText = "course one",
                 Title = "Fullstack Web Developer Course from Scratch",
                 AuthorName = "Robert Fox",
@@ -30,6 +30,7 @@ public class DbSeeds
                 CategoryId = 1,
                 Created = DateTime.UtcNow,
                 Updated = DateTime.UtcNow,
+                ShowcaseImage = "showcase_image_1.svg",
                 CourseDescription = "Suspendisse natoque sagittis, consequat turpis. Sed tristique tellus morbi magna. At vel senectus accumsan, arcu mattis id tempor. Tellus sagittis, euismod porttitor sed tortor est id. Feugiat velit velit, tortor ut. Ut libero cursus nibh lorem urna amet tristique leo. Viverra lorem arcu nam nunc at ipsum quam. A proin id sagittis dignissim mauris condimentum ornare. Tempus mauris sed dictum ultrices.",
                 Reviews = "1.2",
                 AuthorImage = "albert-flores.svg",
@@ -71,7 +72,7 @@ public class DbSeeds
             {
                 Id = 2,
                 IsBestSeller = false,
-                CourseImage = "course_two",
+                CourseImage = "course_two.svg",
                 CourseImageAltText = "course two",
                 Title = "HTML, CSS, JavaScript Web Developer",
                 AuthorName = "Jenny Wilson & Marvin McKinney",
@@ -88,7 +89,7 @@ public class DbSeeds
             {
                 Id = 3,
                 IsBestSeller = false,
-                CourseImage = "course_three",
+                CourseImage = "course_three.svg",
                 CourseImageAltText = "course three",
                 Title = "The Complete Front-End Web Development Course",
                 AuthorName = "Albert Flores",
@@ -105,7 +106,7 @@ public class DbSeeds
             {
                 Id = 4,
                 IsBestSeller = false,
-                CourseImage = "course_four",
+                CourseImage = "course_four.svg",
                 CourseImageAltText = "course four",
                 Title = "iOS & Swift - The Complete iOS App Development Course",
                 AuthorName = "Marvin McKinney",
@@ -122,7 +123,7 @@ public class DbSeeds
             {
                 Id = 5,
                 IsBestSeller = true,
-                CourseImage = "course_five",
+                CourseImage = "course_five.svg",
                 CourseImageAltText = "course five",
                 Title = "Data Science & Machine Learning with Python",
                 AuthorName = "Esther Howard",
@@ -139,7 +140,7 @@ public class DbSeeds
             {
                 Id = 6,
                 IsBestSeller = false,
-                CourseImage = "course_six",
+                CourseImage = "course_six.svg",
                 CourseImageAltText = "course six",
                 Title = "Creative CSS Drawing Course: Make Art With CSS",
                 AuthorName = "Robert Fox",
@@ -156,7 +157,7 @@ public class DbSeeds
             {
                 Id = 7,
                 IsBestSeller = false,
-                CourseImage = "course_seven",
+                CourseImage = "course_seven.svg",
                 CourseImageAltText = "course seven",
                 Title = "Blender Character Creator v2.0 for Video Games Design",
                 AuthorName = "Ralph Edwards",
@@ -173,7 +174,7 @@ public class DbSeeds
             {
                 Id = 8,
                 IsBestSeller = false,
-                CourseImage = "course_eight",
+                CourseImage = "course_eight.svg",
                 CourseImageAltText = "course eight",
                 Title = "The Ultimate Guide to 2D Mobile Game Development with Unity",
                 AuthorName = "Albert Flores",
@@ -190,7 +191,7 @@ public class DbSeeds
             {
                 Id = 9,
                 IsBestSeller = false,
-                CourseImage = "course_nine",
+                CourseImage = "course_nine.svg",
                 CourseImageAltText = "course nine",
                 Title = "Learn JMETER from Scratch on Live Apps-Performance Testing",
                 AuthorName = "Jenny Wilson",
