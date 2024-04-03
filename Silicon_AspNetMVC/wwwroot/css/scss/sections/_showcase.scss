@@ -1,5 +1,6 @@
 .showcase {
     margin-bottom: 80px;
+    background-color: var(--color-gray-001);
 
     @include xxl {
         display: flex;
@@ -9,7 +10,6 @@
 
     .background-image {
         position: relative;
-        z-index: -1;
         display: none;
 
         @include xxl {
@@ -20,6 +20,8 @@
     .container {
         height: 100%;
         display: flex;
+
+
         @include xxl {
             position: absolute;
             left: 0;
@@ -42,6 +44,7 @@
             .d4 {
                 margin-top: 50px;
                 margin-bottom: 35px;
+                color: var(--color-gray-900);
             }
 
             .brands {
@@ -56,6 +59,7 @@
 
             h6 {
                 margin-top: 90px;
+                color: var(--color-gray-900);
             }
 
             a {

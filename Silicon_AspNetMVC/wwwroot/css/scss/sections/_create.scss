@@ -1,9 +1,14 @@
 ﻿.create {
-    margin-top: 2rem;
+    padding-top: 2rem;
 
     h2 {
         margin-bottom: 2rem;
         text-align: center;
+        color: var(--color-gray-900);
+    }
+
+    h3 {
+        color: var(--color-gray-900);
     }
 
     form {
@@ -25,12 +30,13 @@
             padding-left: .6rem;
 
             label {
-                color: $gray-900;
+                color: var(--color-gray-800);
                 font-weight: 700;
             }
 
             input {
-                border: .5px solid $gray-400;
+                border: .5px solid var(--color-gray-400);
+                background-color: var(--color-gray-100);
                 border-radius: .4rem;
                 padding: 0.5rem;
             }

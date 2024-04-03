@@ -1,12 +1,14 @@
-﻿using Infrastructure.Entities;
+﻿using Azure;
+using Infrastructure.Entities;
 using Infrastructure.Factories;
 using Infrastructure.Models;
 using Infrastructure.Models.Sections;
 using Infrastructure.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Silicon_AspNetMVC.Models.Sections;
-using System.Security.Claims;
+
 
 
 namespace Infrastructure.Services
@@ -17,13 +19,14 @@ namespace Infrastructure.Services
         private readonly UserManager<UserEntity> _userManager = userManager;
         private readonly SignInManager<UserEntity> _signInManager = signInManager;
 
+
         public async Task<ResponseResult> CreateUserAsync(SignUpModel model)
         {
             try
             {
                 var standardRole = "User";
 
-                if(!await _userManager.Users.AnyAsync())
+                if (!await _userManager.Users.AnyAsync())
                 {
                     standardRole = "SuperUser";
                 }
@@ -37,7 +40,7 @@ namespace Infrastructure.Services
                 {
                     var newUser = UserFactory.Create(model);
                     var result = await _userManager.CreateAsync(newUser, model.Password);
-                    
+
                     if (result.Succeeded)
                     {
                         await _userManager.AddToRoleAsync(newUser, standardRole);
@@ -158,6 +161,8 @@ namespace Infrastructure.Services
                 return ResponseFactory.Error(ex.Message);
             }
         }
+
+
     }
 }
 
