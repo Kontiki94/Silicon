@@ -2171,18 +2171,23 @@ section .courses .items .course-card .content i {
   position: relative;
 }
 #security .container .menu-bar .profile .image img {
-  position: relative;
   clip-path: circle();
   max-width: 180px;
   max-height: 180px;
+  border: 1px hidden;
 }
 #security .container .menu-bar .profile .image .btn-upload {
   position: absolute;
   background-color: white;
   clip-path: circle();
   padding: 5px;
-  bottom: 30px;
-  right: 70px;
+  bottom: 5px;
+  right: 30px;
+}
+@media (min-width: 1400px) {
+  #security .container .menu-bar .profile .image .btn-upload {
+    right: 70px;
+  }
 }
 #security .container .menu-bar .profile .image .btn-upload:hover {
   background-color: black;
@@ -2807,18 +2812,23 @@ html, body {
   position: relative;
 }
 #saved-courses .container .menu-bar .profile .image img {
-  position: relative;
   clip-path: circle();
   max-width: 180px;
   max-height: 180px;
+  border: 1px hidden;
 }
 #saved-courses .container .menu-bar .profile .image .btn-upload {
   position: absolute;
   background-color: white;
   clip-path: circle();
   padding: 5px;
-  bottom: 30px;
-  right: 70px;
+  bottom: 5px;
+  right: 30px;
+}
+@media (min-width: 1400px) {
+  #saved-courses .container .menu-bar .profile .image .btn-upload {
+    right: 70px;
+  }
 }
 #saved-courses .container .menu-bar .profile .image .btn-upload:hover {
   background-color: black;
