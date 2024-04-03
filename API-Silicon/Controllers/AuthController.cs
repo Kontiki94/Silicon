@@ -6,7 +6,6 @@ using Infrastructure.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using Newtonsoft.Json.Linq;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -101,45 +100,5 @@ public class AuthController(DataContext context, IConfiguration configuration) :
         }
 
         return Unauthorized();
-    }
-
-    [UseApiKey]
-    [HttpPost]
-    [Route("external")]
-    public IActionResult GetTokenForExternalUser([FromBody] JObject json)
-    {
-        if (json == null || json["email"] == null)
-        {
-            return BadRequest("Email is required");
-        }
-
-        var email = json["email"]?.ToString();
-
-        var tokenHandler = new JwtSecurityTokenHandler();
-        var key = Encoding.UTF8.GetBytes(_configuration["Jwt:Secret"]!);
-        var tokenDescriptor = new SecurityTokenDescriptor
-        {
-            Subject = new ClaimsIdentity(new Claim[]
-            {
-            new(ClaimTypes.NameIdentifier, email),
-            new(ClaimTypes.Email, email),
-            }),
-            Expires = DateTime.UtcNow.AddDays(1),
-            Issuer = _configuration["Jwt:Issuer"],
-            Audience = _configuration["Jwt:Audience"],
-            SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-        };
-
-        try
-        {
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-            var tokenString = tokenHandler.WriteToken(token);
-            return Ok(tokenString);
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine("Error generating token: " + ex.Message);
-            return StatusCode(500, "Internal server error");
-        }
     }
 }

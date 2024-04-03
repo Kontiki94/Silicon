@@ -5,11 +5,12 @@ namespace Infrastructure.Models;
 
 public class CoursesModel
 {
+    // GeneralCourseInfo
     public int Id { get; set; }
-    public string Title { get; set; } = null!;
     public bool IsBestSeller { get; set; } = false;
     public string? CourseImage { get; set; }
     public string? CourseImageAltText { get; set; }
+    public string Title { get; set; } = null!;
     public string? Price { get; set; }
     public string? DiscountPrice { get; set; }
     public string? Rating { get; set; }
@@ -18,7 +19,6 @@ public class CoursesModel
     public string? LikesInPercent { get; set; }
     public string? LikesInNumbers { get; set; }
 
-
     // AutherInfo
     public string? AuthorName { get; set; }
     public string? AutherBio { get; set; }
@@ -26,7 +26,6 @@ public class CoursesModel
     public string? AutherImageAltText { get; set; }
     public string? YouTubeSubscribers { get; set; }
     public string? FaceBookFollowers { get; set; }
-
 
     // CourseDetails
     public string? CourseDescription { get; set; }
@@ -37,7 +36,8 @@ public class CoursesModel
     public List<string>? ProgramDetailsTitle { get; set; }
     public List <string>? ProgramDetailsText { get; set; }
     public List<string>? LearnPoints { get; set; }
-    public List<string>? Categories { get; set; }
+
+    public string? Category { get; set; }
 
     // Implicit type converter
     public static implicit operator CoursesModel(CoursesEntity coursesEntity)
@@ -69,7 +69,6 @@ public class CoursesModel
             ProgramDetailsTitle = coursesEntity.ProgramDetailsTitle,
             ProgramDetailsText = coursesEntity.ProgramDetailsText,
             LearnPoints = coursesEntity.LearnPoints,
-            Categories = coursesEntity.Categories,
         };
     }
 }
