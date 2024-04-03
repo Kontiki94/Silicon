@@ -1,4 +1,5 @@
-﻿using Infrastructure.Entities;
+﻿using Infrastructure.DataSeeds;
+using Infrastructure.Entities;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -15,8 +16,9 @@ public class DataContext(DbContextOptions<DataContext> options) : DbContext(opti
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
-
+        DbSeeds.Seeder(modelBuilder);
     }
+
     protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
     {
         configurationBuilder.Properties<decimal>()

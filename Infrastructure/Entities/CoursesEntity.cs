@@ -1,5 +1,4 @@
 ﻿using Infrastructure.DTOs;
-using Infrastructure.Models;
 
 
 namespace Infrastructure.Entities;
