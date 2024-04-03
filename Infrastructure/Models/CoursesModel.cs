@@ -25,6 +25,7 @@ public class CoursesModel
     public string? FaceBookFollowers { get; set; }
 
     // CourseDetails
+    public string? ShowcaseImage { get; set; }
     public string? CourseDescription { get; set; }
     public string? ViewHours { get; set; }
     public string? Articles { get; set; }
