@@ -336,7 +336,7 @@ a:hover {
   position: relative;
   display: inline-block;
   width: 46px;
-  height: 25px;
+  height: 26px;
 }
 .btn-switch .switch input {
   opacity: 0;
@@ -350,8 +350,10 @@ a:hover {
   box-shadow: 0 0 1px #6366F1;
 }
 .btn-switch .switch input:checked + .slider:before {
-  transform: translateX(20px);
-  background-color: #FFFFFF;
+  transform: translateX(20px) scale(1.3);
+  background-color: #6366F1;
+  background-image: url("/images/icons/white-moon.svg");
+  background-size: cover;
 }
 .btn-switch .switch .slider {
   position: absolute;
@@ -378,16 +380,6 @@ a:hover {
 }
 .btn-switch .switch .slider.round:before {
   border-radius: 50%;
-}
-.btn-switch .switch .slider.halfmoon:before {
-  border-radius: 0 50% 50% 0 !important;
-}
-
-[data-bs-theme=dark] .btn-switch .switch .slider {
-  border-radius: 0 34px 34px 0;
-}
-[data-bs-theme=dark] .btn-switch .switch .slider:before {
-  border-radius: 0 50% 50% 0;
 }
 
 .btn-social {
