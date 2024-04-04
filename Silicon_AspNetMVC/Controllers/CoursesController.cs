@@ -18,14 +18,22 @@ public class CoursesController(HttpClient http, IConfiguration configuration, Ca
     private readonly CourseService _courseService = courseService;
 
 
-    public async Task<IActionResult> Index(string category = "", string searchQuery = "")
+    public async Task<IActionResult> Index(string category = "", string searchQuery = "", int pageNumber = 1, int pageSize = 3)
     {
-        ViewData["Title"] = "Courses";
+        
+        var courseResult = await _courseService.GetCoursesAsync(category, searchQuery, pageNumber, pageSize);
 
         var viewModel = new CoursesViewModel()
         {
             Categories = await _categoryService.GetCategoriesAsync(),
-            AllCourses = await _courseService.GetCoursesAsync(category, searchQuery),
+            AllCourses = courseResult.Courses,
+            Pagination = new Pagination
+            {
+                PageSize = pageSize,
+                CurrentPage = pageNumber,
+                TotalPages = courseResult.TotalPages,
+                TotalItems = courseResult.TotalItems
+            }
         };
 
         if (viewModel.AllCourses == null)

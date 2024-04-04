@@ -50,6 +50,9 @@ function updateCoursesByFilter() {
             const dom = parser.parseFromString(data, 'text/html')
             const itemsContainer = document.querySelector('.items')
 
+            const pagination = dom.querySelector('.pagination') ? dom.querySelector('.pagination').innerHTML : ''
+            document.querySelector('.pagination').innerHTML = pagination
+
             if (itemsContainer) {
                 itemsContainer.innerHTML = dom.querySelector('.items').innerHTML
             } else {
