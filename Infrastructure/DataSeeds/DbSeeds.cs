@@ -18,7 +18,7 @@ public class DbSeeds
             {
                 Id = 1,
                 IsBestSeller = true,
-                CourseImage = "course_one.png",
+                CourseImage = "course_one.svg",
                 CourseImageAltText = "course one",
                 Title = "Fullstack Web Developer Course from Scratch",
                 AuthorName = "Robert Fox",
@@ -30,6 +30,7 @@ public class DbSeeds
                 CategoryId = 1,
                 Created = DateTime.UtcNow,
                 Updated = DateTime.UtcNow,
+                ShowcaseImage = "showcase_image_1.svg",
                 CourseDescription = "Suspendisse natoque sagittis, consequat turpis. Sed tristique tellus morbi magna. At vel senectus accumsan, arcu mattis id tempor. Tellus sagittis, euismod porttitor sed tortor est id. Feugiat velit velit, tortor ut. Ut libero cursus nibh lorem urna amet tristique leo. Viverra lorem arcu nam nunc at ipsum quam. A proin id sagittis dignissim mauris condimentum ornare. Tempus mauris sed dictum ultrices.",
                 Reviews = "1.2",
                 AuthorImage = "albert-flores.svg",
@@ -105,7 +106,7 @@ public class DbSeeds
             {
                 Id = 4,
                 IsBestSeller = false,
-                CourseImage = "course_four.png",
+                CourseImage = "course_four.svg",
                 CourseImageAltText = "course four",
                 Title = "iOS & Swift - The Complete iOS App Development Course",
                 AuthorName = "Marvin McKinney",

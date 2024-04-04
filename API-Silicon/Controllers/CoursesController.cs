@@ -61,7 +61,7 @@ namespace API_Silicon.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> GetAll(string category = "", string searchQuery = "")
+        public async Task<IActionResult> GetAll(string category = "", string searchQuery = "", int pageNumber = 1, int pageSize = 10)
         {
             try
             {
@@ -70,7 +70,7 @@ namespace API_Silicon.Controllers
                 if (!string.IsNullOrEmpty(category) && category != "all")
                     query = query.Where(x => x.Category!.CategoryName == category);
 
-              if (!string.IsNullOrEmpty(searchQuery))
+                if (!string.IsNullOrEmpty(searchQuery))
                     query = query.Where(x => x.Title.Contains(searchQuery) || x.AuthorName!.Contains(searchQuery) || x.Category!.CategoryName.Contains(searchQuery));
 
                 query = query.OrderByDescending(o => o.Updated);
@@ -80,14 +80,19 @@ namespace API_Silicon.Controllers
                     var response = new CourseResult
                     {
                         Succeeded = true,
-                        Courses = CourseFactory.Create(courses),
+                        TotalItems = await query.CountAsync(),
                     };
+                    response.TotalPages = (int)Math.Ceiling(response.TotalItems / (double)pageSize);
+                    response.Courses = CourseFactory.Create(await query.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync());
 
                     return Ok(response);
                 }
                 return NotFound();
             }
-            catch (Exception) { return BadRequest(); }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
         }
         #endregion
 
