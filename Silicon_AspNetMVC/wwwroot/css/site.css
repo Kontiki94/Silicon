@@ -3,6 +3,7 @@
 :root {
   --color-gray-001: #FFFFFF;
   --color-gray-100: #FEFEFE;
+  --color-gray-101: #F3F6FF;
   --color-gray-200: #EFF2FC;
   --color-gray-300: #E2E5F1;
   --color-gray-400: #D4D7E5;
@@ -25,6 +26,7 @@
 :root.dark {
   --color-gray-001: #0B0F19;
   --color-gray-100: #12161F;
+  --color-gray-101: #151922;
   --color-gray-200: #12161F;
   --color-gray-300: #9397AD;
   --color-gray-400: #B4B7C9;
@@ -951,10 +953,11 @@ footer .container .social-media {
 }
 
 .download {
-  background-color: #F3F6FF;
+  background-color: var(--color-gray-200);
+  padding-bottom: 0;
 }
 .download .container {
-  background-color: #EFF2FC;
+  background-color: var(--color-gray-101);
   padding: 5rem;
 }
 @media (min-width: 1200px) {
@@ -997,6 +1000,7 @@ footer .container .social-media {
 }
 .download .container .content .right h1 {
   text-align: center;
+  color: var(--color-gray-900);
 }
 @media (min-width: 992px) {
   .download .container .content .right h1 {
@@ -1031,9 +1035,11 @@ footer .container .social-media {
 }
 .download .container .content .right .boxes .apps .box-text p {
   margin: 0px;
+  color: var(--color-gray-600);
 }
 .download .container .content .right .boxes .apps .box-text h4 {
   margin: 0px;
+  color: var(--color-gray-900);
 }
 .download .container .content .right .boxes .apps .box-text .five-stars {
   color: #FFBA08;
@@ -1047,8 +1053,21 @@ footer .container .social-media {
   width: auto;
   height: 100%;
   max-width: 60%;
+  border-radius: 9%;
+  box-shadow: 2px 2px 5px 1px var(--color-theme);
+}
+.download .container .content .right .boxes .apps .box-img img:hover {
+  box-shadow: 1px 1px 3px -1px var(--color-theme);
+  transition: box-shadow 0.3s ease-in-out;
 }
 
+/*box-shadow: -6px 5px 13px -7px var(--color-gray-900)
+;
+
+
+&:hover {
+box-shadow: -3px 4px 8px -6px var(--color-gray-600);
+transition: box-shadow 0.3s ease-in-out;*/
 section {
   background-color: var(--color-gray-001);
   padding-bottom: 120px;
@@ -1280,6 +1299,7 @@ section .courses .grid .course-card .content i {
 .tools .container h1 {
   padding-top: 2rem;
   text-align: center;
+  color: var(--color-gray-900);
 }
 .tools .container p {
   line-height: 160%;
@@ -1291,6 +1311,7 @@ section .courses .grid .course-card .content i {
   padding: 0 2rem 0 2rem;
   margin-left: 2rem;
   margin-right: 2rem;
+  color: var(--color-gray-600);
 }
 @media (min-width: 1200px) {
   .tools .container p {
@@ -1317,8 +1338,9 @@ section .courses .grid .course-card .content i {
   padding: 2rem 9rem 2rem 9rem;
 }
 .tools .container .tool-boxes .box:hover {
-  box-shadow: 2px 2px 5px 3px rgba(0, 0, 0, 0.03);
+  box-shadow: 2px 2px 5px 1px var(--color-gray-300);
   border-radius: 3%;
+  background-color: var(--color-gray-200);
 }
 @media (min-width: 992px) {
   .tools .container .tool-boxes .box {
@@ -1343,6 +1365,7 @@ section .courses .grid .course-card .content i {
   color: #565973;
   font-family: "Manrope", sans-serif;
   font-size: 16px !important;
+  color: var(--color-gray-700);
 }
 
 #signin {

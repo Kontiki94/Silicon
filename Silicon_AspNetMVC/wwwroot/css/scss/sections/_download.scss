@@ -1,8 +1,9 @@
 .download {
-    background-color: $gray-100;
+    background-color: var(--color-gray-200);
+    padding-bottom: 0;
 
     .container {
-        background-color: $gray-200;
+        background-color: var(--color-gray-101);
         padding: 5rem;
 
         @include xl {
@@ -43,6 +44,7 @@
 
                 h1 {
                     text-align: center;
+                    color: var(--color-gray-900);
 
                     @include lg {
                         text-align: left;
@@ -57,7 +59,7 @@
                     }
                 }
 
-                .boxes {                    
+                .boxes {
 
                     .apps {
                         padding-bottom: 20px;
@@ -76,10 +78,12 @@
 
                             p {
                                 margin: 0px;
+                                color: var(--color-gray-600);
                             }
 
                             h4 {
                                 margin: 0px;
+                                color: var(--color-gray-900);
                             }
 
                             .five-stars {
@@ -96,6 +100,14 @@
                                 width: auto;
                                 height: 100%;
                                 max-width: 60%;
+                                border-radius: 9%;
+                                box-shadow: 2px 2px 5px 1px var(--color-theme);
+
+
+                                &:hover {
+                                    box-shadow: 1px 1px 3px -1px var(--color-theme);
+                                    transition: box-shadow 0.3s ease-in-out;
+                                }
                             }
                         }
                     }
@@ -104,3 +116,10 @@
         }
     }
 }
+                            /*box-shadow: -6px 5px 13px -7px var(--color-gray-900)
+                            ;
+
+
+                            &:hover {
+                            box-shadow: -3px 4px 8px -6px var(--color-gray-600);
+                            transition: box-shadow 0.3s ease-in-out;*/
