@@ -217,7 +217,7 @@ public class DbSeeds
             new CategoryEntity()
             {
                 Id = 2,
-                CategoryName = "HTML & CSS"
+                CategoryName = "HTML \\& CSS"
             },
             new CategoryEntity()
             {
