@@ -379,6 +379,16 @@ a:hover {
 .btn-switch .switch .slider.round:before {
   border-radius: 50%;
 }
+.btn-switch .switch .slider.halfmoon:before {
+  border-radius: 0 50% 50% 0 !important;
+}
+
+[data-bs-theme=dark] .btn-switch .switch .slider {
+  border-radius: 0 34px 34px 0;
+}
+[data-bs-theme=dark] .btn-switch .switch .slider:before {
+  border-radius: 0 50% 50% 0;
+}
 
 .btn-social {
   line-height: 160%;
@@ -481,6 +491,9 @@ header .container .hide {
 header .container .btn-switch {
   grid-area: switch;
   display: none;
+}
+header .container .btn-switch label {
+  color: var(--color-gray-900);
 }
 @media (min-width: 992px) {
   header .container .btn-switch {
@@ -1280,6 +1293,27 @@ section .courses .items .course-card .content footer, section .courses .items .c
 section .courses .items .course-card .content i {
   padding-right: 0.1rem;
   margin-bottom: 1.2rem;
+}
+section .courses .pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1.8rem;
+  gap: 1rem;
+}
+section .courses .pagination .number {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.3rem;
+  width: 45px;
+  height: 45px;
+  color: var(--color-gray-900);
+  background-color: #6366F1;
+}
+section .courses .pagination .active {
+  background-color: var(--color-gray-500);
+  color: var(--color-gray-100);
 }
 
 #skills .container {

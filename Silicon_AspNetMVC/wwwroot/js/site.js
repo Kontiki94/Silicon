@@ -66,12 +66,30 @@ document.addEventListener('DOMContentLoaded', function () {
                     window.location.reload()
                 else
                     console.log("Not working")
-            })
-    })
-})
+            });
+        const switchMode = document.getElementById('switch-mode');
+        const switchSlider = document.getElementById('slider');
+
+        switchMode.addEventListener('change', function () {
 
 
-//Upload profileimage
+            if (this.checked) {
+                console.log("måne")
+                switchSlider.classList.remove('round');
+                switchSlider.classList.add('halfmoon');
+            } else {
+                console.log("rund")
+                switchSlider.classList.remove('halfmoon');
+                switchSlider.classList.add('round');
+            }
+
+            console.log(switchSlider.classList);
+        });
+    });
+});
+
+
+// Upload profileimage
 document.addEventListener('DOMContentLoaded', function () {
     handleProfileImageUpload()
 })
@@ -90,4 +108,27 @@ function handleProfileImageUpload() {
     }
     catch { }
 }
+
+// Half-moon script for switch
+//document.addEventListener('DOMContentLoaded', function () {
+
+//    const switchMode = document.getElementById('switch-mode');
+//    const switchSlider = document.getElementById('slider');
+
+//    switchMode.addEventListener('change', function () {
+
+
+//        if (this.checked) {
+//            console.log("måne")
+//            switchSlider.classList.remove('round');
+//            switchSlider.classList.add('halfmoon');
+//        } else {
+//            console.log("rund")
+//            switchSlider.classList.remove('halfmoon');
+//            switchSlider.classList.add('round');
+//        }
+
+//        console.log(switchSlider.classList);
+//    });
+//});
 
