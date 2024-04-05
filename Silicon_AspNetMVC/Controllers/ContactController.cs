@@ -27,7 +27,7 @@ namespace Silicon_AspNetMVC.Controllers
                 using var http = new HttpClient();
                 var json = JsonConvert.SerializeObject(Model);
                 using var content = new StringContent(json, Encoding.UTF8, "application/json");
-                var response = await http.PostAsync("https://localhost:7091/api/contact", content);
+                var response = await http.PostAsync("https://localhost:7091/api/contact", content); //Api nyckel här
 
                 if (response.IsSuccessStatusCode)
                 {
