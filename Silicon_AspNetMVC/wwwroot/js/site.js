@@ -67,7 +67,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 else
                     console.log("Not working")
             })
-
     })
 });
 

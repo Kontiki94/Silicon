@@ -22,7 +22,7 @@ public class CoursesController(HttpClient http, IConfiguration configuration, Ca
     {
         
         var courseResult = await _courseService.GetCoursesAsync(category, searchQuery, pageNumber, pageSize);
-
+            
         var viewModel = new CoursesViewModel()
         {
             Categories = await _categoryService.GetCategoriesAsync(),
@@ -69,7 +69,6 @@ public class CoursesController(HttpClient http, IConfiguration configuration, Ca
         }
         return View(model);
     }
-
 
 
     [Route("/course/{id}")]

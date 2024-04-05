@@ -12,13 +12,14 @@ using Silicon_AspNetMVC.Helpers;
 
 namespace Silicon_AspNetMVC.Controllers;
 [Authorize]
-public class AccountController(UserService userService, SignInManager<UserEntity> signInManager, UserManager<UserEntity> userManager, AddressService addressService, ControllerService controllerService) : Controller
+public class AccountController(UserService userService, SignInManager<UserEntity> signInManager, UserManager<UserEntity> userManager, AddressService addressService, ControllerService controllerService, CourseService courseService) : Controller
 {
     private readonly UserService _userService = userService;
     private readonly SignInManager<UserEntity> _signInManager = signInManager;
     private readonly ControllerService _controllerService = controllerService;
     private readonly UserManager<UserEntity> _userManager = userManager;
     private readonly AddressService _addressService = addressService;
+    private readonly CourseService _courseService = courseService;
 
     #region Account | GET
     [HttpGet]
@@ -231,11 +232,18 @@ public class AccountController(UserService userService, SignInManager<UserEntity
     [Route("/saved")]
     public async Task<IActionResult> SavedCourses()
     {
-        var viewModel = new AccountViewModel()
+        var viewModel = new AccountViewModel();
+        var user = await _signInManager.UserManager.GetUserAsync(User);
+        if (user != null)
         {
-            Navigation = new NavigationViewModel("SavedCourses"),
-            Profile = await PopulateProfileInfoAsync()
-        };
+            var courseResult = await _courseService.GetSavedCoursesAsync(user.Id);
+
+            viewModel.Navigation = new NavigationViewModel("SavedCourses");
+            viewModel.Profile = await PopulateProfileInfoAsync();
+            viewModel.SavedCourseIds = courseResult.Succeeded ? courseResult.Courses! : new List<CoursesModel>();
+
+            return View(viewModel);
+        }
         return View(viewModel);
     }
 

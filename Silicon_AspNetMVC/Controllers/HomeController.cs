@@ -1,10 +1,5 @@
-﻿using Infrastructure.Models;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore.Storage.Json;
-using Newtonsoft.Json;
+﻿using Microsoft.AspNetCore.Mvc;
 using Silicon_AspNetMVC.ViewModels.Home;
-using System.Text;
 
 namespace Silicon_AspNetMVC.Controllers;
 

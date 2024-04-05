@@ -19,7 +19,7 @@
                         {
                             foreach (var category in Model.Categories)
                             {
-                                <div class="option" data-value="@category.CategoryName">@category.CategoryName</div>
+                                <div class="option" data-value="@Html.Raw(@category.CategoryName)">@category.CategoryName</div>
                             }
                         }
                     </div>
