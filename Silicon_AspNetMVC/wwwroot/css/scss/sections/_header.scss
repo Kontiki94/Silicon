@@ -114,6 +114,7 @@ header {
             }
 
             .profile-image {
+                clip-path: circle();
                 max-width: 50px;
                 max-height: 50px;
             }

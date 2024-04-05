@@ -1,7 +1,8 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Infrastructure.Models;
+using Infrastructure.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using Silicon_AspNetMVC.Models.Sections;
 using Silicon_AspNetMVC.ViewModels.Courses;
 using System.Net.Http.Headers;
 using System.Text;
@@ -9,37 +10,33 @@ using System.Text;
 namespace Silicon_AspNetMVC.Controllers;
 
 [Authorize]
-public class CoursesController(HttpClient http, IConfiguration configuration) : Controller
+public class CoursesController(HttpClient http, IConfiguration configuration, CategoryService categoryService, CourseService courseService) : Controller
 {
     private readonly HttpClient _http = http;
     private readonly IConfiguration _configuration = configuration;
+    private readonly CategoryService _categoryService = categoryService;
+    private readonly CourseService _courseService = courseService;
 
 
-    public async Task<IActionResult> Index()
+    public async Task<IActionResult> Index(string category = "", string searchQuery = "", int pageNumber = 1, int pageSize = 3)
     {
-        ViewData["Title"] = "Courses";
-        var viewModel = new CoursesViewModel();
+        
+        var courseResult = await _courseService.GetCoursesAsync(category, searchQuery, pageNumber, pageSize);
 
-        try
+        var viewModel = new CoursesViewModel()
         {
-            if (HttpContext.Request.Cookies.TryGetValue("AccessToken", out var token))
+            Categories = await _categoryService.GetCategoriesAsync(),
+            AllCourses = courseResult.Courses,
+            Pagination = new Pagination
             {
-                _http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-
-                var apiResponse = await _http.GetAsync($"https://localhost:7091/api/courses?key={_configuration["ApiKey:Secret"]}");
-                if (apiResponse.IsSuccessStatusCode)
-                {
-                    var json = await apiResponse.Content.ReadAsStringAsync();
-                    var data = JsonConvert.DeserializeObject<IEnumerable<CoursesModel>>(json);
-                    viewModel.AllCourses = data!;
-                }
-                else
-                {
-                    ViewData["Status"] = "ConnectionFailed";
-                }
+                PageSize = pageSize,
+                CurrentPage = pageNumber,
+                TotalPages = courseResult.TotalPages,
+                TotalItems = courseResult.TotalItems
             }
-        }
-        catch
+        };
+
+        if (viewModel.AllCourses == null)
         {
             ViewData["Status"] = "ConnectionFailed";
         }
@@ -51,16 +48,23 @@ public class CoursesController(HttpClient http, IConfiguration configuration) : 
     {
         if (ModelState.IsValid)
         {
-            if (HttpContext.Request.Cookies.TryGetValue("AccessToken", out var token))
+            try
             {
-                _http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-                var json = JsonConvert.SerializeObject(model);
-                using var content = new StringContent(json, Encoding.UTF8, "application/json");
-                var response = await _http.PostAsync($"https://localhost:7091/api/courses?key={_configuration["ApiKey:Secret"]}", content);
-                if (response.IsSuccessStatusCode)
+                if (HttpContext.Request.Cookies.TryGetValue("AccessToken", out var token))
                 {
-                    return RedirectToAction("Index", "Courses");
+                    _http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                    var json = JsonConvert.SerializeObject(model);
+                    using var content = new StringContent(json, Encoding.UTF8, "application/json");
+                    var response = await _http.PostAsync($"https://localhost:7091/api/courses?key={_configuration["ApiKey:Secret"]}", content);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        return RedirectToAction("Index", "Courses");
+                    }
                 }
+            }
+            catch (Exception)
+            {
+                ViewData["Error"] = "An error occurred while trying to create a new course, please try again later";
             }
         }
         return View(model);
@@ -69,14 +73,11 @@ public class CoursesController(HttpClient http, IConfiguration configuration) : 
 
 
     [Route("/course/{id}")]
-    public async Task<IActionResult> CourseDetails(string id)
+    public async Task<IActionResult> CourseDetails(int id)
     {
         ViewData["Title"] = "Course Details";
-
-        if (HttpContext.Request.Cookies.TryGetValue("AccessToken", out var token))
+        try
         {
-            _http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-
             var apiResponse = await _http.GetAsync($"https://localhost:7091/api/courses/{id}?key={_configuration["ApiKey:Secret"]}");
             if (apiResponse.IsSuccessStatusCode)
             {
@@ -85,6 +86,10 @@ public class CoursesController(HttpClient http, IConfiguration configuration) : 
                 CoursesModel viewModel = data!;
                 return View(viewModel);
             }
+        }
+        catch (Exception)
+        {
+            ViewData["Error"] = "An error occurred while trying to create a new course, please try again later";
         }
         return View();
     }

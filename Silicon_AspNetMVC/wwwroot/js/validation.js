@@ -23,6 +23,7 @@ const compareValidator = (element, compareValue) => {
 
 const emailValidator = (element) => {
     const regEx = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+    console.log(1)
     formErrorHandler(element, regEx.test(element.value))
 }
 

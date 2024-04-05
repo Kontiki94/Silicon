@@ -4,20 +4,24 @@ using Infrastructure.Factories;
 using Infrastructure.Models;
 using Infrastructure.Models.Sections;
 using Infrastructure.Repositories;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Silicon_AspNetMVC.Models.Sections;
+using System.Diagnostics;
+using System.Security.Claims;
 
 
 
 namespace Infrastructure.Services
 {
-    public class UserService(UserRepository repository, UserManager<UserEntity> userManager, SignInManager<UserEntity> signInManager)
+    public class UserService(UserRepository repository, UserManager<UserEntity> userManager, SignInManager<UserEntity> signInManager, IConfiguration configuration)
     {
         private readonly UserRepository _repository = repository;
         private readonly UserManager<UserEntity> _userManager = userManager;
         private readonly SignInManager<UserEntity> _signInManager = signInManager;
+        private readonly IConfiguration _configuration = configuration;
 
 
         public async Task<ResponseResult> CreateUserAsync(SignUpModel model)
@@ -162,7 +166,42 @@ namespace Infrastructure.Services
             }
         }
 
+        public async Task<bool> UploadUserProfileImageAsync(ClaimsPrincipal user, IFormFile file)
+        {
+            try
+            {
+                if (user is not null && file is not null && file.Length != 0)
+                {
+                    var userEntity = await _userManager.GetUserAsync(user);
+                    {
+                        if (userEntity is not null)
+                        {
+                            var fileName = $"p_{userEntity.Id}_{Guid.NewGuid()}{Path.GetExtension(file.FileName)}";
+                            var filePath = Path.Combine(Directory.GetCurrentDirectory(), _configuration["FileUploadPath"]!, fileName);
 
+                            using var fs = new FileStream(filePath, FileMode.Create);
+                            await file.CopyToAsync(fs);
+
+                            userEntity.ProfileImageUrl = fileName;
+                            var result = await _repository.UpdateAsync(userEntity);
+                            if (result.StatusCode == StatusCode.OK)
+                            {
+                                return true;
+                            }
+                            else
+                            {
+                                return false;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+            return false;
+        }
     }
 }
 

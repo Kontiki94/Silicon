@@ -1,43 +1,43 @@
 ﻿@model CoursesViewModel
 
 @{
-    ViewData["Title"] = Model.Title;
+    ViewData["Title"] = "Courses";
 }
 
 
-<section id="@Model.Title">
+<section>
     <div class="courses container">
         <div class="section-title">
             <h1 class="h1">Courses</h1>
             <div class="search-div">
-                <div class="dropdown">
-                    <select name="All Categories" class="select-menu">
-                        <option value="">All Categories</option>
-                        @if (Model.AllCourses != null)
+                <div class="dropdown select">
+                    <div class="selected" data-value="all">All categories<i class="fa-sharp fa-light fa-circle-caret-down"></i></div>
+                    <div class="select-options">
+
+                        <div class="option" data-value="all">All Categories</div>
+                        @if (Model.Categories != null)
                         {
-                            foreach (var course in Model.AllCourses)
+                            foreach (var category in Model.Categories)
                             {
-                                foreach (var category in course.Categories!)
-                                {
-                                    <option value="">@category</option>
-                                }
+                                <div class="option" data-value="@category.CategoryName">@category.CategoryName</div>
                             }
                         }
-                    </select>
+                    </div>
                 </div>
                 <div class="search">
-                    <input type="search" name="search" placeholder="Search courses" />
+                    <input id="searchQuery" type="search" name="searchQuery" placeholder="Search courses" />
                     <i class="fa-sharp fa-solid fa-magnifying-glass"></i>
                 </div>
             </div>
         </div>
-        <div class="grid">
-            @if (Model.AllCourses != null)
-            {
+        @if (Model.AllCourses != null)
+        {
+            <div class="items">
+
                 @foreach (var course in Model.AllCourses!)
                 {
                     <div class="course-card">
-                        <a asp-action="CourseDetails" asp-controller="Courses" asp-route-id="@course.Id" class="content">
+                        <div class="content" onclick="location.href='@Url.Action("CourseDetails", "Courses", new { id = course.Id })' ">
                             <div class="image">
                                 <img src="~/images/@course.CourseImage" alt="" />
 
@@ -45,7 +45,7 @@
                                 {
                                     <span class="best-seller">Best Seller</span>
                                 }
-                                <i class="fa-sharp fa-regular fa-bookmark"></i>
+                                <a asp-action="JoinCourse" asp-controller="Courses"> <i class="fa-sharp fa-regular fa-bookmark" title="Join Course"></i></a>
                             </div>
                             <div class="course-info">
                                 <h5 class="title">@course.Title</h5>
@@ -75,14 +75,36 @@
                                     <p>@course.LikesInPercent % (@course.LikesInNumbers K)</p>
                                 </div>
                             </footer>
-                        </a>
+                        </div>
                     </div>
                 }
-            }
-            @if (ViewData["Status"]?.ToString() == "ConnectionFailed")
+            </div>
+
+            if (Model.Pagination != null && Model.Pagination.TotalPages > 1)
             {
-                <span class="alert alert-danger">Failed to contact server. Please try again later...</span>
+                <div class="pagination">
+                    @for(int i = 1; i <= Model.Pagination.TotalPages; i++)
+                    {
+                        if (i == Model.Pagination.CurrentPage)
+                        {
+                            <span class="number active">@i</span>
+                        }
+                        else
+                        {
+                            <a class="number" href="@Url.Action("Index", new { pageNumber = i, pageSize = Model.Pagination.PageSize })">@i</a>
+                        }
+                    }
+                </div>
             }
-        </div>
+
+
+
+        }
+        @if (ViewData["Status"]?.ToString() == "ConnectionFailed")
+        {
+            <span class="alert alert-danger">Failed to contact server. Please try again later...</span>
+        }
     </div>
 </section>
+
+@await Html.PartialAsync("_FilterAndQueryPartial")

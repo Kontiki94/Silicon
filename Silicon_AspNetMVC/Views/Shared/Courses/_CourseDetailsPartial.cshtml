@@ -30,8 +30,15 @@
                     <p><i class="fa-sharp fa-thin fa-trophy"></i> Certificate of completion</p>
 
                     <div class="course-price">
-                        <p class="discount-price">$@Model.DiscountPrice</p>
-                        <p class="ord-price">$@Model.Price</p>
+                        @if (Model.DiscountPrice is null)
+                        {
+                            <p style="text-decoration:none" class="ord-price">$@Model.Price</p>
+                        }
+                        else
+                        {
+                            <p class="discount-price">$@Model.DiscountPrice</p>
+                            <p class="ord-price">$@Model.Price</p>
+                        }
                     </div>
                     <a class="btn-theme">Join Course</a>
                 </div>
