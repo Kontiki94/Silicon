@@ -9,6 +9,7 @@ namespace API_Silicon.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [UseApiKey]
     public class SubscriberController(DataContext context, SubscriberRepo subscriberRepo) : ControllerBase
     {
         private readonly DataContext _context = context;
