@@ -1,4 +1,5 @@
-﻿using Infrastructure.Entities;
+﻿using Infrastructure.DataSeeds;
+using Infrastructure.Entities;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -10,12 +11,14 @@ public class DataContext(DbContextOptions<DataContext> options) : DbContext(opti
     public DbSet<CoursesEntity> Courses { get; set; }
     public DbSet<SubscribeEntity> Subscribe { get; set; }
     public DbSet<UserEntity> Users { get; set; }
+    public DbSet<CategoryEntity> Categories { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
-
+        DbSeeds.Seeder(modelBuilder);
     }
+
     protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
     {
         configurationBuilder.Properties<decimal>()

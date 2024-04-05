@@ -1,5 +1,4 @@
 ﻿using Infrastructure.DTOs;
-using System.ComponentModel.DataAnnotations.Schema;
 
 
 namespace Infrastructure.Entities;
@@ -19,6 +18,8 @@ public class CoursesEntity
     public string? Views { get; set; }
     public string? LikesInPercent { get; set; }
     public string? LikesInNumbers { get; set; }
+    public DateTime Created {  get; set; }
+    public DateTime Updated {  get; set; }
 
     // AutherInfo
     public string? AuthorName { get; set; }
@@ -29,6 +30,7 @@ public class CoursesEntity
     public string? FaceBookFollowers { get; set; }
 
     // CourseDetails
+    public string? ShowcaseImage { get; set; }
     public string? CourseDescription { get; set; }
     public string? ViewHours { get; set; }
     public string? Articles { get; set; }
@@ -37,12 +39,13 @@ public class CoursesEntity
     public List<string>? ProgramDetailsTitle { get; set; }
     public List<string>? ProgramDetailsText { get; set; }
     public List<string>? LearnPoints { get; set; }
-    public List<string>? Categories { get; set; }
+    public int? CategoryId { get; set; }
+    public CategoryEntity? Category { get; set; }
 
     // Implicit type converter
     public static implicit operator CoursesEntity(CourseRegistrationForm DTO)
     {
-        return new CoursesEntity
+        var courseEntity = new CoursesEntity
         {
             Title = DTO.Title,
             IsBestSeller = DTO.IsBestSeller,
@@ -68,8 +71,17 @@ public class CoursesEntity
             ProgramDetailsTitle = DTO.ProgramDetailsTitle,
             ProgramDetailsText = DTO.ProgramDetailsText,
             LearnPoints = DTO.LearnPoints,
-            Categories = DTO.Categories,
         };
+
+        if (DTO.Category != null)
+        {
+            courseEntity.Category = new CategoryEntity
+            {
+                CategoryName = DTO.Category,
+            };
+        }
+
+        return courseEntity;
     }
 }
 
