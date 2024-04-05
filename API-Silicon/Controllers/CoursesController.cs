@@ -42,6 +42,7 @@ namespace API_Silicon.Controllers
         }
         #endregion
 
+
         #region READ
         [HttpGet("{id}")]
         public async Task<IActionResult> GetOne(int id)
@@ -59,12 +60,12 @@ namespace API_Silicon.Controllers
             catch (Exception) { return BadRequest(); }
         }
 
-
         [HttpGet]
-        public async Task<IActionResult> GetAll(string category = "", string searchQuery = "", int pageNumber = 1, int pageSize = 10)
+        public async Task<IActionResult> GetAll(List<int>? savedCourseIds, string category = "", string searchQuery = "", int pageNumber = 1, int pageSize = 10)
         {
             try
             {
+                List<CoursesEntity> savedCourses = await GetSavedCourses(savedCourseIds!);
                 var query = _context.Courses.Include(i => i.Category).AsQueryable();
 
                 if (!string.IsNullOrEmpty(category) && category != "all")
@@ -81,9 +82,11 @@ namespace API_Silicon.Controllers
                     {
                         Succeeded = true,
                         TotalItems = await query.CountAsync(),
+                        
                     };
                     response.TotalPages = (int)Math.Ceiling(response.TotalItems / (double)pageSize);
                     response.Courses = CourseFactory.Create(await query.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync());
+                    response.SavedCourses = CourseFactory.Create(savedCourses);
 
                     return Ok(response);
                 }
@@ -93,6 +96,22 @@ namespace API_Silicon.Controllers
             {
                 return BadRequest();
             }
+        }
+
+
+        private async Task<List<CoursesEntity>> GetSavedCourses(List<int>? savedCourses)
+        {
+            try
+            {
+                var courses = await _context.Courses
+                .Where(course => savedCourses!.Contains(course.Id))
+                .ToListAsync();
+
+                return courses;
+
+                
+            }
+            catch (Exception) { return null!; }
         }
         #endregion
 
@@ -141,5 +160,7 @@ namespace API_Silicon.Controllers
             catch (Exception) { return BadRequest(); }
         }
         #endregion
+
+
     }
 }
