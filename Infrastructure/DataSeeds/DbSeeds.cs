@@ -1,5 +1,7 @@
 ﻿using Infrastructure.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Identity.Client;
+using System.Text;
 
 namespace Infrastructure.DataSeeds;
 
@@ -217,7 +219,7 @@ public class DbSeeds
             new CategoryEntity()
             {
                 Id = 2,
-                CategoryName = "HTML \\& CSS"
+                CategoryName = "HTML & CSS"
             },
             new CategoryEntity()
             {
@@ -238,6 +240,6 @@ public class DbSeeds
             {
                 Id = 6,
                 CategoryName = "Frontend Development"
-            });
+            }) ;
     }
 }

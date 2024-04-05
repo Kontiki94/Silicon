@@ -20,5 +20,6 @@ public class UseApiKeyAttribute : Attribute, IAsyncActionFilter
             }
             context.Result = new UnauthorizedResult();
         }
+        context.Result = new UnauthorizedResult();
     }
 }
