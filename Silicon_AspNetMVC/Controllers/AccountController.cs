@@ -230,21 +230,34 @@ public class AccountController(UserService userService, SignInManager<UserEntity
     }
 
     [Route("/saved")]
-    public async Task<IActionResult> SavedCourses()
+    public async Task<IActionResult> SavedCourses(int courseId)
     {
-        var viewModel = new AccountViewModel();
-        var user = await _signInManager.UserManager.GetUserAsync(User);
-        if (user != null)
+        try
         {
-            var courseResult = await _courseService.GetSavedCoursesAsync(user.Id);
+            var viewModel = new AccountViewModel();
+            var user = await _signInManager.UserManager.GetUserAsync(User);
+            if (user != null)
+            {
+                if (courseId > 0)
+                {
+                    await _courseService.SaveCourseIdAsync(courseId, User);
+                }
+                var courseResult = await _courseService.GetSavedCoursesAsync(user.Id);
 
-            viewModel.Navigation = new NavigationViewModel("SavedCourses");
-            viewModel.Profile = await PopulateProfileInfoAsync();
-            viewModel.SavedCourseIds = courseResult.Succeeded ? courseResult.Courses! : new List<CoursesModel>();
+                viewModel.Navigation = new NavigationViewModel("SavedCourses");
+                viewModel.Profile = await PopulateProfileInfoAsync();
+                viewModel.SavedCourseIds = courseResult.Succeeded ? courseResult.Courses! : new List<CoursesModel>();
+
+                return View(viewModel);
+            }
 
             return View(viewModel);
         }
-        return View(viewModel);
+        catch (Exception)
+        {
+            TempData["ErrorMessage"] = "An error occurred, please try again.";
+            return RedirectToAction("Home", "Index");
+        }
     }
 
     private async Task<ProfileViewModel> PopulateProfileInfoAsync()
