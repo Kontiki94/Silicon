@@ -45,7 +45,7 @@
                                 {
                                     <span class="best-seller">Best Seller</span>
                                 }
-                                <a asp-action="JoinCourse" asp-controller="Courses"> <i class="fa-sharp fa-regular fa-bookmark" title="Join Course"></i></a>
+                                <a asp-action="Index" asp-controller="Courses" asp-route-savedCourseId="@course.Id"> <i class="fa-sharp fa-regular fa-bookmark" title="Join Course"></i></a>
                             </div>
                             <div class="course-info">
                                 <h5 class="title">@course.Title</h5>

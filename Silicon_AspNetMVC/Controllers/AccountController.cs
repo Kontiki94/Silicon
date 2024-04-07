@@ -167,6 +167,7 @@ public class AccountController(UserService userService, SignInManager<UserEntity
     #region Account Security | Post
     [HttpPost]
     [Route("/security")]
+    [ActionName("Security")]
     public async Task<IActionResult> Security(AccountViewModel viewModel)
     {
         var userEmail = _userManager.GetUserName(User)!;
@@ -202,6 +203,7 @@ public class AccountController(UserService userService, SignInManager<UserEntity
 
     #region Account Delete | Post
     [HttpPost]
+    [ActionName("Delete")]
     public async Task<IActionResult> Delete(AccountViewModel viewModel)
     {
         var userEmail = _userManager.GetUserName(User)!;
@@ -223,30 +225,41 @@ public class AccountController(UserService userService, SignInManager<UserEntity
     }
     #endregion
 
-
-    public IActionResult Cancel()
+    [HttpPost]
+    public async Task<IActionResult> SavedCourses(int removeId)
     {
-        return RedirectToAction("Details", "Account");
+        try
+        {
+            if (removeId > 0)
+            {
+                await _courseService.RemoveOneCourseAsync(removeId, User);
+                return NoContent();
+            }
+            else
+            {
+                await _courseService.RemoveAllCoursesAsync(User);
+                return NoContent();
+            }
+        }
+        catch (Exception) { return NoContent(); }
     }
 
-    [Route("/saved")]
-    public async Task<IActionResult> SavedCourses(int courseId)
+    [HttpGet]
+    [ActionName("SavedCourses")]
+    public async Task<IActionResult> SavedCourses()
     {
         try
         {
             var viewModel = new AccountViewModel();
             var user = await _signInManager.UserManager.GetUserAsync(User);
+
             if (user != null)
             {
-                if (courseId > 0)
-                {
-                    await _courseService.SaveCourseIdAsync(courseId, User);
-                }
                 var courseResult = await _courseService.GetSavedCoursesAsync(user.Id);
 
                 viewModel.Navigation = new NavigationViewModel("SavedCourses");
                 viewModel.Profile = await PopulateProfileInfoAsync();
-                viewModel.SavedCourseIds = courseResult.Succeeded ? courseResult.Courses! : new List<CoursesModel>();
+                viewModel.SavedCourseIds = courseResult.Succeeded ? courseResult.SavedCourses! : new List<CoursesModel>();
 
                 return View(viewModel);
             }
@@ -258,6 +271,19 @@ public class AccountController(UserService userService, SignInManager<UserEntity
             TempData["ErrorMessage"] = "An error occurred, please try again.";
             return RedirectToAction("Home", "Index");
         }
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> UploadImage(IFormFile file)
+    {
+        await _userService.UploadUserProfileImageAsync(User, file);
+
+        return RedirectToAction("Details", "Account");
+    }
+
+    public IActionResult Cancel()
+    {
+        return RedirectToAction("Details", "Account");
     }
 
     private async Task<ProfileViewModel> PopulateProfileInfoAsync()
@@ -359,13 +385,6 @@ public class AccountController(UserService userService, SignInManager<UserEntity
         catch (Exception) { return null!; }
     }
 
-    [HttpPost]
-    public async Task<IActionResult> UploadImage(IFormFile file)
-    {
-        await _userService.UploadUserProfileImageAsync(User, file);
-
-        return RedirectToAction("Details", "Account");
-    }
 }
 
 

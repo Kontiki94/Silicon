@@ -1,6 +1,7 @@
 ﻿using Infrastructure.Contexts;
 using Infrastructure.Entities;
 using Infrastructure.Models;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -21,7 +22,7 @@ public class CourseService(HttpClient http, IConfiguration configuration, DataCo
     {
         try
         {
-            var apiResponse = await _http.GetAsync($"{_configuration["ApiUris:Courses"]}?category={Uri.UnescapeDataString(category)}&searchQuery={Uri.UnescapeDataString(searchQuery)}&key={_configuration["ApiKey:Secret"]}&pageNumber={pageNumber}&pageSize={pageSize}");
+            var apiResponse = await _http.GetAsync($"{_configuration["ApiUris:Courses"]}/all?category={Uri.UnescapeDataString(category)}&searchQuery={Uri.UnescapeDataString(searchQuery)}&key={_configuration["ApiKey:Secret"]}&pageNumber={pageNumber}&pageSize={pageSize}");
             if (apiResponse.IsSuccessStatusCode)
             {
                 var json = await apiResponse.Content.ReadAsStringAsync();
@@ -40,15 +41,14 @@ public class CourseService(HttpClient http, IConfiguration configuration, DataCo
         {
             var currentUser = await _userManager.GetUserAsync(user);
 
-            if (currentUser != null)
+            if (currentUser != null && currentUser.SavedCourseIds != null)
             {
-                currentUser.SavedCourseIds!.Append(courseId);
-                await _userManager.UpdateAsync(currentUser);
-
-                return new CourseResult
+                if (!currentUser.SavedCourseIds.Contains(courseId))
                 {
-                    Succeeded = true,
-                };
+                    currentUser.SavedCourseIds!.Add(courseId);
+                    await _userManager.UpdateAsync(currentUser);
+                    return new CourseResult { Succeeded = true };
+                }
             }
         }
         catch (Exception) { }
@@ -60,52 +60,66 @@ public class CourseService(HttpClient http, IConfiguration configuration, DataCo
         try
         {
             var user = await _context.Users.FirstOrDefaultAsync(x => x.Id == userId);
-            var savedCourseIds = user!.SavedCourseIds;
-            if (user != null && savedCourseIds != null)
+            var savedCourseIds = user?.SavedCourseIds;
+            if (user != null && savedCourseIds != null && savedCourseIds.Any())
             {
-                var courseIdList = savedCourseIds.ToList();
-                if (courseIdList.Count > 0)
+                var apiKey = _configuration["ApiKey:Secret"];
+                var url = $"https://localhost:7091/api/Courses/saved?key={apiKey}";
+
+                var queryParams = savedCourseIds.Select(id => $"savedCourseIds={id}");
+                if (queryParams.Any())
                 {
+                    url += "&" + string.Join("&", queryParams);
+                }
 
-                    var json = JsonConvert.SerializeObject(savedCourseIds);
-                    using var content = new StringContent(json, Encoding.UTF8, "application/json");
-                    var response = await _http.PostAsync($"https://localhost:7091/api/courses?key={_configuration["ApiKey:Secret"]}", content);
+                using var client = new HttpClient();
+                client.DefaultRequestHeaders.Add("Accept", "application/json");
 
-                    if (response.IsSuccessStatusCode)
-                    {
-                        var apiResponse = await response.Content.ReadAsStringAsync();
-                        var courses = JsonConvert.DeserializeObject<IEnumerable<CoursesModel>>(apiResponse);
-                        return new CourseResult
-                        {
-                            Succeeded = true,
-                            Courses = courses,
-                        };
-                    }
+                var response = await client.GetAsync(url);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var apiResponse = await response.Content.ReadAsStringAsync();
+                    var result = JsonConvert.DeserializeObject<CourseResult>(apiResponse);
+                    return result!;
                 }
             }
-            return new CourseResult
-            {
-                Succeeded = false,
-                Courses = null!
-            };
         }
         catch (Exception) { }
         return new CourseResult { Succeeded = false };
     }
 
-    public async Task<CourseResult> RemoveCourseId(int courseId, ClaimsPrincipal user)
+    public async Task<CourseResult> RemoveOneCourseAsync(int courseId, ClaimsPrincipal user)
     {
-        var userEntity = await _userManager.GetUserAsync(user);
-
-        if (userEntity != null)
+        try
         {
-            userEntity.SavedCourseIds!.Remove(courseId);
-            await _userManager.UpdateAsync(userEntity);
-            return new CourseResult()
+            var userEntity = await _userManager.GetUserAsync(user);
+
+            if (userEntity != null)
             {
-                Succeeded = true
-            };
+                userEntity.SavedCourseIds!.Remove(courseId);
+                await _userManager.UpdateAsync(userEntity);
+                return new CourseResult() { Succeeded = true };
+            }
         }
-        return new CourseResult() { Succeeded = false };
+        catch (Exception) { }
+        return new CourseResult { Succeeded = false };
+    }
+
+    public async Task<CourseResult> RemoveAllCoursesAsync(ClaimsPrincipal user)
+    {
+        try
+        {
+            var userEntity = await _userManager.GetUserAsync(user);
+
+            if (userEntity != null && userEntity.SavedCourseIds != null)
+            {
+                userEntity.SavedCourseIds.Clear();
+                await _userManager.UpdateAsync(userEntity);
+                return new CourseResult() { Succeeded = true };
+            }
+        }
+        catch (Exception) { }
+        return new CourseResult { Succeeded = false };
     }
 }

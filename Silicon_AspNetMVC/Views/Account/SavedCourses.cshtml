@@ -3,92 +3,73 @@
 <section id="saved-courses">
     <div class="container">
         <div class="menu-bar">
-            @await Html.PartialAsync("~/Views/Shared/Component/_AccountNavbarPartial.cshtml")           
+            @await Html.PartialAsync("~/Views/Shared/Component/_AccountNavbarPartial.cshtml")
         </div>
         <div class="content">
             <h2>@Model.SavedCourses.Title</h2>
+
+            @* There's a script tied to this button (removeallcourses.js)*@
+            <button class="btn-delete"><p>Delete all</p></button>
+
             <div class="saved-items">
-                <div class="course-card">
-                    <div class="image">
-                        <img src="~/images/video-game-design.svg" />
-                    </div>                    
-                    <a class="bookmark" asp-controller="" asp-action=""><i class="fa-solid fa-bookmark"></i></a>
-                    <div class="hide"><p>Remove</p></div>
-                    <div class="course-info">
-                        <h5 class="title">@Model.SavedCourses.Course.Title</h5>
-                        <p class="author">By @Model.SavedCourses.Course.AuthorName</p>
-                        <p class="price">$@Model.SavedCourses.Course.Price</p>
-                        <div class="divider"></div>                        
-                    </div>
-                    <div class="bottom">
-                        <div>
-                            <i class="fa-sharp fa-solid fa-clock"></i>
-                            <p>@Model.SavedCourses.Course.ViewHours hours</p>
-                        </div>
-                        <div>
-                            <i class="fa-sharp fa-light fa-thumbs-up"></i>
-                            <p>@Model.SavedCourses.Course.LikesInPercent</p>
-                            <p>@Model.SavedCourses.Course.LikesInNumbers</p>
-                        </div>
-                    </div>
-                    
-@*                     Lägg till detta runtom ditt coursecard
+                @if (Model.SavedCourseIds != null)
+                {
                     @foreach (var savedCourses in Model.SavedCourseIds)
                     {
-                        <p>@savedCourses.CourseImage</p>
-                    } *@
+                        <div class="course-card">
+                            <div class="image">
+                                <img src="~/images/@savedCourses.CourseImage" />
+                            </div>
 
-                    
-                </div>
-                <div class="course-card">
-                    <div class="image">
-                        <img src="~/images/video-game-design.svg" />
-                    </div>
-                    <a class="bookmark" asp-controller="" asp-action=""><i class="fa-solid fa-bookmark"></i></a>
-                    <div class="hide"><p>Remove</p></div>
-                    <div class="course-info">
-                        <h5 class="title">@Model.SavedCourses.Course.Title</h5>
-                        <p class="author">By @Model.SavedCourses.Course.AuthorName</p>
-                        <p class="price">$@Model.SavedCourses.Course.Price</p>
-                        <div class="divider"></div>
-                    </div>
-                    <div class="bottom">
-                        <div>
-                            <i class="fa-sharp fa-solid fa-clock"></i>
-                            <p>@Model.SavedCourses.Course.ViewHours hours</p>
+                            <form id="removeForm" method="post" asp-controller="Account" asp-action="SavedCourses" asp-route-removeId="@savedCourses.Id">
+                                <button type="submit" class="bookmark"><i class="fa-solid fa-bookmark"></i></button>
+                            </form>
+
+                            @* <a class="bookmark" asp-controller="Account" asp-action="SavedCourses" asp-route-removeId="@savedCourses.Id"><i class="fa-solid fa-bookmark"></i></a> *@
+                            <div class="course-info">
+                                <h5 class="title">@savedCourses.Title</h5>
+                                <p class="author">By @savedCourses.AuthorName</p>
+                                <p class="price">$@savedCourses.Price</p>
+                                <div class="divider"></div>
+                            </div>
+                            <div class="bottom">
+                                <div>
+                                    <i class="fa-sharp fa-solid fa-clock"></i>
+                                    <p>@savedCourses.ViewHours hours</p>
+                                </div>
+                                <div>
+                                    <i class="fa-sharp fa-light fa-thumbs-up"></i>
+                                    <p>@savedCourses.LikesInPercent</p>
+                                    <p>@savedCourses.LikesInNumbers</p>
+                                </div>
+                            </div>
                         </div>
-                        <div>
-                            <i class="fa-sharp fa-light fa-thumbs-up"></i>
-                            <p>@Model.SavedCourses.Course.LikesInPercent</p>
-                            <p>@Model.SavedCourses.Course.LikesInNumbers</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="course-card">
-                    <div class="image">
-                        <img src="~/images/video-game-design.svg" />
-                    </div>
-                    <a class="bookmark" asp-controller="" asp-action=""><i class="fa-solid fa-bookmark"></i></a>
-                    <div class="hide"><p>Remove</p></div>
-                    <div class="course-info">
-                        <h5 class="title">@Model.SavedCourses.Course.Title</h5>
-                        <p class="author">By @Model.SavedCourses.Course.AuthorName</p>
-                        <p class="price">$@Model.SavedCourses.Course.Price</p>
-                        <div class="divider"></div>
-                    </div>
-                    <div class="bottom">
-                        <div>
-                            <i class="fa-sharp fa-solid fa-clock"></i>
-                            <p>@Model.SavedCourses.Course.ViewHours hours</p>
-                        </div>
-                        <div>
-                            <i class="fa-sharp fa-light fa-thumbs-up"></i>
-                            <p>@Model.SavedCourses.Course.LikesInPercent</p>
-                            <p>@Model.SavedCourses.Course.LikesInNumbers</p>
-                        </div>
-                    </div>
-                </div>
+                    }
+                }
+
             </div>
-        </div>       
+        </div>
     </div>
 </section>
+
+<script>
+    const deleteButton = document.querySelector('.btn-delete');
+
+    deleteButton.addEventListener('click', async () => {
+        const response = await fetch(`/Account/SavedCourses`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if (response.ok) {
+            const courseCards = document.querySelectorAll('.course-card');
+            courseCards.forEach(element => {
+                element.remove();
+            });
+        } else {
+            console.log('No courses removed')
+        }
+    });
+</script>
