@@ -6,13 +6,15 @@
             @await Html.PartialAsync("~/Views/Shared/Component/_AccountNavbarPartial.cshtml")
         </div>
         <div class="content">
-            <h2>@Model.SavedCourses.Title</h2>
+            <div class="section-title">
+                <h2>@Model.SavedCourses.Title</h2>
 
-            @* There's a script tied to this button (removeallcourses.js)*@
-            <button class="btn-delete"><p>Delete all</p></button>
+                @* There's a script tied to this button (removeallcourses.js)*@
+                <button class="btn-delete"><p><i class="fa-solid fa-trash-can"></i>Delete all</p></button>
+            </div>
 
             <div class="saved-items">
-                @if (Model.SavedCourseIds != null)
+                @if (Model.SavedCourseIds != null && Model.SavedCourseIds.Count() > 0)
                 {
                     @foreach (var savedCourses in Model.SavedCourseIds)
                     {
@@ -21,11 +23,9 @@
                                 <img src="~/images/@savedCourses.CourseImage" />
                             </div>
 
-                            <form id="removeForm" method="post" asp-controller="Account" asp-action="SavedCourses" asp-route-removeId="@savedCourses.Id">
-                                <button type="submit" class="bookmark"><i class="fa-solid fa-bookmark"></i></button>
-                            </form>
+                            @* There's a script tied to this link (removeonecourse.js)*@
+                            <a class="bookmark" data-course-id="@savedCourses.Id"><i class="fa-solid fa-bookmark"></i></a>
 
-                            @* <a class="bookmark" asp-controller="Account" asp-action="SavedCourses" asp-route-removeId="@savedCourses.Id"><i class="fa-solid fa-bookmark"></i></a> *@
                             <div class="course-info">
                                 <h5 class="title">@savedCourses.Title</h5>
                                 <p class="author">By @savedCourses.AuthorName</p>
@@ -46,30 +46,24 @@
                         </div>
                     }
                 }
+                else
+                {
+                    <div class="no-courses">
+                        <h5>You don't have any saved courses yet.</h5>
+                        <p>Visit our <a asp-action="Index" asp-controller="Courses">course</a> page and find out what you're missing!</p>
+                    </div>
+                    <div class="lottie" id="lottieAnimation" data-saved-course-ids='@Json.Serialize(Model.SavedCourseIds)'></div>
+                }
+
 
             </div>
         </div>
     </div>
 </section>
 
-<script>
-    const deleteButton = document.querySelector('.btn-delete');
+@await Html.PartialAsync("_LottieAnimation")
+@await Html.PartialAsync("_RemoveAllCourses")
+@await Html.PartialAsync("_RemoveOneCourse")
 
-    deleteButton.addEventListener('click', async () => {
-        const response = await fetch(`/Account/SavedCourses`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        });
 
-        if (response.ok) {
-            const courseCards = document.querySelectorAll('.course-card');
-            courseCards.forEach(element => {
-                element.remove();
-            });
-        } else {
-            console.log('No courses removed')
-        }
-    });
-</script>
+
