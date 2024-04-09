@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-
 namespace API_Silicon.Controllers
 {
     [Route("api/[controller]")]
@@ -60,12 +59,12 @@ namespace API_Silicon.Controllers
             catch (Exception) { return BadRequest(); }
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetAll(List<int>? savedCourseIds, string category = "", string searchQuery = "", int pageNumber = 1, int pageSize = 10)
+
+        [HttpGet("all", Name = "GetAll")]
+        public async Task<IActionResult> GetAll(string category = "", string searchQuery = "", int pageNumber = 1, int pageSize = 10)
         {
             try
             {
-                List<CoursesEntity> savedCourses = await GetSavedCourses(savedCourseIds!);
                 var query = _context.Courses.Include(i => i.Category).AsQueryable();
 
                 if (!string.IsNullOrEmpty(category) && category != "all")
@@ -82,11 +81,10 @@ namespace API_Silicon.Controllers
                     {
                         Succeeded = true,
                         TotalItems = await query.CountAsync(),
-                        
+
                     };
                     response.TotalPages = (int)Math.Ceiling(response.TotalItems / (double)pageSize);
                     response.Courses = CourseFactory.Create(await query.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync());
-                    response.SavedCourses = CourseFactory.Create(savedCourses);
 
                     return Ok(response);
                 }
@@ -99,19 +97,32 @@ namespace API_Silicon.Controllers
         }
 
 
-        private async Task<List<CoursesEntity>> GetSavedCourses(List<int>? savedCourses)
+        [HttpGet("saved", Name = "GetSavedCourses")]
+        public async Task<IActionResult> GetSavedCourses([FromQuery(Name = "savedCourseIds")]IEnumerable<int>? savedCourseIds)
         {
+            if (savedCourseIds == null || !savedCourseIds.Any())
+            {
+                return BadRequest("No saved course ID's provided.");
+            }
+
             try
             {
-                var courses = await _context.Courses
-                .Where(course => savedCourses!.Contains(course.Id))
-                .ToListAsync();
+                var query = _context.Courses.AsQueryable();
+                if (savedCourseIds != null && savedCourseIds.Any())
+                {
+                    query = query.Where(x => savedCourseIds.Contains(x.Id));
+                    var savedCourses = await query.ToListAsync();
 
-                return courses;
-
-                
+                    var response = new CourseResult
+                    {
+                        Succeeded = true,
+                        SavedCourses = CourseFactory.Create(savedCourses)
+                };
+                    return Ok(response);
+                }
             }
-            catch (Exception) { return null!; }
+            catch (Exception) { return BadRequest(); }
+            return NotFound();
         }
         #endregion
 
@@ -160,7 +171,5 @@ namespace API_Silicon.Controllers
             catch (Exception) { return BadRequest(); }
         }
         #endregion
-
-
     }
 }
