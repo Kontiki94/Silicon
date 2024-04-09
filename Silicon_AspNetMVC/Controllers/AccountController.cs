@@ -260,6 +260,7 @@ public class AccountController(UserService userService, SignInManager<UserEntity
                 viewModel.Navigation = new NavigationViewModel("SavedCourses");
                 viewModel.Profile = await PopulateProfileInfoAsync();
                 viewModel.SavedCourseIds = courseResult.Succeeded ? courseResult.SavedCourses! : new List<CoursesModel>();
+                ViewData["Title"] = "Saved Courses";
 
                 return View(viewModel);
             }

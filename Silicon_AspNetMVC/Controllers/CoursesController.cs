@@ -21,17 +21,17 @@ public class CoursesController(HttpClient http, IConfiguration configuration, Ca
     private readonly UserManager<UserEntity> _userManager = userManager;
 
 
-    public async Task<IActionResult> Index(string category = "", string searchQuery = "", int pageNumber = 1, int pageSize = 3, int savedCourseId = 0)
+    public async Task<IActionResult> Index(string category = "", string searchQuery = "", int pageNumber = 1, int pageSize = 3)
     {
         try
         {
             var courseResult = await _courseService.GetCoursesAsync(category, searchQuery, pageNumber, pageSize);
 
-            if (savedCourseId > 0)
-            {
-                await _courseService.SaveCourseIdAsync(savedCourseId, User);
-                return NoContent();
-            }
+            //if (savedCourseId > 0)
+            //{
+            //    await _courseService.SaveCourseIdAsync(savedCourseId, User);
+            //    return NoContent();
+            //}
 
             var viewModel = new CoursesViewModel()
             {
@@ -50,7 +50,9 @@ public class CoursesController(HttpClient http, IConfiguration configuration, Ca
             {
                 ViewData["Status"] = "ConnectionFailed";
             }
-        return View(viewModel);
+
+            ViewData["Title"] = "Courses";
+            return View(viewModel);
         }
         catch (Exception)
         {
@@ -59,7 +61,18 @@ public class CoursesController(HttpClient http, IConfiguration configuration, Ca
         return View();
     }
 
+    [HttpPost]
+    public async Task<IActionResult> Index(int savedCourseId)
+    {
+        if (savedCourseId > 0)
+        {
+            await _courseService.SaveCourseIdAsync(savedCourseId, User);
+            return Ok();
+        }
+        return BadRequest();
+    }
 
+   
     public async Task<IActionResult> Create(CoursesModel model)
     {
         if (ModelState.IsValid)
