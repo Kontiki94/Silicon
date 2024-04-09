@@ -12,11 +12,7 @@ namespace Silicon_AspNetMVC.Controllers
         [HttpGet]    
         public IActionResult ContactUs()
         {
-            var viewModel = new ContactModel() 
-            { 
-                //SuccessMessage = TempData["SuccessMessage"]?.ToString() ?? "",
-                //ErrorMessage = TempData["ErrorMessage"]?.ToString() ?? "",
-            };
+            var viewModel = new ContactModel();             
             ViewData["Title"] = "Contact Us";
             return View(viewModel);
         }
@@ -31,20 +27,21 @@ namespace Silicon_AspNetMVC.Controllers
                 using var http = new HttpClient();
                 var json = JsonConvert.SerializeObject(Model);
                 using var content = new StringContent(json, Encoding.UTF8, "application/json");
-                var response = await http.PostAsync("https://localhost:7091/api/contact", content);
+                var response = await http.PostAsync("https://localhost:7091/api/contact", content); //Api nyckel här
 
                 if (response.IsSuccessStatusCode)
                 {
-                    ViewData["Status"] = "Success";
-                }              
-                
+                    TempData["Status"] = "Success";
+                }
+
+                return RedirectToAction("ContactUs", "Contact");
             }
             else
             {
-                ViewData["Status"] = "Error";              
-            }            
+                TempData["Status"] = "Error";
+
                 return View(Model);
-           
+            }
         }
     }
 }

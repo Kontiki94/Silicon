@@ -37,32 +37,20 @@
             </div>
         </div>       
         <div class="contact-form">          
-            <form method="post" asp-controller="Contact" asp-action="ContactUs" novalidate>
-                <h2>@ViewData["Title"]</h2>
-                @* @if (!string.IsNullOrEmpty(Model.SuccessMessage))
-                {
-                    <span class="alert alert-success" role="alert" id="userMessage">
-                        @Model.SuccessMessage
-                    </span>
-                }
-                @if (!string.IsNullOrEmpty(Model.ErrorMessage))
-                {
-                    <span class="alert alert-danger" role="alert" id="userMessage">
-                        @Model.ErrorMessage
-                    </span>
-                } *@
-                @if (ViewData["Status"]?.ToString() == "Success")
+            <form method="post" asp-controller="Contact" asp-action="ContactUs" novalidate>                             
+                @if(TempData["Status"]?.ToString() == "Success")
                 {
                     <span class="alert alert-success" role="alert" id="userMessage">
                         Contact was sent!
                     </span>
                 }
-                @if (ViewData["Status"]?.ToString() == "Error")
+                @if(TempData["Status"]?.ToString() == "Error")
                 {
                     <span class="alert alert-danger" role="alert" id="userMessage">
                         Please fill in all required fields!
                     </span>
                 }
+                <h2>@ViewData["Title"]</h2>
                 <div class="form-content">
                     <div id="form-fullname" class="input-group">
                         <label asp-for="Name"></label>
@@ -88,10 +76,8 @@
                         <span asp-validation-for="Message"></span>                       
                         <textarea asp-for="Message"></textarea>
                     </div>
-                    <button class="btn-theme-s" type="submit">Send Contact Request</button>
-                    
-                </div>
-                
+                    <button class="btn-theme-s" type="submit">Send Contact Request</button>                    
+                </div>                
             </form>
         </div>
     </div>
