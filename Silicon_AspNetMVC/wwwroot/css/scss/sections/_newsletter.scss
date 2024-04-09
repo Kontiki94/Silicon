@@ -6,6 +6,11 @@
     .container {
         width: 50%;
 
+        #success {
+            padding: 5px;
+            text-align: center;
+        }
+
         @include lg {
             text-align: left;
             width: 50%;
@@ -110,15 +115,13 @@
                 &.field-validation-error {
                     @include text-s;
                     color: $danger;
+                    margin-top: 0px;
+                    padding: 0px;
+                    top: -15px;
 
-                    &::after {
-                        position: absolute;
-                        right: 10px;
-                        top: 38px;
-                        z-index: 1;
-                        font-size: 2em;
-                        display: block;
-                        content: '\2BBF';
+                        @include lg {
+                            top: -40px;
+                        }
                     }
                 }
             }

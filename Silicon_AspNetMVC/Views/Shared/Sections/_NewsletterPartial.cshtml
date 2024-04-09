@@ -5,7 +5,7 @@
             <h1>@Model.NewsletterTitle.Title</h1>
             <img src="@Model.NewsletterImage.ImageUrl" alt="@Model.NewsletterImage.AltText" />
         </div>
-        <form asp-controller="Home" asp-action="Subscribe" asp-fragment="newsletter" method="post" novalidate>
+        <form id="subscribe-form" asp-action="Subscribe" asp-controller="Home" asp-fragment="newsletter" method="post" novalidate>
             <div class="checkbox-content">
                 <div class="news-title">
                     <h5>@Model.NewsletterTitle.Subtitle</h5>
@@ -14,19 +14,50 @@
                     @foreach (var item in Model.Checkbox)
                     {
                         <div class="box">
-                            <input type="checkbox" id="@item.Id"/>
+                            <input type="checkbox" id="@item.Id" />
                             <label asp-for="@item.Id">@item.Text</label>
                         </div>
                     }
                 </div>
             </div>
             <div class="subscribe">
-                <input asp-for="@Model.Subscriber.Email" type="email" placeholder="Your Email" class="input-email" />
-                <button class="btn-theme" type="submit"><span>* Subscribe</span></button>
+                <input id="input-email" input="email" asp-for="@Model.Subscriber.Email" type="email" placeholder="Your Email" />
+                <button id="submit-button" type="submit" class="btn-theme"><span>* Subscribe</span></button>
                 <span asp-validation-for="@Model.Subscriber.Email"></span>
             </div>
         </form>
+        <div id="success" class="alert alert-dark"></div>
     </div>
 </section>
 
+
+<script>
+    var message = document.getElementById('success');
+    message.style.display = "none";
+    var form = document.getElementById('newsletter');
+    form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        var email = document.getElementById('input-email').value;
+        var response = await fetch(`/Home/Subscribe?email=${email}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        message.style.display = "block";
+        if (response.ok) {
+            message.style.backgroundColor = "#90EE90";
+            message.textContent = "Subscribed!"
+        }
+        else if (response.status === 409) {
+            message.style.backgroundColor = "#FFCCCB";
+            message.textContent = "This subscriber already exists!"
+        }
+        else {
+            message.style.backgroundColor = "#FFCCCB";
+            message.textContent = "Enter a valid email!"
+        }
+    });
+</script>
 @await Html.PartialAsync("_ValidationScriptPartial")
+
