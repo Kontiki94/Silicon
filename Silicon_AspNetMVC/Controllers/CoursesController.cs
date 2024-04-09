@@ -66,13 +66,20 @@ public class CoursesController(HttpClient http, IConfiguration configuration, Ca
     {
         if (savedCourseId > 0)
         {
-            await _courseService.SaveCourseIdAsync(savedCourseId, User);
-            return Ok();
+            var result = await _courseService.SaveCourseIdAsync(savedCourseId, User);
+            if (result.Succeeded)
+                return Ok(new { succeeded = true});
+
+            else if (result.Exists)
+                return Ok(new { exists = true });
+
+            else 
+                return BadRequest();
         }
         return BadRequest();
     }
 
-   
+
     public async Task<IActionResult> Create(CoursesModel model)
     {
         if (ModelState.IsValid)
