@@ -47,6 +47,7 @@ public class CourseService(HttpClient http, IConfiguration configuration, DataCo
                     await _userManager.UpdateAsync(currentUser);
                     return new CourseResult { Succeeded = true };
                 }
+                return new CourseResult { Exists = true };
             }
         }
         catch (Exception) { }
