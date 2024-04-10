@@ -27,12 +27,6 @@ public class CoursesController(HttpClient http, IConfiguration configuration, Ca
         {
             var courseResult = await _courseService.GetCoursesAsync(category, searchQuery, pageNumber, pageSize);
 
-            //if (savedCourseId > 0)
-            //{
-            //    await _courseService.SaveCourseIdAsync(savedCourseId, User);
-            //    return NoContent();
-            //}
-
             var viewModel = new CoursesViewModel()
             {
                 Categories = await _categoryService.GetCategoriesAsync(),
@@ -54,31 +48,31 @@ public class CoursesController(HttpClient http, IConfiguration configuration, Ca
             ViewData["Title"] = "Courses";
             return View(viewModel);
         }
-        catch (Exception)
-        {
-            ViewData["Error"] = "An error occurred while trying to create a new course, please try again later";
-        }
+        catch (Exception) { ViewData["Error"] = "An error occurred while trying to create a new course, please try again later"; }
         return View();
     }
 
     [HttpPost]
     public async Task<IActionResult> Index(int savedCourseId)
     {
-        if (savedCourseId > 0)
+        try
         {
-            var result = await _courseService.SaveCourseIdAsync(savedCourseId, User);
-            if (result.Succeeded)
-                return Ok(new { succeeded = true});
+            if (savedCourseId > 0)
+            {
+                var result = await _courseService.SaveCourseIdAsync(savedCourseId, User);
+                if (result.Succeeded)
+                    return Ok(new { succeeded = true });
 
-            else if (result.Exists)
-                return Ok(new { exists = true });
+                else if (result.Exists)
+                    return Ok(new { exists = true });
 
-            else 
-                return BadRequest();
+                else
+                    return BadRequest();
+            }
+            return BadRequest();
         }
-        return BadRequest();
+        catch (Exception) { return StatusCode(500, "Something went wrong"); }
     }
-
 
     public async Task<IActionResult> Create(CoursesModel model)
     {
@@ -98,14 +92,10 @@ public class CoursesController(HttpClient http, IConfiguration configuration, Ca
                     }
                 }
             }
-            catch (Exception)
-            {
-                ViewData["Error"] = "An error occurred while trying to create a new course, please try again later";
-            }
+            catch (Exception) { return StatusCode(500, "Something went wrong"); }
         }
         return View(model);
     }
-
 
     [Route("/course/{id}")]
     public async Task<IActionResult> CourseDetails(int id)
@@ -122,10 +112,7 @@ public class CoursesController(HttpClient http, IConfiguration configuration, Ca
                 return View(viewModel);
             }
         }
-        catch (Exception)
-        {
-            ViewData["Error"] = "An error occurred while trying to create a new course, please try again later";
-        }
+        catch (Exception) { return StatusCode(500, "Something went wrong"); }
         return View();
     }
 }
