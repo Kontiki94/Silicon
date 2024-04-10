@@ -24,7 +24,7 @@ namespace Silicon_AspNetMVC.ViewModels.Home
         public HomeLightAndDarkViewModel()
         {
             TitleWhite = "Switch Between";
-            TitleBlack = "Lignt and Dark";
+            TitleBlack = "Light and Dark";
             ImageUrl = "images/macbook_test.png";
             ImageAlt = "Laptop";
             IconUrl = "images/arrows_laptop.png";

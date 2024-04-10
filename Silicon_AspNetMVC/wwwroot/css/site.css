@@ -338,7 +338,7 @@ a:hover {
   position: relative;
   display: inline-block;
   width: 46px;
-  height: 25px;
+  height: 26px;
 }
 .btn-switch .switch input {
   opacity: 0;
@@ -352,8 +352,10 @@ a:hover {
   box-shadow: 0 0 1px #6366F1;
 }
 .btn-switch .switch input:checked + .slider:before {
-  transform: translateX(20px);
-  background-color: #FFFFFF;
+  transform: translateX(20px) scale(1.3);
+  background-color: #6366F1;
+  background-image: url("/images/icons/white-moon.svg");
+  background-size: cover;
 }
 .btn-switch .switch .slider {
   position: absolute;
@@ -483,6 +485,9 @@ header .container .hide {
 header .container .btn-switch {
   grid-area: switch;
   display: none;
+}
+header .container .btn-switch label {
+  color: var(--color-gray-900);
 }
 @media (min-width: 992px) {
   header .container .btn-switch {
@@ -859,19 +864,20 @@ footer .container .social-media {
 .newsletter .container {
   width: 50%;
 }
-.newsletter .container #success {
-  padding: 5px;
-  text-align: center;
-}
-@media (min-width: 1400px) {
-  .newsletter .container #success {
-    width: 30%;
-  }
-}
 @media (min-width: 992px) {
   .newsletter .container {
     text-align: left;
     width: 50%;
+  }
+}
+.newsletter .container #success {
+  padding: 5px;
+  text-align: center;
+  border-radius: 15px;
+}
+@media (min-width: 992px) {
+  .newsletter .container #success {
+    width: 40%;
   }
 }
 .newsletter .container .top {
@@ -976,22 +982,15 @@ footer .container .social-media {
   padding: 0px;
   top: -15px;
 }
-.newsletter .container .subscribe span.field-validation-error::after {
-  position: absolute;
-  right: 10px;
-  top: -117px;
-  z-index: 1;
-  font-size: 2em;
-}
 @media (min-width: 992px) {
-  .newsletter .container .subscribe span.field-validation-error::after {
-    top: -40px;
+  .newsletter .container .subscribe span.field-validation-error {
+    top: -15px;
   }
 }
-.newsletter .container .subscribe .input-email {
+.newsletter .container #input-email {
   padding: 10px;
   border: 2px solid var(--color-gray-400);
-  border-radius: 7px;
+  border-radius: 15px;
   width: 100%;
 }
 
@@ -1284,12 +1283,14 @@ section .courses .items .course-card .content .image i {
   position: absolute;
   top: 15px;
   right: 16px;
-  border: 1px solid #fff;
   border-radius: 50%;
   font-size: 1rem;
   background-color: #fff;
   color: #000;
   padding: 0.7rem;
+}
+section .courses .items .course-card .content .image i:hover {
+  background-color: #6366F1;
 }
 section .courses .items .course-card .content .divider {
   width: 90%;
@@ -1315,9 +1316,30 @@ section .courses .items .course-card .content i {
   padding-right: 0.1rem;
   margin-bottom: 1.2rem;
 }
+section .courses .pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1.8rem;
+  gap: 1rem;
+}
+section .courses .pagination .number {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.3rem;
+  width: 45px;
+  height: 45px;
+  color: var(--color-gray-900);
+  background-color: #6366F1;
+}
+section .courses .pagination .active {
+  background-color: var(--color-gray-500);
+  color: var(--color-gray-100);
+}
 
 #skills .container {
-  background-color: var(--color-gray-100);
+  background-color: var(--color-gray-200);
   display: grid;
   margin-bottom: 60px;
   padding: 10px;
@@ -2931,6 +2953,31 @@ html, body {
     border-left: 1px solid var(--color-gray-300);
   }
 }
+#saved-courses .container .content .section-title {
+  display: flex;
+  justify-content: space-between;
+}
+#saved-courses .container .content .section-title .btn-delete {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: var(--color-gray-100);
+  border: 1px solid #EF4444;
+  border-radius: 0.2rem;
+  color: #EF4444;
+  width: 147px;
+  height: 44px;
+}
+#saved-courses .container .content .section-title .btn-delete i {
+  padding-right: 0.6rem;
+}
+#saved-courses .container .content .section-title .btn-delete p {
+  margin: 0;
+}
+#saved-courses .container .content .section-title .btn-delete:hover {
+  border: 2px solid #EF4444;
+}
 #saved-courses .container .content h2 {
   padding: 0 0 0.5rem 1rem;
   color: var(--color-gray-900);
@@ -3039,6 +3086,30 @@ html, body {
 #saved-courses .container .content .saved-items .course-card .bottom i {
   margin-bottom: 0.8rem;
   padding-right: 0.5rem;
+}
+#saved-courses .container .content .saved-items .no-courses {
+  position: relative;
+}
+#saved-courses .container .content .saved-items .no-courses h5 {
+  color: var(--color-gray-900);
+}
+#saved-courses .container .content .saved-items .no-courses p {
+  color: var(--color-gray-800);
+}
+#saved-courses .container .content .saved-items .no-courses a {
+  text-decoration: underline;
+}
+#saved-courses .container .content .saved-items .lottie {
+  display: none;
+}
+@media (min-width: 1600px) {
+  #saved-courses .container .content .saved-items .lottie {
+    display: block;
+    position: absolute;
+    top: 300px;
+    right: 900px;
+    transform: scale(1.5);
+  }
 }
 
 .create {

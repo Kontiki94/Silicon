@@ -1,4 +1,5 @@
 ﻿using Infrastructure.Entities;
+using Infrastructure.Models;
 using Silicon_AspNetMVC.ViewModels.Account;
 namespace Silicon_AspNetMVC.ViewModels.CompositeViewModels;
 
@@ -8,6 +9,7 @@ public class AccountViewModel
     public ProfileViewModel Profile { get; set; }
     public AccountDetailsBasicInfoViewModel Details { get; set; }
     public AccountDetailsAddressInfoViewModel AddressInfo { get; set; }
+    public IEnumerable<CoursesModel> SavedCourseIds { get; set; }
     public SavedCoursesViewModel SavedCourses { get; set; }
     public NavigationViewModel Navigation { get; set; }
     public AccountDeleteViewModel Delete { get; set; } = null!;
@@ -32,7 +34,7 @@ public class AccountViewModel
         };
 
         SavedCourses = new SavedCoursesViewModel();
-
+        SavedCourseIds = new List<CoursesModel>();
         Navigation = new NavigationViewModel();
     }
 }

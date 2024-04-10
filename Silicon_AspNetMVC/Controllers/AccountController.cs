@@ -12,13 +12,14 @@ using Silicon_AspNetMVC.Helpers;
 
 namespace Silicon_AspNetMVC.Controllers;
 [Authorize]
-public class AccountController(UserService userService, SignInManager<UserEntity> signInManager, UserManager<UserEntity> userManager, AddressService addressService, ControllerService controllerService) : Controller
+public class AccountController(UserService userService, SignInManager<UserEntity> signInManager, UserManager<UserEntity> userManager, AddressService addressService, ControllerService controllerService, CourseService courseService) : Controller
 {
     private readonly UserService _userService = userService;
     private readonly SignInManager<UserEntity> _signInManager = signInManager;
     private readonly ControllerService _controllerService = controllerService;
     private readonly UserManager<UserEntity> _userManager = userManager;
     private readonly AddressService _addressService = addressService;
+    private readonly CourseService _courseService = courseService;
 
     #region Account | GET
     [HttpGet]
@@ -166,6 +167,7 @@ public class AccountController(UserService userService, SignInManager<UserEntity
     #region Account Security | Post
     [HttpPost]
     [Route("/security")]
+    [ActionName("Security")]
     public async Task<IActionResult> Security(AccountViewModel viewModel)
     {
         var userEmail = _userManager.GetUserName(User)!;
@@ -201,6 +203,7 @@ public class AccountController(UserService userService, SignInManager<UserEntity
 
     #region Account Delete | Post
     [HttpPost]
+    [ActionName("Delete")]
     public async Task<IActionResult> Delete(AccountViewModel viewModel)
     {
         var userEmail = _userManager.GetUserName(User)!;
@@ -222,21 +225,66 @@ public class AccountController(UserService userService, SignInManager<UserEntity
     }
     #endregion
 
+    [HttpPost]
+    public async Task<IActionResult> SavedCourses(int removeId)
+    {
+        try
+        {
+            if (removeId > 0)
+            {
+                await _courseService.RemoveOneCourseAsync(removeId, User);
+                return NoContent();
+            }
+            else
+            {
+                await _courseService.RemoveAllCoursesAsync(User);
+                return NoContent();
+            }
+        }
+        catch (Exception) { return NoContent(); }
+    }
+
+    [HttpGet]
+    [ActionName("SavedCourses")]
+    public async Task<IActionResult> SavedCourses()
+    {
+        try
+        {
+            var viewModel = new AccountViewModel();
+            var user = await _signInManager.UserManager.GetUserAsync(User);
+
+            if (user != null)
+            {
+                var courseResult = await _courseService.GetSavedCoursesAsync(user.Id);
+
+                viewModel.Navigation = new NavigationViewModel("SavedCourses");
+                viewModel.Profile = await PopulateProfileInfoAsync();
+                viewModel.SavedCourseIds = courseResult.Succeeded ? courseResult.SavedCourses! : new List<CoursesModel>();
+                ViewData["Title"] = "Saved Courses";
+
+                return View(viewModel);
+            }
+
+            return View(viewModel);
+        }
+        catch (Exception)
+        {
+            TempData["ErrorMessage"] = "An error occurred, please try again.";
+            return RedirectToAction("Home", "Index");
+        }
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> UploadImage(IFormFile file)
+    {
+        await _userService.UploadUserProfileImageAsync(User, file);
+
+        return RedirectToAction("Details", "Account");
+    }
 
     public IActionResult Cancel()
     {
         return RedirectToAction("Details", "Account");
-    }
-
-    [Route("/saved")]
-    public async Task<IActionResult> SavedCourses()
-    {
-        var viewModel = new AccountViewModel()
-        {
-            Navigation = new NavigationViewModel("SavedCourses"),
-            Profile = await PopulateProfileInfoAsync()
-        };
-        return View(viewModel);
     }
 
     private async Task<ProfileViewModel> PopulateProfileInfoAsync()
@@ -338,13 +386,6 @@ public class AccountController(UserService userService, SignInManager<UserEntity
         catch (Exception) { return null!; }
     }
 
-    [HttpPost]
-    public async Task<IActionResult> UploadImage(IFormFile file)
-    {
-        await _userService.UploadUserProfileImageAsync(User, file);
-
-        return RedirectToAction("Details", "Account");
-    }
 }
 
 

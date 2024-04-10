@@ -68,10 +68,11 @@ document.addEventListener('DOMContentLoaded', function () {
                     console.log("Not working")
             })
     })
-})
+});
 
 
-//Upload profileimage
+
+// Upload profileimage
 document.addEventListener('DOMContentLoaded', function () {
     handleProfileImageUpload()
 })
@@ -90,4 +91,5 @@ function handleProfileImageUpload() {
     }
     catch { }
 }
+
 

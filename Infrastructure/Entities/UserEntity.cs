@@ -19,6 +19,7 @@ public class UserEntity : IdentityUser
     public DateTime? Created { get; set; }
     public DateTime? Updated { get; set; }
     public bool IsExternalAccount { get; set; } = false;
+    public List<int>? SavedCourseIds { get; set; } = new List<int>();
 
     public ICollection<UserAddressEntity> UserAddresses { get; set; } = new List<UserAddressEntity>();
 }
