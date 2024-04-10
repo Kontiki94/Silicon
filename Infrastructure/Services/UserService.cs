@@ -134,7 +134,7 @@ namespace Infrastructure.Services
             try
             {
                 var entityToUpdate = await _repository.UpdateOneAsync(x => x.Id == entity.Id, entity);
-                if (entityToUpdate != null)
+                if (entityToUpdate is not null)
                 {
                     return ResponseFactory.Ok(entityToUpdate);
                 }

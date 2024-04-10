@@ -25,7 +25,7 @@ public class CourseService(HttpClient http, IConfiguration configuration, DataCo
             {
                 var json = await apiResponse.Content.ReadAsStringAsync();
                 var result = JsonConvert.DeserializeObject<CourseResult>(json);
-                if (result!.Courses != null && result.Succeeded)
+                if (result!.Courses is not null && result.Succeeded)
                     return result;
             }
         }
@@ -39,7 +39,7 @@ public class CourseService(HttpClient http, IConfiguration configuration, DataCo
         {
             var currentUser = await _userManager.GetUserAsync(user);
 
-            if (currentUser != null && currentUser.SavedCourseIds != null)
+            if (currentUser is not null && currentUser.SavedCourseIds is not null)
             {
                 if (!currentUser.SavedCourseIds.Contains(courseId))
                 {
@@ -60,7 +60,7 @@ public class CourseService(HttpClient http, IConfiguration configuration, DataCo
         {
             var user = await _context.Users.FirstOrDefaultAsync(x => x.Id == userId);
             var savedCourseIds = user?.SavedCourseIds;
-            if (user != null && savedCourseIds != null && savedCourseIds.Any())
+            if (user is not null && savedCourseIds is not null && savedCourseIds.Any())
             {
                 var apiKey = _configuration["ApiKey:Secret"];
                 var url = $"https://localhost:7091/api/Courses/saved?key={apiKey}";
@@ -94,7 +94,7 @@ public class CourseService(HttpClient http, IConfiguration configuration, DataCo
         {
             var userEntity = await _userManager.GetUserAsync(user);
 
-            if (userEntity != null)
+            if (userEntity is not null)
             {
                 userEntity.SavedCourseIds!.Remove(courseId);
                 await _userManager.UpdateAsync(userEntity);
@@ -111,7 +111,7 @@ public class CourseService(HttpClient http, IConfiguration configuration, DataCo
         {
             var userEntity = await _userManager.GetUserAsync(user);
 
-            if (userEntity != null && userEntity.SavedCourseIds != null)
+            if (userEntity is not null && userEntity.SavedCourseIds is not null)
             {
                 userEntity.SavedCourseIds.Clear();
                 await _userManager.UpdateAsync(userEntity);

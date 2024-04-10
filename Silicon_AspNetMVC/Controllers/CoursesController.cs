@@ -40,7 +40,7 @@ public class CoursesController(HttpClient http, IConfiguration configuration, Ca
                 }
             };
 
-            if (viewModel.AllCourses == null)
+            if (viewModel.AllCourses is null)
             {
                 ViewData["Status"] = "ConnectionFailed";
             }

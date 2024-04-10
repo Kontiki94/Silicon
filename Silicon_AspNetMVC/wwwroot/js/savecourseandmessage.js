@@ -40,7 +40,7 @@
         messageContainer.style.left = '240px';
 
     } catch (error) {
-        console.error("BAJSKORV:", error);
+        console.error("Error:", error);
     }
 }
 

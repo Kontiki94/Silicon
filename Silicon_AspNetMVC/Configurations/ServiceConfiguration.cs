@@ -1,6 +1,5 @@
 ﻿using Infrastructure.Repositories;
 using Infrastructure.Services;
-using Silicon_AspNetMVC.Helpers;
 using Silicon_AspNetMVC.Services;
 
 namespace Silicon_AspNetMVC.Configurations;

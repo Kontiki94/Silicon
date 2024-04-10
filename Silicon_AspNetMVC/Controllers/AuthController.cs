@@ -46,7 +46,7 @@ public class AuthController(UserService userService, SignInManager<UserEntity> s
                 if (result.StatusCode == Infrastructure.Models.StatusCode.OK)
                 {
                     var token = await _authServices.GetAuthTokenAsync(viewModel);
-                    if (token != null)
+                    if (token is not null)
                     {
                         var cookieOptions = new CookieOptions
                         {

@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using Infrastructure.Entities;
 using Infrastructure.Models;
 using Infrastructure.Factories;
-using Silicon_AspNetMVC.Helpers;
+using Silicon_AspNetMVC.Services;
 
 namespace Silicon_AspNetMVC.Controllers;
 [Authorize]
@@ -253,7 +253,7 @@ public class AccountController(UserService userService, SignInManager<UserEntity
             var viewModel = new AccountViewModel();
             var user = await _signInManager.UserManager.GetUserAsync(User);
 
-            if (user != null)
+            if (user is not null)
             {
                 var courseResult = await _courseService.GetSavedCoursesAsync(user.Id);
 
