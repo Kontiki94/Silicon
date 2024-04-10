@@ -870,6 +870,16 @@ footer .container .social-media {
     width: 50%;
   }
 }
+.newsletter .container #success {
+  padding: 5px;
+  text-align: center;
+  border-radius: 15px;
+}
+@media (min-width: 992px) {
+  .newsletter .container #success {
+    width: 40%;
+  }
+}
 .newsletter .container .top {
   text-align: center;
 }
@@ -968,20 +978,19 @@ footer .container .social-media {
   font-family: "Manrope", sans-serif;
   font-size: 14px !important;
   color: #EF4444;
+  margin-top: 0px;
+  padding: 0px;
+  top: -15px;
 }
-.newsletter .container .subscribe span.field-validation-error::after {
-  position: absolute;
-  right: 10px;
-  top: 38px;
-  z-index: 1;
-  font-size: 2em;
-  display: block;
-  content: "⮿";
+@media (min-width: 992px) {
+  .newsletter .container .subscribe span.field-validation-error {
+    top: -15px;
+  }
 }
-.newsletter .container .subscribe .input-email {
+.newsletter .container #input-email {
   padding: 10px;
   border: 2px solid var(--color-gray-400);
-  border-radius: 7px;
+  border-radius: 15px;
   width: 100%;
 }
 
