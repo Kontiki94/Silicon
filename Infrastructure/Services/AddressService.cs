@@ -14,9 +14,9 @@ public class AddressService(AddressRepository addressRepository)
     {
         try
         {
-            var exists = await _addressRepository.AlreadyExistsAsync(x => x.AddressLine1 == model.AddressLine1 && x.PostalCode == model.PostalCode && x.City == model.City);
-            if (exists.StatusCode == StatusCode.NOT_FOUND)
-            {
+            // Den här delen behövs inte, för jag VILL tillåta flera personer att ha samma adress och vice versa. 
+            //var exists = await _addressRepository.AlreadyExistsAsync(x => x.AddressLine1 == model.AddressLine1 && x.PostalCode == model.PostalCode && x.City == model.City);
+            //if (exists.StatusCode == StatusCode.NOT_FOUND)
                 var result = await _addressRepository.CreateOneAsync(AddressFactory.Create(model.UserId, model.AddressLine1, model.AddressLine2, model.PostalCode, model.City));
                 if (result.StatusCode == StatusCode.OK)
                 {
@@ -34,8 +34,7 @@ public class AddressService(AddressRepository addressRepository)
                 }
 
                 return result;
-            }
-            return null!;
+            
         }
         catch (Exception ex) { return ResponseFactory.Error(ex.Message); }
     }
