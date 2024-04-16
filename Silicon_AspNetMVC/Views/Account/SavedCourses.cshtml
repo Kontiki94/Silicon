@@ -1,5 +1,6 @@
 ﻿@model AccountViewModel
 
+
 <section id="saved-courses">
     <div class="container">
         <div class="menu-bar">
@@ -8,11 +9,14 @@
         <div class="content">
             <h2>@Model.SavedCourses.Title</h2>
             <div class="saved-items">
-                <div class="course-card">
+
+                
+
+                <div class="course-card" @* onclick="location.href='@Url.Action("CourseDetails", "Courses", new{id = Model.SavedCourses.Course.Id})'" *@>
                     <div class="image">
                         <img src="~/images/video-game-design.svg" />
                     </div>                    
-                    <a class="bookmark" asp-controller="" asp-action=""><i class="fa-solid fa-bookmark"></i></a>
+                    <a class="bookmark" asp-controller="Courses" asp-action="JoinCourse"><i class="fa-solid fa-bookmark"></i></a>  //asp-action remove?
                     <div class="hide"><p>Remove</p></div>
                     <div class="course-info">
                         <h5 class="title">@Model.SavedCourses.Course.Title</h5>

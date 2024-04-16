@@ -20,6 +20,8 @@ public class UserEntity : IdentityUser
     public DateTime? Updated { get; set; }
     public bool IsExternalAccount { get; set; } = false;
 
+    public List<int>? SavedCoursesId { get; set; }              //Anso
+
     public ICollection<UserAddressEntity> UserAddresses { get; set; } = new List<UserAddressEntity>();
 }
 

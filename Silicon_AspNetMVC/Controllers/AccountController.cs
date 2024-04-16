@@ -231,12 +231,17 @@ public class AccountController(UserService userService, SignInManager<UserEntity
     [Route("/saved")]
     public async Task<IActionResult> SavedCourses()
     {
-        var viewModel = new AccountViewModel()
+        try
         {
-            Navigation = new NavigationViewModel("SavedCourses"),
-            Profile = await PopulateProfileInfoAsync()
-        };
-        return View(viewModel);
+            var viewModel = new AccountViewModel()
+            {
+                Navigation = new NavigationViewModel("SavedCourses"),
+                Profile = await PopulateProfileInfoAsync()
+            };
+            return View(viewModel);
+        }
+        catch (Exception) { return null!; }
+        
     }
 
     private async Task<ProfileViewModel> PopulateProfileInfoAsync()
