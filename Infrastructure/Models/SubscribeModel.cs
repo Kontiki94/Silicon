@@ -7,7 +7,7 @@ public class SubscribeModel
     [Display(Name = "Email", Prompt = "Enter your email.", Order = 0)]
     [Required(ErrorMessage = "Email is required.")]
     [DataType(DataType.EmailAddress)]
-    [EmailAddress(ErrorMessage = "Invalid email address.")]
+    [RegularExpression(@"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$", ErrorMessage = "Invalid email address.")]
     public string Email { get; set; } = null!;
     public bool IsSubscribed { get; set; } = false;
     public bool DailyNewsLetter { get; set; } = false;

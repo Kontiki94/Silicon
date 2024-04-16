@@ -34,8 +34,6 @@ public class HomeController(IConfiguration configuration) : Controller
 
             if (response.IsSuccessStatusCode)
             {
-                ViewData["Subscribed"] = true;
-                
                 return Ok();
             }
             else
