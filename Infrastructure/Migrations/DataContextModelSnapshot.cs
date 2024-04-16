@@ -130,6 +130,9 @@ namespace Infrastructure.Migrations
                     b.Property<string>("ProfileImageUrl")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("SavedCourseIds")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("SavedCoursesId")
                         .HasColumnType("nvarchar(max)");
 

@@ -2,9 +2,9 @@ section {
     background-color: var(--color-gray-001);
     padding-bottom: 120px;
 
-
     .courses {
         padding-top: 60px;
+        position: relative;
 
         .section-title {
             display: flex;
@@ -189,12 +189,15 @@ section {
                             position: absolute;
                             top: 15px;
                             right: 16px;
-                            border: 1px solid #fff;
                             border-radius: 50%;
                             font-size: 1rem;
                             background-color: #fff;
                             color: #000;
                             padding: .7rem;
+
+                            &:hover {
+                                background-color: $theme;
+                            }
                         }
                     }
 
@@ -227,6 +230,30 @@ section {
                         margin-bottom: 1.2rem;
                     }
                 }
+            }
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 1.8rem;
+            gap: 1rem;
+
+            .number {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: .3rem;
+                width: 45px;
+                height: 45px;
+                color: var(--color-gray-900);
+                background-color: $theme;
+            }
+
+            .active {
+                background-color: var(--color-gray-500);
+                color: var(--color-gray-100);
             }
         }
     }
