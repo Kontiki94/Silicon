@@ -24,7 +24,7 @@ namespace API_Silicon.Controllers
                 {
                     try
                     {
-                        var subscriberEntity = new SubscribeEntity { Email = email };
+                        var subscriberEntity = new SubscribeEntity { Email = email, IsSubscribed = true };
                         await _subscriberRepo.CreateAsync(subscriberEntity);
                         return Created("", null);
                     }
