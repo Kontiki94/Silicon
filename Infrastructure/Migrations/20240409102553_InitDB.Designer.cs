@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240405071845_InitDbWithSeed")]
-    partial class InitDbWithSeed
+    [Migration("20240409102553_InitDB")]
+    partial class InitDB
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -218,7 +218,7 @@ namespace Infrastructure.Migrations
                             CourseDescription = "Suspendisse natoque sagittis, consequat turpis. Sed tristique tellus morbi magna. At vel senectus accumsan, arcu mattis id tempor. Tellus sagittis, euismod porttitor sed tortor est id. Feugiat velit velit, tortor ut. Ut libero cursus nibh lorem urna amet tristique leo. Viverra lorem arcu nam nunc at ipsum quam. A proin id sagittis dignissim mauris condimentum ornare. Tempus mauris sed dictum ultrices.",
                             CourseImage = "course_one.svg",
                             CourseImageAltText = "course one",
-                            Created = new DateTime(2024, 4, 5, 7, 18, 45, 506, DateTimeKind.Utc).AddTicks(7348),
+                            Created = new DateTime(2024, 4, 9, 10, 25, 52, 789, DateTimeKind.Utc).AddTicks(8070),
                             FaceBookFollowers = "240",
                             IsBestSeller = true,
                             LearnPoints = "[\"Sed lectus donec amet eu turpis interdum.\",\"Nulla at consectetur vitae dignissim porttitor.\",\"Phasellus id vitae dui aliquet mi.\",\"Integer cursus vitae, odio feugiat iaculis aliquet diam, et purus.\",\"In aenean dolor diam tortor orci eu.\"]",
@@ -231,7 +231,7 @@ namespace Infrastructure.Migrations
                             Reviews = "1.2",
                             ShowcaseImage = "showcase_image_1.svg",
                             Title = "Fullstack Web Developer Course from Scratch",
-                            Updated = new DateTime(2024, 4, 5, 7, 18, 45, 506, DateTimeKind.Utc).AddTicks(7349),
+                            Updated = new DateTime(2024, 4, 9, 10, 25, 52, 789, DateTimeKind.Utc).AddTicks(8072),
                             ViewHours = "220",
                             YouTubeSubscribers = "180"
                         },
@@ -242,13 +242,13 @@ namespace Infrastructure.Migrations
                             CategoryId = 2,
                             CourseImage = "course_two.svg",
                             CourseImageAltText = "course two",
-                            Created = new DateTime(2024, 4, 5, 7, 18, 45, 506, DateTimeKind.Utc).AddTicks(7369),
+                            Created = new DateTime(2024, 4, 9, 10, 25, 52, 789, DateTimeKind.Utc).AddTicks(8088),
                             IsBestSeller = false,
                             LikesInNumbers = "3.1",
                             LikesInPercent = "92",
                             Price = "15.99",
                             Title = "HTML, CSS, JavaScript Web Developer",
-                            Updated = new DateTime(2024, 4, 5, 7, 18, 45, 506, DateTimeKind.Utc).AddTicks(7369),
+                            Updated = new DateTime(2024, 4, 9, 10, 25, 52, 789, DateTimeKind.Utc).AddTicks(8089),
                             ViewHours = "160"
                         },
                         new
@@ -258,14 +258,14 @@ namespace Infrastructure.Migrations
                             CategoryId = 6,
                             CourseImage = "course_three.svg",
                             CourseImageAltText = "course three",
-                            Created = new DateTime(2024, 4, 5, 7, 18, 45, 506, DateTimeKind.Utc).AddTicks(7371),
+                            Created = new DateTime(2024, 4, 9, 10, 25, 52, 789, DateTimeKind.Utc).AddTicks(8091),
                             DiscountPrice = "9.99",
                             IsBestSeller = false,
                             LikesInNumbers = "2.7",
                             LikesInPercent = "98",
                             Price = "44.99",
                             Title = "The Complete Front-End Web Development Course",
-                            Updated = new DateTime(2024, 4, 5, 7, 18, 45, 506, DateTimeKind.Utc).AddTicks(7372),
+                            Updated = new DateTime(2024, 4, 9, 10, 25, 52, 789, DateTimeKind.Utc).AddTicks(8091),
                             ViewHours = "100"
                         },
                         new
@@ -275,13 +275,13 @@ namespace Infrastructure.Migrations
                             CategoryId = 5,
                             CourseImage = "course_four.svg",
                             CourseImageAltText = "course four",
-                            Created = new DateTime(2024, 4, 5, 7, 18, 45, 506, DateTimeKind.Utc).AddTicks(7373),
+                            Created = new DateTime(2024, 4, 9, 10, 25, 52, 789, DateTimeKind.Utc).AddTicks(8093),
                             IsBestSeller = false,
                             LikesInNumbers = "3.1",
                             LikesInPercent = "92",
                             Price = "15.99",
                             Title = "iOS & Swift - The Complete iOS App Development Course",
-                            Updated = new DateTime(2024, 4, 5, 7, 18, 45, 506, DateTimeKind.Utc).AddTicks(7373),
+                            Updated = new DateTime(2024, 4, 9, 10, 25, 52, 789, DateTimeKind.Utc).AddTicks(8093),
                             ViewHours = "220"
                         },
                         new
@@ -291,13 +291,13 @@ namespace Infrastructure.Migrations
                             CategoryId = 3,
                             CourseImage = "course_five.svg",
                             CourseImageAltText = "course five",
-                            Created = new DateTime(2024, 4, 5, 7, 18, 45, 506, DateTimeKind.Utc).AddTicks(7375),
+                            Created = new DateTime(2024, 4, 9, 10, 25, 52, 789, DateTimeKind.Utc).AddTicks(8095),
                             IsBestSeller = true,
                             LikesInNumbers = "4.2",
                             LikesInPercent = "94",
                             Price = "12.50",
                             Title = "Data Science & Machine Learning with Python",
-                            Updated = new DateTime(2024, 4, 5, 7, 18, 45, 506, DateTimeKind.Utc).AddTicks(7375),
+                            Updated = new DateTime(2024, 4, 9, 10, 25, 52, 789, DateTimeKind.Utc).AddTicks(8095),
                             ViewHours = "220"
                         },
                         new
@@ -307,13 +307,13 @@ namespace Infrastructure.Migrations
                             CategoryId = 2,
                             CourseImage = "course_six.svg",
                             CourseImageAltText = "course six",
-                            Created = new DateTime(2024, 4, 5, 7, 18, 45, 506, DateTimeKind.Utc).AddTicks(7377),
+                            Created = new DateTime(2024, 4, 9, 10, 25, 52, 789, DateTimeKind.Utc).AddTicks(8097),
                             IsBestSeller = false,
                             LikesInNumbers = "4.2",
                             LikesInPercent = "94",
                             Price = "10.50",
                             Title = "Creative CSS Drawing Course: Make Art With CSS",
-                            Updated = new DateTime(2024, 4, 5, 7, 18, 45, 506, DateTimeKind.Utc).AddTicks(7377),
+                            Updated = new DateTime(2024, 4, 9, 10, 25, 52, 789, DateTimeKind.Utc).AddTicks(8097),
                             ViewHours = "220"
                         },
                         new
@@ -323,13 +323,13 @@ namespace Infrastructure.Migrations
                             CategoryId = 4,
                             CourseImage = "course_seven.svg",
                             CourseImageAltText = "course seven",
-                            Created = new DateTime(2024, 4, 5, 7, 18, 45, 506, DateTimeKind.Utc).AddTicks(7379),
+                            Created = new DateTime(2024, 4, 9, 10, 25, 52, 789, DateTimeKind.Utc).AddTicks(8131),
                             IsBestSeller = false,
                             LikesInNumbers = "3.1",
                             LikesInPercent = "92",
                             Price = "18.99",
                             Title = "Blender Character Creator v2.0 for Video Games Design",
-                            Updated = new DateTime(2024, 4, 5, 7, 18, 45, 506, DateTimeKind.Utc).AddTicks(7379),
+                            Updated = new DateTime(2024, 4, 9, 10, 25, 52, 789, DateTimeKind.Utc).AddTicks(8132),
                             ViewHours = "160"
                         },
                         new
@@ -339,14 +339,14 @@ namespace Infrastructure.Migrations
                             CategoryId = 4,
                             CourseImage = "course_eight.svg",
                             CourseImageAltText = "course eight",
-                            Created = new DateTime(2024, 4, 5, 7, 18, 45, 506, DateTimeKind.Utc).AddTicks(7381),
+                            Created = new DateTime(2024, 4, 9, 10, 25, 52, 789, DateTimeKind.Utc).AddTicks(8133),
                             DiscountPrice = "12.99",
                             IsBestSeller = false,
                             LikesInNumbers = "2.7",
                             LikesInPercent = "98",
                             Price = "44.99",
                             Title = "The Ultimate Guide to 2D Mobile Game Development with Unity",
-                            Updated = new DateTime(2024, 4, 5, 7, 18, 45, 506, DateTimeKind.Utc).AddTicks(7381),
+                            Updated = new DateTime(2024, 4, 9, 10, 25, 52, 789, DateTimeKind.Utc).AddTicks(8134),
                             ViewHours = "100"
                         },
                         new
@@ -356,13 +356,13 @@ namespace Infrastructure.Migrations
                             CategoryId = 5,
                             CourseImage = "course_nine.svg",
                             CourseImageAltText = "course nine",
-                            Created = new DateTime(2024, 4, 5, 7, 18, 45, 506, DateTimeKind.Utc).AddTicks(7383),
+                            Created = new DateTime(2024, 4, 9, 10, 25, 52, 789, DateTimeKind.Utc).AddTicks(8135),
                             IsBestSeller = false,
                             LikesInNumbers = "3.1",
                             LikesInPercent = "92",
                             Price = "14.50",
                             Title = "Learn JMETER from Scratch on Live Apps-Performance Testing",
-                            Updated = new DateTime(2024, 4, 5, 7, 18, 45, 506, DateTimeKind.Utc).AddTicks(7383),
+                            Updated = new DateTime(2024, 4, 9, 10, 25, 52, 789, DateTimeKind.Utc).AddTicks(8136),
                             ViewHours = "160"
                         });
                 });

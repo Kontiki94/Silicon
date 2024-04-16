@@ -59,6 +59,25 @@ namespace API_Silicon.Controllers
             catch (Exception) { return BadRequest(); }
         }
 
+        [HttpGet("saved")]                                                                                           //Anso
+        public async Task<IActionResult> GetSavedCourses([FromQuery] int[] id)
+        {
+            try
+            {
+                var courses = _context.Courses.AsQueryable();
+                if (id is not null)                                         //behöver något som även sorterar bort id som inte finns
+                {
+                    var savedCourses = await courses.Where(x => id.Contains(x.Id)).ToListAsync();
+                    return Ok(savedCourses);
+                }
+                return NotFound();
+            }
+            
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
 
         [HttpGet]
         public async Task<IActionResult> GetAll(string category = "", string searchQuery = "", int pageNumber = 1, int pageSize = 10)
