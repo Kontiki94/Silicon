@@ -18,14 +18,14 @@
                 {
                     @foreach (var savedCourses in Model.SavedCourseIds)
                     {
-                        <div class="course-card">
+                        <div class="course-card" onclick="location.href='@Url.Action("CourseDetails", "Courses", new {id = savedCourses.Id})'">
                             <div class="image">
                                 <img src="~/images/@savedCourses.CourseImage" />
                             </div>
 
                             @* There's a script tied to this link (removeonecourse.js)*@
-                            <a class="bookmark" data-course-id="@savedCourses.Id"><i class="fa-solid fa-bookmark"></i></a>
-
+                            <a href="#" class="bookmark" data-course-id="@savedCourses.Id" onclick="removeOneCourse(event, @savedCourses.Id)"><i class="fa-solid fa-bookmark"></i></a>
+                            <div class="hide"><p>Remove</p></div>
                             <div class="course-info">
                                 <h5 class="title">@savedCourses.Title</h5>
                                 <p class="author">By @savedCourses.AuthorName</p>

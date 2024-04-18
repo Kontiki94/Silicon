@@ -3009,6 +3009,11 @@ html, body {
   box-shadow: 0px 4px 9px -1px rgba(19, 16, 34, 0.03), 0px 4.4px 20px -1px rgba(19, 16, 34, 0.05);
   position: relative;
   background-color: var(--color-gray-100);
+  z-index: 0;
+}
+#saved-courses .container .content .saved-items .course-card:hover {
+  box-shadow: 0 3px 10px rgba(99, 102, 241, 0.7), 0 4px 5px rgba(99, 102, 241, 0.5);
+  cursor: pointer;
 }
 #saved-courses .container .content .saved-items .course-card .image img {
   width: 100%;
@@ -3024,6 +3029,7 @@ html, body {
   left: 90%;
   background-color: #FFFFFF;
   border-radius: 50%;
+  z-index: 100;
 }
 #saved-courses .container .content .saved-items .course-card .bookmark i {
   position: absolute;

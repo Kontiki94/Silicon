@@ -13,29 +13,23 @@ public class AddressService(AddressRepository addressRepository)
     public async Task<ResponseResult> CreateAddressAsync(AddressModel model)
     {
         try
-        {
-            var exists = await _addressRepository.AlreadyExistsAsync(x => x.AddressLine1 == model.AddressLine1 && x.PostalCode == model.PostalCode && x.City == model.City);
-            if (exists.StatusCode == StatusCode.NOT_FOUND)
+        {      
+            var result = await _addressRepository.CreateOneAsync(AddressFactory.Create(model.UserId, model.AddressLine1, model.AddressLine2, model.PostalCode, model.City));
+            if (result.StatusCode == StatusCode.OK)
             {
-                var result = await _addressRepository.CreateOneAsync(AddressFactory.Create(model.UserId, model.AddressLine1, model.AddressLine2, model.PostalCode, model.City));
-                if (result.StatusCode == StatusCode.OK)
+                var createdAddressEntity = (AddressEntity)result.ContentResult!;
+                createdAddressEntity.UserId = model.UserId;
+
+                var newUserAddress = new UserAddressEntity
                 {
-                    var createdAddressEntity = (AddressEntity)result.ContentResult!;
-                    createdAddressEntity.UserId = model.UserId;
+                    UserId = model.UserId,
+                    AddressId = model.Id
+                };
 
-                    var newUserAddress = new UserAddressEntity
-                    {
-                        UserId = model.UserId,
-                        AddressId = model.Id
-                    };
-
-                    var createdAddressModel = AddressFactory.Create(createdAddressEntity);
-                    return ResponseFactory.Ok(result.ContentResult!);
-                }
-
-                return result;
+                var createdAddressModel = AddressFactory.Create(createdAddressEntity);
+                return ResponseFactory.Ok(result.ContentResult!);
             }
-            return null!;
+            return result;            
         }
         catch (Exception ex) { return ResponseFactory.Error(ex.Message); }
     }

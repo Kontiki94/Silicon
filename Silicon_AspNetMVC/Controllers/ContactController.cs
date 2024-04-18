@@ -22,27 +22,36 @@ namespace Silicon_AspNetMVC.Controllers
         [HttpPost]
         public async Task<IActionResult> ContactUs(ContactModel Model)
         {
-            ViewData["Title"] = "Contact Us";
-            if (ModelState.IsValid)                
+            try
             {
-                using var http = new HttpClient();
-                var json = JsonConvert.SerializeObject(Model);
-                using var content = new StringContent(json, Encoding.UTF8, "application/json");
-                var response = await http.PostAsync($"https://localhost:7091/api/contact?key={_configuration["ApiKey:Secret"]}", content);
-
-                if (response.IsSuccessStatusCode)
+                ViewData["Title"] = "Contact Us";
+                if (ModelState.IsValid)
                 {
-                    TempData["Status"] = "Success";
-                }
+                    using var http = new HttpClient();
+                    var json = JsonConvert.SerializeObject(Model);
+                    using var content = new StringContent(json, Encoding.UTF8, "application/json");
+                    var response = await http.PostAsync($"https://localhost:7091/api/contact?key={_configuration["ApiKey:Secret"]}", content);
 
+                    if (response.IsSuccessStatusCode)
+                    {
+                        TempData["Status"] = "Success";
+                    }
+
+                    return RedirectToAction("ContactUs", "Contact");
+                }
+                else
+                {
+                    TempData["Status"] = "Error";
+
+                    return View(Model);
+                }
+            }
+            catch (Exception) 
+            {
+                TempData["ErrorMessage"] = "An error occurred";
                 return RedirectToAction("ContactUs", "Contact");
             }
-            else
-            {
-                TempData["Status"] = "Error";
-
-                return View(Model);
-            }
+           
         }
     }
 }

@@ -50,6 +50,11 @@
                         Please fill in all required fields!
                     </span>
                 }
+                @if(TempData["ErrorMessage"]?.ToString() == "An error occurred"){
+                    <span class="alert alert-danger" role="alert" id="userMessage">
+                        An error occurred, please try again later.
+                    </span>
+                }
                 <h2>@ViewData["Title"]</h2>
                 <div class="form-content">
                     <div id="form-fullname" class="input-group">
