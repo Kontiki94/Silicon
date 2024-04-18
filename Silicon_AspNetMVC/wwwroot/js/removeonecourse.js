@@ -1,28 +1,33 @@
-﻿bookMarks = document.querySelectorAll('.bookmark')
+﻿async function removeOneCourse(event, courseId) {
+    event.preventDefault();
+    event.stopPropagation();
 
-bookMarks.forEach(function (link) {
-    link.addEventListener('click', async function(event) {
-        event.preventDefault();
+    event.target.closest('.course-card').remove();
 
-        var courseId = this.getAttribute('data-course-id');
-        var data = { removeId: courseId }
-
-        try {
-            var response = await fetch(`/Account/SavedCourses`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            });
-
-            if (response.ok) {
-                this.closest('.course-card').remove();
-            } else {
-                console.log('Hittar inga kurser')
-            }
-        } catch (error) {
-            console.log('Nu blev det fel, ajabaja')
-        }
+    document.querySelectorAll('.bookmark').forEach(function (link) {
+        link.addEventListener('click', async function (event) {
+            var courseId = this.dataset.courseId;
+            console.log(courseId)
+            await removeOneCourse(event, courseId);
+        });
     });
-});
+
+    try {
+        var response = await fetch(`/Account/SavedCourses?removeId=${courseId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        });
+
+        if (!response.ok) {
+            console.log("Hittar inte kurser")
+        } 
+    } catch (error) {
+        console.log('Nu blev det fel, ajabaja')
+    }
+};
+
+
+
+
