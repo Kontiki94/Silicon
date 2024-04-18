@@ -9,7 +9,11 @@ public class ResponseFactory
         return new ResponseResult
         {
             Message = "Succeeded",
+<<<<<<< HEAD
             StatusCode = StatusCode.OK
+=======
+            StatusCode = StatusCode.OK,
+>>>>>>> 5093d5ff2a66cda979cdb5cac84ee5629d1021ef
         };
     }
 

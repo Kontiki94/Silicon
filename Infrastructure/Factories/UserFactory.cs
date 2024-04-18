@@ -1,11 +1,17 @@
 ﻿using Infrastructure.Entities;
+<<<<<<< HEAD
 using Infrastructure.Models;
 using Silicon_AspNetMVC.Models.Sections;
+=======
+using Infrastructure.Helpers;
+using Infrastructure.Models;
+>>>>>>> 5093d5ff2a66cda979cdb5cac84ee5629d1021ef
 
 namespace Infrastructure.Factories;
 
 public class UserFactory
 {
+<<<<<<< HEAD
     public static UserEntity Create()
     {
         try
@@ -18,10 +24,33 @@ public class UserFactory
                 Created = date,
                 Updated = date
             };
+=======
+    public static UserEntity Create(UserRegistrationForm form)
+    {
+        try
+        {
+            var userEntity = PasswordHasher.GenerateSecurePassword(form.Password);
+
+            if (userEntity != null)
+            {
+                return new UserEntity
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    FirstName = form.FirstName,
+                    LastName = form.LastName,
+                    Email = form.Email,
+                    Password = form.Password,
+                    HashedPassword = userEntity.HashedPassword,
+                    Salt = userEntity.Salt,
+                    SecurityKey = userEntity.SecurityKey
+                };
+            }
+>>>>>>> 5093d5ff2a66cda979cdb5cac84ee5629d1021ef
         }
         catch { }
         return null!;
     }
+<<<<<<< HEAD
 
     public static UserEntity Create(AccountDetailsBasicInfoModel model)
     {
@@ -91,4 +120,6 @@ public class UserFactory
     }
 
 
+=======
+>>>>>>> 5093d5ff2a66cda979cdb5cac84ee5629d1021ef
 }

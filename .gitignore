@@ -3,12 +3,15 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+<<<<<<< HEAD
 # Ignore migration folder
 migrations/*
 
 /Migrations/
 *.Designer.cs
 
+=======
+>>>>>>> 5093d5ff2a66cda979cdb5cac84ee5629d1021ef
 # User-specific files
 *.rsuser
 *.suo
