@@ -48,15 +48,19 @@
         if (response.ok) {
             document.getElementById('input-email').value = "";
             message.style.backgroundColor = "#90EE90";
-            message.textContent = "Subscribed!"
+            message.textContent = "Subscribed!";
         }
         else if (response.status === 409) {
             message.style.backgroundColor = "#FFCCCB";
-            message.textContent = "This subscriber already exists!"
+            message.textContent = "This subscriber already exists!";
+        }
+        else if (response.status === 500) {
+            message.style.backgroundColor = "#FFCCCB";
+            message.textContent = "Internal server error. Please try later";
         }
         else {
             message.style.backgroundColor = "#FFCCCB";
-            message.textContent = "Enter a valid email!"
+            message.textContent = "Enter a valid email!";
         }
     });
 </script>

@@ -197,7 +197,7 @@ namespace Infrastructure.Services
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex.Message);
+                ResponseFactory.Error(ex.Message);
             }
             return false;
         }
