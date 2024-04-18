@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Silicon_AspNetMVC.Services;
 using Silicon_AspNetMVC.ViewModels.Auth;
+using System.Diagnostics;
 using System.Security.Claims;
 using System.Text;
 
@@ -22,14 +23,22 @@ public class AuthController(UserService userService, SignInManager<UserEntity> s
     [Route("/signin")]
     public IActionResult SignIn(string returnUrl)
     {
-        var viewModel = new SignInViewModel();
-        ViewData["Title"] = "Sign In";
-        if (_signInManager.IsSignedIn(User))
+        try
         {
-            return RedirectToAction("Index", "Home");
+            var viewModel = new SignInViewModel();
+            ViewData["Title"] = "Sign In";
+            if (_signInManager.IsSignedIn(User))
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            ViewData["ReturnUrl"] = returnUrl ?? Url.Content("~/");
+            return View(viewModel);
         }
-        ViewData["ReturnUrl"] = returnUrl ?? Url.Content("~/");
-        return View(viewModel);
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex.Message);
+            return View("Home", "Index");
+        }
     }
 
     [HttpPost]
@@ -78,35 +87,59 @@ public class AuthController(UserService userService, SignInManager<UserEntity> s
     [HttpGet]
     public IActionResult SignUp()
     {
-        var viewModel = new SignUpViewModel();
-        ViewData["Title"] = "Sign Up";
-        return View(viewModel);
+        try
+        {
+            var viewModel = new SignUpViewModel();
+            ViewData["Title"] = "Sign Up";
+            return View(viewModel);
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex.Message);
+            return View("Home", "Index");
+        }
     }
 
     [Route("/signup")]
     [HttpPost]
     public async Task<IActionResult> SignUp(SignUpViewModel viewModel)
     {
-        ViewData["Title"] = "Sign Up";
-
-        if (ModelState.IsValid)
+        try
         {
-            var result = await _userService.CreateUserAsync(viewModel.Form);
-            if (result.StatusCode == Infrastructure.Models.StatusCode.OK)
+            ViewData["Title"] = "Sign Up";
+
+            if (ModelState.IsValid)
             {
-                return RedirectToAction("SignIn", "Auth");
+                var result = await _userService.CreateUserAsync(viewModel.Form);
+                if (result.StatusCode == Infrastructure.Models.StatusCode.OK)
+                {
+                    return RedirectToAction("SignIn", "Auth");
+                }
             }
+            return View(viewModel);
         }
-        return View(viewModel);
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex.Message);
+            return View(viewModel);
+        }
     }
 
     [HttpGet]
     [Route("/signout")]
     public new async Task<IActionResult> SignOut()
     {
-        Response.Cookies.Delete("AccessToken");
-        await _signInManager.SignOutAsync();
-        return RedirectToAction("Index", "Home");
+        try
+        {
+            Response.Cookies.Delete("AccessToken");
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex.Message);
+            return NoContent();
+        }
     }
 
     #region External Account | Facebook
