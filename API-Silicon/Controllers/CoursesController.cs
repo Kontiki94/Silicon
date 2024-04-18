@@ -73,7 +73,7 @@ namespace API_Silicon.Controllers
                 if (!string.IsNullOrEmpty(searchQuery))
                     query = query.Where(x => x.Title.Contains(searchQuery) || x.AuthorName!.Contains(searchQuery) || x.Category!.CategoryName.Contains(searchQuery));
 
-                query = query.OrderByDescending(o => o.Updated);
+                query = query.OrderBy(o => o.Id);
                 var courses = await query.ToListAsync();
                 if (courses is not null)
                 {

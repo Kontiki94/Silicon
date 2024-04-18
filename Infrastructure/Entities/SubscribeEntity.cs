@@ -4,7 +4,6 @@ namespace Infrastructure.Entities;
 
 public class SubscribeEntity
 {
-
     public string Id { get; set; } = Guid.NewGuid().ToString();
     public string Email { get; set; } = null!;
     public bool IsSubscribed { get; set; } = false;
