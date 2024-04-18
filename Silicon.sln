@@ -5,8 +5,6 @@ VisualStudioVersion = 17.8.34408.163
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Silicon_AspNetMVC", "Silicon_AspNetMVC\Silicon_AspNetMVC.csproj", "{A0030957-3A4C-4667-A16B-5ED7555F05FC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{F1296E30-9432-4B8B-BF80-A27B156E5ED1}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,10 +15,6 @@ Global
 		{A0030957-3A4C-4667-A16B-5ED7555F05FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A0030957-3A4C-4667-A16B-5ED7555F05FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A0030957-3A4C-4667-A16B-5ED7555F05FC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F1296E30-9432-4B8B-BF80-A27B156E5ED1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F1296E30-9432-4B8B-BF80-A27B156E5ED1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F1296E30-9432-4B8B-BF80-A27B156E5ED1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F1296E30-9432-4B8B-BF80-A27B156E5ED1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
