@@ -1,5 +1,4 @@
-﻿using Azure;
-using Infrastructure.Entities;
+﻿using Infrastructure.Entities;
 using Infrastructure.Factories;
 using Infrastructure.Models;
 using Infrastructure.Models.Sections;

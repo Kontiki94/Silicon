@@ -62,7 +62,6 @@ public class Program
         var app = builder.Build();
         app.UseHsts();
 
-        // Added a dollar-sign here. 
         app.UseStatusCodePagesWithReExecute("/Error/PageNotFound", $"?statusCode={0}");
         app.UseHttpsRedirection();
         app.UseStaticFiles();

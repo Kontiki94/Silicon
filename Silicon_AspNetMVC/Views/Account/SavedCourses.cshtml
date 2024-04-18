@@ -16,35 +16,37 @@
             <div class="saved-items">
                 @if (Model.SavedCourseIds != null && Model.SavedCourseIds.Count() > 0)
                 {
+
                     @foreach (var savedCourses in Model.SavedCourseIds)
                     {
-                        <div class="course-card">
-                            <div class="image">
-                                <img src="~/images/@savedCourses.CourseImage" />
-                            </div>
-
-                            @* There's a script tied to this link (removeonecourse.js)*@
-                            <a class="bookmark" data-course-id="@savedCourses.Id"><i class="fa-solid fa-bookmark"></i></a>
-
-                            <div class="course-info">
-                                <h5 class="title">@savedCourses.Title</h5>
-                                <p class="author">By @savedCourses.AuthorName</p>
-                                <p class="price">$@savedCourses.Price</p>
-                                <div class="divider"></div>
-                            </div>
-                            <div class="bottom">
-                                <div>
-                                    <i class="fa-sharp fa-solid fa-clock"></i>
-                                    <p>@savedCourses.ViewHours hours</p>
+                        <div class="course-card" onclick="location.href='@Url.Action("CourseDetails", "Courses", new { id = savedCourses.Id })' ">
+                                <div class="image">
+                                    <img src="~/images/@savedCourses.CourseImage" />
                                 </div>
-                                <div>
-                                    <i class="fa-sharp fa-light fa-thumbs-up"></i>
-                                    <p>@savedCourses.LikesInPercent</p>
-                                    <p>@savedCourses.LikesInNumbers</p>
+
+                                @* There's a script tied to this link (removeonecourse.js)*@
+                                <a href="#" class="bookmark" data-course-id="@savedCourses.Id" onclick="removeOneCourse(event, @savedCourses.Id)"><i class="fa-solid fa-bookmark"></i></a>
+
+                                <div class="course-info">
+                                    <h5 class="title">@savedCourses.Title</h5>
+                                    <p class="author">By @savedCourses.AuthorName</p>
+                                    <p class="price">$@savedCourses.Price</p>
+                                    <div class="divider"></div>
                                 </div>
-                            </div>
+                                <div class="bottom">
+                                    <div>
+                                        <i class="fa-sharp fa-solid fa-clock"></i>
+                                        <p>@savedCourses.ViewHours hours</p>
+                                    </div>
+                                    <div>
+                                        <i class="fa-sharp fa-light fa-thumbs-up"></i>
+                                        <p>@savedCourses.LikesInPercent</p>
+                                        <p>@savedCourses.LikesInNumbers</p>
+                                    </div>
+                                </div>
                         </div>
                     }
+
                 }
                 else
                 {
