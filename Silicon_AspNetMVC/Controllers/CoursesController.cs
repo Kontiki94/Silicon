@@ -103,6 +103,10 @@ public class CoursesController(HttpClient http, IConfiguration configuration, Ca
         ViewData["Title"] = "Course Details";
         try
         {
+            if (id>1 && id<10)
+            {
+                return View("CourseNotOut");
+            }
             var apiResponse = await _http.GetAsync($"https://localhost:7091/api/courses/{id}?key={_configuration["ApiKey:Secret"]}");
             if (apiResponse.IsSuccessStatusCode)
             {
@@ -114,5 +118,11 @@ public class CoursesController(HttpClient http, IConfiguration configuration, Ca
         }
         catch (Exception) { return StatusCode(500, "Something went wrong"); }
         return View();
+    }
+
+    [Route("/course-not-available")]
+    public IActionResult CourseNotAvailable()
+    {
+        return View("CourseNotOut");
     }
 }
