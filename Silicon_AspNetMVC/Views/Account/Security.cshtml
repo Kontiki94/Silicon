@@ -10,13 +10,13 @@
         <div class="security-details">
             @if (!string.IsNullOrEmpty(Model.SuccessMessage))
             {
-                <div class="alert alert-success" id="successMessage" role="alert">
+                <div class="alert alert-success" id="userMessage" role="alert">
                     @Model.SuccessMessage
                 </div>
             }
             else if (!string.IsNullOrEmpty(Model.ErrorMessage))
             {
-                <div class="alert alert-danger" id="errorMessage" role="alert">
+                <div class="alert alert-danger" id="userMessage" role="alert">
                     @Model.ErrorMessage
                 </div>
             }

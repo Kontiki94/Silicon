@@ -1,6 +1,7 @@
 ﻿using Infrastructure.Models;
 using Microsoft.AspNetCore.Mvc;
 using Silicon_AspNetMVC.ViewModels.Home;
+using System.Diagnostics;
 
 namespace Silicon_AspNetMVC.Controllers;
 
@@ -25,24 +26,30 @@ public class HomeController(IConfiguration configuration) : Controller
     [HttpPost]
     public async Task<IActionResult> Subscribe(SubscribeModel model)
     {
-        if (ModelState.IsValid)
+        try
         {
-            using var http = new HttpClient();
-            var url = $"https://localhost:7091/api/Subscriber?email={model.Email}&key={_configuration["ApiKey:Secret"]}";
-            var request = new HttpRequestMessage(HttpMethod.Post, url);
-            var response = await http.SendAsync(request);
+            if (ModelState.IsValid)
+            {
+                using var http = new HttpClient();
+                var url = $"https://localhost:7091/api/Subscriber?email={model.Email}&key={_configuration["ApiKey:Secret"]}";
+                var request = new HttpRequestMessage(HttpMethod.Post, url);
+                var response = await http.SendAsync(request);
 
-            if (response.IsSuccessStatusCode)
-            {
-                ViewData["Subscribed"] = true;
-                
-                return Ok();
+                if (response.IsSuccessStatusCode)
+                {
+                    return Ok();
+                }
+                else
+                {
+                    return Conflict();
+                }
             }
-            else
-            {
-                return Conflict();
-            }
+            return BadRequest();
         }
-        return BadRequest();
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex.Message);
+            return StatusCode(500);
+        }
     }
 }

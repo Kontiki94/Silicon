@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using Infrastructure.Entities;
 using Infrastructure.Models;
 using Infrastructure.Factories;
-using Silicon_AspNetMVC.Helpers;
+using Silicon_AspNetMVC.Services;
 
 namespace Silicon_AspNetMVC.Controllers;
 [Authorize]
@@ -153,14 +153,22 @@ public class AccountController(UserService userService, SignInManager<UserEntity
     [Route("/security")]
     public async Task<IActionResult> Security()
     {
-        var viewModel = new AccountViewModel();
-        viewModel.Navigation = new NavigationViewModel("Security");
-        viewModel.Profile = await PopulateProfileInfoAsync();
-        viewModel.SuccessMessage = TempData["SuccessMessage"]?.ToString() ?? "";
-        viewModel.ErrorMessage = TempData["ErrorMessage"]?.ToString() ?? "";
-        ViewData["Title"] = "Security";
+        try
+        {
+            var viewModel = new AccountViewModel();
+            viewModel.Navigation = new NavigationViewModel("Security");
+            viewModel.Profile = await PopulateProfileInfoAsync();
+            viewModel.SuccessMessage = TempData["SuccessMessage"]?.ToString() ?? "";
+            viewModel.ErrorMessage = TempData["ErrorMessage"]?.ToString() ?? "";
+            ViewData["Title"] = "Security";
 
-        return View(viewModel);
+            return View(viewModel);
+        }
+        catch (Exception)
+        {
+            TempData["ErrorMessage"] = "An error occured. Please try again later";
+            return View("Home", "Index");
+        }
     }
     #endregion
 
@@ -170,34 +178,42 @@ public class AccountController(UserService userService, SignInManager<UserEntity
     [ActionName("Security")]
     public async Task<IActionResult> Security(AccountViewModel viewModel)
     {
-        var userEmail = _userManager.GetUserName(User)!;
-        viewModel.Navigation = new NavigationViewModel("Security");
-        viewModel.Profile = await PopulateProfileInfoAsync();
-
-        if (viewModel.ChangePass is not null)
+        try
         {
-            if (viewModel.ChangePass.ConfirmPassword != null && viewModel.ChangePass.Password != null && viewModel.ChangePass.NewPassword != null && viewModel.ChangePass.NewPassword == viewModel.ChangePass.ConfirmPassword)
-            {
-                var result = _userService.UpdateCredentials(new AccountSecurityModel()
-                {
-                    Password = viewModel.ChangePass.Password,
-                    NewPassword = viewModel.ChangePass.NewPassword,
-                    ConfirmPassword = viewModel.ChangePass.ConfirmPassword
-                }, userEmail);
+            var userEmail = _userManager.GetUserName(User)!;
+            viewModel.Navigation = new NavigationViewModel("Security");
+            viewModel.Profile = await PopulateProfileInfoAsync();
 
-                if (result.Result.StatusCode == Infrastructure.Models.StatusCode.OK)
+            if (viewModel.ChangePass is not null)
+            {
+                if (viewModel.ChangePass.ConfirmPassword != null && viewModel.ChangePass.Password != null && viewModel.ChangePass.NewPassword != null && viewModel.ChangePass.NewPassword == viewModel.ChangePass.ConfirmPassword)
                 {
-                    TempData["SuccessMessage"] = "Password was updated!";
-                    return RedirectToAction(nameof(Security));
-                }
-                else
-                {
-                    TempData["ErrorMessage"] = "Something went wrong. Try again";
-                    return RedirectToAction(nameof(Security));
+                    var result = _userService.UpdateCredentials(new AccountSecurityModel()
+                    {
+                        Password = viewModel.ChangePass.Password,
+                        NewPassword = viewModel.ChangePass.NewPassword,
+                        ConfirmPassword = viewModel.ChangePass.ConfirmPassword
+                    }, userEmail);
+
+                    if (result.Result.StatusCode == Infrastructure.Models.StatusCode.OK)
+                    {
+                        TempData["SuccessMessage"] = "Password was updated!";
+                        return RedirectToAction(nameof(Security));
+                    }
+                    else
+                    {
+                        TempData["ErrorMessage"] = "Something went wrong. Try again";
+                        return RedirectToAction(nameof(Security));
+                    }
                 }
             }
+            return View("Security", viewModel);
         }
-        return View("Security", viewModel);
+        catch (Exception)
+        {
+            TempData["ErrorMessage"] = "An error occured. Please try again later";
+            return NoContent();
+        }
     }
     #endregion
 
@@ -206,22 +222,26 @@ public class AccountController(UserService userService, SignInManager<UserEntity
     [ActionName("Delete")]
     public async Task<IActionResult> Delete(AccountViewModel viewModel)
     {
-        var userEmail = _userManager.GetUserName(User)!;
-        viewModel.Navigation = new NavigationViewModel("Security");
-        viewModel.Profile = await PopulateProfileInfoAsync();
-        if (viewModel.Delete is not null)
+        try
         {
-            if (viewModel.Delete.DeleteAccount == true)
+            var userEmail = _userManager.GetUserName(User)!;
+            viewModel.Navigation = new NavigationViewModel("Security");
+            viewModel.Profile = await PopulateProfileInfoAsync();
+            if (viewModel.Delete is not null)
             {
-                var result = _userService.DeleteUser(userEmail);
-                if (result.Result.StatusCode == Infrastructure.Models.StatusCode.OK)
+                if (viewModel.Delete.DeleteAccount == true)
                 {
-                    await _signInManager.SignOutAsync();
-                    return RedirectToAction("SignUp", "Auth");
+                    var result = _userService.DeleteUser(userEmail);
+                    if (result.Result.StatusCode == Infrastructure.Models.StatusCode.OK)
+                    {
+                        await _signInManager.SignOutAsync();
+                        return RedirectToAction("SignUp", "Auth");
+                    }
                 }
             }
+            return View("Security", viewModel);
         }
-        return View("Security", viewModel);
+        catch (Exception) { return NoContent(); }
     }
     #endregion
 
@@ -253,7 +273,7 @@ public class AccountController(UserService userService, SignInManager<UserEntity
             var viewModel = new AccountViewModel();
             var user = await _signInManager.UserManager.GetUserAsync(User);
 
-            if (user != null)
+            if (user is not null)
             {
                 var courseResult = await _courseService.GetSavedCoursesAsync(user.Id);
 

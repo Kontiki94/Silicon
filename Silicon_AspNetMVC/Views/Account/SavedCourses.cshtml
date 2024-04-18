@@ -16,11 +16,14 @@
             <div class="saved-items">
                 @if (Model.SavedCourseIds != null && Model.SavedCourseIds.Count() > 0)
                 {
+
                     @foreach (var savedCourses in Model.SavedCourseIds)
                     {
-                        <div class="course-card" onclick="location.href='@Url.Action("CourseDetails", "Courses", new {id = savedCourses.Id})'">
+
+                        <div class="course-card" onclick="location.href='@Url.Action("CourseDetails", "Courses", new { id = savedCourses.Id })' ">
                             <div class="image">
                                 <img src="~/images/@savedCourses.CourseImage" />
+
                             </div>
 
                             @* There's a script tied to this link (removeonecourse.js)*@
@@ -45,6 +48,7 @@
                             </div>
                         </div>
                     }
+
                 }
                 else
                 {

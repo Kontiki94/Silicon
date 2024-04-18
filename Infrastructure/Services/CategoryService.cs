@@ -11,13 +11,16 @@ namespace Infrastructure.Services
 
         public async Task<IEnumerable<CategoryModel>> GetCategoriesAsync()
         {
-            var response = await _httpClient.GetAsync(_configuration["ApiUris:Categories"]);
-            if (response.IsSuccessStatusCode)
+            try
             {
-                var categories = JsonConvert.DeserializeObject<IEnumerable<CategoryModel>>(await response.Content.ReadAsStringAsync());
-                return categories ??= null!;
+                var response = await _httpClient.GetAsync(_configuration["ApiUris:Categories"]);
+                if (response.IsSuccessStatusCode)
+                {
+                    var categories = JsonConvert.DeserializeObject<IEnumerable<CategoryModel>>(await response.Content.ReadAsStringAsync());
+                    return categories ??= null!;
+                }
             }
-
+            catch (Exception) { }
             return null!;
         }
     }

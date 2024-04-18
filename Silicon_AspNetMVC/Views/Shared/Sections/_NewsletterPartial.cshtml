@@ -5,7 +5,7 @@
             <h1>@Model.NewsletterTitle.Title</h1>
             <img src="@Model.NewsletterImage.ImageUrl" alt="@Model.NewsletterImage.AltText" />
         </div>
-        <form id="subscribe-form" asp-action="Subscribe" asp-controller="Home" asp-fragment="newsletter" method="post" novalidate>
+        <form id="subscribe-form" asp-fragment="newsletter" method="post" novalidate>
             <div class="checkbox-content">
                 <div class="news-title">
                     <h5>@Model.NewsletterTitle.Subtitle</h5>
@@ -46,16 +46,21 @@
         });
         message.style.display = "block";
         if (response.ok) {
+            document.getElementById('input-email').value = "";
             message.style.backgroundColor = "#90EE90";
-            message.textContent = "Subscribed!"
+            message.textContent = "Subscribed!";
         }
         else if (response.status === 409) {
             message.style.backgroundColor = "#FFCCCB";
-            message.textContent = "This subscriber already exists!"
+            message.textContent = "This subscriber already exists!";
+        }
+        else if (response.status === 500) {
+            message.style.backgroundColor = "#FFCCCB";
+            message.textContent = "Internal server error. Please try later";
         }
         else {
             message.style.backgroundColor = "#FFCCCB";
-            message.textContent = "Enter a valid email!"
+            message.textContent = "Enter a valid email!";
         }
     });
 </script>

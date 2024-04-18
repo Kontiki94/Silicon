@@ -13,13 +13,13 @@ public class AddressService(AddressRepository addressRepository)
     public async Task<ResponseResult> CreateAddressAsync(AddressModel model)
     {
         try
-        {      
+
+        {
             var result = await _addressRepository.CreateOneAsync(AddressFactory.Create(model.UserId, model.AddressLine1, model.AddressLine2, model.PostalCode, model.City));
             if (result.StatusCode == StatusCode.OK)
             {
                 var createdAddressEntity = (AddressEntity)result.ContentResult!;
                 createdAddressEntity.UserId = model.UserId;
-
                 var newUserAddress = new UserAddressEntity
                 {
                     UserId = model.UserId,
@@ -29,7 +29,8 @@ public class AddressService(AddressRepository addressRepository)
                 var createdAddressModel = AddressFactory.Create(createdAddressEntity);
                 return ResponseFactory.Ok(result.ContentResult!);
             }
-            return result;            
+            return result;
+
         }
         catch (Exception ex) { return ResponseFactory.Error(ex.Message); }
     }

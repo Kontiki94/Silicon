@@ -1,5 +1,4 @@
-﻿using Azure;
-using Infrastructure.Entities;
+﻿using Infrastructure.Entities;
 using Infrastructure.Factories;
 using Infrastructure.Models;
 using Infrastructure.Models.Sections;
@@ -134,7 +133,7 @@ namespace Infrastructure.Services
             try
             {
                 var entityToUpdate = await _repository.UpdateOneAsync(x => x.Id == entity.Id, entity);
-                if (entityToUpdate != null)
+                if (entityToUpdate is not null)
                 {
                     return ResponseFactory.Ok(entityToUpdate);
                 }
@@ -198,7 +197,7 @@ namespace Infrastructure.Services
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex.Message);
+                ResponseFactory.Error(ex.Message);
             }
             return false;
         }
