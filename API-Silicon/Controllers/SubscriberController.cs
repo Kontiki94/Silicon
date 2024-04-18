@@ -4,6 +4,7 @@ using Infrastructure.Entities;
 using Infrastructure.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
 
 namespace API_Silicon.Controllers
 {
@@ -18,35 +19,46 @@ namespace API_Silicon.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(string email)
         {
-            if (!string.IsNullOrEmpty(email))
+            try
             {
-                if (!await _context.Subscribe.AnyAsync(x => x.Email == email))
+                if (!string.IsNullOrEmpty(email))
                 {
-                    try
+                    if (!await _context.Subscribe.AnyAsync(x => x.Email == email))
                     {
-                        var subscriberEntity = new SubscribeEntity { Email = email };
-                        await _subscriberRepo.CreateAsync(subscriberEntity);
-                        return Created("", null);
+                        try
+                        {
+                            var subscriberEntity = new SubscribeEntity { Email = email, IsSubscribed = true };
+                            await _subscriberRepo.CreateAsync(subscriberEntity);
+                            return Created("", null);
+                        }
+                        catch
+                        {
+                            return Problem("Something went wrong");
+                        }
                     }
-                    catch
-                    {
-                        return Problem("Something went wrong");
-                    }
+                    return Conflict("This email is already registered");
                 }
-                return Conflict("This email is already registered");
+                return BadRequest();
             }
-            return BadRequest();
+            catch (Exception)
+            {
+                return StatusCode(500, "Internal server error. Please try again later");
+            }
         }
 
         [HttpDelete]
         public async Task<IActionResult> Delete(string email)
         {
-            var result = await _subscriberRepo.DeleteOneAsync(x => x.Email == email);
-            if (result)
+            try
             {
-                return Ok();
+                var result = await _subscriberRepo.DeleteOneAsync(x => x.Email == email);
+                if (result)
+                {
+                    return Ok();
+                }
+                return NotFound();
             }
-            return NotFound();
+            catch (Exception) { return StatusCode(500); }
         }
     }
 }
