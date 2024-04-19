@@ -14,6 +14,18 @@ public class DataContext(DbContextOptions<DataContext> options) : IdentityDbCont
         modelBuilder.Entity<UserAddressEntity>()
                 .HasKey(ua => new { ua.UserId, ua.AddressId });
 
+        modelBuilder.Entity<UserAddressEntity>()
+            .HasOne(ua => ua.User)
+            .WithMany(u => u.UserAddresses)
+            .HasForeignKey(ua => ua.UserId);
+
+        modelBuilder.Entity<UserAddressEntity>()
+            .HasOne(ua => ua.Address)
+            .WithMany(a => a.UserAddresses)
+            .HasForeignKey(ua => ua.AddressId);
+
+
+
         base.OnModelCreating(modelBuilder);
     }
 }
